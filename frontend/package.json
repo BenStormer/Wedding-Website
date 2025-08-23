@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.0.1",
+    "@vitejs/plugin-react-swc": "^4.0.1"
+  }
+}

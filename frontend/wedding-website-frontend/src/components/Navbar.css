@@ -1,0 +1,60 @@
+/* Navbar Component Styles */
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.navbar-container .logo {
+  height: 3rem;
+  padding: 0;
+  will-change: filter;
+  transition: filter 300ms;
+  display: block; /* Ensures the link displays properly */
+  text-decoration: none; /* Removes any underline from the link */
+  cursor: pointer; /* Makes it clear the logo is clickable */
+}
+
+.navbar-container .logo img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+.navbar-container .logo:hover {
+  filter: drop-shadow(0 0 1em #646cffaa);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 2rem;
+}
+
+.nav-links li {
+  margin: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.nav-links a:hover {
+  background-color: #e9ecef;
+  color: #646cff;
+}

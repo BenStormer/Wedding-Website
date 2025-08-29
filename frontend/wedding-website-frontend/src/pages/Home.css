@@ -1,0 +1,35 @@
+.home-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.couple-names {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.wedding-details {
+  font-size: 1.2rem;
+  color: #666;
+  margin-top: 1.5rem;
+}
+
+.wedding-details p {
+  margin: 0.25rem 0; /* Much tighter than default margins */
+  line-height: 1.3; /* Closer line spacing */
+}
+
+/* Mobile-first responsive sizing */
+@media (max-width: 768px) {
+  .couple-names {
+    font-size: 2rem;
+  }
+
+  .wedding-details {
+    font-size: 1rem;
+  }
+}

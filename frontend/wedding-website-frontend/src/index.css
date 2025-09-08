@@ -22,7 +22,7 @@ body {
   /* background-color: #566f4d; */
   /* background-color: #b4b7a0; */
   /* background-color: #5e4838; */
-  background-color: #958375;
+  background: linear-gradient(to bottom, #ffffff 0px, #958375 5px);
   margin: 0;
   padding: 0;
 }

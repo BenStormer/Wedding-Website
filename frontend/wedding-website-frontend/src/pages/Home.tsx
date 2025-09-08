@@ -1,3 +1,4 @@
+import './Home.css'
 import parthenonSitting from '../assets/images/parthenon_sitting.jpg';
 
 const Home = () => {

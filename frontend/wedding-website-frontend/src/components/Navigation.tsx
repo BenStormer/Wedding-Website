@@ -32,7 +32,16 @@ const Navigation = () => {
         <div className="mobile-menu">
           <Link to="/our-story">Our Story</Link>
           <Link to="/rsvp">RSVP</Link>
-          {/* other links */}
+          {/* Links:
+            1. Our Story?
+            2. RSVP
+            3. Event Details
+            4. Travel & Accommodation
+            5. Registry
+            6. Gallery?
+            7. Contact ?
+          
+          */}
         </div>
       )}
     </nav>

@@ -1,38 +1,23 @@
-.home-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+/* Desktop View */
+.engagement-photo {
+  background-image: url('../assets/images/parthenon_sitting.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Parralax effect */
+  height: 90svh;
+}
+
+.overview-details {
+  overflow-y: auto;
+  background-color: var(--primary-green);
   text-align: center;
+  height: 500px;
 }
 
-.couple-names {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-.wedding-details {
-  font-size: 1.2rem;
-  color: #000000;
-  margin-top: 1.5rem;
-}
-
-.wedding-details p {
-  margin: 0.25rem 0;
-  line-height: 1.3;
-}
-
-/* Mobile-first responsive sizing */
+/* Mobile View */
 @media (max-width: 768px) {
-  .home-content {
-    padding-top: 80px;
-  }
-
-  .couple-names {
-    font-size: 2rem;
-  }
-
-  .wedding-details {
-    font-size: 1rem;
+  .engagement-photo {
+    height: 60svh;
+    background-attachment: scroll;
   }
 }

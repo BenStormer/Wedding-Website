@@ -1,36 +1,23 @@
-import './Home.css'
-import parthenonSitting from '../assets/images/parthenon_sitting.jpg';
+import './Home.css';
 
 const Home = () => {
   return (
-    <>
-      <div className="home-content">
-        <div className="wedding-details">
-          <h1 className="names">Aspen & Ben</h1>
-          <span>October 11, 2026</span>
-          <br />
-          <span>Noah Liff Opera Center</span>
-          <span>Nashville, TN</span>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <img
-              src={parthenonSitting}
-              alt="Aspen and Ben sitting on the steps of the Nashville Parthenon"
-              style={{
-                maxWidth: '90vw',
-                maxHeight: '75vh',
-                borderRadius: '25px',
-              }}
-            />
-          </div>
-        </div>
-      </div>
-    </>
+    <div className="body">
+      <div className="engagement-photo"></div>
+      <OverviewDetails />
+      <div className="rsvp"></div>
+      <div className="other-page-nudges"></div>
+      <div className="our-story"></div>
+      <div className="menu"></div>
+    </div>
+  );
+};
+
+const OverviewDetails = () => {
+  return (
+    <div className="overview-details">
+      <h1>Celebrate the wedding of Aspen and Benjamin!</h1>
+    </div>
   );
 };
 

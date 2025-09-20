@@ -1,3 +1,10 @@
+:root {
+  --primary-green: #566f4d;
+  --secondary-green: #b4b7a0;
+  --primary-brown: #5e4838;
+  --secondary-brown: #958375;
+}
+
 @font-face {
   font-family: 'NunitoSans';
   src: url('../assets/fonts/nunito-sans-v18-latin-regular.woff2')
@@ -18,11 +25,5 @@ h6 {
 }
 
 body {
-  /* TODO: DETERMINE COLOR
-  /* background-color: #566f4d; */
-  /* background-color: #b4b7a0; */
-  /* background-color: #5e4838; */
-  background: linear-gradient(to bottom, #ffffff 0px, #958375 5px);
   margin: 0;
-  padding: 0;
 }

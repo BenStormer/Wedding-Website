@@ -1,0 +1,10 @@
+.overview-detail-boxes {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.overview-detail-boxes > * {
+  text-align: left;
+  background-color: var(--secondary-brown);
+}

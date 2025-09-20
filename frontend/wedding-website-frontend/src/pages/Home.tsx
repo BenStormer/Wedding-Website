@@ -1,17 +1,5 @@
 import './Home.css';
-
-const Home = () => {
-  return (
-    <div className="body">
-      <LandingImage />
-      <OverviewDetails />
-      <div className="rsvp"></div>
-      <div className="other-page-nudges"></div>
-      <div className="our-story"></div>
-      <div className="menu"></div>
-    </div>
-  );
-};
+import OverviewDetailBoxes from '../components/OverviewDetailBoxes';
 
 const LandingImage = () => {
   return (
@@ -34,9 +22,25 @@ const OverviewDetails = () => {
   return (
     <div className="overview-details">
       <h1>Celebrate the wedding of Aspen and Benjamin!</h1>
-      <div className="overview-detail-panels"></div>
+      <div className="overview-detail-boxes">
+        <div>When</div>
+        <div>Where</div>
+        <div>Attire</div>
+      </div>
     </div>
   );
 };
 
+const Home = () => {
+  return (
+    <div className="body">
+      <LandingImage />
+      <OverviewDetails />
+      <div className="rsvp"></div>
+      <div className="other-page-nudges"></div>
+      <div className="our-story"></div>
+      <div className="menu"></div>
+    </div>
+  );
+};
 export default Home;

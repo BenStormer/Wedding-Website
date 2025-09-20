@@ -1,10 +1,21 @@
-/* Desktop View */
+.engagement-photo-container {
+  position: relative;
+}
+
 .engagement-photo {
   background-image: url('../assets/images/parthenon_sitting.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed; /* Parralax effect */
   height: 90svh;
+}
+
+.countdown {
+  position: absolute;
+  text-align: center;
+  width: 100vw;
+  top: 1rem;
+  z-index: 10;
 }
 
 .overview-details {

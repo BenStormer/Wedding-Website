@@ -1,5 +1,5 @@
 import './Home.css';
-import OverviewDetailBoxes from '../components/OverviewDetailBoxes';
+import OverviewDetailBoxContainer from '../components/OverviewDetailBoxes';
 
 const LandingImage = () => {
   return (
@@ -21,11 +21,22 @@ function getDaysUntil(): number {
 const OverviewDetails = () => {
   return (
     <div className="overview-details">
-      <h1>Celebrate the wedding of Aspen and Benjamin!</h1>
-      <div className="overview-detail-boxes">
-        <div>When</div>
-        <div>Where</div>
-        <div>Attire</div>
+      <h1>Celebrate the wedding of Aspen and Ben!</h1>
+      <div>
+        {OverviewDetailBoxContainer([
+          {
+            label: 'When',
+            details: 'October 11, 2026',
+          },
+          {
+            label: 'Where',
+            details: 'Noah Liff Opera Center',
+          },
+          {
+            label: 'Attire',
+            details: 'Semi-formal',
+          },
+        ])}
       </div>
     </div>
   );

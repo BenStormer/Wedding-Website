@@ -1,10 +1,25 @@
-.overview-detail-boxes {
+.overview-detail-box-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 20px;
+  justify-content: center;
+  padding: 20px;
+  background-color: var(--primary-green);
 }
 
-.overview-detail-boxes > * {
-  text-align: left;
+.overview-detail-box {
+  text-align: center;
   background-color: var(--secondary-brown);
+  padding: 20px;
+  border-radius: 50px;
+}
+
+.overview-detail-box h1 {
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .overview-detail-box-container {
+    flex-direction: column;
+  }
 }

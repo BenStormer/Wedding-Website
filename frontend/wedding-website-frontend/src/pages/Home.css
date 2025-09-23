@@ -7,7 +7,7 @@
   background-size: cover;
   background-position: center;
   background-attachment: fixed; /* Parralax effect */
-  height: 90svh;
+  height: 100svh;
 }
 
 .countdown {
@@ -20,7 +20,7 @@
 
 .overview-details {
   overflow-y: auto;
-  background-color: var(--primary-green);
+  background-color: var(--secondary-brown);
   text-align: center;
 }
 

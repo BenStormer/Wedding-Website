@@ -1,5 +1,6 @@
 import './Home.css';
 import OverviewDetailBoxContainer from '../components/OverviewDetailBoxes';
+import RsvpBox from '../components/RsvpBox';
 
 const LandingImage = () => {
   return (
@@ -42,12 +43,22 @@ const OverviewDetails = () => {
   );
 };
 
+const Rsvp = () => {
+  return (
+    <div className="rsvp-section-container">
+      <>{RsvpBox()}</>
+      /* Needs to allow user to put Firstname, Lastname, email (optionally) and
+      YES/NO */
+    </div>
+  );
+};
+
 const Home = () => {
   return (
     <div className="body">
       <LandingImage />
       <OverviewDetails />
-      <div className="rsvp"></div>
+      <Rsvp />
       <div className="other-page-nudges"></div>
       <div className="our-story"></div>
       <div className="menu"></div>

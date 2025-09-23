@@ -10,7 +10,7 @@ Heavy inspiration (copying) from https://www.blakeandmolly2024.com/
 The main pages for the website will be:
 
 - [ ] Home
-  - [ ] Quick details
+  - [x] Quick details
     - Really like the "When", "Where", "Attire" cards on the reference website
     - Image of us
   - [ ] RSVP

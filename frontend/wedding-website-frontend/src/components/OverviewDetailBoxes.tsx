@@ -11,13 +11,13 @@ const OverviewDetailBoxContainer = (
   return (
     <div className="overview-detail-box-container">
       {detailBoxes.map((box) => {
-        return OverviewDetailBox(box);
+        return <OverviewDetailBox key={box.label} box={box} />;
       })}
     </div>
   );
 };
 
-const OverviewDetailBox = (box: OverviewDetailBoxType) => {
+const OverviewDetailBox = ({ box }: { box: OverviewDetailBoxType }) => {
   return (
     <div className="overview-detail-box">
       <h1>{box.label}</h1>

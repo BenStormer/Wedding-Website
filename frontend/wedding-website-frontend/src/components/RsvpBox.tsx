@@ -2,18 +2,30 @@ import './RsvpBox.css';
 
 import { Modal, Button, TextInput, Radio, Group } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { useForm, isNotEmpty, matches } from '@mantine/form';
+import { useForm, isNotEmpty, matches, isEmail } from '@mantine/form';
 import { useState } from 'react';
 
-const NameInput = (form: any, label: string, key: string) => {
+type TextualInputOptions = {
+  withAsterisk?: boolean;
+  autoComplete?: string;
+};
+
+const TextualInput = (
+  form: any,
+  label: string,
+  key: string,
+  options: TextualInputOptions = {}
+) => {
   const [focused, setFocused] = useState(false);
   const inputProps = form.getInputProps(key);
   const floating = focused || (inputProps.value && inputProps.value.length > 0);
+  const { withAsterisk, autoComplete } = options;
 
   return (
     <TextInput
-      withAsterisk
+      withAsterisk={withAsterisk}
       label={label}
+      autoComplete={autoComplete}
       placeholder=""
       labelProps={{ 'data-floating': floating || undefined }}
       classNames={{
@@ -34,38 +46,94 @@ const RsvpForm = () => {
     initialValues: {
       firstName: '',
       lastName: '',
+      email: '',
+      phoneNumber: '',
       willAttend: null,
     },
 
     validate: {
       firstName: matches(/^[a-z ,.'-]+$/i, 'Invalid First Name'),
       lastName: matches(/^[a-z ,.'-]+$/i, 'Invalid Last Name'),
+      email: (email) => (email ? isEmail('Invalid Email')(email) : null),
+      phoneNumber: (phoneNumber) =>
+        phoneNumber
+          ? matches(
+              /^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/,
+              'Invalid Phone Number'
+            )(phoneNumber)
+          : null,
       willAttend: isNotEmpty('You must select if you are attending or not'),
     },
   });
 
+  const handleSubmit = (values: typeof form.values) => {
+    console.log('MAKING API CALL!');
+    console.log(values);
+  };
+
   return (
-    <form onSubmit={form.onSubmit((values) => console.log(values))}>
-      <>{NameInput(form, 'First Name', 'firstName')}</>
-      <>{NameInput(form, 'Last Name', 'lastName')}</>
+    <>
+      <form onSubmit={form.onSubmit(handleSubmit)}>
+        <>
+          {TextualInput(form, 'First Name', 'firstName', {
+            withAsterisk: true,
+            autoComplete: 'given-name',
+          })}
+        </>
+        <>
+          {TextualInput(form, 'Last Name', 'lastName', {
+            withAsterisk: true,
+            autoComplete: 'family-name',
+          })}
+        </>
+        <>
+          {TextualInput(form, 'Email', 'email', {
+            withAsterisk: false,
+            autoComplete: 'email',
+          })}
+        </>
+        <>
+          {TextualInput(form, 'Phone Number', 'phoneNumber', {
+            withAsterisk: false,
+            autoComplete: 'tel',
+          })}
+        </>
 
-      <Radio.Group
-        name="willAttend"
-        withAsterisk
-        {...form.getInputProps('willAttend')}
-      >
-        <Group mt="sm">
-          <Radio value="true" label="I will be attending" />
-          <Radio value="false" label="I won't be attending" />
+        <Radio.Group
+          name="willAttend"
+          withAsterisk
+          {...form.getInputProps('willAttend')}
+        >
+          <Group mt="sm">
+            <Radio value="true" label="I will be attending" />
+            <Radio value="false" label="I won't be attending" />
+          </Group>
+        </Radio.Group>
+
+        <Group justify="flex-end" mt="md">
+          <Button type="submit">Submit</Button>
+          {/*// TODO: Call backend API and return success/error based on if RSVP is*/}
         </Group>
-      </Radio.Group>
-
-      <Group justify="flex-end" mt="md">
-        <Button type="submit">Submit</Button>
-      </Group>
-      {/*// TODO: Call backend API and return success/error based on if RSVP is*/}
-      {/*updated*/}
-    </form>
+        {/*updated*/}
+      </form>
+      <form
+        onSubmit={form.onSubmit(
+          (values, event) => {
+            console.log(
+              values, // <- form.getValues() at the moment of submit
+              event // <- form element submit event
+            );
+          },
+          (validationErrors, values, event) => {
+            console.log(
+              validationErrors, // <- form.errors at the moment of submit
+              values, // <- form.getValues() at the moment of submit
+              event // <- form element submit event
+            );
+          }
+        )}
+      />
+    </>
   );
 };
 

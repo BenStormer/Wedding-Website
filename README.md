@@ -11,10 +11,13 @@ The main pages for the website will be:
 
 - [ ] Home
   - [x] Quick details
-    - Really like the "When", "Where", "Attire" cards on the reference website
     - Image of us
-  - [ ] RSVP
+    - Really like the "When", "Where", "Attire" cards on the reference website
+  - [x] RSVP
     - Box that opens up with ability to enter name, email, and Yes/No
+    - API call to backend to check that user is in RSVP list and set their status
+       - [ ] Stretch goal: Confirm prompt for users that are updating a pre-existing RSVP
+       - [ ] Stretch goal: Email and text users
   - [ ] Link/Prompt users to other pages
     - Wedding Details
     - Visiting Nashville

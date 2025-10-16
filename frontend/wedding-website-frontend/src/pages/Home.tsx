@@ -47,8 +47,6 @@ const Rsvp = () => {
   return (
     <div className="rsvp-section-container">
       <>{RsvpBox()}</>
-      /* Needs to allow user to put Firstname, Lastname, email (optionally) and
-      YES/NO */
     </div>
   );
 };

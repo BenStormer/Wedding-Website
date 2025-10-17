@@ -22,6 +22,21 @@
   overflow-y: auto;
   background-color: var(--secondary-brown);
   text-align: center;
+  padding: 20px;
+}
+
+.rsvp {
+  overflow-y: auto;
+  background-color: var(--secondary-green);
+  align-items: center;
+  padding: 20px;
+}
+
+.other-page-links {
+  overflow-y: auto;
+  background-color: var(--secondary-brown);
+  text-align: center;
+  padding: 20px;
 }
 
 /* Mobile View */

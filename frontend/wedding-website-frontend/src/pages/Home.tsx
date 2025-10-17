@@ -1,6 +1,12 @@
 import './Home.css';
+
+// Components
 import OverviewDetailBoxContainer from '../components/OverviewDetailBoxes';
 import RsvpBox from '../components/RsvpBox';
+import PageDetailCardContainer from '../components/PageDetailCards';
+
+// Assets
+import parthenonSitting from '../assets/images/parthenon_sitting.jpg';
 
 const LandingImage = () => {
   return (
@@ -45,8 +51,40 @@ const OverviewDetails = () => {
 
 const Rsvp = () => {
   return (
-    <div className="rsvp-section-container">
+    <div className="rsvp">
       <>{RsvpBox()}</>
+    </div>
+  );
+};
+
+const OtherPageLinks = () => {
+  return (
+    <div className="other-page-links">
+      Want to know more? See the sections below!
+      <>
+        {PageDetailCardContainer([
+          {
+            label: 'Wedding Details',
+            details: 'See what you need to know before attending!',
+            image: parthenonSitting,
+          },
+          {
+            label: 'Visiting Nashville',
+            details: 'Things to know and sights to see in Music City!',
+            image: parthenonSitting,
+          },
+          {
+            label: 'Registry',
+            details: 'Want to send a gift our way? Here are some ideas',
+            image: parthenonSitting,
+          },
+          {
+            label: 'Frequently Asked Questions',
+            details: 'Confused about something? Check our FAQ!',
+            image: parthenonSitting,
+          },
+        ])}
+      </>
     </div>
   );
 };
@@ -57,10 +95,12 @@ const Home = () => {
       <LandingImage />
       <OverviewDetails />
       <Rsvp />
-      <div className="other-page-nudges"></div>
+      <OtherPageLinks />
+      <div className="other-page-links"></div>
       <div className="our-story"></div>
       <div className="menu"></div>
     </div>
   );
 };
+
 export default Home;

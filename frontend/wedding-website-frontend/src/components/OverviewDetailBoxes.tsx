@@ -5,6 +5,15 @@ type OverviewDetailBoxType = {
   details: string;
 };
 
+const OverviewDetailBox = ({ box }: { box: OverviewDetailBoxType }) => {
+  return (
+    <div className="overview-detail-box">
+      <h1>{box.label}</h1>
+      <p>{box.details}</p>
+    </div>
+  );
+};
+
 const OverviewDetailBoxContainer = (
   detailBoxes: Array<OverviewDetailBoxType>
 ) => {
@@ -13,15 +22,6 @@ const OverviewDetailBoxContainer = (
       {detailBoxes.map((box) => {
         return <OverviewDetailBox key={box.label} box={box} />;
       })}
-    </div>
-  );
-};
-
-const OverviewDetailBox = ({ box }: { box: OverviewDetailBoxType }) => {
-  return (
-    <div className="overview-detail-box">
-      <h1>{box.label}</h1>
-      <p>{box.details}</p>
     </div>
   );
 };

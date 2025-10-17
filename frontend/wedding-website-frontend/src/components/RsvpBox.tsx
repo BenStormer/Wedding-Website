@@ -156,7 +156,8 @@ const RsvpBox = () => {
 
         <Button
           variant="filled"
-          color="var(--primary-green)"
+          color="var(--secondary-brown)"
+          c="black"
           size="xl"
           radius="lg"
           onClick={open}

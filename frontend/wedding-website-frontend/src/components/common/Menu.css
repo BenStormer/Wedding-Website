@@ -1,0 +1,12 @@
+.menu-section-container {
+  background-color: var(--secondary-brown);
+  overflow-y: auto;
+  text-align: center;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 15px;
+}
+
+.menu {
+  color: '--var(secondary-green)';
+}

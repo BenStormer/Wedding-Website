@@ -18,13 +18,13 @@ The main pages for the website will be:
     - API call to backend to check that user is in RSVP list and set their status
        - [ ] Stretch goal: Confirm prompt for users that are updating a pre-existing RSVP
        - [ ] Stretch goal: Email and text users
-  - [ ] Link/Prompt users to other pages
+  - [x] Link/Prompt users to other pages
     - Wedding Details
     - Visiting Nashville
     - Registry
     - FAQs
   - [ ] Our Story
-  - [ ] Menu/Navigation to other pages
+  - [x] Menu/Navigation to other pages
 - [ ] Details
   - Timeline
   - About the venue

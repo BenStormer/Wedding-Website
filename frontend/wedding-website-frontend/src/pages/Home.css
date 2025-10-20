@@ -39,10 +39,29 @@
   padding: 20px;
 }
 
+.our-story-container {
+  position: relative;
+  text-align: center;
+  background-color: var(--secondary-green);
+  overflow-y: auto;
+}
+
+.our-story {
+  background-image: url('../assets/images/parthenon_sitting.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: scroll;
+  height: 100svh;
+}
+
 /* Mobile View */
 @media (max-width: 768px) {
   .engagement-photo {
     height: 60svh;
     background-attachment: scroll;
+  }
+
+  .our-story {
+    height: 60svh;
   }
 }

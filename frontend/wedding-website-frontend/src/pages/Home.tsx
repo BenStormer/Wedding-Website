@@ -1,9 +1,10 @@
 import './Home.css';
 
 // Components
-import OverviewDetailBoxContainer from '../components/OverviewDetailBoxes';
-import RsvpBox from '../components/RsvpBox';
-import PageDetailCardContainer from '../components/PageDetailCards';
+import OverviewDetailBoxContainer from '../components/home/OverviewDetailBoxes';
+import RsvpBox from '../components/home/RsvpBox';
+import PageDetailCardContainer from '../components/home/PageDetailCards';
+import Menu from '../components/common/Menu';
 
 // Assets
 import parthenonSitting from '../assets/images/parthenon_sitting.jpg';
@@ -89,10 +90,19 @@ const OtherPageLinks = () => {
             details: 'Confused about something? Check our FAQ!',
             image: parthenonSitting,
             alt: 'An individual looking confused',
-            link: '/faq',
+            link: '/faqs',
           },
         ])}
       </>
+    </div>
+  );
+};
+
+const OurStory = () => {
+  return (
+    <div className="our-story-container">
+      <h1>Our Story</h1>
+      <div className="our-story">Use different photo for mobile + desktop</div>
     </div>
   );
 };
@@ -104,9 +114,8 @@ const Home = () => {
       <OverviewDetails />
       <Rsvp />
       <OtherPageLinks />
-      <div className="other-page-links"></div>
-      <div className="our-story"></div>
-      <div className="menu"></div>
+      <OurStory />
+      <Menu />
     </div>
   );
 };

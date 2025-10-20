@@ -67,21 +67,29 @@ const OtherPageLinks = () => {
             label: 'Wedding Details',
             details: 'See what you need to know before attending!',
             image: parthenonSitting,
+            alt: 'An elegantly decorated wedding venue',
+            link: '/details',
           },
           {
             label: 'Visiting Nashville',
             details: 'Things to know and sights to see in Music City!',
             image: parthenonSitting,
+            alt: 'The Nashville skyline at night',
+            link: '/visiting-nashville',
           },
           {
             label: 'Registry',
             details: 'Want to send a gift our way? Here are some ideas',
             image: parthenonSitting,
+            alt: 'A decorative gift box',
+            link: '/registry',
           },
           {
             label: 'Frequently Asked Questions',
             details: 'Confused about something? Check our FAQ!',
             image: parthenonSitting,
+            alt: 'An individual looking confused',
+            link: '/faq',
           },
         ])}
       </>

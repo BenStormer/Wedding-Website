@@ -24,6 +24,7 @@ The main pages for the website will be:
     - Registry
     - FAQs
   - [ ] Our Story
+    - [ ] Create image to be used
   - [x] Menu/Navigation to other pages
 - [ ] Details
   - Timeline
@@ -44,17 +45,3 @@ The main pages for the website will be:
 ## Mobile Website:
 
 The main focus should be on the scrolling experience. It is much better to scroll than try to click a bunch of buttons and tabs on a mobile phone, so the content should be planned around this.
-
-### Home Page:
-
-1. Start with the main details:
-
-   - Aspen and Ben are getting married!
-   - Location + Date
-   - Photo of us?
-
-2. Scroll down to RSVP prompt
-
-   - Should open up a box that allows user to enter their name + email
-
-3. Scroll down to

@@ -115,7 +115,7 @@ const Home = () => {
       <Rsvp />
       <OtherPageLinks />
       <OurStory />
-      <Menu />
+      {Menu('Home')}
     </div>
   );
 };

@@ -1,0 +1,5 @@
+.timeline-container {
+  padding: 50px;
+  background-color: var(--secondary-green);
+  align-items: center;
+}

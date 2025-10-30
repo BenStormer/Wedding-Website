@@ -66,7 +66,6 @@ const Details = () => {
     <div className="body">
       <WeddingTimeline />
       <WeddingVenueDetails />
-      <div className="faqs?" />
       {Menu('Details')}
     </div>
   );

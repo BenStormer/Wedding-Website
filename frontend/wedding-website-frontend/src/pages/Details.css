@@ -3,3 +3,9 @@
   background-color: var(--secondary-green);
   align-items: center;
 }
+
+.venue-details-container {
+  padding: 50px;
+  background-color: var(--secondary-brown);
+  align-items: center;
+}

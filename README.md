@@ -26,11 +26,15 @@ The main pages for the website will be:
   - [ ] Our Story
     - [ ] Create image to be used
   - [x] Menu/Navigation to other pages
-- [ ] Details
+- [x] Details
   - [x] Timeline
-  - [ ] About the venue
-  - [ ] Parking, Attire, anything else that would concern attendees
-  - [ ] Include FAQs here? Link to them?
+  - [x] About the venue
+    - Overview
+    - Directions
+    - Image
+    - Questions/Details
+  - [x] Parking, Attire, anything else that would concern attendees
+  - [x] Include FAQs here? Link to them?
 - [ ] Visiting Nashville
   - [ ] Recommended Hotels
     - Links to them and a blurb?

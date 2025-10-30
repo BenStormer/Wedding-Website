@@ -2,9 +2,11 @@ import './Details.css';
 
 // Components
 import CustomTimeline from '../components/details/Timeline';
+import VenueInfo from '../components/details/VenueInfo';
 import Menu from '../components/common/Menu';
 
 // Assets
+import parthenonSitting from '../assets/images/parthenon_sitting.jpg';
 
 const WeddingTimeline = () => {
   return (
@@ -39,11 +41,31 @@ const WeddingTimeline = () => {
   );
 };
 
+const WeddingVenueDetails = () => {
+  return (
+    <div className="venue-details-container">
+      {VenueInfo({
+        card: {
+          venueName: 'The Noah Liff Opera Center',
+          venueDetails: `The Noah Liff Opera Center has lots of details that should go here.
+        Lets do a new paragraph too. And a few more fun details.`,
+          image: parthenonSitting,
+          alt: 'An exterior view of the Noah Liff Opera Center',
+          link: 'https://www.google.com/maps/dir//The+Noah+Liff+Opera+Center,+3622+Redmon+St,+Nashville,+TN+37209/data=!4m7!4m6!1m1!4e2!1m2!1m1!1s0x886461520ba83813:0xed31943604954551!3e0?sa=X&ved=1t:3747&ictx=111',
+        },
+        details: {
+          details: 'hey there',
+        },
+      })}
+    </div>
+  );
+};
+
 const Details = () => {
   return (
     <div className="body">
       <WeddingTimeline />
-      <div className="venue-details" />
+      <WeddingVenueDetails />
       <div className="faqs?" />
       {Menu('Details')}
     </div>

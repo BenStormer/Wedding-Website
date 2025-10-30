@@ -2,6 +2,7 @@ import './Timeline.css';
 
 import { Timeline, Text, Button, Space } from '@mantine/core';
 import { useToggle } from '@mantine/hooks';
+
 type TimelineItemType = {
   title: string;
   time: string;
@@ -39,11 +40,6 @@ const TimelineItem = ({ item }: { item: TimelineItemType }) => {
       <Space h="md" />
     </Timeline.Item>
   );
-  // return (
-  //   <Timeline.Item title={<Text fw={600}>{item.title}</Text>}>
-  //     <Text size="sm">{item.details}</Text>
-  //   </Timeline.Item>
-  // );
 };
 
 const CustomTimeline = (timelineItems: Array<TimelineItemType>) => {

@@ -30,7 +30,7 @@ const PageDetailCard = ({ card }: { card: PageDetailCardType }) => {
           {card.label}
         </Button>
 
-        <Text size="sm" c="dimmed" mt="md" mb="xs">
+        <Text size="sm" c="black" mt="md" mb="xs">
           {card.details}
         </Text>
       </Card>

@@ -3,15 +3,20 @@ import './Home.css';
 // Components
 import Menu from '../components/common/Menu';
 import FaqAccordion from '../components/faqs/FaqAccordion';
-import { Space, Text } from '@mantine/core';
+import { Space } from '@mantine/core';
+
+// Data
+import { data } from '../components/faqs/faqs';
 
 const Faqs = () => {
   return (
     <div className="faqs-container">
-      {FaqAccordion('venue')}
-      <Space h="md" />
-      {FaqAccordion('ceremony')}
-      <Space h="md" />
+      {Object.keys(data).map((category) => (
+        <div key={category}>
+          <FaqAccordion category={category} />
+          <Space h="md" />
+        </div>
+      ))}
     </div>
   );
 };
@@ -20,7 +25,7 @@ const Registry = () => {
   return (
     <div className="body">
       <Faqs />
-      {Menu('Registry')}
+      {Menu('Frequently Asked Questions')}
     </div>
   );
 };

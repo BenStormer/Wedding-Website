@@ -4,8 +4,6 @@ import './VisitingNashville.css';
 import NashvilleActivitiesTabs from '../components/visiting-nashville/NashvilleActivities';
 import Menu from '../components/common/Menu';
 
-// Assets
-
 const NashvilleDetailsHeader = () => {
   return <div className="nashville-details-header">Visiting Nashville</div>;
 };

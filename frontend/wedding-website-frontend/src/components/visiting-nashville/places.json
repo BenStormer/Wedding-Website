@@ -1,0 +1,62 @@
+{
+  "places-to-stay": [
+    {
+      "label": "Ben's House",
+      "details": "It is really cool",
+      "image": "https://picsum.photos/800",
+      "alt": "Bens crib",
+      "location": "link here",
+      "cost": 0,
+      "website": "link here"
+    },
+    {
+      "label": "Aspen's House",
+      "details": "Just like Ben's, but pricier",
+      "image": "https://picsum.photos/1600",
+      "alt": "Bens crib",
+      "location": "link here",
+      "cost": 3,
+      "website": "link here"
+    }
+  ],
+  "places-to-see": [
+    {
+      "label": "Ben's House",
+      "details": "It is really cool",
+      "image": "https://picsum.photos/700",
+      "alt": "Bens crib",
+      "location": "link here",
+      "cost": 0,
+      "website": "link here"
+    },
+    {
+      "label": "Aspen's House",
+      "details": "Just like Ben's, but pricier",
+      "image": "https://picsum.photos/650",
+      "alt": "Bens crib",
+      "location": "link here",
+      "cost": 3,
+      "website": "link here"
+    }
+  ],
+  "places-to-eat": [
+    {
+      "label": "Ben's House",
+      "details": "It is really cool",
+      "image": "https://picsum.photos/1000",
+      "alt": "Bens crib",
+      "location": "link here",
+      "cost": 0,
+      "website": "link here"
+    },
+    {
+      "label": "Aspen's House",
+      "details": "Just like Ben's, but pricier",
+      "image": "https://picsum.photos/1200",
+      "alt": "Bens crib",
+      "location": "link here",
+      "cost": 3,
+      "website": "link here"
+    }
+  ]
+}

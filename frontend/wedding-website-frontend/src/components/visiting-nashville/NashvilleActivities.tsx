@@ -1,6 +1,6 @@
 import './NashvilleActivites.css';
 import classes from './NashvilleActivites.module.css';
-import parthenonSitting from '../../assets/images/parthenon_sitting.jpg';
+import places from './places.json';
 
 import {
   SimpleGrid,
@@ -29,7 +29,7 @@ type NashvilleActivityCardType = {
 
 const NashvilleActivityCard = (card: NashvilleActivityCardType) => {
   return (
-    <Card shadow="md" padding="md" radius="md" withBorder>
+    <Card id={card.label} shadow="md" padding="md" radius="md" withBorder>
       <Card.Section>
         <Image radius="xs" src={card.image} alt={card.alt} />
       </Card.Section>
@@ -39,12 +39,14 @@ const NashvilleActivityCard = (card: NashvilleActivityCardType) => {
           <Text mt="md" mb="xs" fw={700}>
             {card.label}
           </Text>
-
           <Space w="md" />
 
-          <Text c="black" mt="md" mb="xs" fw={700}>
-            Cost:{' '}
-          </Text>
+          {/* Must be in box to preserve whitespace*/}
+          <Box component="pre">
+            <Text c="black" mt="md" mb="xs" fw={700}>
+              Cost:{' '}
+            </Text>
+          </Box>
 
           <Text c="black" mt="md" mb="xs" fw={400}>
             {card.cost !== 0
@@ -97,7 +99,7 @@ const ActivityCardContainer = (cards: Array<NashvilleActivityCardType>) => {
 
 const NashvilleActivitiesTabs = () => {
   const [rootRef, setRootRef] = useState<HTMLDivElement | null>(null);
-  const [value, setValue] = useState<string | null>('1');
+  const [value, setValue] = useState<string | null>('places-to-stay');
   const [controlsRefs, setControlsRefs] = useState<
     Record<string, HTMLButtonElement | null>
   >({});
@@ -117,10 +119,18 @@ const NashvilleActivitiesTabs = () => {
           >
             Places to Stay
           </Tabs.Tab>
-          <Tabs.Tab value="2" ref={setControlRef('2')} className={classes.tab}>
+          <Tabs.Tab
+            value="places-to-see"
+            ref={setControlRef('2')}
+            className={classes.tab}
+          >
             Places to See
           </Tabs.Tab>
-          <Tabs.Tab value="3" ref={setControlRef('3')} className={classes.tab}>
+          <Tabs.Tab
+            value="places-to-eat"
+            ref={setControlRef('3')}
+            className={classes.tab}
+          >
             Places to Eat
           </Tabs.Tab>
 
@@ -132,29 +142,16 @@ const NashvilleActivitiesTabs = () => {
         </Tabs.List>
 
         <Tabs.Panel value="places-to-stay">
-          {ActivityCardContainer([
-            {
-              label: "Ben's House",
-              details: 'It is really cool',
-              image: parthenonSitting,
-              alt: 'Bens crib',
-              location: 'link here',
-              cost: 0,
-              website: 'link here',
-            },
-            {
-              label: "Aspen's House",
-              details: "Just like Ben's, but pricier",
-              image: parthenonSitting,
-              alt: 'Bens crib',
-              location: 'link here',
-              cost: 3,
-              website: 'link here',
-            },
-          ])}
+          {ActivityCardContainer(places['places-to-stay'])}
         </Tabs.Panel>
-        <Tabs.Panel value="2">Places to See</Tabs.Panel>
-        <Tabs.Panel value="3">Places to Eat</Tabs.Panel>
+
+        <Tabs.Panel value="places-to-see">
+          {ActivityCardContainer(places['places-to-see'])}
+        </Tabs.Panel>
+
+        <Tabs.Panel value="places-to-eat">
+          {ActivityCardContainer(places['places-to-eat'])}
+        </Tabs.Panel>
       </Tabs>
     </Center>
   );

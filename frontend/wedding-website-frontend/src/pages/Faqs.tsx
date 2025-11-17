@@ -2,11 +2,27 @@ import './Home.css';
 
 // Components
 import Menu from '../components/common/Menu';
-
-// Assets
+import FaqAccordion from '../components/faqs/FaqAccordion';
+import { Space, Text } from '@mantine/core';
 
 const Faqs = () => {
-  return <div className="body">{Menu('Frequently Asked Questions')}</div>;
+  return (
+    <div className="faqs-container">
+      {FaqAccordion('venue')}
+      <Space h="md" />
+      {FaqAccordion('ceremony')}
+      <Space h="md" />
+    </div>
+  );
 };
 
-export default Faqs;
+const Registry = () => {
+  return (
+    <div className="body">
+      <Faqs />
+      {Menu('Registry')}
+    </div>
+  );
+};
+
+export default Registry;

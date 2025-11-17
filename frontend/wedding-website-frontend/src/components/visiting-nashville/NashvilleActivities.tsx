@@ -1,6 +1,6 @@
 import './NashvilleActivites.css';
 import classes from './NashvilleActivites.module.css';
-import places from './places.json';
+import { data } from './places';
 
 import {
   SimpleGrid,
@@ -91,7 +91,9 @@ const ActivityCardContainer = (cards: Array<NashvilleActivityCardType>) => {
   return (
     <Box p="lg">
       <SimpleGrid spacing="lg">
-        {cards.map((card, _index) => NashvilleActivityCard(card))}
+        {cards.map((card, _index) => (
+          <NashvilleActivityCard key={card.label} {...card} />
+        ))}
       </SimpleGrid>
     </Box>
   );
@@ -142,15 +144,15 @@ const NashvilleActivitiesTabs = () => {
         </Tabs.List>
 
         <Tabs.Panel value="places-to-stay">
-          {ActivityCardContainer(places['places-to-stay'])}
+          {ActivityCardContainer(data['places-to-stay'])}
         </Tabs.Panel>
 
         <Tabs.Panel value="places-to-see">
-          {ActivityCardContainer(places['places-to-see'])}
+          {ActivityCardContainer(data['places-to-see'])}
         </Tabs.Panel>
 
         <Tabs.Panel value="places-to-eat">
-          {ActivityCardContainer(places['places-to-eat'])}
+          {ActivityCardContainer(data['places-to-eat'])}
         </Tabs.Panel>
       </Tabs>
     </Center>

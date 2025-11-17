@@ -8,7 +8,7 @@ import { Space } from '@mantine/core';
 // Data
 import { data } from '../components/faqs/faqs';
 
-const Faqs = () => {
+const FaqBoxes = () => {
   return (
     <div className="faqs-container">
       {Object.keys(data).map((category) => (
@@ -21,13 +21,13 @@ const Faqs = () => {
   );
 };
 
-const Registry = () => {
+const Faqs = () => {
   return (
     <div className="body">
-      <Faqs />
+      <FaqBoxes />
       {Menu('Frequently Asked Questions')}
     </div>
   );
 };
 
-export default Registry;
+export default Faqs;

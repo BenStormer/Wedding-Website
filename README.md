@@ -5,7 +5,7 @@ Source code for the Aspen and Ben's Wedding Website
 # Plan:
 
 This section describes how the wedding website will look and function. It will be split into a mobile and desktop version.
-Heavy inspiration (copying) from https://www.blakeandmolly2024.com/
+Heavy inspiration (copying UI/UX) from https://www.blakeandmolly2024.com/
 
 The main pages for the website will be:
 
@@ -35,15 +35,15 @@ The main pages for the website will be:
     - Questions/Details
   - [x] Parking, Attire, anything else that would concern attendees
   - [x] Include FAQs here? Link to them?
-- [ ] Visiting Nashville
+- [x] Visiting Nashville
   - [ ] Recommended Hotels
     - Links to them and a blurb?
-  - [ ] Things to Do
-    - [ ] Events
-    - [ ] Restaurants
+  - [x] Things to Do
+    - [x] Events
+    - [x] Restaurants
   - Other sights to see
 - [ ] Registry
-- [ ] FAQs
+- [x] FAQs
   - Link to FAQs in details rather than have it's own page?
 
 ## Mobile Website:

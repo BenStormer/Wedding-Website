@@ -9,7 +9,7 @@ import VisitingNashville from './pages/VisitingNashville';
 import Registry from './pages/Registry';
 import Faqs from './pages/Faqs';
 
-function App() {
+async function App() {
   return (
     <MantineProvider
       theme={{
@@ -24,7 +24,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/details" element={<Details />} />
           <Route path="/visiting-nashville" element={<VisitingNashville />} />
-          <Route path="/registry" element={<Registry />} />
+          <Route path="/registry" element={await Registry()} />
           <Route path="/faqs" element={<Faqs />} />
         </Routes>
       </Router>

@@ -112,24 +112,16 @@ const RsvpForm = () => {
 
         <Group justify="flex-end" mt="md">
           <Button type="submit">Submit</Button>
-          {/*// TODO: Call backend API and return success/error based on if RSVP is*/}
+          {/*// TODO: Call backend API and return success/error based on if RSVP is updated */}
         </Group>
-        {/*updated*/}
       </form>
       <form
         onSubmit={form.onSubmit(
           (values, event) => {
-            console.log(
-              values, // <- form.getValues() at the moment of submit
-              event // <- form element submit event
-            );
+            console.log(values, event);
           },
           (validationErrors, values, event) => {
-            console.log(
-              validationErrors, // <- form.errors at the moment of submit
-              values, // <- form.getValues() at the moment of submit
-              event // <- form element submit event
-            );
+            console.log(validationErrors, values, event);
           }
         )}
       />
@@ -151,7 +143,7 @@ const RsvpBox = () => {
           centered
           classNames={{ title: 'modal-title-centered' }}
         >
-          <RsvpForm></RsvpForm>
+          <RsvpForm />
         </Modal>
 
         <Button

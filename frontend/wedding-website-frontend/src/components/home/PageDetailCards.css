@@ -1,3 +1,30 @@
+.page-detail-container {
+  width: 100%;
+}
+
 .page-detail-card {
-  padding: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.page-detail-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12) !important;
+}
+
+.page-detail-label {
+  transition: color 0.2s ease;
+}
+
+.page-detail-card:hover .page-detail-label {
+  color: var(--primary-green);
+}
+
+.page-detail-button {
+  transition: all 0.2s ease;
+}
+
+.page-detail-card:hover .page-detail-button {
+  background-color: var(--primary-green);
+  color: white;
 }

@@ -1,6 +1,7 @@
 import { useDisclosure } from '@mantine/hooks';
 import './RegistryItems.css';
 import { mockData } from './gifts'; // TODO: Remove this and use real DB
+import { useState } from 'react';
 
 import {
   Badge,
@@ -19,7 +20,6 @@ import {
   TextInput,
 } from '@mantine/core';
 import { useForm, isNotEmpty, matches, isEmail } from '@mantine/form';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 type RegistryItem = {

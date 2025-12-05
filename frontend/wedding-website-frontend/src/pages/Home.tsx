@@ -31,20 +31,22 @@ const OverviewDetails = () => {
     <div className="overview-details">
       <h1>Celebrate the wedding of Aspen and Ben!</h1>
       <div>
-        {OverviewDetailBoxContainer([
-          {
-            label: 'When',
-            details: 'October 11, 2026',
-          },
-          {
-            label: 'Where',
-            details: 'Noah Liff Opera Center',
-          },
-          {
-            label: 'Attire',
-            details: 'Semi-formal',
-          },
-        ])}
+        <OverviewDetailBoxContainer
+          detailBoxes={[
+            {
+              label: 'When',
+              details: 'October 11, 2026',
+            },
+            {
+              label: 'Where',
+              details: 'Noah Liff Opera Center',
+            },
+            {
+              label: 'Attire',
+              details: 'Semi-formal',
+            },
+          ]}
+        />
       </div>
     </div>
   );
@@ -53,7 +55,7 @@ const OverviewDetails = () => {
 const Rsvp = () => {
   return (
     <div className="rsvp">
-      <>{RsvpBox()}</>
+      <RsvpBox />
     </div>
   );
 };
@@ -61,9 +63,9 @@ const Rsvp = () => {
 const OtherPageLinks = () => {
   return (
     <div className="other-page-links">
-      Want to know more? See the sections below!
-      <>
-        {PageDetailCardContainer([
+      <p>Want to know more? See the sections below!</p>
+      <PageDetailCardContainer
+        pageDetailCards={[
           {
             label: 'Wedding Details',
             details: 'See what you need to know before attending!',
@@ -92,17 +94,8 @@ const OtherPageLinks = () => {
             alt: 'An individual looking confused',
             link: '/faqs',
           },
-        ])}
-      </>
-    </div>
-  );
-};
-
-const OurStory = () => {
-  return (
-    <div className="our-story-container">
-      <h1>Our Story</h1>
-      <div className="our-story">Use different photo for mobile + desktop</div>
+        ]}
+      />
     </div>
   );
 };
@@ -114,7 +107,6 @@ const Home = () => {
       <OverviewDetails />
       <Rsvp />
       <OtherPageLinks />
-      <OurStory />
       {Menu('Home')}
     </div>
   );

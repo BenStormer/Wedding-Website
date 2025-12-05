@@ -6,6 +6,23 @@
   padding: 20px;
 }
 
+.rsvp-button {
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  border: 2px solid var(--primary-green) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.rsvp-button:hover {
+  background-color: var(--primary-green) !important;
+  color: white !important;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(86, 111, 77, 0.3);
+  letter-spacing: 0.1em;
+}
+
 .floating-input-root {
   position: relative;
   margin-top: 28px;
@@ -29,10 +46,7 @@
   color: var(--mantine-color-placeholder);
   font-weight: 400;
   font-size: var(--mantine-font-size-sm);
-  transition:
-    color 100ms ease,
-    transform 100ms ease,
-    font-size 100ms ease;
+  transition: color 100ms ease, transform 100ms ease, font-size 100ms ease;
 }
 
 .floating-input-label[data-floating] {
@@ -44,4 +58,5 @@
 .modal-title-centered {
   width: 100%;
   text-align: center;
+  font-size: 1.5rem;
 }

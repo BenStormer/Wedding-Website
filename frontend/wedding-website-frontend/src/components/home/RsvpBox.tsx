@@ -147,12 +147,17 @@ const RsvpBox = () => {
         </Modal>
 
         <Button
-          variant="filled"
-          color="var(--secondary-brown)"
-          c="black"
+          variant="light"
+          color="var(--primary-green)"
           size="xl"
-          radius="lg"
+          radius="md"
           onClick={open}
+          className="rsvp-button"
+          style={{
+            minWidth: '350px',
+            height: '80px',
+            fontSize: '1.75rem',
+          }}
         >
           RSVP
         </Button>

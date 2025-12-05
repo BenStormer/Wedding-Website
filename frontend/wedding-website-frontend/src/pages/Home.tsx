@@ -14,6 +14,7 @@ const LandingImage = () => {
     <div className="engagement-photo-container">
       <div className="engagement-photo"></div>
       <div className="countdown">In {getDaysUntil()} days...</div>
+      <div className="hero-title">Celebrate the wedding of Aspen and Ben!</div>
     </div>
   );
 };
@@ -29,25 +30,22 @@ function getDaysUntil(): number {
 const OverviewDetails = () => {
   return (
     <div className="overview-details">
-      <h1>Celebrate the wedding of Aspen and Ben!</h1>
-      <div>
-        <OverviewDetailBoxContainer
-          detailBoxes={[
-            {
-              label: 'When',
-              details: 'October 11, 2026',
-            },
-            {
-              label: 'Where',
-              details: 'Noah Liff Opera Center',
-            },
-            {
-              label: 'Attire',
-              details: 'Semi-formal',
-            },
-          ]}
-        />
-      </div>
+      <OverviewDetailBoxContainer
+        detailBoxes={[
+          {
+            label: 'When',
+            details: 'October 11, 2026',
+          },
+          {
+            label: 'Where',
+            details: 'Noah Liff Opera Center',
+          },
+          {
+            label: 'Attire',
+            details: 'Semi-formal',
+          },
+        ]}
+      />
     </div>
   );
 };
@@ -60,10 +58,32 @@ const Rsvp = () => {
   );
 };
 
+const OurStory = () => {
+  return (
+    <div className="our-story">
+      <h2 className="section-heading">Our Story</h2>
+      <div className="story-timeline-container">
+        <img
+          src={parthenonSitting}
+          alt="Timeline of our relationship - desktop view"
+          className="story-timeline-desktop"
+        />
+        <img
+          src={parthenonSitting}
+          alt="Timeline of our relationship - mobile view"
+          className="story-timeline-mobile"
+        />
+      </div>
+    </div>
+  );
+};
+
 const OtherPageLinks = () => {
   return (
     <div className="other-page-links">
-      <p>Want to know more? See the sections below!</p>
+      <h2 className="section-heading">
+        Want to know more? See the sections below!
+      </h2>
       <PageDetailCardContainer
         pageDetailCards={[
           {
@@ -107,6 +127,7 @@ const Home = () => {
       <OverviewDetails />
       <Rsvp />
       <OtherPageLinks />
+      <OurStory />
       {Menu('Home')}
     </div>
   );

@@ -7,7 +7,7 @@ import VenueInfo from '../components/details/VenueInfo';
 import Menu from '../components/common/Menu';
 
 // Assets
-import parthenonSitting from '../assets/images/parthenon_sitting.jpg';
+import noahLiffOperaCenter from '../assets/images/noah_liff_frontview.webp';
 
 const weddingEvents: TimelineEvent[] = [
   {
@@ -24,7 +24,7 @@ const weddingEvents: TimelineEvent[] = [
   },
   {
     title: 'Reception',
-    time: '5:00 PM',
+    time: '6:00 PM',
     description:
       'Let the celebration begin! Join us for dinner, dancing, and an unforgettable evening celebrating our love story.',
   },
@@ -47,19 +47,15 @@ const WeddingTimeline = () => {
 const WeddingVenueDetails = () => {
   return (
     <div className="venue-details-container">
-      {VenueInfo({
-        card: {
-          venueName: 'The Noah Liff Opera Center',
-          venueDetails: `The Noah Liff Opera Center has lots of details that should go here.
-        Lets do a new paragraph too. And a few more fun details.`,
-          image: parthenonSitting,
-          alt: 'An exterior view of the Noah Liff Opera Center',
-          link: 'https://www.google.com/maps/dir//The+Noah+Liff+Opera+Center,+3622+Redmon+St,+Nashville,+TN+37209/data=!4m7!4m6!1m1!4e2!1m2!1m1!1s0x886461520ba83813:0xed31943604954551!3e0?sa=X&ved=1t:3747&ictx=111',
-        },
-        details: {
-          details: 'hey there',
-        },
-      })}
+      <h2 className="section-heading">The Venue</h2>
+      <VenueInfo
+        venueName="The Noah Liff Opera Center"
+        venueDetails="The Noah Liff Opera Center is home to Nashville Opera and the Nashville Ballet. It's in Sylvan Park, a quiet neighborhood just west of Midtown and about 15 minutes from downtown."
+        image={noahLiffOperaCenter}
+        alt="An exterior view of the Noah Liff Opera Center"
+        directionsLink="https://www.google.com/maps/dir//The+Noah+Liff+Opera+Center,+3622+Redmon+St,+Nashville,+TN+37209"
+        websiteLink="https://noahliffoperacenter.org/about-us"
+      />
     </div>
   );
 };

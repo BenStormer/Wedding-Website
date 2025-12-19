@@ -2,6 +2,10 @@
   width: 100%;
 }
 
+.page-detail-card img {
+  object-position: left 43%;
+}
+
 .page-detail-card {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
@@ -20,11 +24,20 @@
   color: var(--primary-green);
 }
 
-.page-detail-button {
+.page-detail-button-placeholder {
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background-color: rgba(86, 111, 77, 0.1);
+  color: var(--primary-green);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: center;
+  margin-top: auto;
   transition: all 0.2s ease;
 }
 
-.page-detail-card:hover .page-detail-button {
+.page-detail-card:hover .page-detail-button-placeholder {
   background-color: var(--primary-green);
   color: white;
 }

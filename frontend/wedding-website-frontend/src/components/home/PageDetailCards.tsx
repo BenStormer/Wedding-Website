@@ -1,6 +1,6 @@
 import './PageDetailCards.css';
 
-import { Card, Text, Button, SimpleGrid, Image } from '@mantine/core';
+import { Card, Text, SimpleGrid, Image } from '@mantine/core';
 import { Link } from 'react-router-dom';
 
 type PageDetailCardType = {
@@ -19,13 +19,33 @@ const PageDetailCard = ({ card }: { card: PageDetailCardType }) => {
       radius="md"
       withBorder
       className="page-detail-card"
-      style={{ textDecoration: 'none', height: '100%', display: 'flex', flexDirection: 'column' }}
+      component={Link}
+      to={card.link}
+      style={{
+        textDecoration: 'none',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
     >
       <Card.Section>
-        <Image radius="xs" src={card.image} alt={card.alt} height={200} fit="cover" />
+        <Image
+          radius="xs"
+          src={card.image}
+          alt={card.alt}
+          height={200}
+          fit="cover"
+        />
       </Card.Section>
 
-      <Text size="lg" fw={500} c="dark.7" mb="sm" mt="md" className="page-detail-label">
+      <Text
+        size="lg"
+        fw={500}
+        c="dark.7"
+        mb="sm"
+        mt="md"
+        className="page-detail-label"
+      >
         {card.label}
       </Text>
 
@@ -33,18 +53,7 @@ const PageDetailCard = ({ card }: { card: PageDetailCardType }) => {
         {card.details}
       </Text>
 
-      <Button
-        variant="light"
-        color="var(--primary-green)"
-        fullWidth
-        mt="auto"
-        radius="md"
-        component={Link}
-        to={card.link}
-        className="page-detail-button"
-      >
-        Learn More
-      </Button>
+      <div className="page-detail-button-placeholder">Learn More</div>
     </Card>
   );
 };
@@ -55,7 +64,11 @@ const PageDetailCardContainer = ({
   pageDetailCards: Array<PageDetailCardType>;
 }) => {
   return (
-    <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="lg" className="page-detail-container">
+    <SimpleGrid
+      cols={{ base: 1, sm: 2 }}
+      spacing="lg"
+      className="page-detail-container"
+    >
       {pageDetailCards.map((card) => {
         return <PageDetailCard key={card.label} card={card} />;
       })}

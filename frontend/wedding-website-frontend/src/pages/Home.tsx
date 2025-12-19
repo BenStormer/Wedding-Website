@@ -8,6 +8,7 @@ import Menu from '../components/common/Menu';
 
 // Assets
 import parthenonSitting from '../assets/images/parthenon_sitting.jpg';
+import ragsdaleLobby from '../assets/images/ragsdale_ceremony_setup.webp';
 
 const LandingImage = () => {
   return (
@@ -89,7 +90,7 @@ const OtherPageLinks = () => {
           {
             label: 'Wedding Details',
             details: 'See what you need to know before attending!',
-            image: parthenonSitting,
+            image: ragsdaleLobby,
             alt: 'An elegantly decorated wedding venue',
             link: '/details',
           },

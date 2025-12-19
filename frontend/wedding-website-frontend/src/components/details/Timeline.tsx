@@ -36,10 +36,6 @@ const CustomTimeline = ({
     }
   };
 
-  const handleEventClick = (index: number) => {
-    setActiveIndex(index);
-  };
-
   const activeEvent = events[activeIndex];
 
   return (
@@ -64,7 +60,7 @@ const CustomTimeline = ({
               className={`timeline-nav-pill ${
                 index === activeIndex ? 'active' : ''
               }`}
-              onClick={() => handleEventClick(index)}
+              onClick={() => setActiveIndex(index)}
             >
               <Text fw={600} fz={{ base: 'xs', sm: 'sm' }}>
                 {event.title}

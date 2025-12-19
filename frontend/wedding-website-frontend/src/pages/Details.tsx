@@ -2,41 +2,44 @@ import './Details.css';
 
 // Components
 import CustomTimeline from '../components/details/Timeline';
+import type { TimelineEvent } from '../components/details/Timeline';
 import VenueInfo from '../components/details/VenueInfo';
 import Menu from '../components/common/Menu';
 
 // Assets
 import parthenonSitting from '../assets/images/parthenon_sitting.jpg';
 
+const weddingEvents: TimelineEvent[] = [
+  {
+    title: 'Ceremony',
+    time: '4:00 PM',
+    description:
+      'Join us as we say "I do"! The ceremony will be held at the beautiful Noah Liff Opera Center. Please arrive 15-20 minutes early to find your seats.',
+  },
+  {
+    title: 'Cocktail Hour',
+    time: '5:00 PM',
+    description:
+      "Enjoy drinks and hors d'oeuvres while we take photos and the room is transformed for the reception. Mingle with friends and family!",
+  },
+  {
+    title: 'Reception',
+    time: '5:00 PM',
+    description:
+      'Let the celebration begin! Join us for dinner, dancing, and an unforgettable evening celebrating our love story.',
+  },
+  {
+    title: 'Last Call',
+    time: '9:00 PM',
+    description:
+      'All good things must come to an end! The reception will wrap up at 10:00 PM. Thank you for celebrating with us!',
+  },
+];
+
 const WeddingTimeline = () => {
   return (
     <div className="timeline-container">
-      {CustomTimeline([
-        {
-          title: 'Ceremony',
-          time: '3pm',
-          details:
-            'The ceremony will be held at the Noah Liff Opera Center at 3:00pm CST!',
-        },
-        {
-          title: 'Cocktail Hour',
-          time: '4pm',
-          details:
-            'Snacks and drinks will be provided for a cocktail hour while the room flip occurs.',
-        },
-        {
-          title: 'Reception',
-          time: '5pm',
-          details:
-            'The wedding reception will occur after a room flip and end at 10:00pm CST! ',
-        },
-        {
-          title: 'Reception Ends',
-          time: '10pm',
-          details:
-            'The reception will end and all guests must leave the venue at 10:00PM CST.',
-        },
-      ])}
+      <CustomTimeline events={weddingEvents} title="Wedding Day Schedule" />
     </div>
   );
 };

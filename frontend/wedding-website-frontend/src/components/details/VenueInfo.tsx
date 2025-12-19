@@ -11,22 +11,22 @@ import {
 } from '@mantine/core';
 import { Link } from 'react-router-dom';
 
-type VenueOverviewCardType = {
+interface VenueOverviewCardType {
   venueName: string;
   venueDetails: string;
   image: string;
   alt: string;
   link: string;
-};
+}
 
-type VenueDetailsType = {
+interface VenueDetailsType {
   details: string;
-};
+}
 
-type VenueInfo = {
+interface VenueInfo {
   card: VenueOverviewCardType;
   details: VenueDetailsType;
-};
+}
 
 const VenueOverviewCard = (card: VenueOverviewCardType) => {
   return (

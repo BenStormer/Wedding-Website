@@ -1,0 +1,130 @@
+.timeline-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Navigation Container with Line */
+.timeline-nav-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.timeline-nav-pills {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  gap: 24px;
+}
+
+/* Line that connects the pills - positioned relative to pills container */
+.timeline-nav-pills::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--primary-brown);
+  border-radius: 2px;
+  transform: translateY(-50%);
+  z-index: -1;
+}
+
+/* Navigation Pills */
+.timeline-nav-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 16px;
+  border: 2px solid var(--primary-brown);
+  background: white;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  color: var(--primary-brown);
+}
+
+.timeline-nav-pill:hover {
+  background: #f5f0ed;
+  transform: translateY(-2px);
+}
+
+.timeline-nav-pill.active {
+  background: var(--primary-brown);
+  color: white;
+  box-shadow: 0 4px 12px rgba(94, 72, 56, 0.3);
+}
+
+/* Arrow Buttons */
+.timeline-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--primary-brown);
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  color: var(--primary-brown);
+}
+
+.timeline-arrow:hover:not(:disabled) {
+  background: var(--primary-brown);
+  color: white;
+  transform: scale(1.05);
+}
+
+.timeline-arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Event Detail Card */
+.timeline-card {
+  flex: 1;
+  overflow: hidden;
+}
+
+.timeline-card-header {
+  background: linear-gradient(135deg, var(--primary-brown) 0%, #7a5f4d 100%);
+  padding: 20px 24px;
+  text-align: center;
+}
+
+.event-description {
+  background: white;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 640px) {
+  .timeline-wrapper {
+    padding: 16px;
+  }
+
+  .timeline-nav-pills {
+    gap: 12px;
+  }
+
+  .timeline-nav-pill {
+    padding: 6px 8px;
+  }
+
+  .timeline-nav-pill .mantine-Text-root {
+    font-size: 0.65rem !important;
+  }
+
+  .timeline-arrow {
+    width: 32px;
+    height: 32px;
+  }
+
+  .timeline-card-header {
+    padding: 16px 20px;
+  }
+}

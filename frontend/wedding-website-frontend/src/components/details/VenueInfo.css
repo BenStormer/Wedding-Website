@@ -38,7 +38,7 @@
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 16px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -50,7 +50,12 @@
 
 .venue-detail-icon {
   color: var(--primary-green);
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
 }
+
 
 .venue-faq-link {
   margin-top: 24px;
@@ -72,4 +77,12 @@
   .venue-detail-card {
     padding: 20px;
   }
+
+  .venue-detail-icon {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+  }
+
 }

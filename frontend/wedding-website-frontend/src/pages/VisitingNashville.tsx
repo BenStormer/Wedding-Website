@@ -4,22 +4,20 @@ import './VisitingNashville.css';
 import NashvilleActivitiesTabs from '../components/visiting-nashville/NashvilleActivities';
 import Menu from '../components/common/Menu';
 
-const NashvilleDetailsHeader = () => {
-  return <div className="nashville-details-header">Visiting Nashville</div>;
-};
-
-const NashvilleDetails = () => {
-  return NashvilleActivitiesTabs();
-};
+// Mantine
+import { Box, Text } from '@mantine/core';
 
 const VisitingNashville = () => {
-  // Sections: Places to Stay, Places to Eat, Places to Go
-  // Details for each "place": Name/Label, Details, Image, Alt, Location, Cost, Neighborhood?, Website
-  //    - Optionally could also include "subfilters" (for food this would be type, for activities this could be like "nature" or "history" or something)
   return (
     <div className="body">
-      <NashvilleDetailsHeader />
-      <NashvilleDetails />
+      <Box className="nashville-page">
+        <Box className="nashville-header">
+          <Text className="nashville-header-title">Visiting Nashville</Text>
+        </Box>
+        <Box className="nashville-content">
+          <NashvilleActivitiesTabs />
+        </Box>
+      </Box>
       {Menu('Visiting Nashville')}
     </div>
   );

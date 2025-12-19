@@ -98,35 +98,35 @@ const detailItems = [
     title: 'Attire',
     description:
       'Semi-formal attire is requested. Please dress comfortably but elegantly for the celebration.',
-    iconSize: 28,
+    iconClass: 'venue-detail-icon',
   },
   {
     icon: IconCar,
     title: 'Parking',
     description:
       'Plentiful free parking is available on-site, but we still encourage you to carpool if possible!',
-    iconSize: 28,
+    iconClass: 'venue-detail-icon',
   },
   {
     icon: IconCalendarEvent,
     title: 'What to Expect',
     description:
       'The ceremony and reception will both be held at the venue. Dinner and drinks will be provided.',
-    iconSize: 28,
+    iconClass: 'venue-detail-icon',
   },
   {
     icon: IconCamera,
     title: 'Photos & Phones',
     description:
       "We kindly ask that you keep phones and cameras away during the ceremony so everyone can be fully present. After that, snap away! We'd love to see your photos from the rest of the celebration.",
-    iconSize: 38,
+    iconClass: 'venue-detail-icon',
   },
   {
     icon: IconGlass,
     title: 'Drinks',
     description:
       'Alcohol will be served at the cocktail hour and reception, please plan your transportation accordingly.',
-    iconSize: 28,
+    iconClass: 'venue-detail-icon',
   },
 ];
 
@@ -146,11 +146,7 @@ const VenueDetailsInfo = () => {
       <SimpleGrid cols={1} spacing="lg" className="venue-details-grid">
         {detailItems.map((item) => (
           <Box key={item.title} className="venue-detail-card">
-            <item.icon
-              size={item.iconSize}
-              stroke={1.5}
-              className="venue-detail-icon"
-            />
+            <item.icon stroke={1.5} className={item.iconClass} />
             <Box>
               <Text fw={600} size="md" mb={4}>
                 {item.title}

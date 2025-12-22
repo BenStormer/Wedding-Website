@@ -3,7 +3,7 @@
 }
 
 .engagement-photo {
-  background-image: url('../assets/images/parthenon_sitting.jpg');
+  background-image: url('../assets/images/parthenon_sitting.webp');
   background-size: cover;
   background-position: center;
   background-attachment: fixed; /* Parralax effect */

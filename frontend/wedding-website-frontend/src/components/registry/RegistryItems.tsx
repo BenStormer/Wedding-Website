@@ -1,53 +1,60 @@
-import { useDisclosure } from '@mantine/hooks';
 import './RegistryItems.css';
-import { mockData } from './gifts'; // TODO: Remove this and use real DB
+import { initialRegistryData } from './Gifts';
+import type { RegistryItem } from './Gifts';
+
+import { useDisclosure } from '@mantine/hooks';
 import { useState } from 'react';
 
 import {
-  Badge,
   Box,
   Button,
   Card,
-  Center,
-  Grid,
   Group,
+  Image,
   Modal,
   NumberInput,
-  Paper,
   Progress,
-  Space,
+  SimpleGrid,
+  Stack,
   Text,
   TextInput,
 } from '@mantine/core';
-import { useForm, isNotEmpty, matches, isEmail } from '@mantine/form';
-import { Link } from 'react-router-dom';
+import { useForm, matches, isEmail } from '@mantine/form';
+import {
+  IconExternalLink,
+  IconCheck,
+  IconGift,
+  IconHeart,
+} from '@tabler/icons-react';
 
-type RegistryItem = {
+// Form values type
+interface PurchaseFormValues {
+  firstName: string;
+  lastName: string;
+  email: string;
+  quantity: number;
+}
+
+// Floating label text input
+interface FloatingInputProps {
+  form: ReturnType<typeof useForm<PurchaseFormValues>>;
   label: string;
-  description: string;
-  price: number;
-  image?: string;
-  alt?: string;
-  requested_quantity: number;
-  received_quantity: number;
-  purchase_link: string;
-};
-
-type TextualInputOptions = {
+  fieldKey: keyof PurchaseFormValues;
   withAsterisk?: boolean;
   autoComplete?: string;
-};
+}
 
-const TextualInput = (
-  form: any,
-  label: string,
-  key: string,
-  options: TextualInputOptions = {}
-) => {
+const FloatingInput = ({
+  form,
+  label,
+  fieldKey,
+  withAsterisk,
+  autoComplete,
+}: FloatingInputProps) => {
   const [focused, setFocused] = useState(false);
-  const inputProps = form.getInputProps(key);
-  const floating = focused || (inputProps.value && inputProps.value.length > 0);
-  const { withAsterisk, autoComplete } = options;
+  const inputProps = form.getInputProps(fieldKey);
+  const value = inputProps.value as string;
+  const floating = focused || (value && value.length > 0);
 
   return (
     <TextInput
@@ -55,7 +62,7 @@ const TextualInput = (
       label={label}
       autoComplete={autoComplete}
       placeholder=""
-      labelProps={{ 'data-floating': floating || undefined }}
+      labelProps={{ 'data-floating': floating ?? undefined }}
       classNames={{
         root: 'floating-input-root',
         input: 'floating-input-input',
@@ -68,202 +75,318 @@ const TextualInput = (
   );
 };
 
-const PurchaseForm = (remaining_quantity: number) => {
-  const form = useForm({
+// Purchase confirmation modal form
+interface PurchaseFormProps {
+  remainingQuantity: number | null;
+  itemLabel: string;
+  isSpecialFund?: boolean;
+  onSubmit: (quantity: number) => void;
+  onClose: () => void;
+}
+
+const PurchaseForm = ({
+  remainingQuantity,
+  itemLabel,
+  isSpecialFund,
+  onSubmit,
+  onClose,
+}: PurchaseFormProps) => {
+  const form = useForm<PurchaseFormValues>({
     mode: 'controlled',
     initialValues: {
       firstName: '',
       lastName: '',
       email: '',
-      phoneNumber: '',
-      willAttend: null,
+      quantity: 1,
     },
-
     validate: {
-      firstName: matches(/^[a-z ,.'-]+$/i, 'Invalid First Name'),
-      lastName: matches(/^[a-z ,.'-]+$/i, 'Invalid Last Name'),
-      email: (email) => (email ? isEmail('Invalid Email')(email) : null),
-      phoneNumber: (phoneNumber) =>
-        phoneNumber
-          ? matches(
-              /^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/,
-              'Invalid Phone Number'
-            )(phoneNumber)
-          : null,
-      willAttend: isNotEmpty('You must select if you are attending or not'),
+      firstName: matches(/^[a-z ,.'-]+$/i, 'Please enter a valid name'),
+      lastName: matches(/^[a-z ,.'-]+$/i, 'Please enter a valid name'),
+      email: (email) =>
+        email ? isEmail('Please enter a valid email')(email) : null,
     },
   });
 
-  const handleSubmit = (values: typeof form.values) => {
-    console.log('MAKING API CALL!');
-    console.log(values);
+  const handleSubmit = (values: PurchaseFormValues) => {
+    console.log('Submitting purchase:', values);
+    // TODO: Call backend API to update registry
+    onSubmit(values.quantity);
+    onClose();
   };
 
   return (
-    <>
-      <form onSubmit={form.onSubmit(handleSubmit)}>
-        <>
-          {TextualInput(form, 'First Name', 'firstName', {
-            withAsterisk: true,
-            autoComplete: 'given-name',
-          })}
-        </>
-        <>
-          {TextualInput(form, 'Last Name', 'lastName', {
-            withAsterisk: true,
-            autoComplete: 'family-name',
-          })}
-        </>
-        <>
-          {TextualInput(form, 'Email', 'email', {
-            withAsterisk: false,
-            autoComplete: 'email',
-          })}
-        </>
-        <>
-          {TextualInput(form, 'Phone Number', 'phoneNumber', {
-            withAsterisk: false,
-            autoComplete: 'tel',
-          })}
-        </>
+    <form onSubmit={form.onSubmit(handleSubmit)}>
+      <Stack gap="md">
+        <Text size="sm" c="dark.5" ta="center">
+          {isSpecialFund ? (
+            <>
+              Thank you for contributing to our <strong>{itemLabel}</strong>!
+              Please let us know who you are so we can send a thank you note.
+            </>
+          ) : (
+            <>
+              Thank you for gifting us{' '}
+              {/^[aeiou]/i.test(itemLabel) ? 'an' : 'a'}{' '}
+              <strong>{itemLabel}</strong>! Please let us know who you are so we
+              can send a thank you note.
+            </>
+          )}
+        </Text>
 
-        <NumberInput
-          pt="lg"
-          label="How many did you purchase?"
-          min={1}
-          max={remaining_quantity}
-          allowDecimal={false}
-          stepHoldDelay={500}
-          stepHoldInterval={(t) => Math.max(1000 / t ** 2, 25)}
-          defaultValue={1}
-        />
-
-        <Group justify="flex-end" mt="md">
-          <Button type="submit">Submit</Button>
-          {/*// TODO: Call backend API and return success/error based on if registry database is updated*/}
+        <Group grow>
+          <FloatingInput
+            form={form}
+            label="First Name"
+            fieldKey="firstName"
+            withAsterisk
+            autoComplete="given-name"
+          />
+          <FloatingInput
+            form={form}
+            label="Last Name"
+            fieldKey="lastName"
+            withAsterisk
+            autoComplete="family-name"
+          />
         </Group>
-      </form>
-      <form
-        onSubmit={form.onSubmit(
-          (values, event) => {
-            console.log(values, event);
-          },
-          (validationErrors, values, event) => {
-            console.log(validationErrors, values, event);
-          }
-        )}
-      />
-    </>
-  );
-};
 
-const ItemCard = (item: RegistryItem) => {
-  const [opened, { open, close }] = useDisclosure(false);
-
-  return (
-    <Card key={item.label} shadow="sm" padding="md" radius="md" withBorder>
-      {/* Label and price */}
-      <Card.Section inheritPadding>
-        <Grid justify="space-between" pt="lg" pl="md">
-          <Text fw={700}>{item.label}</Text>
-          <Badge color="var(--secondary-green)">${item.price}</Badge>
-        </Grid>
-      </Card.Section>
-
-      {/* Description */}
-      <Card.Section inheritPadding>
-        <Space h="sm" />
-        <Center>
-          <Text>{item.description}</Text>
-        </Center>
-        <Space h="xl" />
-        <Space h="md" />
-      </Card.Section>
-
-      {/* Received progress bar */}
-      <Card.Section inheritPadding>
-        <Card.Section pl="xl" pr="xl">
-          <Grid justify="space-between">
-            <Text size="sm">
-              Received {item.received_quantity} of {item.requested_quantity}
-            </Text>
-          </Grid>
-          <Space h="sm" />
-        </Card.Section>
-        <Progress
-          value={(item.received_quantity / item.requested_quantity) * 100}
+        <FloatingInput
+          form={form}
+          label="Email (optional)"
+          fieldKey="email"
+          autoComplete="email"
         />
-      </Card.Section>
 
-      {/* Purchase link */}
-      <Card.Section inheritPadding>
-        <Button
-          color="var(--primary-green)"
-          fullWidth
-          mt="md"
-          radius="md"
-          component={Link}
-          to={item.purchase_link}
-        >
-          Link to Purchase
-        </Button>
-      </Card.Section>
+        {!isSpecialFund && (
+          <NumberInput
+            label="Quantity purchased"
+            min={1}
+            max={remainingQuantity ?? undefined}
+            allowDecimal={false}
+            defaultValue={1}
+            {...form.getInputProps('quantity')}
+          />
+        )}
 
-      {/* Modal for logging purchase */}
-      <Modal
-        opened={opened}
-        onClose={close}
-        title="Purchase Details"
-        overlayProps={{ backgroundOpacity: 0.5, blur: 3 }}
-        centered
-        classNames={{ title: 'modal-title-centered' }}
-      >
-        <>{PurchaseForm(item.requested_quantity - item.received_quantity)}</>
-      </Modal>
-      <Card.Section inheritPadding pb="md">
-        <Button
-          disabled={item.received_quantity >= item.requested_quantity}
-          color="var(--primary-green)"
-          fullWidth
-          mt="md"
-          radius="md"
-          onClick={open}
-        >
-          I have purchased this
-        </Button>
-      </Card.Section>
-    </Card>
+        <Group justify="flex-end" mt="sm">
+          <Button variant="subtle" color="gray" onClick={onClose}>
+            Cancel
+          </Button>
+          <Button type="submit" color="var(--primary-green)">
+            Confirm
+          </Button>
+        </Group>
+      </Stack>
+    </form>
   );
-
-  /*
-  Card should be:
-    - image
-    - label
-    - price
-    - progress bar of requested/received
-    - Link to purchase
-    - Button for "I have purchased" -> Opens modal
-      - Modal:
-        - Ask name (for thank you cards!)
-        - Quantity (to update progress)
-  */
 };
 
-const fetchFromRegistryDatabase = async () => {
-  // TODO: Connect to database for registry registry items
-  return mockData;
-};
-
-const RegistryItems = async () => {
+// Price display
+const PriceDisplay = ({ price }: { price: number }) => {
+  if (price === 0) {
+    return (
+      <Text className="registry-item-price registry-item-price-any">
+        Any Amount
+      </Text>
+    );
+  }
   return (
-    <Box p="md">
-      {(await fetchFromRegistryDatabase()).map((item) => (
-        <Paper key={item.label} p="lg">
-          <ItemCard {...item} />
-        </Paper>
-      ))}
+    <Text className="registry-item-price">
+      ${price.toLocaleString()}
+      {price >= 100 ? '' : ' each'}
+    </Text>
+  );
+};
+
+// Progress display
+interface ProgressDisplayProps {
+  received: number;
+  requested: number | null;
+}
+
+const ProgressDisplay = ({ received, requested }: ProgressDisplayProps) => {
+  // Don't show progress for unlimited items
+  if (requested === null) {
+    return null;
+  }
+
+  const percentage = (received / requested) * 100;
+  const isComplete = received >= requested;
+
+  return (
+    <Box className="registry-progress-container">
+      <Group justify="space-between" mb={6}>
+        <Text size="sm" c="dark.5">
+          {isComplete ? (
+            <Group gap={4}>
+              <IconCheck size={14} />
+              <span>Fully gifted!</span>
+            </Group>
+          ) : (
+            `${received} of ${requested} gifted`
+          )}
+        </Text>
+        <Text size="sm" c="dark.5" fw={500}>
+          {Math.round(percentage)}%
+        </Text>
+      </Group>
+      <Progress
+        value={percentage}
+        color="var(--primary-green)"
+        size="sm"
+        radius="xl"
+        className="registry-progress-bar"
+      />
     </Box>
   );
 };
 
-export default RegistryItems;
+// Check if item is fully gifted
+const isItemFullyGifted = (item: RegistryItem): boolean => {
+  if (item.requested_quantity === null) return false; // Special funds are never "fully gifted"
+  return item.received_quantity >= item.requested_quantity;
+};
+
+// Individual registry item card
+interface RegistryItemCardProps {
+  item: RegistryItem;
+  onGift: (itemId: string, quantity: number) => void;
+}
+
+const RegistryItemCard = ({ item, onGift }: RegistryItemCardProps) => {
+  const [opened, { open, close }] = useDisclosure(false);
+  const isFullyGifted = isItemFullyGifted(item);
+
+  const handleGiftSubmit = (quantity: number) => {
+    onGift(item.id, quantity);
+  };
+
+  return (
+    <>
+      <Card className="registry-card" shadow="sm" radius="md" withBorder>
+        <Card.Section className="registry-card-image-section">
+          <Image
+            src={item.image}
+            alt={item.alt}
+            height={200}
+            fallbackSrc="https://picsum.photos/800/600"
+          />
+          <Box className="registry-price-badge">
+            <PriceDisplay price={item.price} />
+          </Box>
+          {isFullyGifted && (
+            <Box className="registry-gifted-overlay">
+              <IconHeart size={32} />
+              <Text fw={600}>Thank You!</Text>
+            </Box>
+          )}
+        </Card.Section>
+
+        <Stack gap="sm" className="registry-card-content">
+          <Text className="registry-item-title">{item.label}</Text>
+
+          <Text size="sm" c="dark.5" className="registry-item-description">
+            {item.description}
+          </Text>
+
+          <ProgressDisplay
+            received={item.received_quantity}
+            requested={item.requested_quantity}
+          />
+
+          <Group grow gap="sm" className="registry-card-buttons">
+            <Button
+              component="a"
+              href={item.purchase_link}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="light"
+              color="var(--primary-green)"
+              leftSection={<IconExternalLink size={15} />}
+              className="registry-button"
+            >
+              {item.isSpecialFund ? 'Contribute' : 'Purchase'}
+            </Button>
+            <Button
+              onClick={open}
+              disabled={isFullyGifted}
+              color="var(--primary-green)"
+              leftSection={<IconGift size={15} />}
+              className="registry-button"
+            >
+              {item.isSpecialFund ? 'I Contributed' : 'I Purchased'}
+            </Button>
+          </Group>
+        </Stack>
+      </Card>
+
+      <Modal
+        opened={opened}
+        onClose={close}
+        title="Thank You!"
+        centered
+        overlayProps={{ backgroundOpacity: 0.5, blur: 3 }}
+        classNames={{ title: 'registry-modal-title' }}
+      >
+        <PurchaseForm
+          remainingQuantity={
+            item.requested_quantity !== null
+              ? item.requested_quantity - item.received_quantity
+              : null
+          }
+          itemLabel={item.label}
+          isSpecialFund={item.isSpecialFund}
+          onSubmit={handleGiftSubmit}
+          onClose={close}
+        />
+      </Modal>
+    </>
+  );
+};
+
+// Sort items: special funds first, then incomplete items, then completed items
+const sortRegistryItems = (items: RegistryItem[]): RegistryItem[] => {
+  return [...items].sort((a, b) => {
+    // Special funds always come first
+    if (a.isSpecialFund && !b.isSpecialFund) return -1;
+    if (!a.isSpecialFund && b.isSpecialFund) return 1;
+
+    // Then sort by completion status (incomplete first)
+    const aComplete = isItemFullyGifted(a);
+    const bComplete = isItemFullyGifted(b);
+
+    if (!aComplete && bComplete) return -1;
+    if (aComplete && !bComplete) return 1;
+
+    return 0;
+  });
+};
+
+// Main registry grid component
+const RegistryItemsGrid = () => {
+  const [items, setItems] = useState<RegistryItem[]>(initialRegistryData);
+
+  const handleGift = (itemId: string, quantity: number) => {
+    setItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === itemId
+          ? { ...item, received_quantity: item.received_quantity + quantity }
+          : item
+      )
+    );
+  };
+
+  const sortedItems = sortRegistryItems(items);
+
+  return (
+    <Box className="registry-grid-container">
+      <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing="lg">
+        {sortedItems.map((item) => (
+          <RegistryItemCard key={item.id} item={item} onGift={handleGift} />
+        ))}
+      </SimpleGrid>
+    </Box>
+  );
+};
+
+export default RegistryItemsGrid;

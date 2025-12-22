@@ -1,0 +1,169 @@
+/* Registry Grid */
+.registry-grid-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Registry Card */
+.registry-card {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.25s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.registry-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+.registry-card-image-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.registry-card-image-section img {
+  transition: transform 0.3s ease;
+}
+
+.registry-card:hover .registry-card-image-section img {
+  transform: scale(1.05);
+}
+
+.registry-price-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: white;
+  padding: 8px 14px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.registry-item-price {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-green);
+}
+
+.registry-item-price-any {
+  font-size: 0.9rem;
+}
+
+.registry-gifted-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(86, 111, 77, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  gap: 8px;
+}
+
+.registry-card-content {
+  padding: 16px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.registry-item-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--primary-green);
+  line-height: 1.3;
+}
+
+.registry-item-description {
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+/* Progress Bar */
+.registry-progress-container {
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.registry-progress-bar {
+  background-color: rgba(86, 111, 77, 0.15);
+}
+
+/* Buttons */
+.registry-card-buttons {
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.registry-button {
+  transition: all 0.2s ease;
+}
+
+.registry-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+/* Modal */
+.registry-modal-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary-green);
+}
+
+/* Floating Input Styles */
+.floating-input-root {
+  position: relative;
+}
+
+.floating-input-label {
+  position: absolute;
+  z-index: 2;
+  top: 10px;
+  left: 12px;
+  pointer-events: none;
+  color: var(--mantine-color-gray-6);
+  font-size: 0.9rem;
+  transition: all 0.15s ease;
+  background: white;
+  padding: 0 4px;
+}
+
+.floating-input-label[data-floating] {
+  top: -8px;
+  font-size: 0.75rem;
+  color: var(--primary-green);
+  font-weight: 500;
+}
+
+.floating-input-input {
+  padding-top: 8px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .registry-card-buttons {
+    flex-direction: column;
+  }
+
+  .registry-item-title {
+    font-size: 1.05rem;
+  }
+
+  /* Disable hover effects on mobile */
+  .registry-card:hover {
+    transform: none;
+  }
+
+  .registry-card:hover .registry-card-image-section img {
+    transform: none;
+  }
+}
+

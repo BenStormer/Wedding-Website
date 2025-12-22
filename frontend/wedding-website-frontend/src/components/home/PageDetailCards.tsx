@@ -3,13 +3,14 @@ import './PageDetailCards.css';
 import { Card, Text, SimpleGrid, Image } from '@mantine/core';
 import { Link } from 'react-router-dom';
 
-type PageDetailCardType = {
+interface PageDetailCardType {
   label: string;
   details: string;
   image: string;
   alt: string;
   link: string;
-};
+  imagePosition?: string; // e.g., "center", "top", "bottom", "left 50%", etc.
+}
 
 const PageDetailCard = ({ card }: { card: PageDetailCardType }) => {
   return (
@@ -35,6 +36,11 @@ const PageDetailCard = ({ card }: { card: PageDetailCardType }) => {
           alt={card.alt}
           height={200}
           fit="cover"
+          style={
+            card.imagePosition
+              ? { objectPosition: card.imagePosition }
+              : undefined
+          }
         />
       </Card.Section>
 
@@ -61,7 +67,7 @@ const PageDetailCard = ({ card }: { card: PageDetailCardType }) => {
 const PageDetailCardContainer = ({
   pageDetailCards,
 }: {
-  pageDetailCards: Array<PageDetailCardType>;
+  pageDetailCards: PageDetailCardType[];
 }) => {
   return (
     <SimpleGrid

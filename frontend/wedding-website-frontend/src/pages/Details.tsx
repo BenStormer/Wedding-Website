@@ -50,7 +50,7 @@ const WeddingVenueDetails = () => {
       <h2 className="section-heading">The Venue</h2>
       <VenueInfo
         venueName="The Noah Liff Opera Center"
-        venueDetails="The Noah Liff Opera Center is home to Nashville Opera and the Nashville Ballet. It's in Sylvan Park, a quiet neighborhood just west of Midtown and about 15 minutes from downtown."
+        venueDetails="The Noah Liff Opera Center is home to Nashville Opera and shares space with the Nashville Ballet. It's in Sylvan Park, a quiet neighborhood just west of Midtown and about 15 minutes from downtown."
         image={noahLiffOperaCenter}
         alt="An exterior view of the Noah Liff Opera Center"
         directionsLink="https://www.google.com/maps/dir//The+Noah+Liff+Opera+Center,+3622+Redmon+St,+Nashville,+TN+37209"

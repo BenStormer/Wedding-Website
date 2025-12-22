@@ -2,18 +2,23 @@
   width: 100%;
 }
 
-.page-detail-card img {
-  object-position: left 43%;
-}
-
 .page-detail-card {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
+  overflow: hidden;
+}
+
+.page-detail-card img {
+  transition: transform 0.3s ease;
 }
 
 .page-detail-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12) !important;
+}
+
+.page-detail-card:hover img {
+  transform: scale(1.05);
 }
 
 .page-detail-label {
@@ -40,4 +45,16 @@
 .page-detail-card:hover .page-detail-button-placeholder {
   background-color: var(--primary-green);
   color: white;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  /* Disable hover effects on mobile */
+  .page-detail-card:hover {
+    transform: none;
+  }
+
+  .page-detail-card:hover img {
+    transform: none;
+  }
 }

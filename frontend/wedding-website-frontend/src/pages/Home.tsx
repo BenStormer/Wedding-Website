@@ -7,8 +7,11 @@ import PageDetailCardContainer from '../components/home/PageDetailCards';
 import Menu from '../components/common/Menu';
 
 // Assets
-import parthenonSitting from '../assets/images/parthenon_sitting.jpg';
+import parthenonSitting from '../assets/images/parthenon_sitting.webp';
 import ragsdaleLobby from '../assets/images/ragsdale_ceremony_setup.webp';
+import nashvilleSkyline from '../assets/images/nashville_skyline.webp';
+import registryGifts from '../assets/images/registry_gifts.webp';
+import questionCards from '../assets/images/question_cards.webp';
 
 const LandingImage = () => {
   return (
@@ -91,29 +94,32 @@ const OtherPageLinks = () => {
             label: 'Wedding Details',
             details: 'See what you need to know before attending!',
             image: ragsdaleLobby,
-            alt: 'An elegantly decorated wedding venue',
+            alt: 'The Ragsdale Lobby room of the Noah Liff Opera Center decorated for a wedding ceremony',
             link: '/details',
+            imagePosition: 'left 43%',
           },
           {
             label: 'Visiting Nashville',
             details: 'Things to know and sights to see in Music City!',
-            image: parthenonSitting,
+            image: nashvilleSkyline,
             alt: 'The Nashville skyline at night',
             link: '/visiting-nashville',
           },
           {
             label: 'Registry',
             details: 'Want to send a gift our way? Here are some ideas',
-            image: parthenonSitting,
-            alt: 'A decorative gift box',
+            image: registryGifts,
+            alt: 'A set of decorative gift boxes',
             link: '/registry',
+            imagePosition: 'left 25%',
           },
           {
             label: 'Frequently Asked Questions',
             details: 'Confused about something? Check our FAQ!',
-            image: parthenonSitting,
-            alt: 'An individual looking confused',
+            image: questionCards,
+            alt: 'Cards displayed on a table with question marks on them',
             link: '/faqs',
+            imagePosition: 'center top',
           },
         ]}
       />

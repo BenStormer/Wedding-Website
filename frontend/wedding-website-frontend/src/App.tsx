@@ -26,7 +26,7 @@ const ScrollToTop = () => {
   return null;
 };
 
-async function App() {
+function App() {
   return (
     <MantineProvider
       theme={{
@@ -93,7 +93,7 @@ async function App() {
           <Route path="/" element={<Home />} />
           <Route path="/details" element={<Details />} />
           <Route path="/visiting-nashville" element={<VisitingNashville />} />
-          <Route path="/registry" element={await Registry()} />
+          <Route path="/registry" element={<Registry />} />
           <Route path="/faqs" element={<Faqs />} />
         </Routes>
       </Router>

@@ -6,10 +6,10 @@ import {
   IconShirt,
 } from '@tabler/icons-react';
 
-type OverviewDetailBoxType = {
+interface OverviewDetailBoxType {
   label: string;
   details: string;
-};
+}
 
 const getIcon = (label: string) => {
   switch (label.toLowerCase()) {
@@ -43,7 +43,7 @@ const OverviewDetailBox = ({ box }: { box: OverviewDetailBoxType }) => {
 const OverviewDetailBoxContainer = ({
   detailBoxes,
 }: {
-  detailBoxes: Array<OverviewDetailBoxType>;
+  detailBoxes: OverviewDetailBoxType[];
 }) => {
   return (
     <div className="overview-detail-box-container">

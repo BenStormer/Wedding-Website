@@ -3,6 +3,7 @@ import './Registry.css';
 // Components
 import RegistryItemsGrid from '../components/registry/RegistryItems';
 import Menu from '../components/common/Menu';
+import TopNav from '../components/common/TopNav';
 
 // Mantine
 import { Box, Text, Stack } from '@mantine/core';
@@ -11,6 +12,7 @@ import { IconGift } from '@tabler/icons-react';
 const Registry = () => {
   return (
     <div className="body">
+      <TopNav currentPage="Registry" />
       <Box className="registry-page">
         <Box className="registry-header">
           <Stack gap="sm" align="center">

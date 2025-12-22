@@ -1,4 +1,4 @@
-import './NashvilleActivites.css';
+import './NashvilleActivities.css';
 import { data, tagLabels } from './Places';
 import type { Place, PlaceTag } from './Places';
 

@@ -5,10 +5,10 @@ export interface RegistryItem {
   price: number;
   image: string;
   alt: string;
-  requested_quantity: number | null; // null = unlimited (like honeymoon fund)
+  requested_quantity: number | null; // null = unlimited (honeymoon fund)
   received_quantity: number;
   purchase_link: string;
-  isSpecialFund?: boolean; // For items like honeymoon fund that don't track progress
+  isSpecialFund?: boolean; // For the honeymoon fund that doesn't track progress
 }
 
 export const initialRegistryData: RegistryItem[] = [

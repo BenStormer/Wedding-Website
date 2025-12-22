@@ -5,20 +5,30 @@ import { useDisclosure } from '@mantine/hooks';
 import { useForm, isNotEmpty, matches, isEmail } from '@mantine/form';
 import { useState } from 'react';
 
-type TextualInputOptions = {
+// Form values type for RSVP
+interface RsvpFormValues {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  willAttend: string | null;
+}
+
+interface TextualInputOptions {
   withAsterisk?: boolean;
   autoComplete?: string;
-};
+}
 
 const TextualInput = (
-  form: any,
+  form: ReturnType<typeof useForm<RsvpFormValues>>,
   label: string,
-  key: string,
+  key: keyof RsvpFormValues,
   options: TextualInputOptions = {}
 ) => {
   const [focused, setFocused] = useState(false);
   const inputProps = form.getInputProps(key);
-  const floating = focused || (inputProps.value && inputProps.value.length > 0);
+  const value = inputProps.value as string | null;
+  const floating = focused || (value && value.length > 0);
   const { withAsterisk, autoComplete } = options;
 
   return (
@@ -27,7 +37,7 @@ const TextualInput = (
       label={label}
       autoComplete={autoComplete}
       placeholder=""
-      labelProps={{ 'data-floating': floating || undefined }}
+      labelProps={{ 'data-floating': floating ?? undefined }}
       classNames={{
         root: 'floating-input-root',
         input: 'floating-input-input',

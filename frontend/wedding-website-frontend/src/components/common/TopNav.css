@@ -1,0 +1,71 @@
+.top-nav {
+  background-color: #e8ddd4;
+  padding: 16px 24px 8px 24px;
+}
+
+.top-nav-links {
+  justify-content: flex-start;
+}
+
+.top-nav-link {
+  color: black;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  transition: all 0.2s ease;
+}
+
+.top-nav-link:hover {
+  text-decoration: underline;
+}
+
+.top-nav-link-active {
+  color: var(--primary-green);
+  font-weight: 600;
+  cursor: default;
+}
+
+.top-nav-link-active:hover {
+  text-decoration: none;
+}
+
+.top-nav-separator {
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 0.95rem;
+  user-select: none;
+}
+
+/* Short labels hidden by default */
+.top-nav-short-label {
+  display: none;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  .top-nav {
+    padding: 14px 16px 6px 16px;
+  }
+
+  .top-nav-link {
+    font-size: 0.85rem;
+  }
+
+  .top-nav-separator {
+    font-size: 0.85rem;
+  }
+
+  /* Show short labels, hide full labels on mobile */
+  .top-nav-full-label {
+    display: none;
+  }
+
+  .top-nav-short-label {
+    display: inline;
+  }
+
+  /* For items without short labels, show the full label */
+  .top-nav-link:not(:has(.top-nav-short-label)) .top-nav-full-label {
+    display: inline;
+  }
+}

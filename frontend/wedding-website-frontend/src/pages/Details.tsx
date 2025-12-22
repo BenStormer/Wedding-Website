@@ -5,6 +5,7 @@ import CustomTimeline from '../components/details/Timeline';
 import type { TimelineEvent } from '../components/details/Timeline';
 import VenueInfo from '../components/details/VenueInfo';
 import Menu from '../components/common/Menu';
+import TopNav from '../components/common/TopNav';
 
 // Assets
 import noahLiffOperaCenter from '../assets/images/noah_liff_frontview.webp';
@@ -63,6 +64,7 @@ const WeddingVenueDetails = () => {
 const Details = () => {
   return (
     <div className="body">
+      <TopNav currentPage="Details" />
       <WeddingTimeline />
       <WeddingVenueDetails />
       {Menu('Details')}

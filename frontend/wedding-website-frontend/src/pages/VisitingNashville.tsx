@@ -3,23 +3,29 @@ import './VisitingNashville.css';
 // Components
 import NashvilleActivitiesTabs from '../components/visiting-nashville/NashvilleActivities';
 import Menu from '../components/common/Menu';
+import TopNav from '../components/common/TopNav';
 
-const NashvilleDetailsHeader = () => {
-  return <div className="nashville-details-header">Visiting Nashville</div>;
-};
-
-const NashvilleDetails = () => {
-  return NashvilleActivitiesTabs();
-};
+// Mantine
+import { Box, Text, Stack } from '@mantine/core';
 
 const VisitingNashville = () => {
-  // Sections: Places to Stay, Places to Eat, Places to Go
-  // Details for each "place": Name/Label, Details, Image, Alt, Location, Cost, Neighborhood?, Website
-  //    - Optionally could also include "subfilters" (for food this would be type, for activities this could be like "nature" or "history" or something)
   return (
     <div className="body">
-      <NashvilleDetailsHeader />
-      <NashvilleDetails />
+      <TopNav currentPage="Visiting Nashville" />
+      <Box className="nashville-page">
+        <Box className="nashville-header">
+          <Stack gap="sm" align="center">
+            <Text className="nashville-header-title">Visiting Nashville</Text>
+            <Text className="nashville-header-subtitle">
+              Make the most of your trip to Music City! Here are some of our
+              favorite spots for lodging, sightseeing, and dining.
+            </Text>
+          </Stack>
+        </Box>
+        <Box className="nashville-content">
+          <NashvilleActivitiesTabs />
+        </Box>
+      </Box>
       {Menu('Visiting Nashville')}
     </div>
   );

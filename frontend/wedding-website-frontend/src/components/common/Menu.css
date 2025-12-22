@@ -1,8 +1,21 @@
 .menu-section-container {
-  background-color: var(--secondary-brown);
+  background-color: #e8ddd4;
   overflow-y: auto;
   text-align: center;
   align-items: center;
   padding-top: 20px;
   padding-bottom: 15px;
+}
+
+.menu-section-container a {
+  transition: all 0.3s ease;
+  color: black;
+  text-decoration: none;
+  display: inline-block;
+  letter-spacing: 0.02em;
+  font-weight: 700;
+}
+
+.menu-section-container a:hover {
+  letter-spacing: 0.15em;
 }

@@ -21,7 +21,7 @@ const Menu = (currentPage: string) => {
   };
 
   const linksToRender = Object.fromEntries(
-    Object.entries(menuMappings).filter(([key, _value]) => {
+    Object.entries(menuMappings).filter(([key]) => {
       return key !== currentPage;
     })
   );

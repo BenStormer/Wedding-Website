@@ -1,0 +1,36 @@
+.timeline-container {
+  padding: 50px 20px 60px;
+  background-color: var(--secondary-brown);
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.venue-details-container {
+  padding: 50px 20px;
+  background-color: #e8ddd4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section-heading {
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  color: black;
+  margin-bottom: 30px;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 768px) {
+  .timeline-container {
+    padding: 40px 12px 50px;
+  }
+
+  .venue-details-container {
+    padding: 40px 16px;
+  }
+}

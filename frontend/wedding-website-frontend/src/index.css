@@ -1,0 +1,28 @@
+:root {
+  --primary-green: #566f4d;
+  --secondary-green: #b4b7a0;
+  --primary-brown: #5e4838;
+  --secondary-brown: #958375;
+}
+
+@font-face {
+  font-family: 'Nunito Sans';
+  src: url('./assets/fonts/nunito-sans-v18-latin-regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: normal;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+html {
+  overflow-x: hidden;
+}

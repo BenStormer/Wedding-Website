@@ -1,0 +1,58 @@
+/* Registry Page Container */
+.registry-page {
+  min-height: 100vh;
+  background-color: #e8ddd4;
+}
+
+/* Header Section */
+.registry-header {
+  padding: 60px 20px 40px;
+  text-align: center;
+  background-color: var(--secondary-brown);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.registry-header-icon {
+  color: var(--primary-green);
+}
+
+.registry-header-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 400;
+  color: black;
+  letter-spacing: 0.02em;
+}
+
+.registry-header-subtitle {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: black;
+  max-width: 550px;
+  line-height: 1.6;
+}
+
+/* Content Section */
+.registry-content {
+  padding: 40px 20px 80px;
+  background-color: #e8ddd4;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .registry-header {
+    padding: 50px 16px 32px;
+  }
+
+  .registry-content {
+    padding: 32px 16px 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .registry-header {
+    padding: 40px 12px 28px;
+  }
+
+  .registry-content {
+    padding: 24px 12px 60px;
+  }
+}

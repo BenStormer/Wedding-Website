@@ -1,0 +1,162 @@
+/* FAQ Container */
+.faq-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Category Tabs */
+.faq-tabs-container {
+  margin-bottom: 32px;
+}
+
+.faq-category-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--primary-green);
+  background-color: white;
+  border: 2px solid var(--primary-green);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.faq-category-tab:hover {
+  background-color: #f0f4ee;
+  transform: translateY(-1px);
+}
+
+.faq-category-tab-active {
+  background-color: var(--primary-green);
+  color: white;
+  box-shadow: 0 4px 12px rgba(86, 111, 77, 0.3);
+}
+
+.faq-category-tab-active:hover {
+  background-color: var(--primary-green);
+}
+
+/* FAQ Content */
+.faq-content {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Accordion Styling */
+.faq-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.faq-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.faq-item[data-active] {
+  border-color: var(--primary-green) !important;
+  box-shadow: 0 4px 16px rgba(86, 111, 77, 0.15);
+}
+
+.faq-control {
+  padding: 18px 20px;
+}
+
+.faq-control:hover {
+  background-color: #fafafa;
+}
+
+.faq-question {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.4;
+}
+
+.faq-chevron {
+  color: var(--primary-green);
+  transition: transform 0.2s ease;
+}
+
+.faq-item[data-active] .faq-chevron {
+  transform: rotate(180deg);
+}
+
+.faq-panel {
+  padding: 0 20px 20px;
+}
+
+.faq-answer {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .faq-category-tab {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+    gap: 6px;
+  }
+
+  .faq-category-tab svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .faq-control {
+    padding: 14px 16px;
+  }
+
+  .faq-question {
+    font-size: 0.95rem;
+  }
+
+  .faq-panel {
+    padding: 0 16px 16px;
+  }
+
+  .faq-answer {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .faq-tabs-container {
+    margin-bottom: 24px;
+  }
+
+  .faq-category-tab {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+  }
+
+  .faq-category-tab svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+

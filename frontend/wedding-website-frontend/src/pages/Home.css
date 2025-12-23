@@ -1,0 +1,119 @@
+.engagement-photo-container {
+  position: relative;
+}
+
+.engagement-photo {
+  background-image: url('../assets/images/parthenon_sitting.webp');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Parralax effect */
+  height: 100svh;
+}
+
+.countdown {
+  position: absolute;
+  text-align: center;
+  width: 100vw;
+  top: 1rem;
+  z-index: 10;
+  color: black;
+  font-size: 1.1rem;
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.8);
+}
+
+.hero-title {
+  position: absolute;
+  text-align: center;
+  width: 100vw;
+  top: 4rem;
+  z-index: 10;
+  color: black;
+  font-size: clamp(1rem, 4.5vw, 2rem);
+  font-weight: 300;
+  text-shadow: 0 2px 12px rgba(255, 255, 255, 0.8);
+  padding: 0 1rem;
+  line-height: 1.2;
+}
+
+.overview-details {
+  overflow-y: auto;
+  background-color: var(--secondary-brown);
+  text-align: center;
+  padding: 60px 20px 40px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.our-story {
+  overflow-y: auto;
+  background-color: #e8ddd4;
+  text-align: center;
+  padding: 20px 20px;
+}
+
+.story-timeline-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.story-timeline-desktop {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.story-timeline-mobile {
+  display: none;
+}
+
+.rsvp {
+  overflow-y: auto;
+  background-color: #e8ddd4;
+  align-items: center;
+  padding: 50px 20px;
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.other-page-links {
+  overflow-y: auto;
+  background-color: var(--secondary-brown);
+  text-align: center;
+  padding: 50px 20px 60px 20px;
+}
+
+.section-heading {
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  color: black;
+  margin-bottom: 30px;
+  letter-spacing: 0.02em;
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+  .engagement-photo {
+    height: 60svh;
+    background-attachment: scroll;
+  }
+
+  .hero-title {
+    top: 3.5rem;
+  }
+
+  .story-timeline-desktop {
+    display: none;
+  }
+
+  .story-timeline-mobile {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+}

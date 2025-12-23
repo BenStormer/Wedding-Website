@@ -1,0 +1,62 @@
+.rsvp-box-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.rsvp-button {
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  border: 2px solid var(--primary-green) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.rsvp-button:hover {
+  background-color: var(--primary-green) !important;
+  color: white !important;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(86, 111, 77, 0.3);
+  letter-spacing: 0.1em;
+}
+
+.floating-input-root {
+  position: relative;
+  margin-top: 28px;
+}
+
+.floating-input-input {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom-width: 2px;
+  border-radius: 0;
+  padding-left: 0;
+  background-color: var(--mantine-color-body);
+}
+
+.floating-input-label {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  top: 7px;
+  color: var(--mantine-color-placeholder);
+  font-weight: 400;
+  font-size: var(--mantine-font-size-sm);
+  transition: color 100ms ease, transform 100ms ease, font-size 100ms ease;
+}
+
+.floating-input-label[data-floating] {
+  transform: translateY(-20px);
+  font-size: var(--mantine-font-size-xs);
+  color: var(--mantine-color-text);
+}
+
+.modal-title-centered {
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+}

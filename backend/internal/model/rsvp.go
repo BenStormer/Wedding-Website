@@ -19,7 +19,7 @@ type RsvpRequest struct {
 	LastName   string `json:"lastname"`
 	Email      string `json:"email,omitempty"`
 	Phone      string `json:"phone,omitempty"`
-	Attending  bool   `json:"attending"`
+	Attending  *bool   `json:"attending"`
 }
 
 // API response model after updating an Rsvp

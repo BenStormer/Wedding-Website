@@ -8,6 +8,11 @@ import (
 	"github.com/BenStormer/Wedding-Website/backend/internal/model"
 )
 
+// Helper function to create a pointer to a bool
+func boolPtr(b bool) *bool {
+	return &b
+}
+
 type MockRsvpRepository struct {
 	FindGuestResult *model.Guest
 	FindGuestError  error
@@ -39,7 +44,7 @@ func TestSubmitRsvp_GuestNotFound(t *testing.T) {
 	request := model.RsvpRequest{
 		FirstName: "John",
 		LastName:  "Doe",
-		Attending: true,
+		Attending: boolPtr(true),
 	}
 
 	response, err := service.SubmitRsvp(request)
@@ -57,7 +62,6 @@ func TestSubmitRsvp_GuestNotFound(t *testing.T) {
 
 // Guests making a first-time Rsvp should see success
 func TestSubmitRsvp_FirstTimeRsvp(t *testing.T) {
-	attending := true
 	mockRepo := &MockRsvpRepository{
 		FindGuestResult: &model.Guest{
 			FirstName: "John",
@@ -67,7 +71,7 @@ func TestSubmitRsvp_FirstTimeRsvp(t *testing.T) {
 		UpdateRsvpResult: &model.Guest{
 			FirstName: "John",
 			LastName:  "Doe",
-			Attending: &attending,
+			Attending: boolPtr(true),
 		},
 	}
 	service := NewRsvpService(mockRepo)
@@ -75,7 +79,7 @@ func TestSubmitRsvp_FirstTimeRsvp(t *testing.T) {
 	request := model.RsvpRequest{
 		FirstName: "John",
 		LastName:  "Doe",
-		Attending: true,
+		Attending: boolPtr(true),
 	}
 
 	response, err := service.SubmitRsvp(request)
@@ -88,7 +92,7 @@ func TestSubmitRsvp_FirstTimeRsvp(t *testing.T) {
 	}
 
 	attendingStatus := "attending"
-	if !request.Attending {
+	if !*request.Attending {
 		attendingStatus = "not attending"
 	}
 	expectedResponseMessage := fmt.Sprintf("%s %s has been Rsvp-ed as: %s", request.FirstName, request.LastName, attendingStatus)
@@ -99,12 +103,11 @@ func TestSubmitRsvp_FirstTimeRsvp(t *testing.T) {
 
 // Guests resubmitting an Rsvp with the same status should not re-submit
 func TestSubmitRsvp_ResubmitSameStatus(t *testing.T) {
-	attending := true
 	mockRepo := &MockRsvpRepository{
 		FindGuestResult: &model.Guest{
 			FirstName: "John",
 			LastName:  "Doe",
-			Attending: &attending,
+			Attending: boolPtr(true),
 		},
 	}
 	service := NewRsvpService(mockRepo)
@@ -112,7 +115,7 @@ func TestSubmitRsvp_ResubmitSameStatus(t *testing.T) {
 	request := model.RsvpRequest{
 		FirstName: "John",
 		LastName:  "Doe",
-		Attending: true,
+		Attending: boolPtr(true),
 	}
 
 	response, err := service.SubmitRsvp(request)
@@ -125,7 +128,7 @@ func TestSubmitRsvp_ResubmitSameStatus(t *testing.T) {
 	}
 
 	attendingString := "attending"
-	if !request.Attending {
+	if !*request.Attending {
 		attendingString = "not attending"
 	}
 	expectedResponseMessage := fmt.Sprintf("%s %s was already Rsvp-ed as %s, so no update is necessary", request.FirstName, request.LastName, attendingString)
@@ -136,12 +139,11 @@ func TestSubmitRsvp_ResubmitSameStatus(t *testing.T) {
 
 // Guests resubmitting an Rsvp with different status should see success
 func TestSubmitRsvp_ResubmitDifferentStatus(t *testing.T) {
-	attending := false // Note false here
 	mockRepo := &MockRsvpRepository{
 		FindGuestResult: &model.Guest{
 			FirstName: "John",
 			LastName:  "Doe",
-			Attending: &attending,
+			Attending: boolPtr(false), // Note false here
 		},
 	}
 
@@ -150,7 +152,7 @@ func TestSubmitRsvp_ResubmitDifferentStatus(t *testing.T) {
 	request := model.RsvpRequest{
 		FirstName: "John",
 		LastName:  "Doe",
-		Attending: true, // Different from stored response
+		Attending: boolPtr(true), // Different from stored response
 	}
 
 	response, err := service.SubmitRsvp(request)
@@ -164,7 +166,7 @@ func TestSubmitRsvp_ResubmitDifferentStatus(t *testing.T) {
 
 	attendingString := "attending"
 	previousAttendingString := "not attending"
-	if !request.Attending {
+	if !*request.Attending {
 		attendingString = "not attending"
 		previousAttendingString = "attending"
 	}

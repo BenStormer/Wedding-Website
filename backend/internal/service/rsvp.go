@@ -66,9 +66,9 @@ func (s *RsvpService) SubmitRsvp(request model.RsvpRequest) (*model.RsvpResponse
 	}
 
 	// Check if previous status is the same as requested status
-	if *previousRsvpStatus == request.Attending {
+	if *previousRsvpStatus == *request.Attending {
 		attendingString := "attending"
-		if !request.Attending {
+		if !*request.Attending {
 			attendingString = "not attending"
 		}
 		message := fmt.Sprintf("%s %s was already Rsvp-ed as %s, so no update is necessary", request.FirstName, request.LastName, attendingString)
@@ -91,7 +91,7 @@ func (s *RsvpService) SubmitRsvp(request model.RsvpRequest) (*model.RsvpResponse
 
 	attendingString := "attending"
 	previousAttendingString := "not attending"
-	if !request.Attending {
+	if !*request.Attending {
 		attendingString = "not attending"
 		previousAttendingString = "attending"
 	}

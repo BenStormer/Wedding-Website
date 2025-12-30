@@ -2,7 +2,7 @@ package model
 
 import "time"
 
-// Database model for an RSVP entry
+// Database model for an Rsvp entry
 type Guest struct {
 	ID        string
 	FirstName string
@@ -13,8 +13,8 @@ type Guest struct {
 	UpdatedAt *time.Time
 }
 
-// API request model for an RSVP entry
-type RSVPRequest struct {
+// API request model for an Rsvp entry
+type RsvpRequest struct {
 	FirstName  string `json:"firstname"`
 	LastName   string `json:"lastname"`
 	Email      string `json:"email,omitempty"`
@@ -22,15 +22,15 @@ type RSVPRequest struct {
 	Attending  bool   `json:"attending"`
 }
 
-// API response model after updating an RSVP
-type RSVPStatus struct {
+// API response model after updating an Rsvp
+type RsvpStatus struct {
 	Guest *Guest
 	PreviousStatus *bool
 	StatusChanged bool
 }
 
-// API response after an RSVP is submitted
-type RSVPResponse struct {
+// API response after an Rsvp is submitted
+type RsvpResponse struct {
 	Success bool `json:"success"`
 	Message string `json:"message"`
 	Error string `json:"error,omitempty"`

@@ -5,7 +5,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { useForm, isNotEmpty, matches, isEmail } from '@mantine/form';
 import { useState } from 'react';
 
-// Form values type for RSVP
+// Form values type for Rsvp
 interface RsvpFormValues {
   firstName: string;
   lastName: string;
@@ -122,7 +122,7 @@ const RsvpForm = () => {
 
         <Group justify="flex-end" mt="md">
           <Button type="submit">Submit</Button>
-          {/*// TODO: Call backend API and return success/error based on if RSVP is updated */}
+          {/*// TODO: Call backend API and return success/error based on if Rsvp is updated */}
         </Group>
       </form>
       <form
@@ -148,7 +148,7 @@ const RsvpBox = () => {
         <Modal
           opened={opened}
           onClose={close}
-          title="RSVP"
+          title="Rsvp"
           overlayProps={{ backgroundOpacity: 0.5, blur: 3 }}
           centered
           classNames={{ title: 'modal-title-centered' }}
@@ -169,7 +169,7 @@ const RsvpBox = () => {
             fontSize: '1.75rem',
           }}
         >
-          RSVP
+          Rsvp
         </Button>
       </div>
     </>

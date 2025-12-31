@@ -121,14 +121,13 @@ const PurchaseForm = ({
           {isSpecialFund ? (
             <>
               Thank you for contributing to our <strong>{itemLabel}</strong>!
-              Please let us know who you are so we can send a thank you note.
+              Please let us know who to thank!
             </>
           ) : (
             <>
               Thank you for gifting us{' '}
               {/^[aeiou]/i.test(itemLabel) ? 'an' : 'a'}{' '}
-              <strong>{itemLabel}</strong>! Please let us know who you are so we
-              can send a thank you note.
+              <strong>{itemLabel}</strong>! Please let us know who to thank!
             </>
           )}
         </Text>

@@ -101,10 +101,17 @@ func TestSubmitRsvp_FirstTimeRsvp(t *testing.T) {
 	}
 }
 
-// Guests resubmitting an Rsvp with the same status should not re-submit
+// Guests resubmitting an Rsvp with the same status should still update (for email/phone changes)
 func TestSubmitRsvp_ResubmitSameStatus(t *testing.T) {
 	mockRepo := &MockRsvpRepository{
 		FindGuestResult: &model.Guest{
+			ID:        "123",
+			FirstName: "John",
+			LastName:  "Doe",
+			Attending: boolPtr(true),
+		},
+		UpdateRsvpResult: &model.Guest{
+			ID:        "123",
 			FirstName: "John",
 			LastName:  "Doe",
 			Attending: boolPtr(true),
@@ -127,11 +134,16 @@ func TestSubmitRsvp_ResubmitSameStatus(t *testing.T) {
 		t.Errorf("Expected successful response")
 	}
 
+	// Verify UpdateRsvp was called (to save email/phone changes)
+	if !mockRepo.UpdateRsvpCalled {
+		t.Errorf("Expected UpdateRsvp to be called to save contact info")
+	}
+
 	attendingString := "attending"
 	if !*request.Attending {
 		attendingString = "not attending"
 	}
-	expectedResponseMessage := fmt.Sprintf("%s %s was already Rsvp-ed as %s, so no update is necessary", request.FirstName, request.LastName, attendingString)
+	expectedResponseMessage := fmt.Sprintf("%s %s was already Rsvp-ed as %s. Your contact info has been updated if changed.", request.FirstName, request.LastName, attendingString)
 	if response.Message != expectedResponseMessage {
 		t.Errorf("Expected response message to be:\n\"%s\"\nGot:\n\"%s\"", expectedResponseMessage, response.Message)
 	}
@@ -141,9 +153,16 @@ func TestSubmitRsvp_ResubmitSameStatus(t *testing.T) {
 func TestSubmitRsvp_ResubmitDifferentStatus(t *testing.T) {
 	mockRepo := &MockRsvpRepository{
 		FindGuestResult: &model.Guest{
+			ID:        "123",
 			FirstName: "John",
 			LastName:  "Doe",
 			Attending: boolPtr(false), // Note false here
+		},
+		UpdateRsvpResult: &model.Guest{
+			ID:        "123",
+			FirstName: "John",
+			LastName:  "Doe",
+			Attending: boolPtr(true),
 		},
 	}
 

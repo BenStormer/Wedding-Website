@@ -65,21 +65,7 @@ func (s *RsvpService) SubmitRsvp(request model.RsvpRequest) (*model.RsvpResponse
 		}, nil
 	}
 
-	// Check if previous status is the same as requested status
-	if *previousRsvpStatus == *request.Attending {
-		attendingString := "attending"
-		if !*request.Attending {
-			attendingString = "not attending"
-		}
-		message := fmt.Sprintf("%s %s was already Rsvp-ed as %s, so no update is necessary", request.FirstName, request.LastName, attendingString)
-		response := model.RsvpResponse{
-			Success: true,
-			Message: message,
-		}
-		return &response, nil
-	}
-
-	// Previous status is not the same as newly requested status
+	// Always update to save email/phone changes, even if RSVP status is the same
 	guest, err = s.repo.UpdateRsvp(guest.ID, &request)
 	if err != nil {
 		return &model.RsvpResponse{
@@ -89,6 +75,20 @@ func (s *RsvpService) SubmitRsvp(request model.RsvpRequest) (*model.RsvpResponse
 		}, err
 	}
 
+	// Check if previous status is the same as requested status
+	if *previousRsvpStatus == *request.Attending {
+		attendingString := "attending"
+		if !*request.Attending {
+			attendingString = "not attending"
+		}
+		message := fmt.Sprintf("%s %s was already Rsvp-ed as %s. Your contact info has been updated if changed.", request.FirstName, request.LastName, attendingString)
+		return &model.RsvpResponse{
+			Success: true,
+			Message: message,
+		}, nil
+	}
+
+	// Previous status is not the same as newly requested status
 	attendingString := "attending"
 	previousAttendingString := "not attending"
 	if !*request.Attending {

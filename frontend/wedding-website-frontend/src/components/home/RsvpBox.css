@@ -23,47 +23,192 @@
   letter-spacing: 0.1em;
 }
 
-.floating-input-root {
-  position: relative;
-  margin-top: 28px;
+/* Modal Styling */
+.rsvp-modal-content {
+  overflow: hidden;
+  border: none !important;
+  box-shadow: none !important;
 }
 
-.floating-input-input {
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom-width: 2px;
-  border-radius: 0;
-  padding-left: 0;
-  background-color: var(--mantine-color-body);
+.rsvp-modal-body {
+  padding: 0 !important;
 }
 
-.floating-input-label {
-  position: absolute;
-  z-index: 1;
-  pointer-events: none;
-  top: 7px;
-  left: 0;
-  color: var(--mantine-color-placeholder);
-  font-weight: 400;
-  font-size: var(--mantine-font-size-sm);
-  transition: color 100ms ease, transform 100ms ease, font-size 100ms ease;
-}
-
-.floating-input-root[data-floating="true"] .floating-input-label {
-  transform: translateY(-28px);
-  font-size: var(--mantine-font-size-xs);
-  color: var(--primary-green);
-}
-
-.floating-input-label[data-floating] {
-  transform: translateY(-20px);
-  font-size: var(--mantine-font-size-xs);
-  color: var(--mantine-color-text);
-}
-
-.modal-title-centered {
-  width: 100%;
+.rsvp-modal-header {
+  background: linear-gradient(135deg, var(--primary-green) 0%, #4a5f43 100%);
+  padding: 16px 24px;
   text-align: center;
+}
+
+.rsvp-modal-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: white;
+  letter-spacing: 0.1em;
+}
+
+.rsvp-modal-form-container {
+  padding: 28px 28px 32px;
+  background: #fafaf8;
+}
+
+/* Form Input Styling */
+.rsvp-input {
+  border: 1px solid #d4d4d4;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.rsvp-input:focus {
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 3px rgba(86, 111, 77, 0.1);
+}
+
+.rsvp-input::placeholder {
+  color: #aaa;
+}
+
+.rsvp-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary-brown);
+  margin-bottom: 6px;
+}
+
+/* Attendance Section */
+.rsvp-attendance-section {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e8e8e8;
+  margin-top: 4px;
+}
+
+.rsvp-attendance-label {
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  color: var(--primary-brown) !important;
+}
+
+.rsvp-attendance-error {
+  margin-top: 8px;
+}
+
+.rsvp-radio {
+  border-color: var(--primary-green) !important;
+}
+
+.rsvp-radio:checked {
+  background-color: var(--primary-green) !important;
+  border-color: var(--primary-green) !important;
+}
+
+.rsvp-radio-label {
+  font-size: 0.9rem;
+  color: #444;
+  font-weight: 500;
+}
+
+/* Submit Button */
+.rsvp-submit-button {
+  background: linear-gradient(135deg, var(--primary-green) 0%, #4a5f43 100%) !important;
+  border: none !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em;
+  margin-top: 8px;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 12px rgba(86, 111, 77, 0.25);
+}
+
+.rsvp-submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(86, 111, 77, 0.35) !important;
+}
+
+.rsvp-submit-button:active {
+  transform: translateY(0);
+}
+
+/* Success/Error Message Styling */
+.rsvp-message-container {
+  text-align: center;
+  padding: 20px 8px 8px;
+}
+
+.rsvp-message-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.rsvp-message-icon.success {
+  background: linear-gradient(135deg, var(--primary-green) 0%, #4a5f43 100%);
+  color: white;
+}
+
+.rsvp-message-icon.error {
+  background: linear-gradient(135deg, #d64545 0%, #b33939 100%);
+  color: white;
+}
+
+.rsvp-message-title {
   font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-brown);
+  margin-bottom: 8px;
+}
+
+.rsvp-message-text {
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  max-width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rsvp-close-button {
+  border: 2px solid var(--primary-green) !important;
+  color: var(--primary-green) !important;
+  font-weight: 600 !important;
+  padding: 10px 32px !important;
+  transition: all 0.2s ease !important;
+}
+
+.rsvp-close-button:hover {
+  background: var(--primary-green) !important;
+  color: white !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  .rsvp-modal-header {
+    padding: 14px 20px;
+  }
+
+  .rsvp-modal-title {
+    font-size: 1.1rem;
+  }
+
+  .rsvp-modal-form-container {
+    padding: 20px 20px 24px;
+  }
+
+  .rsvp-attendance-section {
+    padding: 16px;
+  }
+
+  .rsvp-button {
+    min-width: 280px !important;
+    height: 70px !important;
+    font-size: 1.5rem !important;
+  }
 }

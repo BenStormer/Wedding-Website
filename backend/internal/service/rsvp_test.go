@@ -95,7 +95,7 @@ func TestSubmitRsvp_FirstTimeRsvp(t *testing.T) {
 	if !*request.Attending {
 		attendingStatus = "not attending"
 	}
-	expectedResponseMessage := fmt.Sprintf("%s %s has been Rsvp-ed as: %s", request.FirstName, request.LastName, attendingStatus)
+	expectedResponseMessage := fmt.Sprintf("%s %s has been Rsvp-ed as %s", request.FirstName, request.LastName, attendingStatus)
 	if response.Message != expectedResponseMessage {
 		t.Errorf("Expected response message to be: %s\nGot %s", expectedResponseMessage, response.Message)
 	}
@@ -189,7 +189,7 @@ func TestSubmitRsvp_ResubmitDifferentStatus(t *testing.T) {
 		attendingString = "not attending"
 		previousAttendingString = "attending"
 	}
-	expectedResponseMessage := fmt.Sprintf("%s %s was previously Rsvp-ed as: %s, but has now been changed to be: %s", request.FirstName, request.LastName, previousAttendingString, attendingString)
+	expectedResponseMessage := fmt.Sprintf("%s %s was previously Rsvp-ed as %s, but has now been changed to be: %s", request.FirstName, request.LastName, previousAttendingString, attendingString)
 	if response.Message != expectedResponseMessage {
 		t.Errorf("Expected response message to be:\n\"%s\"\nGot:\n\"%s\"", expectedResponseMessage, response.Message)
 	}

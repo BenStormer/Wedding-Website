@@ -27,7 +27,7 @@ func Load() *Config {
 	case "local":
 		cfg.FirestoreProject = "wedding-website-local"
 		cfg.UseEmulator = true
-		cfg.EmulatorHost = "localhost:8081"
+		cfg.EmulatorHost = "localhost:8741"
 	case "sqa":
 		cfg.FirestoreProject = "wedding-website-sqa-placeholder"
 		cfg.UseEmulator = false
@@ -45,4 +45,3 @@ func getEnvOrDefault(key, defaultValue string) string {
 	}
 	return defaultValue
 }
-

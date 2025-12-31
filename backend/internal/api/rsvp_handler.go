@@ -12,7 +12,7 @@ import (
 type RsvpServiceInterface interface {
 	SubmitRsvp(request model.RsvpRequest) (*model.RsvpResponse, error)
 }
-	
+
 type RsvpHandler struct {
 	service RsvpServiceInterface
 }
@@ -25,6 +25,15 @@ func NewRsvpHandler(service RsvpServiceInterface) *RsvpHandler {
 
 func (h *RsvpHandler) HandleRsvp(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "PATCH, OPTIONS")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
+	// Handle preflight OPTIONS request
+	if r.Method == http.MethodOptions {
+		w.WriteHeader(http.StatusOK)
+		return
+	}
 
 	// Validate HTTP method
 	if r.Method != http.MethodPatch {
@@ -47,7 +56,7 @@ func (h *RsvpHandler) HandleRsvp(w http.ResponseWriter, r *http.Request) {
 		})
 		return
 	}
-	
+
 	// Validate body parameters
 	if request.FirstName == "" || request.LastName == "" {
 		w.WriteHeader(http.StatusBadRequest)

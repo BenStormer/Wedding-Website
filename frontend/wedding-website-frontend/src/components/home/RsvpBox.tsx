@@ -1,6 +1,6 @@
 import './RsvpBox.css';
 
-import { Modal, Button, TextInput, Radio, Group } from '@mantine/core';
+import { Modal, Button, TextInput, Radio, Group, Alert, Stack } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm, isNotEmpty, matches, isEmail } from '@mantine/form';
 import { useState } from 'react';
@@ -12,6 +12,12 @@ interface RsvpFormValues {
   email: string;
   phoneNumber: string;
   willAttend: string | null;
+}
+
+interface ApiResponse {
+  success: boolean;
+  message?: string;
+  error?: string;
 }
 
 interface TextualInputOptions {
@@ -27,8 +33,8 @@ const TextualInput = (
 ) => {
   const [focused, setFocused] = useState(false);
   const inputProps = form.getInputProps(key);
-  const value = inputProps.value as string | null;
-  const floating = focused || (value && value.length > 0);
+  const value = form.values[key];
+  const floating = (focused || (value && value.length > 0)) ?? undefined;
   const { withAsterisk, autoComplete } = options;
 
   return (
@@ -50,15 +56,22 @@ const TextualInput = (
   );
 };
 
-const RsvpForm = () => {
-  const form = useForm({
+interface RsvpFormProps {
+  onClose: () => void;
+}
+
+const RsvpForm = ({ onClose }: RsvpFormProps) => {
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const apiUrl = (import.meta.env.VITE_API_URL as string | undefined) ?? 'http://localhost:8080';
+  const form = useForm<RsvpFormValues>({
     mode: 'controlled',
     initialValues: {
       firstName: '',
       lastName: '',
       email: '',
       phoneNumber: '',
-      willAttend: null,
+      willAttend: null as string | null,
     },
 
     validate: {
@@ -76,65 +89,96 @@ const RsvpForm = () => {
     },
   });
 
-  const handleSubmit = (values: typeof form.values) => {
-    console.log('MAKING API CALL!');
-    console.log(values);
+  const handleSubmit = async (values: typeof form.values) => {
+    setLoading(true);
+    setMessage(null);
+    console.log('Submitting RSVP:', values);
+    try {
+      const response = await fetch(`${apiUrl}/v1/api/rsvp`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstname: values.firstName,
+          lastname: values.lastName,
+          email: values.email,
+          phone: values.phoneNumber,
+          attending: values.willAttend === 'true',
+        }),
+      });
+      console.log('Response status:', response.status);
+      const data = await response.json() as ApiResponse;
+      console.log('Response data:', data);
+      if (data.success) {
+        console.log('RSVP submitted successfully');
+        form.reset();
+        setMessage({ type: 'success', text: data.message ?? 'Thank you! Your RSVP has been received.' });
+      } else {
+        console.error('RSVP failed:', data.message);
+        setMessage({ type: 'error', text: data.message ?? 'There was an error submitting your RSVP. Please try again.' });
+      }
+    } catch (error) {
+      console.error('Error submitting RSVP:', error);
+      setMessage({ type: 'error', text: 'Network error. Please check your connection and try again.' });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <>
-      <form onSubmit={form.onSubmit(handleSubmit)}>
-        <>
-          {TextualInput(form, 'First Name', 'firstName', {
-            withAsterisk: true,
-            autoComplete: 'given-name',
-          })}
-        </>
-        <>
-          {TextualInput(form, 'Last Name', 'lastName', {
-            withAsterisk: true,
-            autoComplete: 'family-name',
-          })}
-        </>
-        <>
-          {TextualInput(form, 'Email', 'email', {
-            withAsterisk: false,
-            autoComplete: 'email',
-          })}
-        </>
-        <>
-          {TextualInput(form, 'Phone Number', 'phoneNumber', {
-            withAsterisk: false,
-            autoComplete: 'tel',
-          })}
-        </>
-
-        <Radio.Group
-          name="willAttend"
-          withAsterisk
-          {...form.getInputProps('willAttend')}
+      {message && (
+        <Alert
+          title={message.type === 'success' ? 'Success' : 'Error'}
+          color={message.type === 'success' ? 'green' : 'red'}
+          mb="md"
         >
-          <Group mt="sm">
-            <Radio value="true" label="I will be attending" />
-            <Radio value="false" label="I won't be attending" />
-          </Group>
-        </Radio.Group>
-
-        <Group justify="flex-end" mt="md">
-          <Button type="submit">Submit</Button>
-          {/*// TODO: Call backend API and return success/error based on if Rsvp is updated */}
-        </Group>
+          {message.text}
+        </Alert>
+      )}
+      <form onSubmit={form.onSubmit(handleSubmit)}>
+        <Stack gap="md">
+          <div style={{ display: message ? 'none' : 'block' }}>
+            {TextualInput(form, 'First Name', 'firstName', {
+              withAsterisk: true,
+              autoComplete: 'given-name',
+            })}
+            {TextualInput(form, 'Last Name', 'lastName', {
+              withAsterisk: true,
+              autoComplete: 'family-name',
+            })}
+            {TextualInput(form, 'Email', 'email', {
+              withAsterisk: false,
+              autoComplete: 'email',
+            })}
+            {TextualInput(form, 'Phone Number', 'phoneNumber', {
+              withAsterisk: false,
+              autoComplete: 'tel',
+            })}
+            <Radio.Group
+              name="willAttend"
+              withAsterisk
+              {...form.getInputProps('willAttend')}
+            >
+              <Group mt="sm">
+                <Radio value="true" label="I will be attending" />
+                <Radio value="false" label="I won't be attending" />
+              </Group>
+            </Radio.Group>
+            <Group justify="flex-end" mt="md">
+              <Button type="submit" loading={loading}>Submit</Button>
+            </Group>
+          </div>
+          {message && (
+            <Group justify="flex-end" mt="md">
+              <Button onClick={onClose} variant="default">
+                Close
+              </Button>
+            </Group>
+          )}
+        </Stack>
       </form>
-      <form
-        onSubmit={form.onSubmit(
-          (values, event) => {
-            console.log(values, event);
-          },
-          (validationErrors, values, event) => {
-            console.log(validationErrors, values, event);
-          }
-        )}
-      />
     </>
   );
 };
@@ -153,7 +197,7 @@ const RsvpBox = () => {
           centered
           classNames={{ title: 'modal-title-centered' }}
         >
-          <RsvpForm />
+          <RsvpForm onClose={close} />
         </Modal>
 
         <Button

@@ -58,7 +58,7 @@ func (s *RsvpService) SubmitRsvp(request model.RsvpRequest) (*model.RsvpResponse
 		if !*guest.Attending {
 			attendingStatus = "not attending"
 		}
-		message := fmt.Sprintf("%s %s has been Rsvp-ed as: %s", guest.FirstName, guest.LastName, attendingStatus)
+		message := fmt.Sprintf("%s %s has been Rsvp-ed as %s", guest.FirstName, guest.LastName, attendingStatus)
 		return &model.RsvpResponse{
 			Success: true,
 			Message: message,
@@ -95,7 +95,7 @@ func (s *RsvpService) SubmitRsvp(request model.RsvpRequest) (*model.RsvpResponse
 		attendingString = "not attending"
 		previousAttendingString = "attending"
 	}
-	message := fmt.Sprintf("%s %s was previously Rsvp-ed as: %s, but has now been changed to be: %s", request.FirstName, request.LastName, previousAttendingString, attendingString)
+	message := fmt.Sprintf("%s %s was previously Rsvp-ed as %s, but has now been changed to be: %s", request.FirstName, request.LastName, previousAttendingString, attendingString)
 
 	return &model.RsvpResponse{
 		Success: true,

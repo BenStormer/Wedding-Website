@@ -25,19 +25,25 @@
 
 /* Modal Styling */
 .rsvp-modal-content {
-  overflow: hidden;
   border: none !important;
   box-shadow: none !important;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
 }
 
 .rsvp-modal-body {
   padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
 .rsvp-modal-header {
   background: linear-gradient(135deg, var(--primary-green) 0%, #4a5f43 100%);
   padding: 16px 24px;
   text-align: center;
+  flex-shrink: 0;
 }
 
 .rsvp-modal-title {
@@ -50,6 +56,9 @@
 .rsvp-modal-form-container {
   padding: 28px 28px 32px;
   background: #fafaf8;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
 }
 
 /* Form Input Styling */

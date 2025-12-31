@@ -1,33 +1,18 @@
-package main
+package seed
 
 import (
 	"context"
 	"log"
-	"os"
 
 	"cloud.google.com/go/firestore"
-	"github.com/BenStormer/Wedding-Website/backend/internal/config"
 	"github.com/BenStormer/Wedding-Website/backend/internal/model"
 )
 
-func main() {
-	// Load config (should be local)
-	cfg := config.Load()
-	if cfg.Environment != "local" {
-		log.Fatal("This script is only for local environment")
-	}
+// SeedData populates the Firestore emulator with sample data for local development.
+// This should only be called in local environment.
+func SeedData(ctx context.Context, client *firestore.Client) error {
+	log.Println("Seeding database with sample data...")
 
-	// Set emulator
-	os.Setenv("FIRESTORE_EMULATOR_HOST", cfg.EmulatorHost)
-
-	ctx := context.Background()
-	client, err := firestore.NewClient(ctx, cfg.FirestoreProject)
-	if err != nil {
-		log.Fatalf("Failed to create client: %v", err)
-	}
-	defer client.Close()
-
-	// Mock data
 	guests := []model.Guest{
 		{
 			ID:        "1",
@@ -47,18 +32,17 @@ func main() {
 			Attending: nil,
 			UpdatedAt: nil,
 		},
-		// Add more as needed
 	}
 
-	// Add to Firestore
 	for _, guest := range guests {
 		_, err := client.Collection("guests").Doc(guest.ID).Set(ctx, guest)
 		if err != nil {
 			log.Printf("Failed to add guest %s: %v", guest.FirstName, err)
-		} else {
-			log.Printf("Added guest: %s %s", guest.FirstName, guest.LastName)
+			return err
 		}
+		log.Printf("Added guest: %s %s", guest.FirstName, guest.LastName)
 	}
 
-	log.Println("Mock data populated")
+	log.Println("Seed data populated successfully")
+	return nil
 }

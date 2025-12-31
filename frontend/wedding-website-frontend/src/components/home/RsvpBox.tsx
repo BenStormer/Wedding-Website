@@ -1,9 +1,10 @@
 import './RsvpBox.css';
 
-import { Modal, Button, TextInput, Radio, Group } from '@mantine/core';
+import { Modal, Button, TextInput, Radio, Group, Stack, Text, Box } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm, isNotEmpty, matches, isEmail } from '@mantine/form';
 import { useState } from 'react';
+import { IconHeartFilled, IconCheck, IconX } from '@tabler/icons-react';
 
 // Form values type for RSVP
 interface RsvpFormValues {
@@ -14,45 +15,23 @@ interface RsvpFormValues {
   willAttend: string | null;
 }
 
-interface TextualInputOptions {
-  withAsterisk?: boolean;
-  autoComplete?: string;
+interface ApiResponse {
+  success: boolean;
+  message?: string;
+  error?: string;
 }
 
-const TextualInput = (
-  form: ReturnType<typeof useForm<RsvpFormValues>>,
-  label: string,
-  key: keyof RsvpFormValues,
-  options: TextualInputOptions = {}
-) => {
-  const [focused, setFocused] = useState(false);
-  const inputProps = form.getInputProps(key);
-  const value = inputProps.value as string | null;
-  const floating = focused || (value && value.length > 0);
-  const { withAsterisk, autoComplete } = options;
+interface RsvpFormProps {
+  onClose: () => void;
+}
 
-  return (
-    <TextInput
-      withAsterisk={withAsterisk}
-      label={label}
-      autoComplete={autoComplete}
-      placeholder=""
-      labelProps={{ 'data-floating': floating ?? undefined }}
-      classNames={{
-        root: 'floating-input-root',
-        input: 'floating-input-input',
-        label: 'floating-input-label',
-      }}
-      {...inputProps}
-      onFocus={() => setFocused(true)}
-      onBlur={() => setFocused(false)}
-    />
-  );
-};
+const RsvpForm = ({ onClose }: RsvpFormProps) => {
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const apiUrl = (import.meta.env.VITE_API_URL as string | undefined) ?? 'http://localhost:8080';
 
-const RsvpForm = () => {
-  const form = useForm({
-    mode: 'controlled',
+  const form = useForm<RsvpFormValues>({
+    mode: 'uncontrolled',
     initialValues: {
       firstName: '',
       lastName: '',
@@ -60,7 +39,6 @@ const RsvpForm = () => {
       phoneNumber: '',
       willAttend: null,
     },
-
     validate: {
       firstName: matches(/^[a-z ,.'-]+$/i, 'Invalid First Name'),
       lastName: matches(/^[a-z ,.'-]+$/i, 'Invalid Last Name'),
@@ -72,70 +50,172 @@ const RsvpForm = () => {
               'Invalid Phone Number'
             )(phoneNumber)
           : null,
-      willAttend: isNotEmpty('You must select if you are attending or not'),
+      willAttend: isNotEmpty('Please let us know if you can attend'),
     },
   });
 
-  const handleSubmit = (values: typeof form.values) => {
-    console.log('MAKING API CALL!');
-    console.log(values);
+  const handleSubmit = async (values: RsvpFormValues) => {
+    setLoading(true);
+    setMessage(null);
+
+    try {
+      const response = await fetch(`${apiUrl}/v1/api/rsvp`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstname: values.firstName,
+          lastname: values.lastName,
+          email: values.email,
+          phone: values.phoneNumber,
+          attending: values.willAttend === 'true',
+        }),
+      });
+
+      const data = (await response.json()) as ApiResponse;
+
+      if (data.success) {
+        form.reset();
+        setMessage({ type: 'success', text: data.message ?? 'Thank you! Your RSVP has been received.' });
+      } else {
+        setMessage({ type: 'error', text: data.message ?? 'There was an error submitting your RSVP. Please try again.' });
+      }
+    } catch (error) {
+      console.error('Error submitting RSVP:', error);
+      setMessage({ type: 'error', text: 'Network error. Please check your connection and try again.' });
+    } finally {
+      setLoading(false);
+    }
   };
 
-  return (
-    <>
-      <form onSubmit={form.onSubmit(handleSubmit)}>
-        <>
-          {TextualInput(form, 'First Name', 'firstName', {
-            withAsterisk: true,
-            autoComplete: 'given-name',
-          })}
-        </>
-        <>
-          {TextualInput(form, 'Last Name', 'lastName', {
-            withAsterisk: true,
-            autoComplete: 'family-name',
-          })}
-        </>
-        <>
-          {TextualInput(form, 'Email', 'email', {
-            withAsterisk: false,
-            autoComplete: 'email',
-          })}
-        </>
-        <>
-          {TextualInput(form, 'Phone Number', 'phoneNumber', {
-            withAsterisk: false,
-            autoComplete: 'tel',
-          })}
-        </>
-
-        <Radio.Group
-          name="willAttend"
-          withAsterisk
-          {...form.getInputProps('willAttend')}
+  if (message) {
+    return (
+      <Box className="rsvp-message-container">
+        <Box className={`rsvp-message-icon ${message.type}`}>
+          {message.type === 'success' ? (
+            <IconCheck size={48} stroke={2} />
+          ) : (
+            <IconX size={48} stroke={2} />
+          )}
+        </Box>
+        <Text className="rsvp-message-title">
+          {message.type === 'success' ? 'You\'re All Set!' : 'Oops!'}
+        </Text>
+        <Text className="rsvp-message-text">
+          {message.text}
+        </Text>
+        <Button 
+          onClick={onClose} 
+          className="rsvp-close-button"
+          variant="outline"
+          size="md"
         >
-          <Group mt="sm">
-            <Radio value="true" label="I will be attending" />
-            <Radio value="false" label="I won't be attending" />
-          </Group>
-        </Radio.Group>
+          Close
+        </Button>
+      </Box>
+    );
+  }
 
-        <Group justify="flex-end" mt="md">
-          <Button type="submit">Submit</Button>
-          {/*// TODO: Call backend API and return success/error based on if RSVP is updated */}
+  return (
+    <form onSubmit={form.onSubmit(handleSubmit)}>
+      <Stack gap="md">
+        <Group grow>
+          <TextInput
+            label="First Name"
+            placeholder="Your first name"
+            withAsterisk
+            autoComplete="given-name"
+            key={form.key('firstName')}
+            classNames={{
+              input: 'rsvp-input',
+              label: 'rsvp-label',
+            }}
+            {...form.getInputProps('firstName')}
+          />
+          <TextInput
+            label="Last Name"
+            placeholder="Your last name"
+            withAsterisk
+            autoComplete="family-name"
+            key={form.key('lastName')}
+            classNames={{
+              input: 'rsvp-input',
+              label: 'rsvp-label',
+            }}
+            {...form.getInputProps('lastName')}
+          />
         </Group>
-      </form>
-      <form
-        onSubmit={form.onSubmit(
-          (values, event) => {
-            console.log(values, event);
-          },
-          (validationErrors, values, event) => {
-            console.log(validationErrors, values, event);
-          }
-        )}
-      />
-    </>
+        
+        <TextInput
+          label="Email"
+          placeholder="your.email@example.com"
+          autoComplete="email"
+          key={form.key('email')}
+          classNames={{
+            input: 'rsvp-input',
+            label: 'rsvp-label',
+          }}
+          {...form.getInputProps('email')}
+        />
+        
+        <TextInput
+          label="Phone Number"
+          placeholder="(555) 123-4567"
+          autoComplete="tel"
+          key={form.key('phoneNumber')}
+          classNames={{
+            input: 'rsvp-input',
+            label: 'rsvp-label',
+          }}
+          {...form.getInputProps('phoneNumber')}
+        />
+
+        <Box className="rsvp-attendance-section">
+          <Radio.Group
+            name="willAttend"
+            withAsterisk
+            label="Will you be joining us?"
+            key={form.key('willAttend')}
+            classNames={{
+              label: 'rsvp-attendance-label',
+              error: 'rsvp-attendance-error',
+            }}
+            {...form.getInputProps('willAttend')}
+          >
+            <Group mt="sm" gap="md">
+              <Radio 
+                value="true" 
+                label="Yes" 
+                classNames={{
+                  radio: 'rsvp-radio',
+                  label: 'rsvp-radio-label',
+                }}
+              />
+              <Radio 
+                value="false" 
+                label="No" 
+                classNames={{
+                  radio: 'rsvp-radio',
+                  label: 'rsvp-radio-label',
+                }}
+              />
+            </Group>
+          </Radio.Group>
+        </Box>
+
+        <Button 
+          type="submit" 
+          loading={loading} 
+          className="rsvp-submit-button"
+          size="lg"
+          fullWidth
+          leftSection={<IconHeartFilled size={18} />}
+        >
+          Send RSVP
+        </Button>
+      </Stack>
+    </form>
   );
 };
 
@@ -143,36 +223,46 @@ const RsvpBox = () => {
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
-    <>
-      <div className="rsvp-box-container">
-        <Modal
-          opened={opened}
-          onClose={close}
-          title="RSVP"
-          overlayProps={{ backgroundOpacity: 0.5, blur: 3 }}
-          centered
-          classNames={{ title: 'modal-title-centered' }}
-        >
-          <RsvpForm />
-        </Modal>
+    <div className="rsvp-box-container">
+      <Modal
+        opened={opened}
+        onClose={close}
+        withCloseButton={false}
+        overlayProps={{ backgroundOpacity: 0.4 }}
+        centered
+        padding={0}
+        radius="lg"
+        size="md"
+        transitionProps={{ duration: 150 }}
+        classNames={{
+          content: 'rsvp-modal-content',
+          body: 'rsvp-modal-body',
+        }}
+      >
+        <Box className="rsvp-modal-header">
+          <Text className="rsvp-modal-title">RSVP</Text>
+        </Box>
+        <Box className="rsvp-modal-form-container">
+          <RsvpForm onClose={close} />
+        </Box>
+      </Modal>
 
-        <Button
-          variant="light"
-          color="var(--primary-green)"
-          size="xl"
-          radius="md"
-          onClick={open}
-          className="rsvp-button"
-          style={{
-            minWidth: '350px',
-            height: '80px',
-            fontSize: '1.75rem',
-          }}
-        >
-          RSVP
-        </Button>
-      </div>
-    </>
+      <Button
+        variant="light"
+        color="var(--primary-green)"
+        size="xl"
+        radius="md"
+        onClick={open}
+        className="rsvp-button"
+        style={{
+          minWidth: '350px',
+          height: '80px',
+          fontSize: '1.75rem',
+        }}
+      >
+        RSVP
+      </Button>
+    </div>
   );
 };
 

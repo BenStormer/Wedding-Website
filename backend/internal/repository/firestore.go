@@ -1,0 +1,98 @@
+package repository
+
+import (
+	"context"
+	"os"
+	"strings"
+
+	"cloud.google.com/go/firestore"
+	"github.com/BenStormer/Wedding-Website/backend/internal/config"
+	"github.com/BenStormer/Wedding-Website/backend/internal/model"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
+	"google.golang.org/api/iterator"
+)
+
+type FirestoreRsvpRepository struct {
+	client *firestore.Client
+}
+
+func NewFirestoreRsvpRepository(cfg *config.Config) (*FirestoreRsvpRepository, error) {
+	ctx := context.Background()
+
+	// Tell the SDK to use the emulator if configured
+	if cfg.UseEmulator {
+		os.Setenv("FIRESTORE_EMULATOR_HOST", cfg.EmulatorHost)
+	}
+
+	client, err := firestore.NewClient(ctx, cfg.FirestoreProject)
+	if err != nil {
+		return nil, err
+	}
+
+	return &FirestoreRsvpRepository{client: client}, nil
+}
+
+func (r *FirestoreRsvpRepository) FindGuest(firstName, lastName string) (*model.Guest, error) {
+	ctx := context.Background()
+
+	// Query for guest by first and last name (case-insensitive)
+	caser := cases.Title(language.English)
+	iter := r.client.Collection("guests").
+		Where("FirstName", "==", caser.String(strings.ToLower(firstName))).
+		Where("LastName", "==", caser.String(strings.ToLower(lastName))).
+		Limit(1).
+		Documents(ctx)
+
+	doc, err := iter.Next()
+	if err == iterator.Done {
+		// No guest found
+		return nil, nil
+	}
+	if err != nil {
+		return nil, err
+	}
+
+	var guest model.Guest
+	if err := doc.DataTo(&guest); err != nil {
+		return nil, err
+	}
+	guest.ID = doc.Ref.ID
+
+	return &guest, nil
+}
+
+func (r *FirestoreRsvpRepository) UpdateRsvp(id string, request *model.RsvpRequest) (*model.Guest, error) {
+	ctx := context.Background()
+
+	docRef := r.client.Collection("guests").Doc(id)
+
+	// Update the guest document
+	_, err := docRef.Update(ctx, []firestore.Update{
+		{Path: "Email", Value: request.Email},
+		{Path: "Phone", Value: request.Phone},
+		{Path: "Attending", Value: request.Attending},
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	// Fetch the updated document
+	doc, err := docRef.Get(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	var guest model.Guest
+	if err := doc.DataTo(&guest); err != nil {
+		return nil, err
+	}
+	guest.ID = doc.Ref.ID
+
+	return &guest, nil
+}
+
+func (r *FirestoreRsvpRepository) Close() error {
+	return r.client.Close()
+}
+

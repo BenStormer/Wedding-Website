@@ -5,18 +5,35 @@
   width: 100%;
 }
 
+/* Venue Card - follows card pattern: secondary-green bg, primary-green border */
 .venue-card {
   width: 70vw;
   max-width: 900px;
+  background-color: var(--secondary-green) !important;
+  border: 2px solid var(--primary-green) !important;
 }
 
+.venue-name {
+  color: var(--bold-green) !important;
+}
+
+.venue-details-text {
+  color: var(--bold-green) !important;
+}
+
+/* Venue Buttons - follows button pattern */
 .venue-button {
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  background-color: var(--secondary-green) !important;
+  border: 2px solid var(--primary-green) !important;
+  color: var(--bold-green) !important;
 }
 
 .venue-button:hover {
-  background-color: var(--primary-green);
-  color: white;
+  background-color: var(--primary-green) !important;
+  color: var(--secondary-green) !important;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(86, 111, 77, 0.3);
 }
 
 /* Details section */
@@ -25,15 +42,20 @@
   max-width: 900px;
   margin-top: 48px;
   padding-top: 32px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 2px solid var(--primary-green);
+}
+
+.venue-details-title {
+  color: var(--bold-green) !important;
 }
 
 .venue-details-grid {
   width: 100%;
 }
 
+/* Detail Cards - follows card pattern */
 .venue-detail-card {
-  background: white;
+  background: var(--primary-green);
   padding: 24px;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
@@ -49,17 +71,34 @@
 }
 
 .venue-detail-icon {
-  color: var(--primary-green);
+  color: var(--secondary-green);
   width: 28px;
   height: 28px;
   min-width: 28px;
   min-height: 28px;
 }
 
+.venue-detail-title {
+  color: var(--secondary-green) !important;
+}
 
+.venue-detail-description {
+  color: var(--secondary-green) !important;
+}
+
+/* FAQ Link */
 .venue-faq-link {
   margin-top: 24px;
   text-align: center;
+}
+
+.venue-faq-link a {
+  color: var(--bold-green) !important;
+  transition: all 0.2s ease;
+}
+
+.venue-faq-link a:hover {
+  color: var(--primary-green) !important;
 }
 
 /* Mobile - full width */

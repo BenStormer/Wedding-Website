@@ -1,5 +1,5 @@
 .top-nav {
-  background-color: #e8ddd4;
+  background-color: var(--secondary-green);
   padding: 16px 24px 8px 24px;
 }
 
@@ -8,7 +8,7 @@
 }
 
 .top-nav-link {
-  color: black;
+  color: var(--bold-green);
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 400;
@@ -31,7 +31,7 @@
 }
 
 .top-nav-separator {
-  color: rgba(0, 0, 0, 0.4);
+  color: var(--primary-green);
   font-size: 0.95rem;
   user-select: none;
 }

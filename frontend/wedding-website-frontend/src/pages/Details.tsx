@@ -67,7 +67,7 @@ const Details = () => {
       <TopNav currentPage="Details" />
       <WeddingTimeline />
       <WeddingVenueDetails />
-      {Menu('Details')}
+      {Menu('Details', 'green')}
     </div>
   );
 };

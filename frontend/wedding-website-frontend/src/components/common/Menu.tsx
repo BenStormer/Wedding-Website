@@ -11,7 +11,7 @@ const MenuLink = (label: string, link: string) => {
   );
 };
 
-const Menu = (currentPage: string) => {
+const Menu = (currentPage: string, theme: 'brown' | 'green' = 'brown') => {
   const menuMappings = {
     Home: '/',
     Details: '/details',
@@ -27,7 +27,7 @@ const Menu = (currentPage: string) => {
   );
 
   return (
-    <div className="menu-section-container">
+    <div className={`menu-section-container menu-${theme}`}>
       <Flex direction="column">
         {Object.entries(linksToRender).map(([label, link]) =>
           MenuLink(label, link)

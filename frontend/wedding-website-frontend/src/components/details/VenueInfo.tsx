@@ -52,7 +52,7 @@ const VenueOverviewCard = (props: VenueInfoProps) => {
         <Text
           size="lg"
           fw={500}
-          c="dark.7"
+          c="var(--bold-green)"
           mt="md"
           mb="sm"
           className="venue-name"
@@ -61,7 +61,7 @@ const VenueOverviewCard = (props: VenueInfoProps) => {
         </Text>
       </Center>
 
-      <Text size="sm" fw={300} c="dark.6" mb="md">
+      <Text size="sm" fw={300} c="var(--bold-green)" mb="md" className="venue-details-text">
         {props.venueDetails}
       </Text>
 
@@ -132,9 +132,10 @@ const VenueDetailsInfo = () => {
         ta="center"
         fz={{ base: 'lg', sm: 'xl' }}
         fw={400}
-        c="black"
+        c="var(--bold-green)"
         mb="lg"
         style={{ letterSpacing: '0.02em' }}
+        className="venue-details-title"
       >
         Important Details
       </Text>
@@ -143,10 +144,10 @@ const VenueDetailsInfo = () => {
           <Box key={item.title} className="venue-detail-card">
             <item.icon stroke={1.5} className="venue-detail-icon" />
             <Box>
-              <Text fw={600} size="md" mb={4}>
+              <Text fw={600} size="md" mb={4} c="var(--secondary-green)" className="venue-detail-title">
                 {item.title}
               </Text>
-              <Text size="sm" c="dark.6" lh={1.5}>
+              <Text size="sm" c="var(--secondary-green)" lh={1.5} className="venue-detail-description">
                 {item.description}
               </Text>
             </Box>

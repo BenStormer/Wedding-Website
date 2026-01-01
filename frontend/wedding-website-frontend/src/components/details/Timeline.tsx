@@ -44,7 +44,7 @@ const CustomTimeline = ({
         ta="center"
         fz={{ base: 'xl', sm: '1.5rem' }}
         fw={400}
-        c="black"
+        c="var(--bold-green)"
         mb="xl"
         style={{ letterSpacing: '0.03em' }}
       >
@@ -98,7 +98,7 @@ const CustomTimeline = ({
           </Box>
 
           <Box p="lg" className="event-description">
-            <Text size="sm" lh={1.7}>
+            <Text size="sm" lh={1.7} c="var(--bold-green)">
               {activeEvent.description}
             </Text>
           </Box>

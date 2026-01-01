@@ -1,3 +1,4 @@
+/* Hero Section */
 .engagement-photo-container {
   position: relative;
 }
@@ -6,7 +7,7 @@
   background-image: url('../assets/images/parthenon_sitting.webp');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed; /* Parralax effect */
+  background-attachment: fixed;
   height: 100svh;
 }
 
@@ -16,7 +17,7 @@
   width: 100vw;
   top: 1rem;
   z-index: 10;
-  color: black;
+  color: var(--bold-brown);
   font-size: 1.1rem;
   text-shadow: 0 2px 8px rgba(255, 255, 255, 0.8);
 }
@@ -27,7 +28,7 @@
   width: 100vw;
   top: 4rem;
   z-index: 10;
-  color: black;
+  color: var(--bold-brown);
   font-size: clamp(1rem, 4.5vw, 2rem);
   font-weight: 300;
   text-shadow: 0 2px 12px rgba(255, 255, 255, 0.8);
@@ -35,22 +36,41 @@
   line-height: 1.2;
 }
 
+/* Page Sections - All use secondary-brown background */
 .overview-details {
-  overflow-y: auto;
   background-color: var(--secondary-brown);
   text-align: center;
   padding: 60px 20px 40px 20px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.our-story {
-  overflow-y: auto;
-  background-color: #e8ddd4;
+.rsvp {
+  background-color: var(--secondary-brown);
   text-align: center;
   padding: 20px 20px;
 }
 
+.other-page-links {
+  background-color: var(--secondary-brown);
+  text-align: center;
+  padding: 50px 20px 60px 20px;
+}
+
+.our-story {
+  background-color: var(--secondary-brown);
+  text-align: center;
+  padding: 20px 20px;
+}
+
+/* Section Heading */
+.section-heading {
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  color: var(--bold-brown) !important;
+  margin-bottom: 30px;
+  letter-spacing: 0.02em;
+}
+
+/* Our Story Timeline */
 .story-timeline-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -69,32 +89,7 @@
   display: none;
 }
 
-.rsvp {
-  overflow-y: auto;
-  background-color: #e8ddd4;
-  align-items: center;
-  padding: 50px 20px;
-  text-align: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.other-page-links {
-  overflow-y: auto;
-  background-color: var(--secondary-brown);
-  text-align: center;
-  padding: 50px 20px 60px 20px;
-}
-
-.section-heading {
-  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-  font-weight: 400;
-  color: black;
-  margin-bottom: 30px;
-  letter-spacing: 0.02em;
-}
-
-/* Mobile View */
+/* Mobile Responsive */
 @media (max-width: 768px) {
   .engagement-photo {
     height: 60svh;

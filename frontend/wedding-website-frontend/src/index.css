@@ -1,8 +1,25 @@
 :root {
-  --primary-green: #566f4d;
-  --secondary-green: #b4b7a0;
-  --primary-brown: #5e4838;
-  --secondary-brown: #958375;
+  /*
+   * Color System
+   * 
+   * Each color family has 3 shades:
+   * - bold: Darkest shade, used for text
+   * - primary: Medium shade, used for component backgrounds and borders
+   * - secondary: Lightest shade, used for page/section backgrounds
+   * 
+   * Brown theme: Used on Home page
+   * Green theme: Available for other pages (Details, etc.)
+   */
+
+  /* Green color family */
+  --bold-green: #566f4d;
+  --primary-green: #b4b7a0;
+  --secondary-green: #d4ddc8;
+
+  /* Brown color family */
+  --bold-brown: #5e4838;
+  --primary-brown: #958375;
+  --secondary-brown: #e8ddd4;
 }
 
 @font-face {

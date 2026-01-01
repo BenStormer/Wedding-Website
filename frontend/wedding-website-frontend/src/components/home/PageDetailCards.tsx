@@ -45,9 +45,9 @@ const PageDetailCard = ({ card }: { card: PageDetailCardType }) => {
       </Card.Section>
 
       <Text
-        size="lg"
-        fw={500}
-        c="dark.7"
+        size="xl"
+        fw={600}
+        c="var(--bold-brown)"
         mb="sm"
         mt="md"
         className="page-detail-label"
@@ -55,11 +55,9 @@ const PageDetailCard = ({ card }: { card: PageDetailCardType }) => {
         {card.label}
       </Text>
 
-      <Text size="sm" fw={300} c="dark.6" mb="md" style={{ flex: 1 }}>
+      <Text size="md" fw={400} c="var(--bold-brown)" style={{ flex: 1 }} className="page-detail-text">
         {card.details}
       </Text>
-
-      <div className="page-detail-button-placeholder">Learn More</div>
     </Card>
   );
 };

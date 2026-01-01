@@ -249,15 +249,15 @@ const RsvpBox = () => {
 
       <Button
         variant="light"
-        color="var(--primary-green)"
+        color="var(--primary-brown)"
         size="xl"
         radius="md"
         onClick={open}
         className="rsvp-button"
         style={{
-          minWidth: '350px',
-          height: '80px',
-          fontSize: '1.75rem',
+          minWidth: '450px',
+          height: '100px',
+          fontSize: '2.25rem',
         }}
       >
         RSVP

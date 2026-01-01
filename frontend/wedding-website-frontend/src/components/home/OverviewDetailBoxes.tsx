@@ -27,13 +27,13 @@ const getIcon = (label: string) => {
 const OverviewDetailBox = ({ box }: { box: OverviewDetailBoxType }) => {
   return (
     <Box className="overview-detail-box">
-      <Box className="overview-detail-icon" c="var(--primary-green)">
+      <Box className="overview-detail-icon" c="var(--secondary-brown)">
         {getIcon(box.label)}
       </Box>
-      <Text size="sm" fw={500} c="dark.7" mb="xs" className="overview-detail-label">
+      <Text size="sm" fw={500} c="var(--secondary-brown)" mb="xs" className="overview-detail-label">
         {box.label.toUpperCase()}
       </Text>
-      <Text size="md" fw={300} c="dark.6" className="overview-detail-text">
+      <Text size="md" fw={300} c="var(--secondary-brown)" className="overview-detail-text">
         {box.details}
       </Text>
     </Box>

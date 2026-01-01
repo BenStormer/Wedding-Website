@@ -16,12 +16,20 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+.rsvp-button .mantine-Button-label {
+  color: var(--bold-brown) !important;
+}
+
 .rsvp-button:hover {
   background-color: var(--primary-brown) !important;
   color: var(--secondary-brown) !important;
   transform: translateY(-3px);
   box-shadow: 0 6px 16px rgba(94, 72, 56, 0.3);
   letter-spacing: 0.1em;
+}
+
+.rsvp-button:hover .mantine-Button-label {
+  color: var(--secondary-brown) !important;
 }
 
 /* Modal Styling */

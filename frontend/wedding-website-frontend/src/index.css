@@ -11,10 +11,10 @@
    * Green theme: Available for other pages (Details, etc.)
    */
 
-  /* Green color family */
-  --bold-green: #566f4d;
-  --primary-green: #b4b7a0;
-  --secondary-green: #e8ebe4;
+  /* Green color family - Sage/Olive palette */
+  --bold-green: #4a5d4a; /* Deep forest sage - for text */
+  --primary-green: #8b9e7d; /* Muted olive - for components */
+  --secondary-green: #e9e9e2; /* Warm grey-green - for backgrounds */
 
   /* Brown color family */
   --bold-brown: #5e4838;

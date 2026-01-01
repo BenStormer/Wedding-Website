@@ -86,12 +86,12 @@ const CustomTimeline = ({
 
         <Paper shadow="md" radius="md" className="timeline-card">
           <Box className="timeline-card-header">
-            <Text fz={{ base: 'lg', sm: 'xl' }} fw={500} c="white">
+            <Text fz={{ base: 'lg', sm: 'xl' }} fw={500} c="var(--secondary-green)">
               {activeEvent.title}
             </Text>
             <Group gap="xs" justify="center" mt="xs">
-              <IconClock size={16} stroke={1.5} color="rgba(255,255,255,0.8)" />
-              <Text fz="sm" c="rgba(255,255,255,0.9)">
+              <IconClock size={16} stroke={1.5} color="var(--secondary-green)" />
+              <Text fz="sm" c="var(--secondary-green)">
                 {activeEvent.time}
               </Text>
             </Group>

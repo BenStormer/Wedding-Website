@@ -36,13 +36,16 @@
   box-shadow: 0 6px 16px rgba(86, 111, 77, 0.3);
 }
 
+.venue-button:hover .mantine-Button-label {
+  color: var(--secondary-green) !important;
+}
+
 /* Details section */
 .venue-details-section {
   width: 70vw;
   max-width: 900px;
   margin-top: 48px;
   padding-top: 32px;
-  border-top: 2px solid var(--primary-green);
 }
 
 .venue-details-title {

@@ -96,9 +96,10 @@
 }
 
 .timeline-card-header {
-  background: linear-gradient(135deg, var(--bold-green) 0%, #4a5f43 100%);
+  background: var(--primary-green);
   padding: 20px 24px;
   text-align: center;
+  color: var(--secondary-green);
 }
 
 .event-description {

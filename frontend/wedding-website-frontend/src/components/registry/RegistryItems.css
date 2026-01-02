@@ -161,6 +161,15 @@
   opacity: 0.8;
 }
 
+.registry-modal-close-button:focus {
+  outline: none;
+}
+
+.registry-modal-close-button:focus-visible {
+  outline: 2px solid var(--secondary-green);
+  outline-offset: 2px;
+}
+
 .registry-modal-close-button:hover {
   opacity: 1;
   background: rgba(255, 255, 255, 0.1) !important;

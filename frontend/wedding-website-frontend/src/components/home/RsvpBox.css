@@ -64,6 +64,15 @@
   opacity: 0.8;
 }
 
+.rsvp-modal-close-button:focus {
+  outline: none;
+}
+
+.rsvp-modal-close-button:focus-visible {
+  outline: 2px solid var(--secondary-brown);
+  outline-offset: 2px;
+}
+
 .rsvp-modal-close-button:hover {
   opacity: 1;
   background: rgba(255, 255, 255, 0.1) !important;

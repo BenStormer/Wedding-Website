@@ -24,11 +24,6 @@ import {
   IconX,
 } from '@tabler/icons-react';
 
-// Use brown theme color for all tags
-const getTagColor = (): string => {
-  return 'var(--bold-brown)';
-};
-
 // Cost display component
 const CostDisplay = ({ cost }: { cost: number }) => {
   if (cost === 0) {

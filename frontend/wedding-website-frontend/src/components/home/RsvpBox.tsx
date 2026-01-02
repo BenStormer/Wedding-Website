@@ -1,6 +1,6 @@
 import './RsvpBox.css';
 
-import { Modal, Button, TextInput, Radio, Group, Stack, Text, Box } from '@mantine/core';
+import { Modal, Button, TextInput, Radio, Group, Stack, Text, Box, CloseButton } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm, isNotEmpty, matches, isEmail } from '@mantine/form';
 import { useState } from 'react';
@@ -240,6 +240,12 @@ const RsvpBox = () => {
         }}
       >
         <Box className="rsvp-modal-header">
+          <CloseButton 
+            onClick={close} 
+            className="rsvp-modal-close-button"
+            size="md"
+            aria-label="Close modal"
+          />
           <Text className="rsvp-modal-title">RSVP</Text>
         </Box>
         <Box className="rsvp-modal-form-container">

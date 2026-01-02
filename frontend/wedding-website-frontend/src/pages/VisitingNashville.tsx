@@ -6,15 +6,19 @@ import Menu from '../components/common/Menu';
 import TopNav from '../components/common/TopNav';
 
 // Mantine
-import { Box, Text, Stack } from '@mantine/core';
+import { Box, Text, Stack, Center } from '@mantine/core';
+import { IconPlane } from '@tabler/icons-react';
 
 const VisitingNashville = () => {
   return (
     <div className="body">
-      <TopNav currentPage="Visiting Nashville" />
+      <TopNav currentPage="Visiting Nashville" theme="brown" />
       <Box className="nashville-page">
         <Box className="nashville-header">
           <Stack gap="sm" align="center">
+            <Center>
+              <IconPlane size={36} stroke={1.5} className="nashville-header-icon" />
+            </Center>
             <Text className="nashville-header-title">Visiting Nashville</Text>
             <Text className="nashville-header-subtitle">
               Make the most of your trip to Music City! Here are some of our
@@ -26,7 +30,7 @@ const VisitingNashville = () => {
           <NashvilleActivitiesTabs />
         </Box>
       </Box>
-      {Menu('Visiting Nashville')}
+      {Menu('Visiting Nashville', 'brown')}
     </div>
   );
 };

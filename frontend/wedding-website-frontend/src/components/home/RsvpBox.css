@@ -46,7 +46,22 @@
 .rsvp-modal-header {
   background: linear-gradient(135deg, var(--bold-brown) 0%, #4a3a2e 100%);
   padding: 16px 24px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.rsvp-modal-close-button {
+  position: absolute;
+  right: 12px;
+  color: var(--secondary-brown) !important;
+  opacity: 0.8;
+}
+
+.rsvp-modal-close-button:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.1) !important;
 }
 
 .rsvp-modal-title {
@@ -77,7 +92,11 @@
 }
 
 .rsvp-input::placeholder {
-  color: #aaa;
+  color: var(--primary-brown);
+}
+
+.rsvp-input {
+  color: var(--bold-brown);
 }
 
 .rsvp-label {
@@ -165,7 +184,7 @@
 
 .rsvp-message-icon.error {
   background: linear-gradient(135deg, #d64545 0%, #b33939 100%);
-  color: white;
+  color: var(--secondary-brown);
 }
 
 .rsvp-message-title {

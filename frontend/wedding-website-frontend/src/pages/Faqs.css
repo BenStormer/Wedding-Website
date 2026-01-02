@@ -1,7 +1,7 @@
 /* FAQs Page Container */
 .faqs-page {
   min-height: 100vh;
-  background-color: #e8ddd4;
+  background-color: var(--secondary-brown);
 }
 
 /* Header Section */
@@ -9,23 +9,22 @@
   padding: 60px 20px 40px;
   text-align: center;
   background-color: var(--secondary-brown);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .faqs-header-icon {
-  color: var(--primary-green);
+  color: var(--bold-brown);
 }
 
 .faqs-header-title {
   font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 400;
-  color: black;
+  color: var(--bold-brown);
   letter-spacing: 0.02em;
 }
 
 .faqs-header-subtitle {
   font-size: clamp(0.9rem, 2vw, 1rem);
-  color: black;
+  color: var(--bold-brown);
   max-width: 500px;
   line-height: 1.6;
 }
@@ -33,7 +32,7 @@
 /* Content Section */
 .faqs-content {
   padding: 40px 20px 80px;
-  background-color: #e8ddd4;
+  background-color: var(--secondary-brown);
 }
 
 /* Mobile Responsive */

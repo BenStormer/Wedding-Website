@@ -6,18 +6,18 @@ import {
   Image,
   Text,
   Button,
-  Anchor,
   Group,
   Box,
   SimpleGrid,
 } from '@mantine/core';
-import { Link } from 'react-router-dom';
 import {
   IconHanger,
   IconCar,
   IconCalendarEvent,
   IconCamera,
   IconGlass,
+  IconMapPin,
+  IconExternalLink,
 } from '@tabler/icons-react';
 
 interface VenueInfoProps {
@@ -71,21 +71,24 @@ const VenueOverviewCard = (props: VenueInfoProps) => {
           color="var(--primary-green)"
           radius="md"
           component="a"
-          href={props.websiteLink}
+          href={props.directionsLink}
           target="_blank"
+          leftSection={<IconMapPin size={16} />}
           className="venue-button"
         >
-          Website
+          Directions
         </Button>
         <Button
           variant="light"
           color="var(--primary-green)"
           radius="md"
-          component={Link}
-          to={props.directionsLink}
+          component="a"
+          href={props.websiteLink}
+          target="_blank"
+          leftSection={<IconExternalLink size={16} />}
           className="venue-button"
         >
-          Directions
+          Website
         </Button>
       </Group>
     </Card>
@@ -158,22 +161,11 @@ const VenueDetailsInfo = () => {
   );
 };
 
-const VenueAdditionalInfo = () => {
-  return (
-    <div className="venue-faq-link">
-      <Anchor fw={700} c="var(--primary-green)" href="/faqs">
-        Need more details? See the Frequently Asked Questions
-      </Anchor>
-    </div>
-  );
-};
-
 const VenueInfo = (props: VenueInfoProps) => {
   return (
     <div className="venue-info-wrapper">
       <VenueOverviewCard {...props} />
       <VenueDetailsInfo />
-      <VenueAdditionalInfo />
     </div>
   );
 };

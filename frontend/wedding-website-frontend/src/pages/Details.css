@@ -1,3 +1,34 @@
+/* Details Page Container */
+.details-page {
+  min-height: 100vh;
+  background-color: var(--secondary-green);
+}
+
+/* Header Section */
+.details-header {
+  padding: 60px 20px 40px;
+  text-align: center;
+  background-color: var(--secondary-green);
+}
+
+.details-header-icon {
+  color: var(--bold-green);
+}
+
+.details-header-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 400;
+  color: var(--bold-green);
+  letter-spacing: 0.02em;
+}
+
+.details-header-subtitle {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: var(--bold-green);
+  max-width: 500px;
+  line-height: 1.6;
+}
+
 /* Page Sections - All use secondary-green background */
 .timeline-container {
   padding: 50px 20px 60px;

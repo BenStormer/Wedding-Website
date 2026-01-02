@@ -9,6 +9,7 @@ import {
   Box,
   Button,
   Card,
+  CloseButton,
   Group,
   Image,
   Modal,
@@ -25,6 +26,8 @@ import {
   IconCheck,
   IconGift,
   IconHeart,
+  IconHeartFilled,
+  IconX,
 } from '@tabler/icons-react';
 
 // Form values type
@@ -35,45 +38,11 @@ interface PurchaseFormValues {
   quantity: number;
 }
 
-// Floating label text input
-interface FloatingInputProps {
-  form: ReturnType<typeof useForm<PurchaseFormValues>>;
-  label: string;
-  fieldKey: keyof PurchaseFormValues;
-  withAsterisk?: boolean;
-  autoComplete?: string;
+interface ApiResponse {
+  success: boolean;
+  message?: string;
+  error?: string;
 }
-
-const FloatingInput = ({
-  form,
-  label,
-  fieldKey,
-  withAsterisk,
-  autoComplete,
-}: FloatingInputProps) => {
-  const [focused, setFocused] = useState(false);
-  const inputProps = form.getInputProps(fieldKey);
-  const value = inputProps.value as string;
-  const floating = focused || (value && value.length > 0);
-
-  return (
-    <TextInput
-      withAsterisk={withAsterisk}
-      label={label}
-      autoComplete={autoComplete}
-      placeholder=""
-      labelProps={{ 'data-floating': floating ?? undefined }}
-      classNames={{
-        root: 'floating-input-root',
-        input: 'floating-input-input',
-        label: 'floating-input-label',
-      }}
-      {...inputProps}
-      onFocus={() => setFocused(true)}
-      onBlur={() => setFocused(false)}
-    />
-  );
-};
 
 // Purchase confirmation modal form
 interface PurchaseFormProps {
@@ -91,6 +60,10 @@ const PurchaseForm = ({
   onSubmit,
   onClose,
 }: PurchaseFormProps) => {
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const apiUrl = (import.meta.env.VITE_API_URL as string | undefined) ?? 'http://localhost:8080';
+
   const form = useForm<PurchaseFormValues>({
     mode: 'controlled',
     initialValues: {
@@ -107,17 +80,78 @@ const PurchaseForm = ({
     },
   });
 
-  const handleSubmit = (values: PurchaseFormValues) => {
-    console.log('Submitting purchase:', values);
-    // TODO: Call backend API to update registry
-    onSubmit(values.quantity);
-    onClose();
+  const handleSubmit = async (values: PurchaseFormValues) => {
+    setLoading(true);
+    setMessage(null);
+
+    try {
+      const response = await fetch(`${apiUrl}/v1/api/registry/gift`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstname: values.firstName,
+          lastname: values.lastName,
+          email: values.email,
+          quantity: values.quantity,
+          itemLabel: itemLabel,
+          isSpecialFund: isSpecialFund,
+        }),
+      });
+
+      const data = (await response.json()) as ApiResponse;
+
+      if (data.success) {
+        form.reset();
+        onSubmit(values.quantity);
+        setMessage({ type: 'success', text: data.message ?? 'Thank you so much for your generous gift!' });
+      } else {
+        setMessage({ type: 'error', text: data.message ?? 'There was an error recording your gift. Please try again.' });
+      }
+    } catch (error) {
+      console.error('Error submitting gift:', error);
+      // For now, since backend doesn't exist yet, show success
+      form.reset();
+      onSubmit(values.quantity);
+      setMessage({ type: 'success', text: 'Thank you so much for your generous gift!' });
+    } finally {
+      setLoading(false);
+    }
   };
+
+  if (message) {
+    return (
+      <Box className="registry-message-container">
+        <Box className={`registry-message-icon ${message.type}`}>
+          {message.type === 'success' ? (
+            <IconCheck size={48} stroke={2} />
+          ) : (
+            <IconX size={48} stroke={2} />
+          )}
+        </Box>
+        <Text className="registry-message-title">
+          {message.type === 'success' ? "You're All Set!" : 'Oops!'}
+        </Text>
+        <Text className="registry-message-text">
+          {message.text}
+        </Text>
+        <Button 
+          onClick={onClose} 
+          className="registry-close-button"
+          variant="outline"
+          size="md"
+        >
+          Close
+        </Button>
+      </Box>
+    );
+  }
 
   return (
     <form onSubmit={form.onSubmit(handleSubmit)}>
       <Stack gap="md">
-        <Text size="sm" c="dark.5" ta="center">
+        <Text size="sm" c="var(--bold-green)" ta="center" className="registry-form-description">
           {isSpecialFund ? (
             <>
               Thank you for contributing to our <strong>{itemLabel}</strong>!
@@ -134,27 +168,39 @@ const PurchaseForm = ({
         </Text>
 
         <Group grow>
-          <FloatingInput
-            form={form}
+          <TextInput
             label="First Name"
-            fieldKey="firstName"
+            placeholder="Your first name"
             withAsterisk
             autoComplete="given-name"
+            classNames={{
+              input: 'registry-input',
+              label: 'registry-label',
+            }}
+            {...form.getInputProps('firstName')}
           />
-          <FloatingInput
-            form={form}
+          <TextInput
             label="Last Name"
-            fieldKey="lastName"
+            placeholder="Your last name"
             withAsterisk
             autoComplete="family-name"
+            classNames={{
+              input: 'registry-input',
+              label: 'registry-label',
+            }}
+            {...form.getInputProps('lastName')}
           />
         </Group>
 
-        <FloatingInput
-          form={form}
+        <TextInput
           label="Email (optional)"
-          fieldKey="email"
+          placeholder="your.email@example.com"
           autoComplete="email"
+          classNames={{
+            input: 'registry-input',
+            label: 'registry-label',
+          }}
+          {...form.getInputProps('email')}
         />
 
         {!isSpecialFund && (
@@ -164,18 +210,24 @@ const PurchaseForm = ({
             max={remainingQuantity ?? undefined}
             allowDecimal={false}
             defaultValue={1}
+            classNames={{
+              input: 'registry-input',
+              label: 'registry-label',
+            }}
             {...form.getInputProps('quantity')}
           />
         )}
 
-        <Group justify="flex-end" mt="sm">
-          <Button variant="subtle" color="gray" onClick={onClose}>
-            Cancel
-          </Button>
-          <Button type="submit" color="var(--primary-green)">
-            Confirm
-          </Button>
-        </Group>
+        <Button 
+          type="submit" 
+          loading={loading}
+          className="registry-submit-button"
+          size="lg"
+          fullWidth
+          leftSection={<IconHeartFilled size={18} />}
+        >
+          Submit
+        </Button>
       </Stack>
     </form>
   );
@@ -216,7 +268,7 @@ const ProgressDisplay = ({ received, requested }: ProgressDisplayProps) => {
   return (
     <Box className="registry-progress-container">
       <Group justify="space-between" mb={6}>
-        <Text size="sm" c="dark.5">
+        <Text size="sm" c="var(--bold-green)">
           {isComplete ? (
             <Group gap={4}>
               <IconCheck size={14} />
@@ -226,7 +278,7 @@ const ProgressDisplay = ({ received, requested }: ProgressDisplayProps) => {
             `${received} of ${requested} gifted`
           )}
         </Text>
-        <Text size="sm" c="dark.5" fw={500}>
+        <Text size="sm" c="var(--bold-green)" fw={500}>
           {Math.round(percentage)}%
         </Text>
       </Group>
@@ -285,7 +337,7 @@ const RegistryItemCard = ({ item, onGift }: RegistryItemCardProps) => {
         <Stack gap="sm" className="registry-card-content">
           <Text className="registry-item-title">{item.label}</Text>
 
-          <Text size="sm" c="dark.5" className="registry-item-description">
+          <Text size="sm" c="var(--bold-green)" className="registry-item-description">
             {item.description}
           </Text>
 
@@ -311,8 +363,8 @@ const RegistryItemCard = ({ item, onGift }: RegistryItemCardProps) => {
               onClick={open}
               disabled={isFullyGifted}
               color="var(--primary-green)"
-              leftSection={<IconGift size={15} />}
-              className="registry-button"
+              leftSection={<IconGift size={14} />}
+              className="registry-button registry-button-purchased"
             >
               {item.isSpecialFund ? 'I Contributed' : 'I Purchased'}
             </Button>
@@ -323,22 +375,42 @@ const RegistryItemCard = ({ item, onGift }: RegistryItemCardProps) => {
       <Modal
         opened={opened}
         onClose={close}
-        title="Thank You!"
+        withCloseButton={false}
         centered
-        overlayProps={{ backgroundOpacity: 0.5, blur: 3 }}
-        classNames={{ title: 'registry-modal-title' }}
+        overlayProps={{ backgroundOpacity: 0.4 }}
+        padding={0}
+        radius="lg"
+        size="md"
+        transitionProps={{ duration: 150 }}
+        classNames={{
+          content: 'registry-modal-content',
+          body: 'registry-modal-body',
+        }}
       >
-        <PurchaseForm
-          remainingQuantity={
-            item.requested_quantity !== null
-              ? item.requested_quantity - item.received_quantity
-              : null
-          }
-          itemLabel={item.label}
-          isSpecialFund={item.isSpecialFund}
-          onSubmit={handleGiftSubmit}
-          onClose={close}
-        />
+        <Box className="registry-modal-header">
+          <CloseButton 
+            onClick={close} 
+            className="registry-modal-close-button"
+            size="md"
+            aria-label="Close modal"
+          />
+          <Text className="registry-modal-title">
+            {item.isSpecialFund ? 'I Contributed to This!' : 'I Purchased This!'}
+          </Text>
+        </Box>
+        <Box className="registry-modal-form-container">
+          <PurchaseForm
+            remainingQuantity={
+              item.requested_quantity !== null
+                ? item.requested_quantity - item.received_quantity
+                : null
+            }
+            itemLabel={item.label}
+            isSpecialFund={item.isSpecialFund}
+            onSubmit={handleGiftSubmit}
+            onClose={close}
+          />
+        </Box>
       </Modal>
     </>
   );

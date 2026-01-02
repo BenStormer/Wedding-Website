@@ -12,7 +12,7 @@ import {
   Badge,
   Stack,
   UnstyledButton,
-  Anchor,
+  Button,
 } from '@mantine/core';
 import { useState } from 'react';
 import {
@@ -24,30 +24,16 @@ import {
   IconX,
 } from '@tabler/icons-react';
 
-// Tag color mapping for visual variety
-const getTagColor = (tag: PlaceTag): string => {
-  const colors: Record<PlaceTag, string> = {
-    downtown: '#5e4838',
-    outdoors: '#566f4d',
-    drinks: '#8b5a2b',
-    'live-music': '#6b4c7a',
-    history: '#4a6572',
-    'family-friendly': '#5e4838',
-    parking: '#566f4d',
-    walkable: '#6b8e6b',
-    brunch: '#c4956a',
-    upscale: '#5e4838',
-    casual: '#7a8b6e',
-    'local-favorite': '#b4846c',
-  };
-  return colors[tag] || '#5e4838';
+// Use brown theme color for all tags
+const getTagColor = (): string => {
+  return 'var(--bold-brown)';
 };
 
 // Cost display component
 const CostDisplay = ({ cost }: { cost: number }) => {
   if (cost === 0) {
     return (
-      <Text size="sm" c="var(--primary-green)" fw={600}>
+      <Text size="sm" c="var(--bold-brown)" fw={600}>
         Free
       </Text>
     );
@@ -60,7 +46,7 @@ const CostDisplay = ({ cost }: { cost: number }) => {
           key={i}
           size="sm"
           fw={600}
-          c={i <= cost ? 'var(--primary-green)' : 'gray.4'}
+          c={i <= cost ? 'var(--bold-brown)' : 'var(--primary-brown)'}
         >
           $
         </Text>
@@ -103,13 +89,6 @@ const PlaceCard = ({ place, onTagClick, activeFilters }: PlaceCardProps) => {
                 size="xs"
                 variant="light"
                 className={`place-tag place-tag-clickable ${isActive ? 'place-tag-active' : ''}`}
-                style={{
-                  backgroundColor: isActive
-                    ? getTagColor(tag)
-                    : `${getTagColor(tag)}15`,
-                  color: isActive ? 'white' : getTagColor(tag),
-                  border: `1px solid ${getTagColor(tag)}${isActive ? '' : '30'}`,
-                }}
                 onClick={() => onTagClick(tag)}
               >
                 {tagLabels[tag]}
@@ -118,29 +97,35 @@ const PlaceCard = ({ place, onTagClick, activeFilters }: PlaceCardProps) => {
           })}
         </Group>
 
-        <Text size="md" c="dark.5" className="place-card-details">
+        <Text size="md" c="var(--bold-brown)" className="place-card-details">
           {place.details}
         </Text>
 
-        <Group justify="space-between" className="place-card-links">
-          <Anchor
+        <Group grow gap="sm" className="place-card-links">
+          <Button
+            component="a"
             href={place.directionsLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="place-link"
+            variant="light"
+            color="var(--primary-brown)"
+            leftSection={<IconMapPin size={15} />}
+            className="place-button"
           >
-            <IconMapPin size={18} />
-            <span>Directions</span>
-          </Anchor>
-          <Anchor
+            Directions
+          </Button>
+          <Button
+            component="a"
             href={place.websiteLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="place-link"
+            variant="light"
+            color="var(--primary-brown)"
+            leftSection={<IconExternalLink size={15} />}
+            className="place-button"
           >
-            <IconExternalLink size={18} />
-            <span>Website</span>
-          </Anchor>
+            Website
+          </Button>
         </Group>
       </Stack>
     </Card>
@@ -160,7 +145,7 @@ const ActiveFilters = ({ filters, onRemove, onClearAll }: ActiveFiltersProps) =>
   return (
     <Box className="active-filter-container">
       <Group gap="xs" justify="center" wrap="wrap">
-        <Text size="sm" c="dark.5">
+        <Text size="sm" c="var(--bold-brown)">
           Filtering by:
         </Text>
         {filterArray.map((tag) => (
@@ -169,9 +154,6 @@ const ActiveFilters = ({ filters, onRemove, onClearAll }: ActiveFiltersProps) =>
             size="lg"
             variant="filled"
             className="active-filter-badge"
-            style={{
-              backgroundColor: getTagColor(tag),
-            }}
             rightSection={
               <UnstyledButton
                 onClick={() => onRemove(tag)}
@@ -321,7 +303,7 @@ const NashvilleActivitiesTabs = () => {
           />
         ) : (
           <Box className="no-results">
-            <Text c="dark.4" ta="center">
+            <Text c="var(--bold-brown)" ta="center">
               No places found with these filters.
             </Text>
           </Box>

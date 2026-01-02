@@ -1,5 +1,4 @@
 .top-nav {
-  background-color: var(--secondary-green);
   padding: 16px 24px 8px 24px;
 }
 
@@ -8,7 +7,6 @@
 }
 
 .top-nav-link {
-  color: var(--bold-green);
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 400;
@@ -21,7 +19,6 @@
 }
 
 .top-nav-link-active {
-  color: var(--primary-green);
   font-weight: 600;
   cursor: default;
 }
@@ -31,9 +28,42 @@
 }
 
 .top-nav-separator {
-  color: var(--primary-green);
   font-size: 0.95rem;
   user-select: none;
+}
+
+/* Green theme */
+.top-nav-green {
+  background-color: var(--secondary-green);
+}
+
+.top-nav-green .top-nav-link {
+  color: var(--bold-green);
+}
+
+.top-nav-green .top-nav-link-active {
+  color: var(--primary-green);
+}
+
+.top-nav-green .top-nav-separator {
+  color: var(--primary-green);
+}
+
+/* Brown theme */
+.top-nav-brown {
+  background-color: var(--secondary-brown);
+}
+
+.top-nav-brown .top-nav-link {
+  color: var(--bold-brown);
+}
+
+.top-nav-brown .top-nav-link-active {
+  color: var(--primary-brown);
+}
+
+.top-nav-brown .top-nav-separator {
+  color: var(--primary-brown);
 }
 
 /* Short labels hidden by default */

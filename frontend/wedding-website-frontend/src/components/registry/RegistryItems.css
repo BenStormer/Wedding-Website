@@ -7,8 +7,8 @@
 
 /* Registry Card */
 .registry-card {
-  background: white;
-  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  background: var(--secondary-green);
+  border: 2px solid var(--primary-green) !important;
   transition: all 0.25s ease;
   overflow: hidden;
   display: flex;
@@ -17,7 +17,7 @@
 
 .registry-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 12px 24px rgba(74, 93, 74, 0.2) !important;
 }
 
 .registry-card-image-section {
@@ -37,7 +37,7 @@
   position: absolute;
   top: 12px;
   right: 12px;
-  background: white;
+  background: var(--secondary-green);
   padding: 8px 14px;
   border-radius: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
@@ -46,7 +46,7 @@
 .registry-item-price {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--primary-green);
+  color: var(--bold-green);
 }
 
 .registry-item-price-any {
@@ -59,12 +59,12 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(86, 111, 77, 0.85);
+  background: rgba(139, 158, 125, 0.9);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--secondary-green);
   gap: 8px;
 }
 
@@ -78,13 +78,14 @@
 .registry-item-title {
   font-size: 1.15rem;
   font-weight: 600;
-  color: var(--primary-green);
+  color: var(--bold-green);
   line-height: 1.3;
 }
 
 .registry-item-description {
   line-height: 1.5;
   flex-grow: 1;
+  color: var(--bold-green) !important;
 }
 
 /* Progress Bar */
@@ -94,13 +95,13 @@
 }
 
 .registry-progress-bar {
-  background-color: rgba(86, 111, 77, 0.15);
+  background-color: rgba(139, 158, 125, 0.3);
 }
 
 /* Buttons */
 .registry-card-buttons {
   padding-top: 12px;
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-top: 1px solid var(--primary-green);
 }
 
 .registry-button {
@@ -111,40 +112,162 @@
   transform: translateY(-1px);
 }
 
-/* Modal */
-.registry-modal-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--primary-green);
+.registry-button-purchased {
+  padding-left: 8px;
+  padding-right: 8px;
+  gap: 4px;
 }
 
-/* Floating Input Styles */
-.floating-input-root {
+/* Modal Styling */
+.registry-modal-content {
+  overflow: hidden;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.registry-modal-body {
+  padding: 0 !important;
+}
+
+.registry-modal-header {
+  background: linear-gradient(135deg, var(--bold-green) 0%, #3a4a3a 100%);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
 }
 
-.floating-input-label {
+.registry-modal-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--secondary-green);
+  letter-spacing: 0.1em;
+}
+
+.registry-modal-close-button {
   position: absolute;
-  z-index: 2;
-  top: 10px;
-  left: 12px;
-  pointer-events: none;
-  color: var(--mantine-color-gray-6);
-  font-size: 0.9rem;
-  transition: all 0.15s ease;
+  right: 12px;
+  color: var(--secondary-green) !important;
+  opacity: 0.8;
+}
+
+.registry-modal-close-button:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.registry-modal-form-container {
+  padding: 28px 28px 32px;
+  background: var(--secondary-green);
+}
+
+.registry-form-description {
+  line-height: 1.5;
+}
+
+/* Form Input Styling */
+.registry-input {
+  border: 1px solid var(--primary-green);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
   background: white;
-  padding: 0 4px;
+  color: var(--bold-green);
 }
 
-.floating-input-label[data-floating] {
-  top: -8px;
-  font-size: 0.75rem;
+.registry-input:focus {
+  border-color: var(--bold-green);
+  box-shadow: 0 0 0 3px rgba(74, 93, 74, 0.1);
+}
+
+.registry-input::placeholder {
   color: var(--primary-green);
-  font-weight: 500;
 }
 
-.floating-input-input {
-  padding-top: 8px;
+.registry-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--bold-green);
+  margin-bottom: 6px;
+}
+
+/* Submit Button */
+.registry-submit-button {
+  background: linear-gradient(135deg, var(--bold-green) 0%, #3a4a3a 100%) !important;
+  border: none !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em;
+  margin-top: 8px;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 12px rgba(74, 93, 74, 0.25);
+  color: var(--secondary-green) !important;
+}
+
+.registry-submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(74, 93, 74, 0.35) !important;
+}
+
+.registry-submit-button:active {
+  transform: translateY(0);
+}
+
+/* Success/Error Message Styling */
+.registry-message-container {
+  text-align: center;
+  padding: 20px 8px 8px;
+}
+
+.registry-message-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.registry-message-icon.success {
+  background: linear-gradient(135deg, var(--bold-green) 0%, #3a4a3a 100%);
+  color: var(--secondary-green);
+}
+
+.registry-message-icon.error {
+  background: linear-gradient(135deg, #d64545 0%, #b33939 100%);
+  color: var(--secondary-green);
+}
+
+.registry-message-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--bold-green);
+  margin-bottom: 8px;
+}
+
+.registry-message-text {
+  font-size: 0.95rem;
+  color: var(--bold-green);
+  line-height: 1.5;
+  margin-bottom: 24px;
+  max-width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.registry-close-button {
+  border: 2px solid var(--bold-green) !important;
+  color: var(--bold-green) !important;
+  font-weight: 600 !important;
+  padding: 10px 32px !important;
+  transition: all 0.2s ease !important;
+}
+
+.registry-close-button:hover {
+  background: var(--bold-green) !important;
+  color: var(--secondary-green) !important;
 }
 
 /* Mobile Responsive */

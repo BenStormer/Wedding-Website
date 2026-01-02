@@ -44,7 +44,7 @@ const weddingEvents: TimelineEvent[] = [
 const WeddingTimeline = () => {
   return (
     <div className="timeline-container">
-      <CustomTimeline events={weddingEvents} title="Wedding Day Schedule" />
+      <CustomTimeline events={weddingEvents} />
     </div>
   );
 };

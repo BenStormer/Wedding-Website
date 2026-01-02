@@ -11,7 +11,6 @@ import {
   Accordion,
   Box,
   Text,
-  Group,
   UnstyledButton,
   Stack,
 } from '@mantine/core';
@@ -86,7 +85,7 @@ const FaqAccordionSection = () => {
     <Box className="faq-container">
       {/* Category Tabs */}
       <Box className="faq-tabs-container">
-        <Group gap="sm" justify="center" wrap="wrap">
+        <Box className="faq-tabs-grid">
           {categoryOrder.map((category) => (
             <CategoryTab
               key={category}
@@ -95,7 +94,7 @@ const FaqAccordionSection = () => {
               onClick={() => setActiveCategory(category)}
             />
           ))}
-        </Group>
+        </Box>
       </Box>
 
       {/* FAQ Content */}

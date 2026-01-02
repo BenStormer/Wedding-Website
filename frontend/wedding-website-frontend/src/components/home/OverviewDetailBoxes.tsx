@@ -14,11 +14,11 @@ interface OverviewDetailBoxType {
 const getIcon = (label: string) => {
   switch (label.toLowerCase()) {
     case 'when':
-      return <IconCalendar size={32} stroke={1.5} />;
+      return <IconCalendar size={40} stroke={1.5} />;
     case 'where':
-      return <IconMapPin size={32} stroke={1.5} />;
+      return <IconMapPin size={40} stroke={1.5} />;
     case 'attire':
-      return <IconShirt size={32} stroke={1.5} />;
+      return <IconShirt size={40} stroke={1.5} />;
     default:
       return null;
   }
@@ -30,10 +30,10 @@ const OverviewDetailBox = ({ box }: { box: OverviewDetailBoxType }) => {
       <Box className="overview-detail-icon" c="var(--secondary-brown)">
         {getIcon(box.label)}
       </Box>
-      <Text size="sm" fw={500} c="var(--secondary-brown)" mb="xs" className="overview-detail-label">
+      <Text className="overview-detail-label">
         {box.label.toUpperCase()}
       </Text>
-      <Text size="md" fw={300} c="var(--secondary-brown)" className="overview-detail-text">
+      <Text className="overview-detail-text">
         {box.details}
       </Text>
     </Box>

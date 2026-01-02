@@ -38,7 +38,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 16px;
+  padding: 12px 20px;
   border: 2px solid var(--primary-green);
   background: var(--secondary-green);
   border-radius: 20px;
@@ -104,6 +104,12 @@
 
 .event-description {
   background: var(--secondary-green);
+  color: var(--bold-green);
+}
+
+.timeline-description-text {
+  font-size: var(--font-size-body-sm);
+  line-height: 1.7;
   color: var(--bold-green);
 }
 

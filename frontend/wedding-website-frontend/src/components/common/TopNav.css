@@ -8,8 +8,8 @@
 
 .top-nav-link {
   text-decoration: none;
-  font-size: 0.95rem;
-  font-weight: 400;
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-normal);
   letter-spacing: 0.02em;
   transition: all 0.2s ease;
 }
@@ -19,7 +19,7 @@
 }
 
 .top-nav-link-active {
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   cursor: default;
 }
 
@@ -28,7 +28,7 @@
 }
 
 .top-nav-separator {
-  font-size: 0.95rem;
+  font-size: var(--font-size-body-sm);
   user-select: none;
 }
 
@@ -78,11 +78,11 @@
   }
 
   .top-nav-link {
-    font-size: 0.85rem;
+    font-size: var(--font-size-label);
   }
 
   .top-nav-separator {
-    font-size: 0.85rem;
+    font-size: var(--font-size-label);
   }
 
   /* Show short labels, hide full labels on mobile */

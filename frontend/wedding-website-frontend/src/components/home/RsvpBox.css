@@ -65,8 +65,8 @@
 }
 
 .rsvp-modal-title {
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: var(--font-size-modal-title);
+  font-weight: var(--font-weight-semibold);
   color: var(--secondary-brown);
   letter-spacing: 0.1em;
 }
@@ -81,9 +81,10 @@
   border: 1px solid var(--primary-brown);
   border-radius: 8px;
   padding: 12px 14px;
-  font-size: 0.95rem;
+  font-size: var(--font-size-body-sm);
   transition: all 0.2s ease;
   background: white;
+  color: var(--bold-brown);
 }
 
 .rsvp-input:focus {
@@ -95,13 +96,9 @@
   color: var(--primary-brown);
 }
 
-.rsvp-input {
-  color: var(--bold-brown);
-}
-
 .rsvp-label {
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-semibold);
   color: var(--bold-brown);
   margin-bottom: 6px;
 }
@@ -116,8 +113,8 @@
 }
 
 .rsvp-attendance-label {
-  font-size: 0.95rem !important;
-  font-weight: 600 !important;
+  font-size: var(--font-size-body-sm) !important;
+  font-weight: var(--font-weight-semibold) !important;
   color: var(--bold-brown) !important;
 }
 
@@ -135,9 +132,9 @@
 }
 
 .rsvp-radio-label {
-  font-size: 0.9rem;
+  font-size: var(--font-size-label);
   color: var(--bold-brown);
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
 }
 
 /* Submit Button */
@@ -188,16 +185,16 @@
 }
 
 .rsvp-message-title {
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: var(--font-size-section-title);
+  font-weight: var(--font-weight-semibold);
   color: var(--bold-brown);
   margin-bottom: 8px;
 }
 
 .rsvp-message-text {
-  font-size: 0.95rem;
+  font-size: var(--font-size-body-sm);
   color: var(--bold-brown);
-  line-height: 1.5;
+  line-height: var(--line-height-normal);
   margin-bottom: 24px;
   max-width: 280px;
   margin-left: auto;
@@ -207,7 +204,7 @@
 .rsvp-close-button {
   border: 2px solid var(--bold-brown) !important;
   color: var(--bold-brown) !important;
-  font-weight: 600 !important;
+  font-weight: var(--font-weight-semibold) !important;
   padding: 10px 32px !important;
   transition: all 0.2s ease !important;
 }
@@ -224,7 +221,7 @@
   }
 
   .rsvp-modal-title {
-    font-size: 1.1rem;
+    font-size: var(--font-size-body);
   }
 
   .rsvp-modal-form-container {

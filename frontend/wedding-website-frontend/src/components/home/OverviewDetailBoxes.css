@@ -33,13 +33,17 @@
 }
 
 .overview-detail-label {
+  font-size: var(--font-size-card-title);
+  font-weight: var(--font-weight-medium);
   letter-spacing: 0.1em;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   color: var(--secondary-brown);
 }
 
 .overview-detail-text {
-  line-height: 1.6;
+  font-size: var(--font-size-card-subtitle);
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-relaxed);
   color: var(--secondary-brown);
 }
 

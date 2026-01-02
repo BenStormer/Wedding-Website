@@ -362,6 +362,7 @@ const RegistryItemCard = ({ item, onGift }: RegistryItemCardProps) => {
             <Button
               onClick={open}
               disabled={isFullyGifted}
+              variant="light"
               color="var(--primary-green)"
               leftSection={<IconGift size={14} />}
               className="registry-button registry-button-purchased"

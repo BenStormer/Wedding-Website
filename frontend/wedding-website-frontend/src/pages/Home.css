@@ -18,7 +18,8 @@
   top: 1rem;
   z-index: 10;
   color: var(--bold-brown);
-  font-size: 1.1rem;
+  font-size: var(--font-size-card-title);
+  font-weight: var(--font-weight-medium);
   text-shadow: 0 2px 8px rgba(255, 255, 255, 0.8);
 }
 
@@ -29,43 +30,43 @@
   top: 4rem;
   z-index: 10;
   color: var(--bold-brown);
-  font-size: clamp(1rem, 4.5vw, 2rem);
-  font-weight: 300;
+  font-size: var(--font-size-hero);
+  font-weight: var(--font-weight-light);
   text-shadow: 0 2px 12px rgba(255, 255, 255, 0.8);
   padding: 0 1rem;
-  line-height: 1.2;
+  line-height: var(--line-height-tight);
 }
 
 /* Page Sections - All use secondary-brown background */
 .overview-details {
   background-color: var(--secondary-brown);
   text-align: center;
-  padding: 60px 20px 40px 20px;
+  padding: 60px 20px 50px;
 }
 
 .rsvp {
   background-color: var(--secondary-brown);
   text-align: center;
-  padding: 20px 20px;
+  padding: 30px 20px;
 }
 
 .other-page-links {
   background-color: var(--secondary-brown);
   text-align: center;
-  padding: 50px 20px 60px 20px;
+  padding: 50px 20px 50px;
 }
 
 .our-story {
   background-color: var(--secondary-brown);
   text-align: center;
-  padding: 20px 20px;
+  padding: 30px 20px 50px;
 }
 
 /* Section Heading - Home page specific */
 .our-story .section-heading,
 .other-page-links .section-heading {
-  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-  font-weight: 400;
+  font-size: var(--font-size-section-title);
+  font-weight: var(--font-weight-normal);
   color: var(--bold-brown) !important;
   margin-bottom: 30px;
   letter-spacing: 0.02em;

@@ -16,7 +16,6 @@
 
 .page-detail-card:hover {
   background-color: var(--primary-brown) !important;
-  transform: translateY(-3px);
   box-shadow: 0 6px 16px rgba(94, 72, 56, 0.3) !important;
 }
 
@@ -25,6 +24,8 @@
 }
 
 .page-detail-label {
+  font-size: var(--font-size-card-title);
+  font-weight: var(--font-weight-semibold);
   transition: color 0.3s ease;
   color: var(--bold-brown) !important;
 }
@@ -34,6 +35,9 @@
 }
 
 .page-detail-text {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-relaxed);
   transition: color 0.3s ease;
   color: var(--bold-brown) !important;
 }

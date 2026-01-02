@@ -45,17 +45,14 @@ const PageDetailCard = ({ card }: { card: PageDetailCardType }) => {
       </Card.Section>
 
       <Text
-        size="xl"
-        fw={600}
-        c="var(--bold-brown)"
+        className="page-detail-label"
         mb="sm"
         mt="md"
-        className="page-detail-label"
       >
         {card.label}
       </Text>
 
-      <Text size="md" fw={400} c="var(--bold-brown)" style={{ flex: 1 }} className="page-detail-text">
+      <Text className="page-detail-text" style={{ flex: 1 }}>
         {card.details}
       </Text>
     </Card>

@@ -14,10 +14,15 @@
 }
 
 .venue-name {
+  font-size: var(--font-size-card-title);
+  font-weight: var(--font-weight-medium);
   color: var(--bold-green) !important;
 }
 
 .venue-details-text {
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-relaxed);
   color: var(--bold-green) !important;
 }
 
@@ -44,11 +49,14 @@
 .venue-details-section {
   width: 70vw;
   max-width: 900px;
-  margin-top: 48px;
-  padding-top: 32px;
+  margin-top: 24px;
+  padding-top: 16px;
 }
 
 .venue-details-title {
+  font-size: var(--font-size-section-title);
+  font-weight: var(--font-weight-normal);
+  letter-spacing: 0.02em;
   color: var(--bold-green) !important;
 }
 
@@ -82,10 +90,15 @@
 }
 
 .venue-detail-title {
+  font-size: var(--font-size-card-subtitle);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: 4px;
   color: var(--secondary-green) !important;
 }
 
 .venue-detail-description {
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-normal);
   color: var(--secondary-green) !important;
 }
 

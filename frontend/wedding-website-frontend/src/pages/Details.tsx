@@ -81,8 +81,8 @@ const Details = () => {
             </Text>
           </Stack>
         </Box>
-        <WeddingTimeline />
-        <WeddingVenueDetails />
+      <WeddingTimeline />
+      <WeddingVenueDetails />
       </Box>
       {Menu('Details', 'green')}
     </div>

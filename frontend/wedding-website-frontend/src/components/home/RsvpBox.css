@@ -34,13 +34,18 @@
 
 /* Modal Styling */
 .rsvp-modal-content {
-  overflow: hidden;
   border: none !important;
   box-shadow: none !important;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
 }
 
 .rsvp-modal-body {
   padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
 .rsvp-modal-header {

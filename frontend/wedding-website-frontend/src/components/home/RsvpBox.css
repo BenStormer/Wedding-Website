@@ -3,24 +3,33 @@
   flex-direction: row;
   gap: 20px;
   justify-content: center;
-  padding: 20px;
+  padding: 10px 20px;
 }
 
 .rsvp-button {
   transition: all 0.3s ease;
-  background-color: rgba(255, 255, 255, 0.7) !important;
-  border: 2px solid var(--primary-green) !important;
+  background-color: var(--secondary-brown) !important;
+  border: 2px solid var(--primary-brown) !important;
+  color: var(--bold-brown) !important;
   font-weight: 600 !important;
   letter-spacing: 0.05em;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+.rsvp-button .mantine-Button-label {
+  color: var(--bold-brown) !important;
+}
+
 .rsvp-button:hover {
-  background-color: var(--primary-green) !important;
-  color: white !important;
+  background-color: var(--primary-brown) !important;
+  color: var(--secondary-brown) !important;
   transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(86, 111, 77, 0.3);
+  box-shadow: 0 6px 16px rgba(94, 72, 56, 0.3);
   letter-spacing: 0.1em;
+}
+
+.rsvp-button:hover .mantine-Button-label {
+  color: var(--secondary-brown) !important;
 }
 
 /* Modal Styling */
@@ -40,50 +49,62 @@
 }
 
 .rsvp-modal-header {
-  background: linear-gradient(135deg, var(--primary-green) 0%, #4a5f43 100%);
+  background: linear-gradient(135deg, var(--bold-brown) 0%, #4a3a2e 100%);
   padding: 16px 24px;
-  text-align: center;
-  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.rsvp-modal-close-button {
+  position: absolute;
+  right: 12px;
+  color: var(--secondary-brown) !important;
+  opacity: 0.8;
+}
+
+.rsvp-modal-close-button:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.1) !important;
 }
 
 .rsvp-modal-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: white;
+  font-size: var(--font-size-modal-title);
+  font-weight: var(--font-weight-semibold);
+  color: var(--secondary-brown);
   letter-spacing: 0.1em;
 }
 
 .rsvp-modal-form-container {
   padding: 28px 28px 32px;
-  background: #fafaf8;
-  overflow-y: auto;
-  flex: 1;
-  min-height: 0;
+  background: var(--secondary-brown);
 }
 
 /* Form Input Styling */
 .rsvp-input {
-  border: 1px solid #d4d4d4;
+  border: 1px solid var(--primary-brown);
   border-radius: 8px;
   padding: 12px 14px;
-  font-size: 0.95rem;
+  font-size: var(--font-size-body-sm);
   transition: all 0.2s ease;
   background: white;
+  color: var(--bold-brown);
 }
 
 .rsvp-input:focus {
-  border-color: var(--primary-green);
-  box-shadow: 0 0 0 3px rgba(86, 111, 77, 0.1);
+  border-color: var(--bold-brown);
+  box-shadow: 0 0 0 3px rgba(94, 72, 56, 0.1);
 }
 
 .rsvp-input::placeholder {
-  color: #aaa;
+  color: var(--primary-brown);
 }
 
 .rsvp-label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--primary-brown);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-semibold);
+  color: var(--bold-brown);
   margin-bottom: 6px;
 }
 
@@ -92,14 +113,14 @@
   background: white;
   padding: 20px;
   border-radius: 12px;
-  border: 1px solid #e8e8e8;
+  border: 1px solid var(--primary-brown);
   margin-top: 4px;
 }
 
 .rsvp-attendance-label {
-  font-size: 0.95rem !important;
-  font-weight: 600 !important;
-  color: var(--primary-brown) !important;
+  font-size: var(--font-size-body-sm) !important;
+  font-weight: var(--font-weight-semibold) !important;
+  color: var(--bold-brown) !important;
 }
 
 .rsvp-attendance-error {
@@ -107,34 +128,35 @@
 }
 
 .rsvp-radio {
-  border-color: var(--primary-green) !important;
+  border-color: var(--bold-brown) !important;
 }
 
 .rsvp-radio:checked {
-  background-color: var(--primary-green) !important;
-  border-color: var(--primary-green) !important;
+  background-color: var(--bold-brown) !important;
+  border-color: var(--bold-brown) !important;
 }
 
 .rsvp-radio-label {
-  font-size: 0.9rem;
-  color: #444;
-  font-weight: 500;
+  font-size: var(--font-size-label);
+  color: var(--bold-brown);
+  font-weight: var(--font-weight-medium);
 }
 
 /* Submit Button */
 .rsvp-submit-button {
-  background: linear-gradient(135deg, var(--primary-green) 0%, #4a5f43 100%) !important;
+  background: linear-gradient(135deg, var(--bold-brown) 0%, #4a3a2e 100%) !important;
   border: none !important;
   font-weight: 600 !important;
   letter-spacing: 0.05em;
   margin-top: 8px;
   transition: all 0.3s ease !important;
-  box-shadow: 0 4px 12px rgba(86, 111, 77, 0.25);
+  box-shadow: 0 4px 12px rgba(94, 72, 56, 0.25);
+  color: var(--secondary-brown) !important;
 }
 
 .rsvp-submit-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(86, 111, 77, 0.35) !important;
+  box-shadow: 0 6px 20px rgba(94, 72, 56, 0.35) !important;
 }
 
 .rsvp-submit-button:active {
@@ -158,26 +180,26 @@
 }
 
 .rsvp-message-icon.success {
-  background: linear-gradient(135deg, var(--primary-green) 0%, #4a5f43 100%);
-  color: white;
+  background: linear-gradient(135deg, var(--bold-brown) 0%, #4a3a2e 100%);
+  color: var(--secondary-brown);
 }
 
 .rsvp-message-icon.error {
   background: linear-gradient(135deg, #d64545 0%, #b33939 100%);
-  color: white;
+  color: var(--secondary-brown);
 }
 
 .rsvp-message-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--primary-brown);
+  font-size: var(--font-size-section-title);
+  font-weight: var(--font-weight-semibold);
+  color: var(--bold-brown);
   margin-bottom: 8px;
 }
 
 .rsvp-message-text {
-  font-size: 0.95rem;
-  color: #666;
-  line-height: 1.5;
+  font-size: var(--font-size-body-sm);
+  color: var(--bold-brown);
+  line-height: var(--line-height-normal);
   margin-bottom: 24px;
   max-width: 280px;
   margin-left: auto;
@@ -185,16 +207,16 @@
 }
 
 .rsvp-close-button {
-  border: 2px solid var(--primary-green) !important;
-  color: var(--primary-green) !important;
-  font-weight: 600 !important;
+  border: 2px solid var(--bold-brown) !important;
+  color: var(--bold-brown) !important;
+  font-weight: var(--font-weight-semibold) !important;
   padding: 10px 32px !important;
   transition: all 0.2s ease !important;
 }
 
 .rsvp-close-button:hover {
-  background: var(--primary-green) !important;
-  color: white !important;
+  background: var(--bold-brown) !important;
+  color: var(--secondary-brown) !important;
 }
 
 /* Mobile Responsive */
@@ -204,7 +226,7 @@
   }
 
   .rsvp-modal-title {
-    font-size: 1.1rem;
+    font-size: var(--font-size-body);
   }
 
   .rsvp-modal-form-container {
@@ -216,8 +238,8 @@
   }
 
   .rsvp-button {
-    min-width: 280px !important;
-    height: 70px !important;
-    font-size: 1.5rem !important;
+    min-width: 320px !important;
+    height: 80px !important;
+    font-size: 1.75rem !important;
   }
 }

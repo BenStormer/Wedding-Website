@@ -15,12 +15,10 @@ export interface TimelineEvent {
 
 interface TimelineProps {
   events: TimelineEvent[];
-  title?: string;
 }
 
 const CustomTimeline = ({
   events,
-  title = 'Wedding Weekend Schedule',
 }: TimelineProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -40,17 +38,6 @@ const CustomTimeline = ({
 
   return (
     <Box className="timeline-wrapper">
-      <Text
-        ta="center"
-        fz={{ base: 'xl', sm: '1.5rem' }}
-        fw={400}
-        c="black"
-        mb="xl"
-        style={{ letterSpacing: '0.03em' }}
-      >
-        {title}
-      </Text>
-
       {/* Event Navigation Pills with connecting line */}
       <Box className="timeline-nav-container" mb="xl">
         <div className="timeline-nav-pills">
@@ -62,10 +49,10 @@ const CustomTimeline = ({
               }`}
               onClick={() => setActiveIndex(index)}
             >
-              <Text fw={600} fz={{ base: 'xs', sm: 'sm' }}>
+              <Text fw={600} fz={{ base: 'sm', sm: 'md' }}>
                 {event.title}
               </Text>
-              <Text fz={{ base: '0.6rem', sm: 'xs' }} opacity={0.7}>
+              <Text fz={{ base: 'xs', sm: 'sm' }} opacity={0.7}>
                 {event.time}
               </Text>
             </UnstyledButton>
@@ -86,19 +73,19 @@ const CustomTimeline = ({
 
         <Paper shadow="md" radius="md" className="timeline-card">
           <Box className="timeline-card-header">
-            <Text fz={{ base: 'lg', sm: 'xl' }} fw={500} c="white">
+            <Text fz={{ base: 'xl', sm: '1.5rem' }} fw={500} c="var(--secondary-green)">
               {activeEvent.title}
             </Text>
             <Group gap="xs" justify="center" mt="xs">
-              <IconClock size={16} stroke={1.5} color="rgba(255,255,255,0.8)" />
-              <Text fz="sm" c="rgba(255,255,255,0.9)">
+              <IconClock size={18} stroke={1.5} color="var(--secondary-green)" />
+              <Text fz="md" c="var(--secondary-green)">
                 {activeEvent.time}
               </Text>
             </Group>
           </Box>
 
           <Box p="lg" className="event-description">
-            <Text size="sm" lh={1.7}>
+            <Text className="timeline-description-text">
               {activeEvent.description}
             </Text>
           </Box>

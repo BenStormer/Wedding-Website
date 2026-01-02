@@ -86,7 +86,7 @@ const OtherPageLinks = () => {
   return (
     <div className="other-page-links">
       <h2 className="section-heading">
-        Want to know more? See the sections below!
+        Want to know more? Click one of the sections below!
       </h2>
       <PageDetailCardContainer
         pageDetailCards={[
@@ -135,7 +135,7 @@ const Home = () => {
       <Rsvp />
       <OtherPageLinks />
       <OurStory />
-      {Menu('Home')}
+      {Menu('Home', 'brown')}
     </div>
   );
 };

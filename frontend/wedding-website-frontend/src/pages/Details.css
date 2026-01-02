@@ -1,26 +1,57 @@
+/* Details Page Container */
+.details-page {
+  min-height: 100vh;
+  background-color: var(--secondary-green);
+}
+
+/* Header Section */
+.details-header {
+  padding: 50px 20px 24px;
+  text-align: center;
+  background-color: var(--secondary-green);
+}
+
+.details-header-icon {
+  color: var(--bold-green);
+}
+
+.details-header-title {
+  font-size: var(--font-size-page-title);
+  font-weight: var(--font-weight-normal);
+  color: var(--bold-green);
+  letter-spacing: 0.02em;
+}
+
+.details-header-subtitle {
+  font-size: var(--font-size-body-sm);
+  color: var(--bold-green);
+  max-width: 500px;
+  line-height: var(--line-height-relaxed);
+}
+
+/* Page Sections - All use secondary-green background */
 .timeline-container {
-  padding: 50px 20px 60px;
-  background-color: var(--secondary-brown);
+  padding: 30px 20px 40px;
+  background-color: var(--secondary-green);
   min-height: 50vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .venue-details-container {
-  padding: 50px 20px;
-  background-color: #e8ddd4;
+  padding: 20px 20px 30px;
+  background-color: var(--secondary-green);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* Section Heading - uses bold-green for text */
 .section-heading {
-  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-  font-weight: 400;
-  color: black;
+  font-size: var(--font-size-section-title);
+  font-weight: var(--font-weight-normal);
+  color: var(--bold-green) !important;
   margin-bottom: 30px;
   letter-spacing: 0.02em;
 }

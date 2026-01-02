@@ -12,7 +12,7 @@ import { IconGift } from '@tabler/icons-react';
 const Registry = () => {
   return (
     <div className="body">
-      <TopNav currentPage="Registry" />
+      <TopNav currentPage="Registry" theme="green" />
       <Box className="registry-page">
         <Box className="registry-header">
           <Stack gap="sm" align="center">
@@ -29,7 +29,7 @@ const Registry = () => {
           <RegistryItemsGrid />
         </Box>
       </Box>
-      {Menu('Registry')}
+      {Menu('Registry', 'green')}
     </div>
   );
 };

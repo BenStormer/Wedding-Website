@@ -6,18 +6,18 @@ import {
   Image,
   Text,
   Button,
-  Anchor,
   Group,
   Box,
   SimpleGrid,
 } from '@mantine/core';
-import { Link } from 'react-router-dom';
 import {
   IconHanger,
   IconCar,
   IconCalendarEvent,
   IconCamera,
   IconGlass,
+  IconMapPin,
+  IconExternalLink,
 } from '@tabler/icons-react';
 
 interface VenueInfoProps {
@@ -50,9 +50,6 @@ const VenueOverviewCard = (props: VenueInfoProps) => {
 
       <Center>
         <Text
-          size="lg"
-          fw={500}
-          c="dark.7"
           mt="md"
           mb="sm"
           className="venue-name"
@@ -61,7 +58,7 @@ const VenueOverviewCard = (props: VenueInfoProps) => {
         </Text>
       </Center>
 
-      <Text size="sm" fw={300} c="dark.6" mb="md">
+      <Text mb="md" className="venue-details-text">
         {props.venueDetails}
       </Text>
 
@@ -71,21 +68,24 @@ const VenueOverviewCard = (props: VenueInfoProps) => {
           color="var(--primary-green)"
           radius="md"
           component="a"
-          href={props.websiteLink}
+          href={props.directionsLink}
           target="_blank"
+          leftSection={<IconMapPin size={16} />}
           className="venue-button"
         >
-          Website
+          Directions
         </Button>
         <Button
           variant="light"
           color="var(--primary-green)"
           radius="md"
-          component={Link}
-          to={props.directionsLink}
+          component="a"
+          href={props.websiteLink}
+          target="_blank"
+          leftSection={<IconExternalLink size={16} />}
           className="venue-button"
         >
-          Directions
+          Website
         </Button>
       </Group>
     </Card>
@@ -130,11 +130,8 @@ const VenueDetailsInfo = () => {
     <Box className="venue-details-section">
       <Text
         ta="center"
-        fz={{ base: 'lg', sm: 'xl' }}
-        fw={400}
-        c="black"
         mb="lg"
-        style={{ letterSpacing: '0.02em' }}
+        className="venue-details-title"
       >
         Important Details
       </Text>
@@ -143,10 +140,10 @@ const VenueDetailsInfo = () => {
           <Box key={item.title} className="venue-detail-card">
             <item.icon stroke={1.5} className="venue-detail-icon" />
             <Box>
-              <Text fw={600} size="md" mb={4}>
+              <Text className="venue-detail-title">
                 {item.title}
               </Text>
-              <Text size="sm" c="dark.6" lh={1.5}>
+              <Text className="venue-detail-description">
                 {item.description}
               </Text>
             </Box>
@@ -157,22 +154,11 @@ const VenueDetailsInfo = () => {
   );
 };
 
-const VenueAdditionalInfo = () => {
-  return (
-    <div className="venue-faq-link">
-      <Anchor fw={700} c="var(--primary-green)" href="/faqs">
-        Need more details? See the Frequently Asked Questions
-      </Anchor>
-    </div>
-  );
-};
-
 const VenueInfo = (props: VenueInfoProps) => {
   return (
     <div className="venue-info-wrapper">
       <VenueOverviewCard {...props} />
       <VenueDetailsInfo />
-      <VenueAdditionalInfo />
     </div>
   );
 };

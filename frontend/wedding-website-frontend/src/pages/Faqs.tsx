@@ -12,7 +12,7 @@ import { IconQuestionMark } from '@tabler/icons-react';
 const Faqs = () => {
   return (
     <div className="body">
-      <TopNav currentPage="FAQs" />
+      <TopNav currentPage="FAQs" theme="brown" />
       <Box className="faqs-page">
         <Box className="faqs-header">
           <Stack gap="sm" align="center">

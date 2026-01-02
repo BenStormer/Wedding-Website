@@ -7,6 +7,10 @@ import VenueInfo from '../components/details/VenueInfo';
 import Menu from '../components/common/Menu';
 import TopNav from '../components/common/TopNav';
 
+// Mantine
+import { Box, Text, Stack, Center } from '@mantine/core';
+import { IconCalendarHeart } from '@tabler/icons-react';
+
 // Assets
 import noahLiffOperaCenter from '../assets/images/noah_liff_frontview.webp';
 
@@ -40,7 +44,7 @@ const weddingEvents: TimelineEvent[] = [
 const WeddingTimeline = () => {
   return (
     <div className="timeline-container">
-      <CustomTimeline events={weddingEvents} title="Wedding Day Schedule" />
+      <CustomTimeline events={weddingEvents} />
     </div>
   );
 };
@@ -64,10 +68,23 @@ const WeddingVenueDetails = () => {
 const Details = () => {
   return (
     <div className="body">
-      <TopNav currentPage="Details" />
-      <WeddingTimeline />
-      <WeddingVenueDetails />
-      {Menu('Details')}
+      <TopNav currentPage="Details" theme="green" />
+      <Box className="details-page">
+        <Box className="details-header">
+          <Stack gap="sm" align="center">
+            <Center>
+              <IconCalendarHeart size={36} stroke={1.5} className="details-header-icon" />
+            </Center>
+            <Text className="details-header-title">Wedding Details</Text>
+            <Text className="details-header-subtitle">
+              Everything you need to know about our special day
+            </Text>
+          </Stack>
+        </Box>
+        <WeddingTimeline />
+        <WeddingVenueDetails />
+      </Box>
+      {Menu('Details', 'green')}
     </div>
   );
 };

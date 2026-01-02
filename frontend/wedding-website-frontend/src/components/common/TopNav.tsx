@@ -19,11 +19,12 @@ const navItems: NavItem[] = [
 
 interface TopNavProps {
   currentPage: string;
+  theme?: 'brown' | 'green';
 }
 
-const TopNav = ({ currentPage }: TopNavProps) => {
+const TopNav = ({ currentPage, theme = 'green' }: TopNavProps) => {
   return (
-    <nav className="top-nav">
+    <nav className={`top-nav top-nav-${theme}`}>
       <Group gap="xs" justify="flex-start" wrap="wrap" className="top-nav-links">
         {navItems.map((item, index) => {
           const isActive = item.label === currentPage;

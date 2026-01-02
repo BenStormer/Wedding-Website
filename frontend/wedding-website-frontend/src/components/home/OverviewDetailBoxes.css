@@ -10,7 +10,7 @@
 .overview-detail-box {
   text-align: center;
   flex: 1;
-  background-color: var(--secondary-green);
+  background-color: var(--primary-brown);
   padding: 2.5rem 2rem;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -29,18 +29,22 @@
 .overview-detail-icon {
   margin-bottom: 1rem;
   opacity: 0.9;
-  color: var(--primary-green);
+  color: var(--secondary-brown);
 }
 
 .overview-detail-label {
+  font-size: var(--font-size-card-title);
+  font-weight: var(--font-weight-medium);
   letter-spacing: 0.1em;
-  margin-bottom: 0.5rem;
-  color: var(--primary-brown);
+  margin-bottom: 0.75rem;
+  color: var(--secondary-brown);
 }
 
 .overview-detail-text {
-  line-height: 1.6;
-  color: var(--primary-brown);
+  font-size: var(--font-size-card-subtitle);
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-relaxed);
+  color: var(--secondary-brown);
 }
 
 @media (max-width: 768px) {

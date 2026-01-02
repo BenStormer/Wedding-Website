@@ -1,5 +1,4 @@
 .menu-section-container {
-  background-color: #e8ddd4;
   overflow-y: auto;
   text-align: center;
   align-items: center;
@@ -9,7 +8,6 @@
 
 .menu-section-container a {
   transition: all 0.3s ease;
-  color: black;
   text-decoration: none;
   display: inline-block;
   letter-spacing: 0.02em;
@@ -18,4 +16,22 @@
 
 .menu-section-container a:hover {
   letter-spacing: 0.15em;
+}
+
+/* Brown theme (default, used on Home page) */
+.menu-brown {
+  background-color: var(--secondary-brown);
+}
+
+.menu-brown a {
+  color: var(--bold-brown);
+}
+
+/* Green theme (used on Details and other pages) */
+.menu-green {
+  background-color: var(--secondary-green);
+}
+
+.menu-green a {
+  color: var(--bold-green);
 }

@@ -8,6 +8,7 @@ import (
 
 	"github.com/BenStormer/Wedding-Website/backend/internal/model"
 	"github.com/BenStormer/Wedding-Website/backend/internal/service"
+	"github.com/BenStormer/Wedding-Website/backend/internal/util"
 )
 
 type RsvpServiceInterface interface {
@@ -75,6 +76,12 @@ func (h *RsvpHandler) HandleRsvp(w http.ResponseWriter, r *http.Request) {
 		})
 		return
 	}
+
+	// Normalize input data to consistent format
+	request.FirstName = util.NormalizeName(request.FirstName)
+	request.LastName = util.NormalizeName(request.LastName)
+	request.Email = util.NormalizeEmail(request.Email)
+	request.Phone = util.NormalizePhone(request.Phone)
 
 	// Call service to submit Rsvp
 	response, err := h.service.SubmitRsvp(request)

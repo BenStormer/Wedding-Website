@@ -60,7 +60,7 @@ func normalizeColumnName(col string) string {
 	col = strings.ToLower(strings.TrimSpace(col))
 	col = strings.ReplaceAll(col, " ", "")
 	col = strings.ReplaceAll(col, "_", "")
-	
+
 	// Handle common aliases
 	switch col {
 	case "firstname", "first":
@@ -118,10 +118,10 @@ func main() {
 	imported := 0
 	for _, guest := range guests {
 		// Use FirstName_LastName as document ID for easy lookup
-		docID := fmt.Sprintf("%s_%s", 
-			strings.ToLower(guest.FirstName), 
+		docID := fmt.Sprintf("%s_%s",
+			strings.ToLower(guest.FirstName),
 			strings.ToLower(guest.LastName))
-		
+
 		_, err := client.Collection("guests").Doc(docID).Set(ctx, guest)
 		if err != nil {
 			log.Printf("Failed to import %s %s: %v", guest.FirstName, guest.LastName, err)
@@ -142,7 +142,7 @@ func readCSV(path string) ([]Guest, error) {
 	defer file.Close()
 
 	reader := csv.NewReader(file)
-	
+
 	// Read header row
 	header, err := reader.Read()
 	if err != nil {

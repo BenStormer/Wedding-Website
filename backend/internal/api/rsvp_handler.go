@@ -26,8 +26,8 @@ func NewRsvpHandler(service RsvpServiceInterface) *RsvpHandler {
 func (h *RsvpHandler) HandleRsvp(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "PATCH, OPTIONS")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, PATCH, OPTIONS")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, X-HTTP-Method-Override")
 
 	// Handle preflight OPTIONS request
 	if r.Method == http.MethodOptions {
@@ -35,8 +35,16 @@ func (h *RsvpHandler) HandleRsvp(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Validate HTTP method
-	if r.Method != http.MethodPatch {
+	// Check for method override header (for Cloud Run/proxy compatibility)
+	// Some proxies and load balancers don't handle PATCH well, so we accept
+	// POST with X-HTTP-Method-Override: PATCH as an alternative
+	method := r.Method
+	if override := r.Header.Get("X-HTTP-Method-Override"); override != "" {
+		method = override
+	}
+
+	// Validate HTTP method - accept both PATCH and POST (with override)
+	if method != http.MethodPatch && method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		json.NewEncoder(w).Encode(model.RsvpResponse{
 			Success: false,

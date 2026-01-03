@@ -5,16 +5,18 @@ on:
     branches: [main]
     paths:
       - "backend/**"
-  workflow_dispatch: # Allow manual trigger
+      - "infra/**"
+  workflow_dispatch:
+
+env:
+  TF_VERSION: "1.5.7"
+  REGION: us-central1
+  SERVICE_NAME: wedding-website-api
+  REPO_NAME: wedding-backend
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
-    env:
-      REGION: us-central1
-      SERVICE_NAME: wedding-website-api
-      REPO_NAME: wedding-backend
 
     steps:
       - name: Checkout
@@ -38,12 +40,20 @@ jobs:
           docker build -t ${IMAGE}:${{ github.sha }} -t ${IMAGE}:latest .
           docker push ${IMAGE}:${{ github.sha }}
           docker push ${IMAGE}:latest
+          echo "IMAGE_URL=${IMAGE}:${{ github.sha }}" >> $GITHUB_ENV
 
-      - name: Deploy to Cloud Run
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - name: Terraform Init
+        working-directory: infra
+        run: terraform init
+
+      - name: Terraform Apply
+        working-directory: infra
         run: |
-          gcloud run deploy ${{ env.SERVICE_NAME }} \
-            --image=${{ env.REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}:${{ github.sha }} \
-            --region=${{ env.REGION }} \
-            --project=${{ secrets.GCP_PROJECT_ID }} \
-            --allow-unauthenticated \
-            --quiet
+          terraform apply -auto-approve \
+            -var="project_id=${{ secrets.GCP_PROJECT_ID }}" \
+            -var="backend_image=${{ env.IMAGE_URL }}"

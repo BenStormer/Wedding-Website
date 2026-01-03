@@ -7,7 +7,6 @@ import PageDetailCardContainer from '../components/home/PageDetailCards';
 import Menu from '../components/common/Menu';
 
 // Assets
-import parthenonSitting from '../assets/images/parthenon_sitting.webp';
 import ragsdaleLobby from '../assets/images/ragsdale_ceremony_setup.webp';
 import nashvilleSkyline from '../assets/images/nashville_skyline.webp';
 import registryGifts from '../assets/images/registry_gifts.webp';

@@ -18,6 +18,33 @@ func NewFirestoreRegistryRepository(cfg *config.Config, client *firestore.Client
 	return &FirestoreRegistryRepository{client: client}
 }
 
+func (r *FirestoreRegistryRepository) GetAllItems() ([]model.RegistryItem, error) {
+	ctx := context.Background()
+
+	iter := r.client.Collection("registry_items").Documents(ctx)
+	defer iter.Stop()
+
+	var items []model.RegistryItem
+	for {
+		doc, err := iter.Next()
+		if err == iterator.Done {
+			break
+		}
+		if err != nil {
+			return nil, err
+		}
+
+		var item model.RegistryItem
+		if err := doc.DataTo(&item); err != nil {
+			return nil, err
+		}
+		item.ID = doc.Ref.ID
+		items = append(items, item)
+	}
+
+	return items, nil
+}
+
 func (r *FirestoreRegistryRepository) FindItemByLabel(label string) (*model.RegistryItem, error) {
 	ctx := context.Background()
 

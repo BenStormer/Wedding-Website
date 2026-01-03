@@ -13,8 +13,15 @@ import (
 )
 
 type MockRegistryService struct {
+	GetAllItemsResult *model.RegistryItemsResponse
+	GetAllItemsError  error
+
 	RecordGiftResult *model.GiftResponse
 	RecordGiftError  error
+}
+
+func (m *MockRegistryService) GetAllItems() (*model.RegistryItemsResponse, error) {
+	return m.GetAllItemsResult, m.GetAllItemsError
 }
 
 func (m *MockRegistryService) RecordGift(request model.GiftRequest) (*model.GiftResponse, error) {

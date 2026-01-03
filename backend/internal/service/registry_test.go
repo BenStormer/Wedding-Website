@@ -13,15 +13,22 @@ func intPtr(i int) *int {
 }
 
 type MockRegistryRepository struct {
+	GetAllItemsResult []model.RegistryItem
+	GetAllItemsError  error
+
 	FindItemResult *model.RegistryItem
 	FindItemError  error
 
-	RecordGiftError error
+	RecordGiftError  error
 	RecordGiftCalled bool
 
-	UpdateQuantityError error
+	UpdateQuantityError  error
 	UpdateQuantityCalled bool
-	UpdateQuantityValue int
+	UpdateQuantityValue  int
+}
+
+func (m *MockRegistryRepository) GetAllItems() ([]model.RegistryItem, error) {
+	return m.GetAllItemsResult, m.GetAllItemsError
 }
 
 func (m *MockRegistryRepository) FindItemByLabel(label string) (*model.RegistryItem, error) {

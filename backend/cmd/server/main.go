@@ -81,6 +81,7 @@ func main() {
 
 	// 6. Set up routes with rate limiting
 	http.HandleFunc("/v1/api/rsvp", rateLimiter.Middleware(rsvpHandler.HandleRsvp))
+	http.HandleFunc("/v1/api/registry/items", rateLimiter.Middleware(registryHandler.HandleGetItems))
 	http.HandleFunc("/v1/api/registry/gift", rateLimiter.Middleware(registryHandler.HandleGift))
 
 	// Health check endpoint for Cloud Run startup probe

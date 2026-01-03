@@ -44,3 +44,24 @@ type GiftResponse struct {
 	Message string `json:"message"`
 	Error   string `json:"error,omitempty"`
 }
+
+// API response model for a registry item (matches frontend RegistryItem interface)
+type RegistryItemResponse struct {
+	ID                string  `json:"id"`
+	Label             string  `json:"label"`
+	Description       string  `json:"description"`
+	Price             float64 `json:"price"`
+	Image             string  `json:"image"`
+	Alt               string  `json:"alt"`
+	RequestedQuantity *int    `json:"requested_quantity"`
+	ReceivedQuantity  int     `json:"received_quantity"`
+	PurchaseLink      string  `json:"purchase_link"`
+	IsSpecialFund     bool    `json:"isSpecialFund"`
+}
+
+// API response for getting all registry items
+type RegistryItemsResponse struct {
+	Success bool                   `json:"success"`
+	Items   []RegistryItemResponse `json:"items,omitempty"`
+	Error   string                 `json:"error,omitempty"`
+}

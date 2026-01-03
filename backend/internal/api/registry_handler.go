@@ -12,6 +12,7 @@ import (
 )
 
 type RegistryServiceInterface interface {
+	GetAllItems() (*model.RegistryItemsResponse, error)
 	RecordGift(request model.GiftRequest) (*model.GiftResponse, error)
 }
 
@@ -23,6 +24,33 @@ func NewRegistryHandler(service RegistryServiceInterface) *RegistryHandler {
 	return &RegistryHandler{
 		service: service,
 	}
+}
+
+func (h *RegistryHandler) HandleGetItems(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	// Note: CORS headers and OPTIONS handling are done by the middleware
+
+	// Validate HTTP method - only accept GET
+	if r.Method != http.MethodGet {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		json.NewEncoder(w).Encode(model.RegistryItemsResponse{
+			Success: false,
+			Error:   "Method not allowed",
+		})
+		return
+	}
+
+	// Call service to get all items
+	response, err := h.service.GetAllItems()
+	if err != nil {
+		log.Printf("Error fetching registry items: %v", err)
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(response)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(response)
 }
 
 func (h *RegistryHandler) HandleGift(w http.ResponseWriter, r *http.Request) {

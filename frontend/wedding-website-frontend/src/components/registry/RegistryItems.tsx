@@ -1,9 +1,8 @@
 import './RegistryItems.css';
-import { initialRegistryData } from './Gifts';
 import type { RegistryItem } from './Gifts';
 
 import { useDisclosure } from '@mantine/hooks';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import {
   Box,
@@ -12,6 +11,7 @@ import {
   CloseButton,
   Group,
   Image,
+  Loader,
   Modal,
   NumberInput,
   Progress,
@@ -28,7 +28,10 @@ import {
   IconHeart,
   IconHeartFilled,
   IconX,
+  IconAlertCircle,
 } from '@tabler/icons-react';
+
+const apiUrl = (import.meta.env.VITE_API_URL as string | undefined) ?? 'http://localhost:8080';
 
 // Form values type
 interface PurchaseFormValues {
@@ -62,7 +65,6 @@ const PurchaseForm = ({
 }: PurchaseFormProps) => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
-  const apiUrl = (import.meta.env.VITE_API_URL as string | undefined) ?? 'http://localhost:8080';
 
   const form = useForm<PurchaseFormValues>({
     mode: 'controlled',
@@ -431,9 +433,41 @@ const sortRegistryItems = (items: RegistryItem[]): RegistryItem[] => {
   });
 };
 
+// API response type for fetching items
+interface RegistryItemsApiResponse {
+  success: boolean;
+  items?: RegistryItem[];
+  error?: string;
+}
+
 // Main registry grid component
 const RegistryItemsGrid = () => {
-  const [items, setItems] = useState<RegistryItem[]>(initialRegistryData);
+  const [items, setItems] = useState<RegistryItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const response = await fetch(`${apiUrl}/v1/api/registry/items`);
+        const data = (await response.json()) as RegistryItemsApiResponse;
+
+        if (data.success && data.items) {
+          setItems(data.items);
+          setError(null);
+        } else {
+          setError(data.error ?? 'Failed to load registry items');
+        }
+      } catch (err) {
+        console.error('Error fetching registry items:', err);
+        setError('Unable to connect to the server. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchItems();
+  }, []);
 
   const handleGift = (itemId: string, quantity: number) => {
     setItems((prevItems) =>
@@ -444,6 +478,46 @@ const RegistryItemsGrid = () => {
       )
     );
   };
+
+  if (loading) {
+    return (
+      <Box className="registry-grid-container registry-loading">
+        <Stack align="center" gap="md">
+          <Loader size="lg" color="var(--primary-green)" />
+          <Text c="var(--bold-green)">Loading registry...</Text>
+        </Stack>
+      </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <Box className="registry-grid-container registry-error">
+        <Stack align="center" gap="md">
+          <IconAlertCircle size={48} color="var(--primary-green)" />
+          <Text c="var(--bold-green)" ta="center">{error}</Text>
+          <Button
+            variant="outline"
+            color="var(--primary-green)"
+            onClick={() => window.location.reload()}
+          >
+            Try Again
+          </Button>
+        </Stack>
+      </Box>
+    );
+  }
+
+  if (items.length === 0) {
+    return (
+      <Box className="registry-grid-container registry-empty">
+        <Stack align="center" gap="md">
+          <IconGift size={48} color="var(--primary-green)" />
+          <Text c="var(--bold-green)" ta="center">No registry items available yet.</Text>
+        </Stack>
+      </Box>
+    );
+  }
 
   const sortedItems = sortRegistryItems(items);
 

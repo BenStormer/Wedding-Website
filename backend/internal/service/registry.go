@@ -16,10 +16,49 @@ type RegistryService struct {
 	repo repository.RegistryRepository
 }
 
+const DefaultPlaceholderImage = "https://placehold.co/800x600/e8ddd4/5e4838?text=Gift"
+
 func NewRegistryService(repo repository.RegistryRepository) *RegistryService {
 	return &RegistryService{
 		repo: repo,
 	}
+}
+
+func (s *RegistryService) GetAllItems() (*model.RegistryItemsResponse, error) {
+	items, err := s.repo.GetAllItems()
+	if err != nil {
+		return &model.RegistryItemsResponse{
+			Success: false,
+			Error:   err.Error(),
+		}, err
+	}
+
+	// Convert to response format and apply placeholder image if needed
+	responseItems := make([]model.RegistryItemResponse, len(items))
+	for i, item := range items {
+		image := item.Image
+		if image == "" {
+			image = DefaultPlaceholderImage
+		}
+
+		responseItems[i] = model.RegistryItemResponse{
+			ID:                item.ID,
+			Label:             item.Label,
+			Description:       item.Description,
+			Price:             item.Price,
+			Image:             image,
+			Alt:               item.Alt,
+			RequestedQuantity: item.RequestedQuantity,
+			ReceivedQuantity:  item.ReceivedQuantity,
+			PurchaseLink:      item.PurchaseLink,
+			IsSpecialFund:     item.IsSpecialFund,
+		}
+	}
+
+	return &model.RegistryItemsResponse{
+		Success: true,
+		Items:   responseItems,
+	}, nil
 }
 
 func (s *RegistryService) RecordGift(request model.GiftRequest) (*model.GiftResponse, error) {

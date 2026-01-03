@@ -29,11 +29,8 @@ func Load() *Config {
 		cfg.FirestoreProject = "wedding-website-local"
 		cfg.UseEmulator = true
 		cfg.EmulatorHost = getEnvOrDefault("FIRESTORE_EMULATOR_HOST", "localhost:8741")
-	case "sqa":
-		cfg.FirestoreProject = "wedding-website-sqa"
-		cfg.UseEmulator = false
 	case "prod":
-		cfg.FirestoreProject = "wedding-website-prod"
+		cfg.FirestoreProject = "wedding-website-482918"
 		cfg.UseEmulator = false
 	}
 

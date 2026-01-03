@@ -3,6 +3,7 @@ package api
 import (
 	"encoding/json"
 	"errors"
+	"log"
 	"net/http"
 
 	"github.com/BenStormer/Wedding-Website/backend/internal/model"
@@ -78,6 +79,7 @@ func (h *RsvpHandler) HandleRsvp(w http.ResponseWriter, r *http.Request) {
 	// Call service to submit Rsvp
 	response, err := h.service.SubmitRsvp(request)
 	if err != nil {
+		log.Printf("Error submitting RSVP for %s %s: %v", request.FirstName, request.LastName, err)
 		if errors.Is(err, service.ErrGuestNotFound) {
 			w.WriteHeader(http.StatusNotFound)
 		} else {

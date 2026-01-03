@@ -105,14 +105,32 @@ func getClientIP(r *http.Request) string {
 	return ip
 }
 
+// setCORSHeaders sets the CORS headers for cross-origin requests.
+func setCORSHeaders(w http.ResponseWriter) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PATCH, OPTIONS")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+}
+
 // Middleware wraps an http.HandlerFunc with rate limiting.
 func (rl *RateLimiter) Middleware(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		// Always set CORS headers first
+		setCORSHeaders(w)
+
+		// Handle preflight OPTIONS request - don't rate limit these
+		if r.Method == http.MethodOptions {
+			w.WriteHeader(http.StatusOK)
+			return
+		}
+
 		ip := getClientIP(r)
 
 		if !rl.Allow(ip) {
+			w.Header().Set("Content-Type", "application/json")
 			w.Header().Set("Retry-After", "60")
-			http.Error(w, `{"success":false,"message":"Too many requests. Please try again later."}`, http.StatusTooManyRequests)
+			w.WriteHeader(http.StatusTooManyRequests)
+			w.Write([]byte(`{"success":false,"message":"Too many requests. Please try again later."}`))
 			return
 		}
 

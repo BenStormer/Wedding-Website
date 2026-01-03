@@ -25,18 +25,9 @@ func NewRsvpHandler(service RsvpServiceInterface) *RsvpHandler {
 
 func (h *RsvpHandler) HandleRsvp(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "PATCH, OPTIONS")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
-	// Handle preflight OPTIONS request
-	if r.Method == http.MethodOptions {
-		w.WriteHeader(http.StatusOK)
-		return
-	}
-
-	// Validate HTTP method
-	if r.Method != http.MethodPatch {
+	// Validate HTTP method (OPTIONS is handled by middleware)
+	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		json.NewEncoder(w).Encode(model.RsvpResponse{
 			Success: false,

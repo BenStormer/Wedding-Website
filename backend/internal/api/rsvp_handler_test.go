@@ -38,7 +38,7 @@ func TestHandleRsvp_Success(t *testing.T) {
 		"lastname": "Doe",
 		"attending": true
 	}`
-	req := httptest.NewRequest("PATCH", "/v1/api/rsvp", strings.NewReader(body))
+	req := httptest.NewRequest("POST", "/v1/api/rsvp", strings.NewReader(body))
 	req.Header.Set("Content-Type", "application/json")
 
 	recorder := httptest.NewRecorder()
@@ -71,7 +71,7 @@ func TestHandleRsvp_InvalidJson(t *testing.T) {
 
 	// Malformed JSON (missing closing brace)
 	body := `{"firstname": "John", "lastname": "Doe"`
-	req := httptest.NewRequest("PATCH", "/v1/api/rsvp", strings.NewReader(body))
+	req := httptest.NewRequest("POST", "/v1/api/rsvp", strings.NewReader(body))
 	req.Header.Set("Content-Type", "application/json")
 
 	recorder := httptest.NewRecorder()
@@ -97,7 +97,7 @@ func TestHandleRsvp_EmptyBody(t *testing.T) {
 	handler := NewRsvpHandler(mockService)
 
 	// Empty body
-	req := httptest.NewRequest("PATCH", "/v1/api/rsvp", strings.NewReader(""))
+	req := httptest.NewRequest("POST", "/v1/api/rsvp", strings.NewReader(""))
 	req.Header.Set("Content-Type", "application/json")
 
 	recorder := httptest.NewRecorder()
@@ -121,7 +121,7 @@ func TestHandleRsvp_MissingFirstName(t *testing.T) {
 
 	// Missing firstname
 	body := `{"lastname": "Doe", "attending": true}`
-	req := httptest.NewRequest("PATCH", "/v1/api/rsvp", strings.NewReader(body))
+	req := httptest.NewRequest("POST", "/v1/api/rsvp", strings.NewReader(body))
 	req.Header.Set("Content-Type", "application/json")
 
 	recorder := httptest.NewRecorder()
@@ -148,7 +148,7 @@ func TestHandleRsvp_MissingLastName(t *testing.T) {
 
 	// Missing lastname
 	body := `{"firstname": "John", "attending": true}`
-	req := httptest.NewRequest("PATCH", "/v1/api/rsvp", strings.NewReader(body))
+	req := httptest.NewRequest("POST", "/v1/api/rsvp", strings.NewReader(body))
 	req.Header.Set("Content-Type", "application/json")
 
 	recorder := httptest.NewRecorder()
@@ -173,7 +173,7 @@ func TestHandleRsvp_WrongHttpMethod(t *testing.T) {
 	mockService := &MockRsvpService{}
 	handler := NewRsvpHandler(mockService)
 
-	// Use GET instead of PATCH
+	// Use GET instead of POST
 	body := `{"firstname": "John", "lastname": "Doe", "attending": true}`
 	req := httptest.NewRequest("GET", "/v1/api/rsvp", strings.NewReader(body))
 	req.Header.Set("Content-Type", "application/json")
@@ -208,7 +208,7 @@ func TestHandleRsvp_GuestNotFound(t *testing.T) {
 	handler := NewRsvpHandler(mockService)
 
 	body := `{"firstname": "Unknown", "lastname": "Person", "attending": true}`
-	req := httptest.NewRequest("PATCH", "/v1/api/rsvp", strings.NewReader(body))
+	req := httptest.NewRequest("POST", "/v1/api/rsvp", strings.NewReader(body))
 	req.Header.Set("Content-Type", "application/json")
 
 	recorder := httptest.NewRecorder()
@@ -238,7 +238,7 @@ func TestHandleRsvp_InternalError(t *testing.T) {
 	handler := NewRsvpHandler(mockService)
 
 	body := `{"firstname": "John", "lastname": "Doe", "attending": true}`
-	req := httptest.NewRequest("PATCH", "/v1/api/rsvp", strings.NewReader(body))
+	req := httptest.NewRequest("POST", "/v1/api/rsvp", strings.NewReader(body))
 	req.Header.Set("Content-Type", "application/json")
 
 	recorder := httptest.NewRecorder()

@@ -196,4 +196,58 @@ func TestRateLimiter_Middleware(t *testing.T) {
 	if rr.Header().Get("Retry-After") != "60" {
 		t.Errorf("Expected Retry-After header to be 60, got %q", rr.Header().Get("Retry-After"))
 	}
+
+	// Check CORS headers are set on rate-limited response
+	if rr.Header().Get("Access-Control-Allow-Origin") != "*" {
+		t.Errorf("Expected Access-Control-Allow-Origin header to be *, got %q", rr.Header().Get("Access-Control-Allow-Origin"))
+	}
+}
+
+func TestRateLimiter_Middleware_OPTIONS(t *testing.T) {
+	rl := NewRateLimiter(1, time.Minute)
+	defer rl.Stop()
+
+	handlerCalled := 0
+	handler := func(w http.ResponseWriter, r *http.Request) {
+		handlerCalled++
+		w.WriteHeader(http.StatusOK)
+	}
+
+	wrapped := rl.Middleware(handler)
+
+	// First, exhaust the rate limit with a regular request
+	req := httptest.NewRequest("GET", "/", nil)
+	req.RemoteAddr = "192.168.1.1:12345"
+	rr := httptest.NewRecorder()
+	wrapped(rr, req)
+
+	if handlerCalled != 1 {
+		t.Errorf("Handler should be called 1 time, got %d", handlerCalled)
+	}
+
+	// OPTIONS request should still work (not rate limited)
+	req = httptest.NewRequest("OPTIONS", "/", nil)
+	req.RemoteAddr = "192.168.1.1:12345"
+	rr = httptest.NewRecorder()
+	wrapped(rr, req)
+
+	if rr.Code != http.StatusOK {
+		t.Errorf("OPTIONS request: expected status 200, got %d", rr.Code)
+	}
+
+	// Handler should NOT be called for OPTIONS (middleware handles it)
+	if handlerCalled != 1 {
+		t.Errorf("Handler should still be called only 1 time after OPTIONS, got %d", handlerCalled)
+	}
+
+	// Check CORS headers are set
+	if rr.Header().Get("Access-Control-Allow-Origin") != "*" {
+		t.Errorf("Expected Access-Control-Allow-Origin header to be *, got %q", rr.Header().Get("Access-Control-Allow-Origin"))
+	}
+	if rr.Header().Get("Access-Control-Allow-Methods") != "GET, POST, PATCH, OPTIONS" {
+		t.Errorf("Expected Access-Control-Allow-Methods header, got %q", rr.Header().Get("Access-Control-Allow-Methods"))
+	}
+	if rr.Header().Get("Access-Control-Allow-Headers") != "Content-Type" {
+		t.Errorf("Expected Access-Control-Allow-Headers header, got %q", rr.Header().Get("Access-Control-Allow-Headers"))
+	}
 }

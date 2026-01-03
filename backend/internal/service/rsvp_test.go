@@ -91,11 +91,11 @@ func TestSubmitRsvp_FirstTimeRsvp(t *testing.T) {
 		t.Errorf("Expected successful response")
 	}
 
-	attendingStatus := "attending"
+	attendingStatus := "ATTENDING"
 	if !*request.Attending {
-		attendingStatus = "not attending"
+		attendingStatus = "NOT ATTENDING"
 	}
-	expectedResponseMessage := fmt.Sprintf("%s %s has been Rsvp-ed as %s", request.FirstName, request.LastName, attendingStatus)
+	expectedResponseMessage := fmt.Sprintf("%s %s has been RSVP'd as: %s", request.FirstName, request.LastName, attendingStatus)
 	if response.Message != expectedResponseMessage {
 		t.Errorf("Expected response message to be: %s\nGot %s", expectedResponseMessage, response.Message)
 	}
@@ -139,11 +139,11 @@ func TestSubmitRsvp_ResubmitSameStatus(t *testing.T) {
 		t.Errorf("Expected UpdateRsvp to be called to save contact info")
 	}
 
-	attendingString := "attending"
+	attendingString := "ATTENDING"
 	if !*request.Attending {
-		attendingString = "not attending"
+		attendingString = "NOT ATTENDING"
 	}
-	expectedResponseMessage := fmt.Sprintf("%s %s was already Rsvp-ed as %s. Your contact info has been updated if changed.", request.FirstName, request.LastName, attendingString)
+	expectedResponseMessage := fmt.Sprintf("%s %s was already RSVP'd as: %s. Your contact info has been updated if changed.", request.FirstName, request.LastName, attendingString)
 	if response.Message != expectedResponseMessage {
 		t.Errorf("Expected response message to be:\n\"%s\"\nGot:\n\"%s\"", expectedResponseMessage, response.Message)
 	}
@@ -183,13 +183,13 @@ func TestSubmitRsvp_ResubmitDifferentStatus(t *testing.T) {
 		t.Errorf("Expected successful response")
 	}
 
-	attendingString := "attending"
-	previousAttendingString := "not attending"
+	attendingString := "ATTENDING"
+	previousAttendingString := "NOT ATTENDING"
 	if !*request.Attending {
-		attendingString = "not attending"
-		previousAttendingString = "attending"
+		attendingString = "NOT ATTENDING"
+		previousAttendingString = "ATTENDING"
 	}
-	expectedResponseMessage := fmt.Sprintf("%s %s was previously Rsvp-ed as %s, but has now been changed to be: %s", request.FirstName, request.LastName, previousAttendingString, attendingString)
+	expectedResponseMessage := fmt.Sprintf("%s %s was previously RSVP'd as: %s, but has now been changed to be: %s", request.FirstName, request.LastName, previousAttendingString, attendingString)
 	if response.Message != expectedResponseMessage {
 		t.Errorf("Expected response message to be:\n\"%s\"\nGot:\n\"%s\"", expectedResponseMessage, response.Message)
 	}

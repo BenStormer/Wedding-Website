@@ -16,11 +16,10 @@ terraform {
     }
   }
 
-  # Remote state storage - uncomment when ready
-  # backend "gcs" {
-  #   bucket = "wedding-website-tfstate"
-  #   prefix = "terraform/state"
-  # }
+  backend "gcs" {
+    bucket = "wedding-website-tfstate"
+    prefix = "terraform/state"
+  }
 }
 
 # -----------------------------------------------------------------------------

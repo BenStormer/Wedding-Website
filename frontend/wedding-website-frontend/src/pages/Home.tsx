@@ -7,11 +7,12 @@ import PageDetailCardContainer from '../components/home/PageDetailCards';
 import Menu from '../components/common/Menu';
 
 // Assets
-import parthenonSitting from '../assets/images/parthenon_sitting.webp';
 import ragsdaleLobby from '../assets/images/ragsdale_ceremony_setup.webp';
 import nashvilleSkyline from '../assets/images/nashville_skyline.webp';
 import registryGifts from '../assets/images/registry_gifts.webp';
 import questionCards from '../assets/images/question_cards.webp';
+import ourStoryHorizontal from '../assets/images/our_story_horizontal.svg';
+import ourStoryVertical from '../assets/images/our_story_vertical.svg';
 
 const LandingImage = () => {
   return (
@@ -68,12 +69,12 @@ const OurStory = () => {
       <h2 className="section-heading">Our Story</h2>
       <div className="story-timeline-container">
         <img
-          src={parthenonSitting}
+          src={ourStoryHorizontal}
           alt="Timeline of our relationship - desktop view"
           className="story-timeline-desktop"
         />
         <img
-          src={parthenonSitting}
+          src={ourStoryVertical}
           alt="Timeline of our relationship - mobile view"
           className="story-timeline-mobile"
         />

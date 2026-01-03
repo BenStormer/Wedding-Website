@@ -154,7 +154,7 @@ resource "google_cloud_run_v2_service" "backend" {
 
       startup_probe {
         http_get {
-          path = "/v1/api/rsvp"
+          path = "/health"
         }
         initial_delay_seconds = 0
         period_seconds        = 10

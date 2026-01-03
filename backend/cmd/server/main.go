@@ -66,6 +66,13 @@ func main() {
 	// 5. Set up routes with rate limiting
 	http.HandleFunc("/v1/api/rsvp", rateLimiter.Middleware(rsvpHandler.HandleRsvp))
 
+	// Health check endpoint for Cloud Run startup probe
+	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte(`{"status":"healthy"}`))
+	})
+
 	// 6. Start server
 	log.Printf("Server listening on :%s", cfg.Port)
 	log.Fatal(http.ListenAndServe(":"+cfg.Port, nil))

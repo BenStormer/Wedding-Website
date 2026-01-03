@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"regexp"
 	"strings"
 
 	"cloud.google.com/go/firestore"
@@ -21,6 +22,58 @@ type Guest struct {
 	Email     string `firestore:"Email,omitempty"`
 	Phone     string `firestore:"Phone,omitempty"`
 	Attending *bool  `firestore:"Attending"` // nil = not yet responded
+}
+
+// normalizePhone strips all non-digit characters and formats as (XXX) XXX-XXXX
+// Accepts various formats: 5551234567, 555-123-4567, (555) 123-4567, +1 555 123 4567, etc.
+func normalizePhone(phone string) string {
+	if phone == "" {
+		return ""
+	}
+
+	// Remove all non-digit characters
+	re := regexp.MustCompile(`\D`)
+	digits := re.ReplaceAllString(phone, "")
+
+	// Handle country code (if 11 digits starting with 1, strip the 1)
+	if len(digits) == 11 && digits[0] == '1' {
+		digits = digits[1:]
+	}
+
+	// Must have exactly 10 digits for US phone number
+	if len(digits) != 10 {
+		// Return original if we can't normalize (might be international)
+		log.Printf("Warning: Could not normalize phone '%s' (got %d digits)", phone, len(digits))
+		return phone
+	}
+
+	// Format as (XXX) XXX-XXXX
+	return fmt.Sprintf("(%s) %s-%s", digits[0:3], digits[3:6], digits[6:10])
+}
+
+// normalizeColumnName handles various column name formats
+// "First Name", "first_name", "firstname", "FIRSTNAME" -> "firstname"
+// "Last Name", "last_name", "lastname" -> "lastname"
+// "Phone Number", "phone_number", "phone" -> "phone"
+// "Email Address", "email_address", "email" -> "email"
+func normalizeColumnName(col string) string {
+	col = strings.ToLower(strings.TrimSpace(col))
+	col = strings.ReplaceAll(col, " ", "")
+	col = strings.ReplaceAll(col, "_", "")
+
+	// Handle common aliases
+	switch col {
+	case "firstname", "first":
+		return "firstname"
+	case "lastname", "last":
+		return "lastname"
+	case "phone", "phonenumber", "telephone", "tel", "mobile", "cell":
+		return "phone"
+	case "email", "emailaddress", "mail":
+		return "email"
+	default:
+		return col
+	}
 }
 
 func main() {
@@ -65,10 +118,10 @@ func main() {
 	imported := 0
 	for _, guest := range guests {
 		// Use FirstName_LastName as document ID for easy lookup
-		docID := fmt.Sprintf("%s_%s", 
-			strings.ToLower(guest.FirstName), 
+		docID := fmt.Sprintf("%s_%s",
+			strings.ToLower(guest.FirstName),
 			strings.ToLower(guest.LastName))
-		
+
 		_, err := client.Collection("guests").Doc(docID).Set(ctx, guest)
 		if err != nil {
 			log.Printf("Failed to import %s %s: %v", guest.FirstName, guest.LastName, err)
@@ -89,25 +142,26 @@ func readCSV(path string) ([]Guest, error) {
 	defer file.Close()
 
 	reader := csv.NewReader(file)
-	
+
 	// Read header row
 	header, err := reader.Read()
 	if err != nil {
 		return nil, fmt.Errorf("failed to read header: %w", err)
 	}
 
-	// Map column names to indices (case-insensitive)
+	// Map column names to indices (case-insensitive, handles variations)
 	colIndex := make(map[string]int)
 	for i, col := range header {
-		colIndex[strings.ToLower(strings.TrimSpace(col))] = i
+		normalized := normalizeColumnName(col)
+		colIndex[normalized] = i
 	}
 
 	// Verify required columns exist
-	requiredCols := []string{"firstname", "lastname"}
-	for _, col := range requiredCols {
-		if _, ok := colIndex[col]; !ok {
-			return nil, fmt.Errorf("missing required column: %s", col)
-		}
+	if _, ok := colIndex["firstname"]; !ok {
+		return nil, fmt.Errorf("missing required column: firstname (or first_name, first name)")
+	}
+	if _, ok := colIndex["lastname"]; !ok {
+		return nil, fmt.Errorf("missing required column: lastname (or last_name, last name)")
 	}
 
 	// Read all records
@@ -128,10 +182,10 @@ func readCSV(path string) ([]Guest, error) {
 
 		// Optional fields
 		if idx, ok := colIndex["email"]; ok && idx < len(record) {
-			guest.Email = strings.TrimSpace(record[idx])
+			guest.Email = strings.ToLower(strings.TrimSpace(record[idx]))
 		}
 		if idx, ok := colIndex["phone"]; ok && idx < len(record) {
-			guest.Phone = strings.TrimSpace(record[idx])
+			guest.Phone = normalizePhone(strings.TrimSpace(record[idx]))
 		}
 
 		// Skip empty rows

@@ -105,9 +105,22 @@ func getClientIP(r *http.Request) string {
 	return ip
 }
 
+// allowedOrigins contains the list of origins allowed to make cross-origin requests.
+var allowedOrigins = map[string]bool{
+	"https://aspenandbenjamin.com":     true,
+	"https://www.aspenandbenjamin.com": true,
+}
+
 // setCORSHeaders sets the CORS headers for cross-origin requests.
-func setCORSHeaders(w http.ResponseWriter) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
+// It dynamically sets the Allow-Origin based on the request's Origin header.
+func setCORSHeaders(w http.ResponseWriter, r *http.Request) {
+	origin := r.Header.Get("Origin")
+
+	// Check if the origin is allowed
+	if allowedOrigins[origin] {
+		w.Header().Set("Access-Control-Allow-Origin", origin)
+	}
+
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PATCH, OPTIONS")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, X-HTTP-Method-Override")
 }
@@ -116,7 +129,7 @@ func setCORSHeaders(w http.ResponseWriter) {
 func (rl *RateLimiter) Middleware(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		// Always set CORS headers first
-		setCORSHeaders(w)
+		setCORSHeaders(w, r)
 
 		// Handle preflight OPTIONS request - don't rate limit these
 		if r.Method == http.MethodOptions {

@@ -67,12 +67,24 @@ func (r *FirestoreRsvpRepository) UpdateRsvp(id string, request *model.RsvpReque
 
 	docRef := r.client.Collection("guests").Doc(id)
 
-	// Update the guest document
-	_, err := docRef.Update(ctx, []firestore.Update{
-		{Path: "Email", Value: request.Email},
-		{Path: "Phone", Value: request.Phone},
+	// Build update list - only update optional fields if new values are provided
+	// This prevents overwriting existing email/phone with empty values
+	updates := []firestore.Update{
 		{Path: "Attending", Value: request.Attending},
-	})
+	}
+
+	// Only update email if a new value is provided
+	if request.Email != "" {
+		updates = append(updates, firestore.Update{Path: "Email", Value: request.Email})
+	}
+
+	// Only update phone if a new value is provided
+	if request.Phone != "" {
+		updates = append(updates, firestore.Update{Path: "Phone", Value: request.Phone})
+	}
+
+	// Update the guest document
+	_, err := docRef.Update(ctx, updates)
 	if err != nil {
 		return nil, err
 	}

@@ -104,9 +104,13 @@ resource "google_firestore_database" "main" {
   name            = "(default)"
   location_id     = var.firestore_location
   type            = "FIRESTORE_NATIVE"
-  deletion_policy = "DELETE"
+  deletion_policy = "ABANDON"  # Prevents Terraform from deleting the database and its data
 
   depends_on = [google_project_service.required_apis]
+
+  lifecycle {
+    prevent_destroy = true  # Extra protection against accidental deletion
+  }
 }
 
 # -----------------------------------------------------------------------------
@@ -114,7 +118,7 @@ resource "google_firestore_database" "main" {
 # -----------------------------------------------------------------------------
 
 resource "google_cloud_run_v2_service" "backend" {
-  name     = "wedding-backend"
+  name     = "wedding-website-api"
   location = var.region
   ingress  = "INGRESS_TRAFFIC_ALL"
 
@@ -154,7 +158,7 @@ resource "google_cloud_run_v2_service" "backend" {
 
       startup_probe {
         http_get {
-          path = "/v1/api/rsvp"
+          path = "/health"
         }
         initial_delay_seconds = 0
         period_seconds        = 10

@@ -197,10 +197,8 @@ func TestRateLimiter_Middleware(t *testing.T) {
 		t.Errorf("Expected Retry-After header to be 60, got %q", rr.Header().Get("Retry-After"))
 	}
 
-	// Check CORS headers are set on rate-limited response
-	if rr.Header().Get("Access-Control-Allow-Origin") != "*" {
-		t.Errorf("Expected Access-Control-Allow-Origin header to be *, got %q", rr.Header().Get("Access-Control-Allow-Origin"))
-	}
+	// Note: CORS origin header won't be set without Origin in request
+	// This is expected behavior - we only set Allow-Origin for allowed origins
 }
 
 func TestRateLimiter_Middleware_OPTIONS(t *testing.T) {
@@ -218,6 +216,7 @@ func TestRateLimiter_Middleware_OPTIONS(t *testing.T) {
 	// First, exhaust the rate limit with a regular request
 	req := httptest.NewRequest("GET", "/", nil)
 	req.RemoteAddr = "192.168.1.1:12345"
+	req.Header.Set("Origin", "https://aspenandbenjamin.com")
 	rr := httptest.NewRecorder()
 	wrapped(rr, req)
 
@@ -228,6 +227,7 @@ func TestRateLimiter_Middleware_OPTIONS(t *testing.T) {
 	// OPTIONS request should still work (not rate limited)
 	req = httptest.NewRequest("OPTIONS", "/", nil)
 	req.RemoteAddr = "192.168.1.1:12345"
+	req.Header.Set("Origin", "https://aspenandbenjamin.com")
 	rr = httptest.NewRecorder()
 	wrapped(rr, req)
 
@@ -241,13 +241,55 @@ func TestRateLimiter_Middleware_OPTIONS(t *testing.T) {
 	}
 
 	// Check CORS headers are set
-	if rr.Header().Get("Access-Control-Allow-Origin") != "*" {
-		t.Errorf("Expected Access-Control-Allow-Origin header to be *, got %q", rr.Header().Get("Access-Control-Allow-Origin"))
+	if rr.Header().Get("Access-Control-Allow-Origin") != "https://aspenandbenjamin.com" {
+		t.Errorf("Expected Access-Control-Allow-Origin header to be https://aspenandbenjamin.com, got %q", rr.Header().Get("Access-Control-Allow-Origin"))
 	}
 	if rr.Header().Get("Access-Control-Allow-Methods") != "GET, POST, PATCH, OPTIONS" {
 		t.Errorf("Expected Access-Control-Allow-Methods header, got %q", rr.Header().Get("Access-Control-Allow-Methods"))
 	}
 	if rr.Header().Get("Access-Control-Allow-Headers") != "Content-Type, X-HTTP-Method-Override" {
 		t.Errorf("Expected Access-Control-Allow-Headers header, got %q", rr.Header().Get("Access-Control-Allow-Headers"))
+	}
+}
+
+func TestRateLimiter_Middleware_CORS_WWW(t *testing.T) {
+	rl := NewRateLimiter(10, time.Minute)
+	defer rl.Stop()
+
+	handler := func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+	}
+
+	wrapped := rl.Middleware(handler)
+
+	// Test www subdomain is also allowed
+	req := httptest.NewRequest("OPTIONS", "/", nil)
+	req.Header.Set("Origin", "https://www.aspenandbenjamin.com")
+	rr := httptest.NewRecorder()
+	wrapped(rr, req)
+
+	if rr.Header().Get("Access-Control-Allow-Origin") != "https://www.aspenandbenjamin.com" {
+		t.Errorf("Expected Access-Control-Allow-Origin header to be https://www.aspenandbenjamin.com, got %q", rr.Header().Get("Access-Control-Allow-Origin"))
+	}
+}
+
+func TestRateLimiter_Middleware_CORS_DisallowedOrigin(t *testing.T) {
+	rl := NewRateLimiter(10, time.Minute)
+	defer rl.Stop()
+
+	handler := func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+	}
+
+	wrapped := rl.Middleware(handler)
+
+	// Test that unknown origins don't get CORS headers
+	req := httptest.NewRequest("OPTIONS", "/", nil)
+	req.Header.Set("Origin", "https://evil-site.com")
+	rr := httptest.NewRecorder()
+	wrapped(rr, req)
+
+	if rr.Header().Get("Access-Control-Allow-Origin") != "" {
+		t.Errorf("Expected no Access-Control-Allow-Origin header for disallowed origin, got %q", rr.Header().Get("Access-Control-Allow-Origin"))
 	}
 }

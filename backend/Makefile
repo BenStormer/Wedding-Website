@@ -4,8 +4,9 @@
 GCP_PROJECT = $(shell gcloud config get-value project)
 GCP_REGION ?= us-central1
 SERVICE_NAME ?= wedding-website-api
+REPO_NAME ?= wedding-backend
 IMAGE_TAG ?= latest
-IMAGE_URL ?= gcr.io/${GCP_PROJECT}/${SERVICE_NAME}:${IMAGE_TAG}
+IMAGE_URL ?= ${GCP_REGION}-docker.pkg.dev/${GCP_PROJECT}/${REPO_NAME}/${SERVICE_NAME}:${IMAGE_TAG}
 
 # Start the server locally (assumes emulator is running)
 dev:
@@ -35,11 +36,15 @@ emulator:
 clean:
 	rm -rf bin/
 
-# Build Docker image and push to Google Container Registry
-build-and-push:
+# Configure Docker for Artifact Registry (run once)
+docker-auth:
+	gcloud auth configure-docker ${GCP_REGION}-docker.pkg.dev
+
+# Build Docker image and push to Artifact Registry
+build-and-push: docker-auth
 	@echo "Building Docker image..."
 	docker build -t ${IMAGE_URL} .
-	@echo "Pushing to Google Container Registry..."
+	@echo "Pushing to Artifact Registry..."
 	docker push ${IMAGE_URL}
 	@echo "Image pushed successfully to ${IMAGE_URL}!"
 
@@ -52,6 +57,5 @@ deploy:
 		--region ${GCP_REGION} \
 		--platform managed \
 		--max-instances 2 \
-		--set-env-vars FIRESTORE_PROJECT_ID=wedding-website \
 		--allow-unauthenticated
 	@echo "Deployment complete!"

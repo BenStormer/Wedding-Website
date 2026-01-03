@@ -114,7 +114,7 @@ resource "google_firestore_database" "main" {
 # -----------------------------------------------------------------------------
 
 resource "google_cloud_run_v2_service" "backend" {
-  name     = "wedding-backend"
+  name     = "wedding-website-api"
   location = var.region
   ingress  = "INGRESS_TRAFFIC_ALL"
 

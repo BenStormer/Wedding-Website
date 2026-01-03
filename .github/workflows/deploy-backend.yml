@@ -13,7 +13,8 @@ jobs:
 
     env:
       REGION: us-central1
-      SERVICE_NAME: wedding-api
+      SERVICE_NAME: wedding-website-api
+      REPO_NAME: wedding-backend
 
     steps:
       - name: Checkout
@@ -33,7 +34,7 @@ jobs:
       - name: Build and Push Docker Image
         working-directory: backend
         run: |
-          IMAGE="${{ env.REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/wedding-website/wedding-api"
+          IMAGE="${{ env.REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}"
           docker build -t ${IMAGE}:${{ github.sha }} -t ${IMAGE}:latest .
           docker push ${IMAGE}:${{ github.sha }}
           docker push ${IMAGE}:latest
@@ -41,7 +42,8 @@ jobs:
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy ${{ env.SERVICE_NAME }} \
-            --image=${{ env.REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/wedding-website/wedding-api:${{ github.sha }} \
+            --image=${{ env.REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}:${{ github.sha }} \
             --region=${{ env.REGION }} \
             --project=${{ secrets.GCP_PROJECT_ID }} \
+            --allow-unauthenticated \
             --quiet

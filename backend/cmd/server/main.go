@@ -48,23 +48,40 @@ func main() {
 		return
 	}
 
-	// 2. Initialize Firestore repository
+	// 2. Initialize shared Firestore client
+	if cfg.UseEmulator {
+		os.Setenv("FIRESTORE_EMULATOR_HOST", cfg.EmulatorHost)
+	}
+	ctx := context.Background()
+	firestoreClient, err := firestore.NewClient(ctx, cfg.FirestoreProject)
+	if err != nil {
+		log.Fatalf("Failed to create Firestore client: %v", err)
+	}
+	defer firestoreClient.Close()
+
+	// 3. Initialize repositories with shared client
 	rsvpRepo, err := repository.NewFirestoreRsvpRepository(cfg)
 	if err != nil {
-		log.Fatalf("Failed to initialize Firestore: %v", err)
+		log.Fatalf("Failed to initialize RSVP repository: %v", err)
 	}
 	defer rsvpRepo.Close()
 
-	// 3. Wire up layers
+	registryRepo := repository.NewFirestoreRegistryRepository(cfg, firestoreClient)
+
+	// 4. Wire up layers
 	rsvpService := service.NewRsvpService(rsvpRepo)
 	rsvpHandler := api.NewRsvpHandler(rsvpService)
 
-	// 4. Set up rate limiter (10 requests per minute per IP)
+	registryService := service.NewRegistryService(registryRepo)
+	registryHandler := api.NewRegistryHandler(registryService)
+
+	// 5. Set up rate limiter (10 requests per minute per IP)
 	rateLimiter := middleware.NewRateLimiter(10, time.Minute)
 	defer rateLimiter.Stop()
 
-	// 5. Set up routes with rate limiting
+	// 6. Set up routes with rate limiting
 	http.HandleFunc("/v1/api/rsvp", rateLimiter.Middleware(rsvpHandler.HandleRsvp))
+	http.HandleFunc("/v1/api/registry/gift", rateLimiter.Middleware(registryHandler.HandleGift))
 
 	// Health check endpoint for Cloud Run startup probe
 	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
@@ -73,7 +90,7 @@ func main() {
 		w.Write([]byte(`{"status":"healthy"}`))
 	})
 
-	// 6. Start server
+	// 7. Start server
 	log.Printf("Server listening on :%s", cfg.Port)
 	log.Fatal(http.ListenAndServe(":"+cfg.Port, nil))
 }

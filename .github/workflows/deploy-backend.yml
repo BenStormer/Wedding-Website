@@ -1,0 +1,93 @@
+name: Deploy Backend
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "backend/**"
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to deploy"
+        required: true
+        type: choice
+        options:
+          - sqa
+          - prod
+
+jobs:
+  # Determine which environment(s) to deploy
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      environments: ${{ steps.set-envs.outputs.environments }}
+    steps:
+      - name: Determine environments
+        id: set-envs
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo 'environments=["${{ inputs.environment }}"]' >> $GITHUB_OUTPUT
+          else
+            # Push to main - deploy to both
+            echo 'environments=["sqa", "prod"]' >> $GITHUB_OUTPUT
+          fi
+
+  deploy:
+    needs: setup
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: ${{ fromJson(needs.setup.outputs.environments) }}
+      fail-fast: false
+
+    permissions:
+      contents: read
+      id-token: write # Required for Workload Identity Federation
+
+    env:
+      REGION: us-central1
+      SERVICE_NAME: wedding-api-${{ matrix.environment }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set environment variables
+        run: |
+          if [ "${{ matrix.environment }}" == "sqa" ]; then
+            echo "PROJECT_ID=${{ secrets.SQA_PROJECT_ID }}" >> $GITHUB_ENV
+            echo "WIF_PROVIDER=${{ secrets.SQA_WORKLOAD_IDENTITY_PROVIDER }}" >> $GITHUB_ENV
+            echo "SA_EMAIL=${{ secrets.SQA_GITHUB_ACTIONS_SA }}" >> $GITHUB_ENV
+          else
+            echo "PROJECT_ID=${{ secrets.PROD_PROJECT_ID }}" >> $GITHUB_ENV
+            echo "WIF_PROVIDER=${{ secrets.PROD_WORKLOAD_IDENTITY_PROVIDER }}" >> $GITHUB_ENV
+            echo "SA_EMAIL=${{ secrets.PROD_GITHUB_ACTIONS_SA }}" >> $GITHUB_ENV
+          fi
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ env.WIF_PROVIDER }}
+          service_account: ${{ env.SA_EMAIL }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
+
+      - name: Build and Push Docker Image
+        working-directory: backend
+        run: |
+          IMAGE="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/wedding-website/wedding-api"
+          docker build -t ${IMAGE}:${{ github.sha }} -t ${IMAGE}:latest .
+          docker push ${IMAGE}:${{ github.sha }}
+          docker push ${IMAGE}:latest
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy ${{ env.SERVICE_NAME }} \
+            --image=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/wedding-website/wedding-api:${{ github.sha }} \
+            --region=${{ env.REGION }} \
+            --project=${{ env.PROJECT_ID }} \
+            --quiet

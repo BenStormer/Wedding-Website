@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/BenStormer/Wedding-Website/backend/internal/model"
+	"github.com/BenStormer/Wedding-Website/backend/internal/repository"
 )
 
 // Helper function to create a pointer to an int
@@ -25,6 +26,10 @@ type MockRegistryRepository struct {
 	UpdateQuantityError  error
 	UpdateQuantityCalled bool
 	UpdateQuantityValue  int
+
+	// For transactional method
+	RecordGiftWithValidationResult *model.RegistryItem
+	RecordGiftWithValidationError  error
 }
 
 func (m *MockRegistryRepository) GetAllItems() ([]model.RegistryItem, error) {
@@ -46,9 +51,18 @@ func (m *MockRegistryRepository) UpdateItemReceivedQuantity(itemID string, newQu
 	return m.UpdateQuantityError
 }
 
+func (m *MockRegistryRepository) RecordGiftWithValidation(gift *model.GiftRecord, requestedQuantity int) (*model.RegistryItem, error) {
+	m.RecordGiftCalled = true
+	m.UpdateQuantityValue = requestedQuantity
+	return m.RecordGiftWithValidationResult, m.RecordGiftWithValidationError
+}
+
 func TestRecordGift_ItemNotFound(t *testing.T) {
 	mockRepo := &MockRegistryRepository{
-		FindItemResult: nil,
+		RecordGiftWithValidationError: &repository.GiftValidationError{
+			Code:    "not_found",
+			Message: "Registry item not found",
+		},
 	}
 	service := NewRegistryService(mockRepo)
 
@@ -74,11 +88,11 @@ func TestRecordGift_ItemNotFound(t *testing.T) {
 
 func TestRecordGift_Success(t *testing.T) {
 	mockRepo := &MockRegistryRepository{
-		FindItemResult: &model.RegistryItem{
+		RecordGiftWithValidationResult: &model.RegistryItem{
 			ID:                "kitchenaid-mixer",
 			Label:             "KitchenAid Stand Mixer",
 			RequestedQuantity: intPtr(1),
-			ReceivedQuantity:  0,
+			ReceivedQuantity:  1,
 			IsSpecialFund:     false,
 		},
 	}
@@ -100,19 +114,16 @@ func TestRecordGift_Success(t *testing.T) {
 		t.Errorf("Expected successful response")
 	}
 	if !mockRepo.RecordGiftCalled {
-		t.Errorf("Expected RecordGift to be called")
-	}
-	if !mockRepo.UpdateQuantityCalled {
-		t.Errorf("Expected UpdateItemReceivedQuantity to be called")
+		t.Errorf("Expected RecordGiftWithValidation to be called")
 	}
 	if mockRepo.UpdateQuantityValue != 1 {
-		t.Errorf("Expected quantity to be updated to 1, got %d", mockRepo.UpdateQuantityValue)
+		t.Errorf("Expected quantity to be 1, got %d", mockRepo.UpdateQuantityValue)
 	}
 }
 
 func TestRecordGift_SpecialFund(t *testing.T) {
 	mockRepo := &MockRegistryRepository{
-		FindItemResult: &model.RegistryItem{
+		RecordGiftWithValidationResult: &model.RegistryItem{
 			ID:                "honeymoon-fund",
 			Label:             "Honeymoon Fund",
 			RequestedQuantity: nil, // unlimited
@@ -139,22 +150,15 @@ func TestRecordGift_SpecialFund(t *testing.T) {
 		t.Errorf("Expected successful response")
 	}
 	if !mockRepo.RecordGiftCalled {
-		t.Errorf("Expected RecordGift to be called")
-	}
-	// Special funds should NOT update quantity
-	if mockRepo.UpdateQuantityCalled {
-		t.Errorf("Expected UpdateItemReceivedQuantity to NOT be called for special fund")
+		t.Errorf("Expected RecordGiftWithValidation to be called")
 	}
 }
 
 func TestRecordGift_ItemFullyGifted(t *testing.T) {
 	mockRepo := &MockRegistryRepository{
-		FindItemResult: &model.RegistryItem{
-			ID:                "kitchenaid-mixer",
-			Label:             "KitchenAid Stand Mixer",
-			RequestedQuantity: intPtr(1),
-			ReceivedQuantity:  1, // Already fully gifted
-			IsSpecialFund:     false,
+		RecordGiftWithValidationError: &repository.GiftValidationError{
+			Code:    "fully_gifted",
+			Message: "This item has already been fully gifted",
 		},
 	}
 	service := NewRegistryService(mockRepo)
@@ -181,12 +185,9 @@ func TestRecordGift_ItemFullyGifted(t *testing.T) {
 
 func TestRecordGift_QuantityExceedsRemaining(t *testing.T) {
 	mockRepo := &MockRegistryRepository{
-		FindItemResult: &model.RegistryItem{
-			ID:                "towel-set",
-			Label:             "Luxury Bath Towel Set",
-			RequestedQuantity: intPtr(2),
-			ReceivedQuantity:  1, // Only 1 remaining
-			IsSpecialFund:     false,
+		RecordGiftWithValidationError: &repository.GiftValidationError{
+			Code:    "quantity_exceeded",
+			Message: "Requested quantity exceeds remaining needed",
 		},
 	}
 	service := NewRegistryService(mockRepo)
@@ -213,11 +214,11 @@ func TestRecordGift_QuantityExceedsRemaining(t *testing.T) {
 
 func TestRecordGift_MultipleQuantity(t *testing.T) {
 	mockRepo := &MockRegistryRepository{
-		FindItemResult: &model.RegistryItem{
+		RecordGiftWithValidationResult: &model.RegistryItem{
 			ID:                "towel-set",
 			Label:             "Luxury Bath Towel Set",
 			RequestedQuantity: intPtr(3),
-			ReceivedQuantity:  0,
+			ReceivedQuantity:  2,
 			IsSpecialFund:     false,
 		},
 	}
@@ -239,20 +240,13 @@ func TestRecordGift_MultipleQuantity(t *testing.T) {
 		t.Errorf("Expected successful response")
 	}
 	if mockRepo.UpdateQuantityValue != 2 {
-		t.Errorf("Expected quantity to be updated to 2, got %d", mockRepo.UpdateQuantityValue)
+		t.Errorf("Expected quantity to be 2, got %d", mockRepo.UpdateQuantityValue)
 	}
 }
 
-func TestRecordGift_RecordGiftError(t *testing.T) {
+func TestRecordGift_SystemError(t *testing.T) {
 	mockRepo := &MockRegistryRepository{
-		FindItemResult: &model.RegistryItem{
-			ID:                "kitchenaid-mixer",
-			Label:             "KitchenAid Stand Mixer",
-			RequestedQuantity: intPtr(1),
-			ReceivedQuantity:  0,
-			IsSpecialFund:     false,
-		},
-		RecordGiftError: errors.New("database error"),
+		RecordGiftWithValidationError: errors.New("database connection failed"),
 	}
 	service := NewRegistryService(mockRepo)
 
@@ -266,32 +260,12 @@ func TestRecordGift_RecordGiftError(t *testing.T) {
 	response, err := service.RecordGift(request)
 
 	if err == nil {
-		t.Errorf("Expected error when RecordGift fails, got nil")
+		t.Errorf("Expected error when system fails, got nil")
 	}
 	if response.Success != false {
 		t.Errorf("Expected unsuccessful response")
 	}
-}
-
-func TestRecordGift_FindItemError(t *testing.T) {
-	mockRepo := &MockRegistryRepository{
-		FindItemError: errors.New("database connection error"),
-	}
-	service := NewRegistryService(mockRepo)
-
-	request := model.GiftRequest{
-		FirstName: "John",
-		LastName:  "Doe",
-		ItemLabel: "KitchenAid Stand Mixer",
-		Quantity:  1,
-	}
-
-	response, err := service.RecordGift(request)
-
-	if err == nil {
-		t.Errorf("Expected error when FindItemByLabel fails, got nil")
-	}
-	if response.Success != false {
-		t.Errorf("Expected unsuccessful response")
+	if response.Message != "Failed to record your gift" {
+		t.Errorf("Expected 'Failed to record your gift' message, got '%s'", response.Message)
 	}
 }

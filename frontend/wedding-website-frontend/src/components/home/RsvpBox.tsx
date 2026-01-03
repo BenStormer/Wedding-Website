@@ -1,6 +1,16 @@
 import './RsvpBox.css';
 
-import { Modal, Button, TextInput, Radio, Group, Stack, Text, Box, CloseButton } from '@mantine/core';
+import {
+  Modal,
+  Button,
+  TextInput,
+  Radio,
+  Group,
+  Stack,
+  Text,
+  Box,
+  CloseButton,
+} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm, isNotEmpty, matches, isEmail } from '@mantine/form';
 import { useState } from 'react';
@@ -27,8 +37,13 @@ interface RsvpFormProps {
 
 const RsvpForm = ({ onClose }: RsvpFormProps) => {
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
-  const apiUrl = (import.meta.env.VITE_API_URL as string | undefined) ?? 'http://localhost:8080';
+  const [message, setMessage] = useState<{
+    type: 'success' | 'error';
+    text: string;
+  } | null>(null);
+  const apiUrl =
+    (import.meta.env.VITE_API_URL as string | undefined) ??
+    'http://localhost:8080';
 
   const form = useForm<RsvpFormValues>({
     mode: 'uncontrolled',
@@ -58,11 +73,16 @@ const RsvpForm = ({ onClose }: RsvpFormProps) => {
     setLoading(true);
     setMessage(null);
 
+    // Create AbortController for timeout
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
+
     try {
       const response = await fetch(`${apiUrl}/v1/api/rsvp`, {
-        method: 'PATCH',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'X-HTTP-Method-Override': 'PATCH',
         },
         body: JSON.stringify({
           firstname: values.firstName,
@@ -71,19 +91,41 @@ const RsvpForm = ({ onClose }: RsvpFormProps) => {
           phone: values.phoneNumber,
           attending: values.willAttend === 'true',
         }),
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
 
       const data = (await response.json()) as ApiResponse;
 
       if (data.success) {
         form.reset();
-        setMessage({ type: 'success', text: data.message ?? 'Thank you! Your RSVP has been received.' });
+        setMessage({
+          type: 'success',
+          text: data.message ?? 'Thank you! Your RSVP has been received.',
+        });
       } else {
-        setMessage({ type: 'error', text: data.message ?? 'There was an error submitting your RSVP. Please try again.' });
+        setMessage({
+          type: 'error',
+          text:
+            data.message ??
+            'There was an error submitting your RSVP. Please try again.',
+        });
       }
     } catch (error) {
+      clearTimeout(timeoutId);
       console.error('Error submitting RSVP:', error);
-      setMessage({ type: 'error', text: 'Network error. Please check your connection and try again.' });
+      if (error instanceof Error && error.name === 'AbortError') {
+        setMessage({
+          type: 'error',
+          text: 'Request timed out. Please try again.',
+        });
+      } else {
+        setMessage({
+          type: 'error',
+          text: 'Network error. Please check your connection and try again.',
+        });
+      }
     } finally {
       setLoading(false);
     }
@@ -100,13 +142,11 @@ const RsvpForm = ({ onClose }: RsvpFormProps) => {
           )}
         </Box>
         <Text className="rsvp-message-title">
-          {message.type === 'success' ? 'You\'re All Set!' : 'Oops!'}
+          {message.type === 'success' ? "You're All Set!" : 'Oops!'}
         </Text>
-        <Text className="rsvp-message-text">
-          {message.text}
-        </Text>
-        <Button 
-          onClick={onClose} 
+        <Text className="rsvp-message-text">{message.text}</Text>
+        <Button
+          onClick={onClose}
           className="rsvp-close-button"
           variant="outline"
           size="md"
@@ -146,7 +186,7 @@ const RsvpForm = ({ onClose }: RsvpFormProps) => {
             {...form.getInputProps('lastName')}
           />
         </Group>
-        
+
         <TextInput
           label="Email"
           placeholder="your.email@example.com"
@@ -158,7 +198,7 @@ const RsvpForm = ({ onClose }: RsvpFormProps) => {
           }}
           {...form.getInputProps('email')}
         />
-        
+
         <TextInput
           label="Phone Number"
           placeholder="(555) 123-4567"
@@ -184,17 +224,17 @@ const RsvpForm = ({ onClose }: RsvpFormProps) => {
             {...form.getInputProps('willAttend')}
           >
             <Group mt="sm" gap="md">
-              <Radio 
-                value="true" 
-                label="Yes" 
+              <Radio
+                value="true"
+                label="Yes"
                 classNames={{
                   radio: 'rsvp-radio',
                   label: 'rsvp-radio-label',
                 }}
               />
-              <Radio 
-                value="false" 
-                label="No" 
+              <Radio
+                value="false"
+                label="No"
                 classNames={{
                   radio: 'rsvp-radio',
                   label: 'rsvp-radio-label',
@@ -204,9 +244,9 @@ const RsvpForm = ({ onClose }: RsvpFormProps) => {
           </Radio.Group>
         </Box>
 
-        <Button 
-          type="submit" 
-          loading={loading} 
+        <Button
+          type="submit"
+          loading={loading}
           className="rsvp-submit-button"
           size="lg"
           fullWidth
@@ -240,8 +280,8 @@ const RsvpBox = () => {
         }}
       >
         <Box className="rsvp-modal-header">
-          <CloseButton 
-            onClick={close} 
+          <CloseButton
+            onClick={close}
             className="rsvp-modal-close-button"
             size="md"
             aria-label="Close modal"

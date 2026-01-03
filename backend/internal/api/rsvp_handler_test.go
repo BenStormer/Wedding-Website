@@ -255,3 +255,80 @@ func TestHandleRsvp_InternalError(t *testing.T) {
 		t.Errorf("Expected success=false, got %v", got.Success)
 	}
 }
+
+func TestHandleRsvp_PostWithMethodOverride(t *testing.T) {
+	mockService := &MockRsvpService{
+		SubmitRsvpResult: &model.RsvpResponse{
+			Success: true,
+			Message: "Rsvp submitted successfully",
+		},
+		SubmitRsvpError: nil,
+	}
+	handler := NewRsvpHandler(mockService)
+
+	body := `{
+		"firstname": "John",
+		"lastname": "Doe",
+		"attending": true
+	}`
+	// Use POST with X-HTTP-Method-Override header (Cloud Run compatibility)
+	req := httptest.NewRequest("POST", "/v1/api/rsvp", strings.NewReader(body))
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("X-HTTP-Method-Override", "PATCH")
+
+	recorder := httptest.NewRecorder()
+
+	handler.HandleRsvp(recorder, req)
+
+	if recorder.Code != http.StatusOK {
+		t.Errorf("Expected status OK, got %d", recorder.Code)
+	}
+
+	var got model.RsvpResponse
+	err := json.Unmarshal(recorder.Body.Bytes(), &got)
+	if err != nil {
+		t.Fatalf("Failed to parse response JSON: %v", err)
+	}
+
+	if got.Success != true {
+		t.Errorf("Expected success=true, got %v", got.Success)
+	}
+}
+
+func TestHandleRsvp_PostWithoutOverride(t *testing.T) {
+	mockService := &MockRsvpService{
+		SubmitRsvpResult: &model.RsvpResponse{
+			Success: true,
+			Message: "Rsvp submitted successfully",
+		},
+		SubmitRsvpError: nil,
+	}
+	handler := NewRsvpHandler(mockService)
+
+	body := `{
+		"firstname": "John",
+		"lastname": "Doe",
+		"attending": true
+	}`
+	// Plain POST should also work now for Cloud Run compatibility
+	req := httptest.NewRequest("POST", "/v1/api/rsvp", strings.NewReader(body))
+	req.Header.Set("Content-Type", "application/json")
+
+	recorder := httptest.NewRecorder()
+
+	handler.HandleRsvp(recorder, req)
+
+	if recorder.Code != http.StatusOK {
+		t.Errorf("Expected status OK, got %d", recorder.Code)
+	}
+
+	var got model.RsvpResponse
+	err := json.Unmarshal(recorder.Body.Bytes(), &got)
+	if err != nil {
+		t.Fatalf("Failed to parse response JSON: %v", err)
+	}
+
+	if got.Success != true {
+		t.Errorf("Expected success=true, got %v", got.Success)
+	}
+}

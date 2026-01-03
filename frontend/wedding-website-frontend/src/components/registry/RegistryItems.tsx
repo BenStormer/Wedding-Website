@@ -111,10 +111,7 @@ const PurchaseForm = ({
       }
     } catch (error) {
       console.error('Error submitting gift:', error);
-      // For now, since backend doesn't exist yet, show success
-      form.reset();
-      onSubmit(values.quantity);
-      setMessage({ type: 'success', text: 'Thank you so much for your generous gift!' });
+      setMessage({ type: 'error', text: 'Unable to connect to the server. Please try again later.' });
     } finally {
       setLoading(false);
     }

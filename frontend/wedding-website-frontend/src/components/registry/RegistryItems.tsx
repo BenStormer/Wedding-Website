@@ -446,26 +446,29 @@ const RegistryItemsGrid = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const response = await fetch(`${apiUrl}/v1/api/registry/items`);
-        const data = (await response.json()) as RegistryItemsApiResponse;
+  const fetchItems = async () => {
+    setLoading(true);
+    setError(null);
+    
+    try {
+      const response = await fetch(`${apiUrl}/v1/api/registry/items`);
+      const data = (await response.json()) as RegistryItemsApiResponse;
 
-        if (data.success && data.items) {
-          setItems(data.items);
-          setError(null);
-        } else {
-          setError(data.error ?? 'Failed to load registry items');
-        }
-      } catch (err) {
-        console.error('Error fetching registry items:', err);
-        setError('Unable to connect to the server. Please try again later.');
-      } finally {
-        setLoading(false);
+      if (data.success && data.items) {
+        setItems(data.items);
+        setError(null);
+      } else {
+        setError(data.error ?? 'Failed to load registry items');
       }
-    };
+    } catch (err) {
+      console.error('Error fetching registry items:', err);
+      setError('Unable to connect to the server. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchItems();
   }, []);
 
@@ -499,7 +502,7 @@ const RegistryItemsGrid = () => {
           <Button
             variant="outline"
             color="var(--primary-green)"
-            onClick={() => window.location.reload()}
+            onClick={fetchItems}
           >
             Try Again
           </Button>

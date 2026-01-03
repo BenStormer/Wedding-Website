@@ -73,11 +73,16 @@ const RsvpForm = ({ onClose }: RsvpFormProps) => {
     setLoading(true);
     setMessage(null);
 
+    // Create AbortController for timeout
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
+
     try {
       const response = await fetch(`${apiUrl}/v1/api/rsvp`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'X-HTTP-Method-Override': 'PATCH',
         },
         body: JSON.stringify({
           firstname: values.firstName,
@@ -86,7 +91,10 @@ const RsvpForm = ({ onClose }: RsvpFormProps) => {
           phone: values.phoneNumber,
           attending: values.willAttend === 'true',
         }),
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
 
       const data = (await response.json()) as ApiResponse;
 
@@ -105,11 +113,19 @@ const RsvpForm = ({ onClose }: RsvpFormProps) => {
         });
       }
     } catch (error) {
+      clearTimeout(timeoutId);
       console.error('Error submitting RSVP:', error);
-      setMessage({
-        type: 'error',
-        text: 'Network error. Please check your connection and try again.',
-      });
+      if (error instanceof Error && error.name === 'AbortError') {
+        setMessage({
+          type: 'error',
+          text: 'Request timed out. Please try again.',
+        });
+      } else {
+        setMessage({
+          type: 'error',
+          text: 'Network error. Please check your connection and try again.',
+        });
+      }
     } finally {
       setLoading(false);
     }

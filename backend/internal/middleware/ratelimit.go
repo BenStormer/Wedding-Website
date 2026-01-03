@@ -109,7 +109,7 @@ func getClientIP(r *http.Request) string {
 func setCORSHeaders(w http.ResponseWriter) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PATCH, OPTIONS")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, X-HTTP-Method-Override")
 }
 
 // Middleware wraps an http.HandlerFunc with rate limiting.

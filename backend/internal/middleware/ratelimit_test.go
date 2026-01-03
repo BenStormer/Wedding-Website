@@ -247,7 +247,7 @@ func TestRateLimiter_Middleware_OPTIONS(t *testing.T) {
 	if rr.Header().Get("Access-Control-Allow-Methods") != "GET, POST, PATCH, OPTIONS" {
 		t.Errorf("Expected Access-Control-Allow-Methods header, got %q", rr.Header().Get("Access-Control-Allow-Methods"))
 	}
-	if rr.Header().Get("Access-Control-Allow-Headers") != "Content-Type" {
+	if rr.Header().Get("Access-Control-Allow-Headers") != "Content-Type, X-HTTP-Method-Override" {
 		t.Errorf("Expected Access-Control-Allow-Headers header, got %q", rr.Header().Get("Access-Control-Allow-Headers"))
 	}
 }

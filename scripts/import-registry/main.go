@@ -23,10 +23,9 @@ type RegistryItem struct {
 	Price             float64 `firestore:"price"`
 	Image             string  `firestore:"image"`
 	Alt               string  `firestore:"alt"`
-	RequestedQuantity *int    `firestore:"requested_quantity"` // nil = unlimited (special fund)
+	RequestedQuantity *int    `firestore:"requested_quantity"`
 	ReceivedQuantity  int     `firestore:"received_quantity"`
 	PurchaseLink      string  `firestore:"purchase_link"`
-	IsSpecialFund     bool    `firestore:"is_special_fund"`
 }
 
 // normalizeColumnName handles various column name formats
@@ -54,8 +53,6 @@ func normalizeColumnName(col string) string {
 		return "requestedquantity"
 	case "purchaselink", "link", "url", "buylink", "storelink":
 		return "purchaselink"
-	case "isspecialfund", "specialfund", "fund", "isfund":
-		return "isspecialfund"
 	default:
 		return col
 	}
@@ -100,15 +97,11 @@ func main() {
 	if *dryRun {
 		log.Println("DRY RUN - Would import the following registry items:")
 		for i, item := range items {
-			qtyStr := "unlimited"
-			if item.RequestedQuantity != nil {
-				qtyStr = fmt.Sprintf("%d", *item.RequestedQuantity)
-			}
-			fundStr := ""
-			if item.IsSpecialFund {
-				fundStr = " [SPECIAL FUND]"
-			}
-			log.Printf("  %d. %s (ID: %s, $%.2f, qty: %s)%s", i+1, item.Label, item.ID, item.Price, qtyStr, fundStr)
+		qtyStr := "unlimited"
+		if item.RequestedQuantity != nil {
+			qtyStr = fmt.Sprintf("%d", *item.RequestedQuantity)
+		}
+		log.Printf("  %d. %s (ID: %s, $%.2f, qty: %s)", i+1, item.Label, item.ID, item.Price, qtyStr)
 			log.Printf("      Description: %s", truncate(item.Description, 60))
 			log.Printf("      Link: %s", item.PurchaseLink)
 			if item.Image != "" {
@@ -249,12 +242,6 @@ func readCSV(path string) ([]RegistryItem, error) {
 		// Purchase link
 		if idx, ok := colIndex["purchaselink"]; ok && idx < len(record) {
 			item.PurchaseLink = strings.TrimSpace(record[idx])
-		}
-
-		// Is special fund
-		if idx, ok := colIndex["isspecialfund"]; ok && idx < len(record) {
-			val := strings.ToLower(strings.TrimSpace(record[idx]))
-			item.IsSpecialFund = val == "true" || val == "yes" || val == "1" || val == "y"
 		}
 
 		items = append(items, item)

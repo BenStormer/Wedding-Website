@@ -219,7 +219,11 @@
 
 /* Submit Button */
 .registry-submit-button {
-  background: linear-gradient(135deg, var(--bold-green) 0%, #3a4a3a 100%) !important;
+  background: linear-gradient(
+    135deg,
+    var(--bold-green) 0%,
+    #3a4a3a 100%
+  ) !important;
   border: none !important;
   font-weight: 600 !important;
   letter-spacing: 0.05em;

@@ -9,9 +9,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
-)
 
-import (
 	"cloud.google.com/go/firestore"
 )
 
@@ -165,6 +163,10 @@ func readCSV(path string) ([]RegistryItem, error) {
 	// Map column names to indices (case-insensitive, handles variations)
 	colIndex := make(map[string]int)
 	for i, col := range header {
+		// Strip BOM (Byte Order Mark) from first column if present
+		if i == 0 {
+			col = strings.TrimPrefix(col, "\ufeff")
+		}
 		normalized := normalizeColumnName(col)
 		colIndex[normalized] = i
 	}

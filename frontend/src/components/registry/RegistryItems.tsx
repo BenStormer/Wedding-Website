@@ -365,6 +365,17 @@ const RegistryItemCard = ({ item, onGift }: RegistryItemCardProps) => {
         <Stack gap="sm" className="registry-card-content">
           <Text className="registry-item-title">{item.label}</Text>
 
+          {item.version && (
+            <Text
+              size="sm"
+              c="var(--bold-green)"
+              fs="italic"
+              className="registry-item-version"
+            >
+              {item.version}
+            </Text>
+          )}
+
           <Text
             size="sm"
             c="var(--bold-green)"

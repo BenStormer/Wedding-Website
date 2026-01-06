@@ -61,6 +61,7 @@ func SeedData(ctx context.Context, client *firestore.Client) error {
 			ID:                "kitchenaid-mixer",
 			Label:             "KitchenAid Stand Mixer",
 			Description:       "A classic kitchen essential for baking together. We would love the Artisan series in any neutral color!",
+			Version:           "5 Qt, Artisan Series",
 			Price:             350,
 			Image:             "https://picsum.photos/seed/mixer/800/600",
 			Alt:               "KitchenAid Stand Mixer",
@@ -71,7 +72,8 @@ func SeedData(ctx context.Context, client *firestore.Client) error {
 		{
 			ID:                "le-creuset",
 			Label:             "Le Creuset Dutch Oven",
-			Description:       "Perfect for cozy soups and stews. The 5.5 quart size in any color would be wonderful.",
+			Description:       "Perfect for cozy soups and stews.",
+			Version:           "5.5 Qt, Any Color",
 			Price:             400,
 			Image:             "https://picsum.photos/seed/dutchoven/800/600",
 			Alt:               "Le Creuset Dutch Oven",

@@ -340,10 +340,7 @@ const RegistryItemCard = ({ item, onGift }: RegistryItemCardProps) => {
   };
 
   // Determine button text based on whether item has a purchase link
-  const giftButtonText = itemHasPurchaseLink
-    ? 'I Purchased This'
-    : 'I Gave This';
-  const modalTitle = itemHasPurchaseLink ? 'I Purchased This!' : 'I Gave This!';
+  const giftButtonText = 'I Got This';
 
   return (
     <>
@@ -411,7 +408,7 @@ const RegistryItemCard = ({ item, onGift }: RegistryItemCardProps) => {
                 leftSection={<IconExternalLink size={15} />}
                 className="registry-button"
               >
-                Purchase
+                Get This
               </Button>
             )}
             <Button
@@ -451,7 +448,7 @@ const RegistryItemCard = ({ item, onGift }: RegistryItemCardProps) => {
             size="md"
             aria-label="Close modal"
           />
-          <Text className="registry-modal-title">{modalTitle}</Text>
+          <Text className="registry-modal-title">{giftButtonText}</Text>
         </Box>
         <Box className="registry-modal-form-container">
           <PurchaseForm

@@ -2,6 +2,8 @@ package repository
 
 import (
 	"context"
+	"log"
+	"sync"
 	"time"
 
 	"cloud.google.com/go/firestore"
@@ -12,92 +14,67 @@ import (
 
 type FirestoreRegistryRepository struct {
 	client *firestore.Client
+	
+	// In-memory cache for registry items
+	cache      []model.RegistryItem
+	cacheMu    sync.RWMutex
+	cacheTime  time.Time
+	cacheTTL   time.Duration
 }
 
 func NewFirestoreRegistryRepository(cfg *config.Config, client *firestore.Client) *FirestoreRegistryRepository {
-	return &FirestoreRegistryRepository{client: client}
+	return &FirestoreRegistryRepository{
+		client:   client,
+		cacheTTL: 30 * time.Second, // Cache items for 30 seconds
+	}
 }
 
 func (r *FirestoreRegistryRepository) GetAllItems() ([]model.RegistryItem, error) {
+	// Check cache first
+	r.cacheMu.RLock()
+	if r.cache != nil && time.Since(r.cacheTime) < r.cacheTTL {
+		items := make([]model.RegistryItem, len(r.cache))
+		copy(items, r.cache)
+		r.cacheMu.RUnlock()
+		return items, nil
+	}
+	r.cacheMu.RUnlock()
+
+	// Cache miss - fetch from Firestore using GetAll for batch fetching
 	ctx := context.Background()
 
-	iter := r.client.Collection("registry_items").Documents(ctx)
-	defer iter.Stop()
+	// Use GetAll() instead of iterating - this is more efficient as it fetches all documents in a single RPC
+	docs, err := r.client.Collection("registry_items").Documents(ctx).GetAll()
+	if err != nil {
+		return nil, err
+	}
 
-	var items []model.RegistryItem
-	for {
-		doc, err := iter.Next()
-		if err == iterator.Done {
-			break
-		}
-		if err != nil {
-			return nil, err
-		}
-
+	items := make([]model.RegistryItem, 0, len(docs))
+	for _, doc := range docs {
 		var item model.RegistryItem
 		if err := doc.DataTo(&item); err != nil {
-			return nil, err
+			log.Printf("Warning: failed to parse registry item %s: %v", doc.Ref.ID, err)
+			continue
 		}
 		item.ID = doc.Ref.ID
 		items = append(items, item)
 	}
 
+	// Update cache
+	r.cacheMu.Lock()
+	r.cache = make([]model.RegistryItem, len(items))
+	copy(r.cache, items)
+	r.cacheTime = time.Now()
+	r.cacheMu.Unlock()
+
 	return items, nil
 }
 
-func (r *FirestoreRegistryRepository) FindItemByLabel(label string) (*model.RegistryItem, error) {
-	ctx := context.Background()
-
-	// Query for registry item by label
-	iter := r.client.Collection("registry_items").
-		Where("label", "==", label).
-		Limit(1).
-		Documents(ctx)
-
-	doc, err := iter.Next()
-	if err == iterator.Done {
-		// No item found
-		return nil, nil
-	}
-	if err != nil {
-		return nil, err
-	}
-
-	var item model.RegistryItem
-	if err := doc.DataTo(&item); err != nil {
-		return nil, err
-	}
-	item.ID = doc.Ref.ID
-
-	return &item, nil
+func (r *FirestoreRegistryRepository) invalidateCache() {
+	r.cacheMu.Lock()
+	r.cache = nil
+	r.cacheMu.Unlock()
 }
-
-func (r *FirestoreRegistryRepository) RecordGift(gift *model.GiftRecord) error {
-	ctx := context.Background()
-
-	// Set creation timestamp
-	now := time.Now()
-	gift.CreatedAt = &now
-
-	// Add to gifts collection
-	_, _, err := r.client.Collection("gifts").Add(ctx, gift)
-	return err
-}
-
-func (r *FirestoreRegistryRepository) UpdateItemReceivedQuantity(itemID string, newQuantity int) error {
-	ctx := context.Background()
-
-	docRef := r.client.Collection("registry_items").Doc(itemID)
-
-	_, err := docRef.Update(ctx, []firestore.Update{
-		{Path: "received_quantity", Value: newQuantity},
-	})
-
-	return err
-}
-
-// RecordGiftWithValidation atomically validates availability and records the gift using a Firestore transaction.
-// This prevents race conditions where two users could over-gift an item.
 func (r *FirestoreRegistryRepository) RecordGiftWithValidation(gift *model.GiftRecord, requestedQuantity int) (*model.RegistryItem, error) {
 	ctx := context.Background()
 
@@ -127,8 +104,8 @@ func (r *FirestoreRegistryRepository) RecordGiftWithValidation(gift *model.GiftR
 		}
 		item.ID = doc.Ref.ID
 
-		// For non-special funds, validate quantity
-		if !gift.IsSpecialFund && item.RequestedQuantity != nil {
+		// For items with a requested quantity, validate availability
+		if item.RequestedQuantity != nil {
 			remaining := *item.RequestedQuantity - item.ReceivedQuantity
 
 			if remaining <= 0 {
@@ -173,6 +150,8 @@ func (r *FirestoreRegistryRepository) RecordGiftWithValidation(gift *model.GiftR
 	if err != nil {
 		return nil, err
 	}
+
+	r.invalidateCache()
 
 	return resultItem, nil
 }

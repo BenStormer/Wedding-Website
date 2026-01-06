@@ -43,8 +43,7 @@ func TestHandleGift_Success(t *testing.T) {
 		"lastname": "Doe",
 		"email": "john@example.com",
 		"quantity": 1,
-		"itemLabel": "KitchenAid Stand Mixer",
-		"isSpecialFund": false
+		"itemLabel": "KitchenAid Stand Mixer"
 	}`
 	req := httptest.NewRequest("POST", "/v1/api/registry/gift", strings.NewReader(body))
 	req.Header.Set("Content-Type", "application/json")
@@ -68,23 +67,22 @@ func TestHandleGift_Success(t *testing.T) {
 	}
 }
 
-func TestHandleGift_SpecialFund(t *testing.T) {
+func TestHandleGift_NoQuantityProvided(t *testing.T) {
 	mockService := &MockRegistryService{
 		RecordGiftResult: &model.GiftResponse{
 			Success: true,
-			Message: "Thank you, Jane Smith, for your generous contribution to our Honeymoon Fund!",
+			Message: "Thank you, Jane Smith, for gifting us Family Recipes!",
 		},
 		RecordGiftError: nil,
 	}
 	handler := NewRegistryHandler(mockService)
 
+	// Test that quantity defaults to 1 when not provided
 	body := `{
 		"firstname": "Jane",
 		"lastname": "Smith",
 		"email": "jane@example.com",
-		"quantity": 0,
-		"itemLabel": "Honeymoon Fund",
-		"isSpecialFund": true
+		"itemLabel": "Family Recipes"
 	}`
 	req := httptest.NewRequest("POST", "/v1/api/registry/gift", strings.NewReader(body))
 	req.Header.Set("Content-Type", "application/json")
@@ -187,29 +185,33 @@ func TestHandleGift_MissingItemLabel(t *testing.T) {
 	}
 }
 
-func TestHandleGift_InvalidQuantity(t *testing.T) {
-	mockService := &MockRegistryService{}
+func TestHandleGift_ZeroQuantityDefaultsToOne(t *testing.T) {
+	mockService := &MockRegistryService{
+		RecordGiftResult: &model.GiftResponse{
+			Success: true,
+			Message: "Thank you, John Doe, for gifting us KitchenAid Stand Mixer!",
+		},
+		RecordGiftError: nil,
+	}
 	handler := NewRegistryHandler(mockService)
 
-	body := `{"firstname": "John", "lastname": "Doe", "itemLabel": "KitchenAid Stand Mixer", "quantity": 0, "isSpecialFund": false}`
+	// Quantity 0 should default to 1
+	body := `{"firstname": "John", "lastname": "Doe", "itemLabel": "KitchenAid Stand Mixer", "quantity": 0}`
 	req := httptest.NewRequest("POST", "/v1/api/registry/gift", strings.NewReader(body))
 	req.Header.Set("Content-Type", "application/json")
 
 	recorder := httptest.NewRecorder()
 	handler.HandleGift(recorder, req)
 
-	if recorder.Code != http.StatusBadRequest {
-		t.Errorf("Expected status 400 Bad Request, got %d", recorder.Code)
+	if recorder.Code != http.StatusOK {
+		t.Errorf("Expected status OK, got %d", recorder.Code)
 	}
 
 	var got model.GiftResponse
 	json.Unmarshal(recorder.Body.Bytes(), &got)
 
-	if got.Success != false {
-		t.Errorf("Expected success=false, got %v", got.Success)
-	}
-	if got.Message != "Quantity must be at least 1" {
-		t.Errorf("Expected message='Quantity must be at least 1', got '%s'", got.Message)
+	if got.Success != true {
+		t.Errorf("Expected success=true, got %v", got.Success)
 	}
 }
 

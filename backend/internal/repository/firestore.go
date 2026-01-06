@@ -14,9 +14,11 @@ import (
 )
 
 type FirestoreRsvpRepository struct {
-	client *firestore.Client
+	client    *firestore.Client
+	ownsClient bool // true if this repository owns the client and should close it
 }
 
+// NewFirestoreRsvpRepository creates a new repository with its own Firestore client.
 func NewFirestoreRsvpRepository(cfg *config.Config) (*FirestoreRsvpRepository, error) {
 	ctx := context.Background()
 
@@ -30,7 +32,12 @@ func NewFirestoreRsvpRepository(cfg *config.Config) (*FirestoreRsvpRepository, e
 		return nil, err
 	}
 
-	return &FirestoreRsvpRepository{client: client}, nil
+	return &FirestoreRsvpRepository{client: client, ownsClient: true}, nil
+}
+
+// NewFirestoreRsvpRepositoryWithClient creates a new repository using a shared Firestore client.
+func NewFirestoreRsvpRepositoryWithClient(client *firestore.Client) *FirestoreRsvpRepository {
+	return &FirestoreRsvpRepository{client: client, ownsClient: false}
 }
 
 func (r *FirestoreRsvpRepository) FindGuest(firstName, lastName string) (*model.Guest, error) {
@@ -105,6 +112,10 @@ func (r *FirestoreRsvpRepository) UpdateRsvp(id string, request *model.RsvpReque
 }
 
 func (r *FirestoreRsvpRepository) Close() error {
-	return r.client.Close()
+	// Only close the client if this repository owns it
+	if r.ownsClient {
+		return r.client.Close()
+	}
+	return nil
 }
 

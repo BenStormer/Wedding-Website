@@ -45,6 +45,7 @@ func (s *RegistryService) GetAllItems() (*model.RegistryItemsResponse, error) {
 			ID:                item.ID,
 			Label:             item.Label,
 			Description:       item.Description,
+			Version:           item.Version,
 			Price:             item.Price,
 			Image:             image,
 			Alt:               item.Alt,

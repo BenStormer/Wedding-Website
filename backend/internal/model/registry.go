@@ -2,11 +2,11 @@ package model
 
 import "time"
 
-// Database model for a registry item
 type RegistryItem struct {
 	ID                string  `firestore:"id"`
 	Label             string  `firestore:"label"`
 	Description       string  `firestore:"description"`
+	Version           string  `firestore:"version,omitempty"`
 	Price             float64 `firestore:"price"`
 	Image             string  `firestore:"image"`
 	Alt               string  `firestore:"alt"`
@@ -42,11 +42,11 @@ type GiftResponse struct {
 	Error   string `json:"error,omitempty"`
 }
 
-// API response model for a registry item (matches frontend RegistryItem interface)
 type RegistryItemResponse struct {
 	ID                string  `json:"id"`
 	Label             string  `json:"label"`
 	Description       string  `json:"description"`
+	Version           string  `json:"version,omitempty"`
 	Price             float64 `json:"price"`
 	Image             string  `json:"image"`
 	Alt               string  `json:"alt"`

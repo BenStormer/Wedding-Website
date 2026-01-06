@@ -250,7 +250,12 @@ const PurchaseForm = ({
 };
 
 // Price display
-const PriceDisplay = ({ price }: { price: number }) => {
+interface PriceDisplayProps {
+  price: number;
+  requestedQuantity: number | null;
+}
+
+const PriceDisplay = ({ price, requestedQuantity }: PriceDisplayProps) => {
   if (price === 0) {
     return (
       <Text className="registry-item-price registry-item-price-any">
@@ -258,10 +263,11 @@ const PriceDisplay = ({ price }: { price: number }) => {
       </Text>
     );
   }
+  const showEach = requestedQuantity !== null && requestedQuantity > 1;
   return (
     <Text className="registry-item-price">
       ${price.toLocaleString()}
-      {price >= 100 ? '' : ' each'}
+      {showEach ? ' each' : ''}
     </Text>
   );
 };
@@ -351,7 +357,7 @@ const RegistryItemCard = ({ item, onGift }: RegistryItemCardProps) => {
           />
           {item.price > 0 && (
             <Box className="registry-price-badge">
-              <PriceDisplay price={item.price} />
+              <PriceDisplay price={item.price} requestedQuantity={item.requested_quantity} />
             </Box>
           )}
           {isFullyGifted && (

@@ -23,10 +23,14 @@
 .registry-card-image-section {
   position: relative;
   overflow: hidden;
+  background: #f5f5f5;
 }
 
 .registry-card-image-section img {
   transition: transform 0.3s ease;
+  object-fit: contain;
+  width: 100%;
+  height: 200px;
 }
 
 .registry-card:hover .registry-card-image-section img {

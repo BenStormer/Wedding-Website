@@ -31,6 +31,9 @@ import {
   IconAlertCircle,
 } from '@tabler/icons-react';
 
+// Fallback image URL for failed image loads
+const GIFT_PLACEHOLDER = 'https://placehold.co/400x300/f5f5f5/4a5d4a?text=Gift';
+
 const apiUrl =
   (import.meta.env.VITE_API_URL as string | undefined) ??
   'http://localhost:8080';
@@ -347,14 +350,17 @@ const RegistryItemCard = ({ item, onGift }: RegistryItemCardProps) => {
       <Card className="registry-card" shadow="sm" radius="md" withBorder>
         <Card.Section className="registry-card-image-section">
           <Image
-            src={item.image}
+            src={item.image || GIFT_PLACEHOLDER}
             alt={item.alt}
             height={200}
-            fallbackSrc="https://picsum.photos/800/600"
+            fallbackSrc={GIFT_PLACEHOLDER}
           />
           {item.price > 0 && (
             <Box className="registry-price-badge">
-              <PriceDisplay price={item.price} requestedQuantity={item.requested_quantity} />
+              <PriceDisplay
+                price={item.price}
+                requestedQuantity={item.requested_quantity}
+              />
             </Box>
           )}
           {isFullyGifted && (

@@ -180,7 +180,7 @@ const PurchaseForm = ({
             </>
           ) : (
             <>
-              Thank you for sharing your <strong>{itemLabel}</strong> with us!
+              Thank you for sharing <strong>{itemLabel.toLocaleLowerCase()}</strong> with us!
               Please let us know who to thank!
             </>
           )}

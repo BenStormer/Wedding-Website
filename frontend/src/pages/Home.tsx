@@ -108,7 +108,7 @@ const OtherPageLinks = () => {
           },
           {
             label: 'Registry',
-            details: 'Want to send a gift our way? Here are some ideas',
+            details: 'Want to send a gift our way? Here are some ideas!',
             image: registryGifts,
             alt: 'A set of decorative gift boxes',
             link: '/registry',

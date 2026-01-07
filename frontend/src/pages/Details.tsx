@@ -73,16 +73,20 @@ const Details = () => {
         <Box className="details-header">
           <Stack gap="sm" align="center">
             <Center>
-              <IconCalendarHeart size={36} stroke={1.5} className="details-header-icon" />
+              <IconCalendarHeart
+                size={36}
+                stroke={1.5}
+                className="details-header-icon"
+              />
             </Center>
             <Text className="details-header-title">Wedding Details</Text>
             <Text className="details-header-subtitle">
-              Everything you need to know about our special day
+              Everything you need to know about our special day!
             </Text>
           </Stack>
         </Box>
-      <WeddingTimeline />
-      <WeddingVenueDetails />
+        <WeddingTimeline />
+        <WeddingVenueDetails />
       </Box>
       {Menu('Details', 'green')}
     </div>

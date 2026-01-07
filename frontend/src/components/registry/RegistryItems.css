@@ -131,6 +131,21 @@
   color: var(--secondary-green) !important;
 }
 
+/* Disabled button state - muted green */
+.registry-button:disabled {
+  background-color: #e8ebe8 !important;
+  border-color: #b8c4b8 !important;
+  color: #8a9a8a !important;
+  cursor: not-allowed;
+  opacity: 0.8;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.registry-button:disabled .mantine-Button-label {
+  color: #8a9a8a !important;
+}
+
 .registry-button-purchased {
   padding-left: 8px;
   padding-right: 8px;

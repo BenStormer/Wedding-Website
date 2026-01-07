@@ -17,19 +17,22 @@ import {
 import {
   IconChevronDown,
   IconInfoCircle,
+  IconMail,
+  IconPlane,
   IconMapPin,
   IconHeart,
-  IconPlane,
+  IconClock,
   IconGift,
 } from '@tabler/icons-react';
 
 // Icon mapping for categories
 const categoryIcons: Record<FaqCategory, typeof IconInfoCircle> = {
-  general: IconInfoCircle,
+  rsvp: IconMail, 
+  travel: IconPlane,
   venue: IconMapPin,
-  ceremony: IconHeart,
-  accommodations: IconPlane,
-  gifts: IconGift,
+  ceremony_and_reception: IconHeart,
+  timeline: IconClock,
+  gifts_and_registry: IconGift,
 };
 
 // Category tab button
@@ -77,7 +80,7 @@ const FaqItem = ({ question, answer }: FaqItemProps) => {
 
 // Main FAQ component
 const FaqAccordionSection = () => {
-  const [activeCategory, setActiveCategory] = useState<FaqCategory>('general');
+  const [activeCategory, setActiveCategory] = useState<FaqCategory>('rsvp');
 
   const currentFaqs = faqData[activeCategory];
 

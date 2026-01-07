@@ -45,13 +45,13 @@ func (s *RegistryService) GetAllItems() (*model.RegistryItemsResponse, error) {
 			ID:                item.ID,
 			Label:             item.Label,
 			Description:       item.Description,
+			Version:           item.Version,
 			Price:             item.Price,
 			Image:             image,
 			Alt:               item.Alt,
 			RequestedQuantity: item.RequestedQuantity,
 			ReceivedQuantity:  item.ReceivedQuantity,
 			PurchaseLink:      item.PurchaseLink,
-			IsSpecialFund:     item.IsSpecialFund,
 		}
 	}
 
@@ -64,12 +64,11 @@ func (s *RegistryService) GetAllItems() (*model.RegistryItemsResponse, error) {
 func (s *RegistryService) RecordGift(request model.GiftRequest) (*model.GiftResponse, error) {
 	// Create gift record
 	giftRecord := &model.GiftRecord{
-		ItemLabel:     request.ItemLabel,
-		FirstName:     request.FirstName,
-		LastName:      request.LastName,
-		Email:         request.Email,
-		Quantity:      request.Quantity,
-		IsSpecialFund: request.IsSpecialFund,
+		ItemLabel: request.ItemLabel,
+		FirstName: request.FirstName,
+		LastName:  request.LastName,
+		Email:     request.Email,
+		Quantity:  request.Quantity,
 	}
 
 	// Use transactional method to atomically validate and record the gift
@@ -109,14 +108,8 @@ func (s *RegistryService) RecordGift(request model.GiftRequest) (*model.GiftResp
 	}
 
 	// Build success message
-	var message string
-	if request.IsSpecialFund {
-		message = fmt.Sprintf("Thank you, %s %s, for your generous contribution to our %s!",
-			request.FirstName, request.LastName, item.Label)
-	} else {
-		message = fmt.Sprintf("Thank you, %s %s, for gifting us %s!",
-			request.FirstName, request.LastName, item.Label)
-	}
+	message := fmt.Sprintf("Thank you, %s %s, for gifting us %s!",
+		request.FirstName, request.LastName, item.Label)
 
 	return &model.GiftResponse{
 		Success: true,

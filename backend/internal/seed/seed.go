@@ -47,40 +47,39 @@ func SeedData(ctx context.Context, client *firestore.Client) error {
 	// Seed registry items
 	registryItems := []model.RegistryItem{
 		{
-			ID:                "honeymoon-fund",
-			Label:             "Honeymoon Fund",
-			Description:       "Help us create unforgettable memories on our honeymoon! We're dreaming of exploring together. Any contribution is deeply appreciated.",
+			ID:                "family-recipes",
+			Label:             "Family Recipes",
+			Description:       "Share your favorite family recipes with us! We'd love to cook your cherished dishes in our new home together.",
 			Price:             0,
-			Image:             "https://picsum.photos/seed/honeymoon/800/600",
-			Alt:               "Tropical beach destination",
-			RequestedQuantity: nil, // unlimited
+			Image:             "https://picsum.photos/seed/recipes/800/600",
+			Alt:               "Handwritten recipe cards",
+			RequestedQuantity: nil,
 			ReceivedQuantity:  0,
-			PurchaseLink:      "https://www.honeyfund.com",
-			IsSpecialFund:     true,
+			PurchaseLink:      "",
 		},
 		{
 			ID:                "kitchenaid-mixer",
 			Label:             "KitchenAid Stand Mixer",
 			Description:       "A classic kitchen essential for baking together. We would love the Artisan series in any neutral color!",
+			Version:           "5 Qt, Artisan Series",
 			Price:             350,
 			Image:             "https://picsum.photos/seed/mixer/800/600",
 			Alt:               "KitchenAid Stand Mixer",
 			RequestedQuantity: intPtr(1),
 			ReceivedQuantity:  0,
 			PurchaseLink:      "https://www.williams-sonoma.com",
-			IsSpecialFund:     false,
 		},
 		{
 			ID:                "le-creuset",
 			Label:             "Le Creuset Dutch Oven",
-			Description:       "Perfect for cozy soups and stews. The 5.5 quart size in any color would be wonderful.",
+			Description:       "Perfect for cozy soups and stews.",
+			Version:           "5.5 Qt, Any Color",
 			Price:             400,
 			Image:             "https://picsum.photos/seed/dutchoven/800/600",
 			Alt:               "Le Creuset Dutch Oven",
 			RequestedQuantity: intPtr(1),
 			ReceivedQuantity:  0,
 			PurchaseLink:      "https://www.lecreuset.com",
-			IsSpecialFund:     false,
 		},
 		{
 			ID:                "towel-set",
@@ -92,7 +91,6 @@ func SeedData(ctx context.Context, client *firestore.Client) error {
 			RequestedQuantity: intPtr(2),
 			ReceivedQuantity:  1,
 			PurchaseLink:      "https://www.parachutehome.com",
-			IsSpecialFund:     false,
 		},
 		{
 			ID:                "dyson-vacuum",
@@ -104,7 +102,6 @@ func SeedData(ctx context.Context, client *firestore.Client) error {
 			RequestedQuantity: intPtr(1),
 			ReceivedQuantity:  0,
 			PurchaseLink:      "https://www.dyson.com",
-			IsSpecialFund:     false,
 		},
 		{
 			ID:                "dinner-plates",
@@ -116,7 +113,6 @@ func SeedData(ctx context.Context, client *firestore.Client) error {
 			RequestedQuantity: intPtr(1),
 			ReceivedQuantity:  0,
 			PurchaseLink:      "https://www.crateandbarrel.com",
-			IsSpecialFund:     false,
 		},
 	}
 

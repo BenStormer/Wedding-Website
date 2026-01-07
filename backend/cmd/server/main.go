@@ -59,13 +59,8 @@ func main() {
 	}
 	defer firestoreClient.Close()
 
-	// 3. Initialize repositories with shared client
-	rsvpRepo, err := repository.NewFirestoreRsvpRepository(cfg)
-	if err != nil {
-		log.Fatalf("Failed to initialize RSVP repository: %v", err)
-	}
-	defer rsvpRepo.Close()
-
+	// 3. Initialize repositories with shared Firestore client
+	rsvpRepo := repository.NewFirestoreRsvpRepositoryWithClient(firestoreClient)
 	registryRepo := repository.NewFirestoreRegistryRepository(cfg, firestoreClient)
 
 	// 4. Wire up layers

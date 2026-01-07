@@ -96,17 +96,8 @@ func (h *RegistryHandler) HandleGift(w http.ResponseWriter, r *http.Request) {
 		})
 		return
 	}
-	if request.Quantity < 1 && !request.IsSpecialFund {
-		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(model.GiftResponse{
-			Success: false,
-			Message: "Quantity must be at least 1",
-		})
-		return
-	}
-
-	// For special funds, set quantity to 1 if not provided
-	if request.IsSpecialFund && request.Quantity < 1 {
+	// Default quantity to 1 if not provided (for items without quantity tracking)
+	if request.Quantity < 1 {
 		request.Quantity = 1
 	}
 

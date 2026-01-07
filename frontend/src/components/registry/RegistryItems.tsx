@@ -31,7 +31,12 @@ import {
   IconAlertCircle,
 } from '@tabler/icons-react';
 
-const apiUrl = (import.meta.env.VITE_API_URL as string | undefined) ?? 'http://localhost:8080';
+// Fallback image URL for failed image loads
+const GIFT_PLACEHOLDER = 'https://placehold.co/400x300/f5f5f5/4a5d4a?text=Gift';
+
+const apiUrl =
+  (import.meta.env.VITE_API_URL as string | undefined) ??
+  'http://localhost:8080';
 
 // Form values type
 interface PurchaseFormValues {
@@ -51,7 +56,7 @@ interface ApiResponse {
 interface PurchaseFormProps {
   remainingQuantity: number | null;
   itemLabel: string;
-  isSpecialFund?: boolean;
+  hasPurchaseLink: boolean;
   onSubmit: (quantity: number) => void;
   onClose: () => void;
 }
@@ -59,12 +64,15 @@ interface PurchaseFormProps {
 const PurchaseForm = ({
   remainingQuantity,
   itemLabel,
-  isSpecialFund,
+  hasPurchaseLink,
   onSubmit,
   onClose,
 }: PurchaseFormProps) => {
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [message, setMessage] = useState<{
+    type: 'success' | 'error';
+    text: string;
+  } | null>(null);
 
   const form = useForm<PurchaseFormValues>({
     mode: 'controlled',
@@ -98,7 +106,6 @@ const PurchaseForm = ({
           email: values.email,
           quantity: values.quantity,
           itemLabel: itemLabel,
-          isSpecialFund: isSpecialFund,
         }),
       });
 
@@ -107,13 +114,24 @@ const PurchaseForm = ({
       if (data.success) {
         form.reset();
         onSubmit(values.quantity);
-        setMessage({ type: 'success', text: data.message ?? 'Thank you so much for your generous gift!' });
+        setMessage({
+          type: 'success',
+          text: data.message ?? 'Thank you so much for your generous gift!',
+        });
       } else {
-        setMessage({ type: 'error', text: data.message ?? 'There was an error recording your gift. Please try again.' });
+        setMessage({
+          type: 'error',
+          text:
+            data.message ??
+            'There was an error recording your gift. Please try again.',
+        });
       }
     } catch (error) {
       console.error('Error submitting gift:', error);
-      setMessage({ type: 'error', text: 'Unable to connect to the server. Please try again later.' });
+      setMessage({
+        type: 'error',
+        text: 'Unable to connect to the server. Please try again later.',
+      });
     } finally {
       setLoading(false);
     }
@@ -132,11 +150,9 @@ const PurchaseForm = ({
         <Text className="registry-message-title">
           {message.type === 'success' ? "You're All Set!" : 'Oops!'}
         </Text>
-        <Text className="registry-message-text">
-          {message.text}
-        </Text>
-        <Button 
-          onClick={onClose} 
+        <Text className="registry-message-text">{message.text}</Text>
+        <Button
+          onClick={onClose}
           className="registry-close-button"
           variant="outline"
           size="md"
@@ -150,17 +166,22 @@ const PurchaseForm = ({
   return (
     <form onSubmit={form.onSubmit(handleSubmit)}>
       <Stack gap="md">
-        <Text size="sm" c="var(--bold-green)" ta="center" className="registry-form-description">
-          {isSpecialFund ? (
-            <>
-              Thank you for contributing to our <strong>{itemLabel}</strong>!
-              Please let us know who to thank!
-            </>
-          ) : (
+        <Text
+          size="sm"
+          c="var(--bold-green)"
+          ta="center"
+          className="registry-form-description"
+        >
+          {hasPurchaseLink ? (
             <>
               Thank you for gifting us{' '}
               {/^[aeiou]/i.test(itemLabel) ? 'an' : 'a'}{' '}
               <strong>{itemLabel}</strong>! Please let us know who to thank!
+            </>
+          ) : (
+            <>
+              Thank you for sharing your <strong>{itemLabel}</strong> with us!
+              Please let us know who to thank!
             </>
           )}
         </Text>
@@ -201,11 +222,11 @@ const PurchaseForm = ({
           {...form.getInputProps('email')}
         />
 
-        {!isSpecialFund && (
+        {remainingQuantity !== null && (
           <NumberInput
-            label="Quantity purchased"
+            label="Quantity"
             min={1}
-            max={remainingQuantity ?? undefined}
+            max={remainingQuantity}
             allowDecimal={false}
             defaultValue={1}
             classNames={{
@@ -216,8 +237,8 @@ const PurchaseForm = ({
           />
         )}
 
-        <Button 
-          type="submit" 
+        <Button
+          type="submit"
           loading={loading}
           className="registry-submit-button"
           size="lg"
@@ -232,7 +253,12 @@ const PurchaseForm = ({
 };
 
 // Price display
-const PriceDisplay = ({ price }: { price: number }) => {
+interface PriceDisplayProps {
+  price: number;
+  requestedQuantity: number | null;
+}
+
+const PriceDisplay = ({ price, requestedQuantity }: PriceDisplayProps) => {
   if (price === 0) {
     return (
       <Text className="registry-item-price registry-item-price-any">
@@ -240,10 +266,11 @@ const PriceDisplay = ({ price }: { price: number }) => {
       </Text>
     );
   }
+  const showEach = requestedQuantity !== null && requestedQuantity > 1;
   return (
     <Text className="registry-item-price">
       ${price.toLocaleString()}
-      {price >= 100 ? '' : ' each'}
+      {showEach ? ' each' : ''}
     </Text>
   );
 };
@@ -291,10 +318,13 @@ const ProgressDisplay = ({ received, requested }: ProgressDisplayProps) => {
   );
 };
 
-// Check if item is fully gifted
 const isItemFullyGifted = (item: RegistryItem): boolean => {
-  if (item.requested_quantity === null) return false; // Special funds are never "fully gifted"
+  if (item.requested_quantity === null) return false;
   return item.received_quantity >= item.requested_quantity;
+};
+
+const hasPurchaseLink = (item: RegistryItem): boolean => {
+  return item.purchase_link !== '' && item.purchase_link !== null;
 };
 
 // Individual registry item card
@@ -306,24 +336,33 @@ interface RegistryItemCardProps {
 const RegistryItemCard = ({ item, onGift }: RegistryItemCardProps) => {
   const [opened, { open, close }] = useDisclosure(false);
   const isFullyGifted = isItemFullyGifted(item);
+  const itemHasPurchaseLink = hasPurchaseLink(item);
 
   const handleGiftSubmit = (quantity: number) => {
     onGift(item.id, quantity);
   };
+
+  // Determine button text based on whether item has a purchase link
+  const giftButtonText = 'I Got This';
 
   return (
     <>
       <Card className="registry-card" shadow="sm" radius="md" withBorder>
         <Card.Section className="registry-card-image-section">
           <Image
-            src={item.image}
+            src={item.image || GIFT_PLACEHOLDER}
             alt={item.alt}
             height={200}
-            fallbackSrc="https://picsum.photos/800/600"
+            fallbackSrc={GIFT_PLACEHOLDER}
           />
-          <Box className="registry-price-badge">
-            <PriceDisplay price={item.price} />
-          </Box>
+          {item.price > 0 && (
+            <Box className="registry-price-badge">
+              <PriceDisplay
+                price={item.price}
+                requestedQuantity={item.requested_quantity}
+              />
+            </Box>
+          )}
           {isFullyGifted && (
             <Box className="registry-gifted-overlay">
               <IconHeart size={32} />
@@ -335,7 +374,22 @@ const RegistryItemCard = ({ item, onGift }: RegistryItemCardProps) => {
         <Stack gap="sm" className="registry-card-content">
           <Text className="registry-item-title">{item.label}</Text>
 
-          <Text size="sm" c="var(--bold-green)" className="registry-item-description">
+          {item.version && (
+            <Text
+              size="sm"
+              c="var(--bold-green)"
+              fs="italic"
+              className="registry-item-version"
+            >
+              {item.version}
+            </Text>
+          )}
+
+          <Text
+            size="sm"
+            c="var(--bold-green)"
+            className="registry-item-description"
+          >
             {item.description}
           </Text>
 
@@ -344,19 +398,25 @@ const RegistryItemCard = ({ item, onGift }: RegistryItemCardProps) => {
             requested={item.requested_quantity}
           />
 
-          <Group grow gap="sm" className="registry-card-buttons">
-            <Button
-              component="a"
-              href={item.purchase_link}
-              target="_blank"
-              rel="noopener noreferrer"
-              variant="light"
-              color="var(--primary-green)"
-              leftSection={<IconExternalLink size={15} />}
-              className="registry-button"
-            >
-              {item.isSpecialFund ? 'Contribute' : 'Purchase'}
-            </Button>
+          <Group
+            grow={itemHasPurchaseLink}
+            gap="sm"
+            className="registry-card-buttons"
+          >
+            {itemHasPurchaseLink && (
+              <Button
+                component="a"
+                href={item.purchase_link}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="light"
+                color="var(--primary-green)"
+                leftSection={<IconExternalLink size={15} />}
+                className="registry-button"
+              >
+                Get This
+              </Button>
+            )}
             <Button
               onClick={open}
               disabled={isFullyGifted}
@@ -364,8 +424,9 @@ const RegistryItemCard = ({ item, onGift }: RegistryItemCardProps) => {
               color="var(--primary-green)"
               leftSection={<IconGift size={14} />}
               className="registry-button registry-button-purchased"
+              fullWidth={!itemHasPurchaseLink}
             >
-              {item.isSpecialFund ? 'I Contributed' : 'I Purchased'}
+              {giftButtonText}
             </Button>
           </Group>
         </Stack>
@@ -387,15 +448,13 @@ const RegistryItemCard = ({ item, onGift }: RegistryItemCardProps) => {
         }}
       >
         <Box className="registry-modal-header">
-          <CloseButton 
-            onClick={close} 
+          <CloseButton
+            onClick={close}
             className="registry-modal-close-button"
             size="md"
             aria-label="Close modal"
           />
-          <Text className="registry-modal-title">
-            {item.isSpecialFund ? 'I Contributed to This!' : 'I Purchased This!'}
-          </Text>
+          <Text className="registry-modal-title">{giftButtonText}</Text>
         </Box>
         <Box className="registry-modal-form-container">
           <PurchaseForm
@@ -405,7 +464,7 @@ const RegistryItemCard = ({ item, onGift }: RegistryItemCardProps) => {
                 : null
             }
             itemLabel={item.label}
-            isSpecialFund={item.isSpecialFund}
+            hasPurchaseLink={itemHasPurchaseLink}
             onSubmit={handleGiftSubmit}
             onClose={close}
           />
@@ -415,17 +474,15 @@ const RegistryItemCard = ({ item, onGift }: RegistryItemCardProps) => {
   );
 };
 
-// Sort items: special funds first, then incomplete items, then completed items
 const sortRegistryItems = (items: RegistryItem[]): RegistryItem[] => {
   return [...items].sort((a, b) => {
-    // Special funds always come first
-    if (a.isSpecialFund && !b.isSpecialFund) return -1;
-    if (!a.isSpecialFund && b.isSpecialFund) return 1;
+    const aHasLink = hasPurchaseLink(a);
+    const bHasLink = hasPurchaseLink(b);
+    if (!aHasLink && bHasLink) return -1;
+    if (aHasLink && !bHasLink) return 1;
 
-    // Then sort by completion status (incomplete first)
     const aComplete = isItemFullyGifted(a);
     const bComplete = isItemFullyGifted(b);
-
     if (!aComplete && bComplete) return -1;
     if (aComplete && !bComplete) return 1;
 
@@ -449,7 +506,7 @@ const RegistryItemsGrid = () => {
   const fetchItems = async () => {
     setLoading(true);
     setError(null);
-    
+
     try {
       const response = await fetch(`${apiUrl}/v1/api/registry/items`);
       const data = (await response.json()) as RegistryItemsApiResponse;
@@ -469,7 +526,7 @@ const RegistryItemsGrid = () => {
   };
 
   useEffect(() => {
-    fetchItems();
+    void fetchItems();
   }, []);
 
   const handleGift = (itemId: string, quantity: number) => {
@@ -498,11 +555,13 @@ const RegistryItemsGrid = () => {
       <Box className="registry-grid-container registry-error">
         <Stack align="center" gap="md">
           <IconAlertCircle size={48} color="var(--primary-green)" />
-          <Text c="var(--bold-green)" ta="center">{error}</Text>
+          <Text c="var(--bold-green)" ta="center">
+            {error}
+          </Text>
           <Button
             variant="outline"
             color="var(--primary-green)"
-            onClick={fetchItems}
+            onClick={() => void fetchItems()}
           >
             Try Again
           </Button>
@@ -516,7 +575,9 @@ const RegistryItemsGrid = () => {
       <Box className="registry-grid-container registry-empty">
         <Stack align="center" gap="md">
           <IconGift size={48} color="var(--primary-green)" />
-          <Text c="var(--bold-green)" ta="center">No registry items available yet.</Text>
+          <Text c="var(--bold-green)" ta="center">
+            No registry items available yet.
+          </Text>
         </Stack>
       </Box>
     );

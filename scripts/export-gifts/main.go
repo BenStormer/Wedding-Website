@@ -16,14 +16,13 @@ import (
 
 // GiftRecord represents a gift document in Firestore
 type GiftRecord struct {
-	ID            string
-	ItemLabel     string     `firestore:"item_label"`
-	FirstName     string     `firestore:"first_name"`
-	LastName      string     `firestore:"last_name"`
-	Email         string     `firestore:"email"`
-	Quantity      int        `firestore:"quantity"`
-	IsSpecialFund bool       `firestore:"is_special_fund"`
-	CreatedAt     *time.Time `firestore:"created_at"`
+	ID        string
+	ItemLabel string     `firestore:"item_label"`
+	FirstName string     `firestore:"first_name"`
+	LastName  string     `firestore:"last_name"`
+	Email     string     `firestore:"email"`
+	Quantity  int        `firestore:"quantity"`
+	CreatedAt *time.Time `firestore:"created_at"`
 }
 
 func main() {
@@ -141,7 +140,6 @@ func writeCSV(path string, gifts []GiftRecord) error {
 		"Email",
 		"Item",
 		"Quantity",
-		"Type",
 		"Date",
 	}
 	if err := writer.Write(header); err != nil {
@@ -150,11 +148,6 @@ func writeCSV(path string, gifts []GiftRecord) error {
 
 	// Write records
 	for _, gift := range gifts {
-		giftType := "Regular Gift"
-		if gift.IsSpecialFund {
-			giftType = "Special Fund Contribution"
-		}
-
 		dateStr := ""
 		if gift.CreatedAt != nil {
 			dateStr = gift.CreatedAt.Format("2006-01-02 3:04 PM")
@@ -166,7 +159,6 @@ func writeCSV(path string, gifts []GiftRecord) error {
 			gift.Email,
 			gift.ItemLabel,
 			fmt.Sprintf("%d", gift.Quantity),
-			giftType,
 			dateStr,
 		}
 		if err := writer.Write(record); err != nil {
@@ -183,19 +175,13 @@ func printSummary(gifts []GiftRecord) {
 	// Count by item
 	itemCounts := make(map[string]int)
 	itemQuantities := make(map[string]int)
-	specialFundCount := 0
 
 	for _, gift := range gifts {
 		itemCounts[gift.ItemLabel]++
 		itemQuantities[gift.ItemLabel] += gift.Quantity
-		if gift.IsSpecialFund {
-			specialFundCount++
-		}
 	}
 
 	fmt.Printf("\nTotal gift records: %d\n", len(gifts))
-	fmt.Printf("Special fund contributions: %d\n", specialFundCount)
-	fmt.Printf("Regular gifts: %d\n", len(gifts)-specialFundCount)
 
 	fmt.Println("\nBy Item:")
 	// Sort items by count for display

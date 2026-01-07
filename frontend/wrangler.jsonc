@@ -4,8 +4,5 @@
   "assets": {
     "directory": "./dist/",
     "not_found_handling": "single-page-application"
-  },
-  "vars": {
-    "VITE_API_URL": "https://wedding-website-api-z27bzcxl7q-uc.a.run.app"
   }
 }

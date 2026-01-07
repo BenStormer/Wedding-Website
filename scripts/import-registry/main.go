@@ -9,9 +9,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
-)
 
-import (
 	"cloud.google.com/go/firestore"
 )
 
@@ -20,13 +18,13 @@ type RegistryItem struct {
 	ID                string  `firestore:"id"`
 	Label             string  `firestore:"label"`
 	Description       string  `firestore:"description"`
+	Version           string  `firestore:"version,omitempty"`
 	Price             float64 `firestore:"price"`
 	Image             string  `firestore:"image"`
 	Alt               string  `firestore:"alt"`
-	RequestedQuantity *int    `firestore:"requested_quantity"` // nil = unlimited (special fund)
+	RequestedQuantity *int    `firestore:"requested_quantity"`
 	ReceivedQuantity  int     `firestore:"received_quantity"`
 	PurchaseLink      string  `firestore:"purchase_link"`
-	IsSpecialFund     bool    `firestore:"is_special_fund"`
 }
 
 // normalizeColumnName handles various column name formats
@@ -54,8 +52,8 @@ func normalizeColumnName(col string) string {
 		return "requestedquantity"
 	case "purchaselink", "link", "url", "buylink", "storelink":
 		return "purchaselink"
-	case "isspecialfund", "specialfund", "fund", "isfund":
-		return "isspecialfund"
+	case "version", "variant", "spec", "specs", "specifications":
+		return "version"
 	default:
 		return col
 	}
@@ -104,11 +102,10 @@ func main() {
 			if item.RequestedQuantity != nil {
 				qtyStr = fmt.Sprintf("%d", *item.RequestedQuantity)
 			}
-			fundStr := ""
-			if item.IsSpecialFund {
-				fundStr = " [SPECIAL FUND]"
+			log.Printf("  %d. %s (ID: %s, $%.2f, qty: %s)", i+1, item.Label, item.ID, item.Price, qtyStr)
+			if item.Version != "" {
+				log.Printf("      Version: %s", item.Version)
 			}
-			log.Printf("  %d. %s (ID: %s, $%.2f, qty: %s)%s", i+1, item.Label, item.ID, item.Price, qtyStr, fundStr)
 			log.Printf("      Description: %s", truncate(item.Description, 60))
 			log.Printf("      Link: %s", item.PurchaseLink)
 			if item.Image != "" {
@@ -166,6 +163,10 @@ func readCSV(path string) ([]RegistryItem, error) {
 	// Map column names to indices (case-insensitive, handles variations)
 	colIndex := make(map[string]int)
 	for i, col := range header {
+		// Strip BOM (Byte Order Mark) from first column if present
+		if i == 0 {
+			col = strings.TrimPrefix(col, "\ufeff")
+		}
 		normalized := normalizeColumnName(col)
 		colIndex[normalized] = i
 	}
@@ -251,10 +252,9 @@ func readCSV(path string) ([]RegistryItem, error) {
 			item.PurchaseLink = strings.TrimSpace(record[idx])
 		}
 
-		// Is special fund
-		if idx, ok := colIndex["isspecialfund"]; ok && idx < len(record) {
-			val := strings.ToLower(strings.TrimSpace(record[idx]))
-			item.IsSpecialFund = val == "true" || val == "yes" || val == "1" || val == "y"
+		// Version (optional)
+		if idx, ok := colIndex["version"]; ok && idx < len(record) {
+			item.Version = strings.TrimSpace(record[idx])
 		}
 
 		items = append(items, item)

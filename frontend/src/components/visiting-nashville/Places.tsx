@@ -168,7 +168,7 @@ export const data: Record<PlaceCategory, Place[]> = {
         'https://maps.google.com/?q=Hilton+Garden+Inn+Nashville+Vanderbilt',
       cost: 2,
       websiteLink:
-        'https://www.hilton.com/en/hotels/bnavbgi-hilton-garden-inn-nashville-vanderbilt/',
+        'https://www.hilton.com/en/hotels/bnagigi-hilton-garden-inn-nashville-west-end-avenue/',
       tags: ['midtown', 'parking'],
     },
   ],
@@ -269,7 +269,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       alt: 'Tennessee State Capitol building',
       directionsLink: 'https://maps.google.com/?q=Tennessee+State+Capitol',
       cost: 0,
-      websiteLink: 'https://www.capitol.tn.gov',
+      websiteLink: 'https://www.capitol.tn.gov/about/capitolvisit.html',
       tags: ['downtown', 'indoor', 'history', 'walkable', 'free'],
     },
     {
@@ -342,7 +342,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       directionsLink: 'https://maps.google.com/?q=Regal+Opry+Mills+IMAX',
       cost: 2,
       websiteLink:
-        'https://www.regmovies.com/theatres/regal-opry-mills-imax/0852',
+        'https://www.regmovies.com/theatres/regal-opry-mills-0615',
       tags: ['opry-mills', 'indoor', 'parking'],
     },
     {
@@ -391,7 +391,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       alt: 'Greenhouse Bar rooftop',
       directionsLink: 'https://maps.google.com/?q=Greenhouse+Bar+Nashville',
       cost: 2,
-      websiteLink: 'https://www.greenhousebar.com',
+      websiteLink: 'https://www.greenhousenash.com/',
       tags: ['downtown', 'drinks', 'rooftop', 'walkable'],
     },
     {
@@ -494,7 +494,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       alt: 'Oku Japanese restaurant',
       directionsLink: 'https://maps.google.com/?q=Oku+Nashville',
       cost: 3,
-      websiteLink: 'https://www.okunashville.com',
+      websiteLink: 'https://www.o-kusushi.com/location/o-ku-nashville/',
       tags: ['germantown', 'upscale', 'drinks', 'local-favorite'],
     },
     {
@@ -551,7 +551,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       alt: 'Emmy Squared pizza',
       directionsLink: 'https://maps.google.com/?q=Emmy+Squared+Nashville',
       cost: 2,
-      websiteLink: 'https://www.emmysquared.com',
+      websiteLink: 'https://www.emmysquaredpizza.com/location/germantown-nashville-tn/',
       tags: ['gulch', 'casual', 'local-favorite', 'drinks'],
     },
     {

@@ -24,6 +24,9 @@ import {
   IconX,
 } from '@tabler/icons-react';
 
+// Fallback image URL for failed image loads
+const PLACE_PLACEHOLDER = 'https://placehold.co/800x600/f5f0ed/5e4838?text=Place';
+
 // Cost display component
 const CostDisplay = ({ cost }: { cost: number }) => {
   if (cost === 0) {
@@ -65,7 +68,7 @@ const PlaceCard = ({ place, onTagClick, activeFilters }: PlaceCardProps) => {
           src={place.image}
           alt={place.alt}
           height={180}
-          fallbackSrc="https://picsum.photos/800/600"
+          fallbackSrc={PLACE_PLACEHOLDER}
         />
         <Box className="place-card-cost-badge">
           <CostDisplay cost={place.cost} />

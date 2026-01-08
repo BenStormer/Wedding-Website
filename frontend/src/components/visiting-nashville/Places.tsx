@@ -1,3 +1,45 @@
+// Images for Places to Stay
+import hiltonDownton from '../../assets/images/visiting-nashville/stay/hilton_downtown.webp';
+import hiltonWestEnd from '../../assets/images/visiting-nashville/stay/hilton_west_end.webp';
+import joseph from '../../assets/images/visiting-nashville/stay/joseph.webp';
+
+// Images for Places to See
+import bicentennial from '../../assets/images/visiting-nashville/see/bicentennial.webp';
+import broadway from '../../assets/images/visiting-nashville/see/broadway.webp';
+import capitol from '../../assets/images/visiting-nashville/see/capitol.webp';
+import centennial from '../../assets/images/visiting-nashville/see/centennial.webp';
+import cheekwood from '../../assets/images/visiting-nashville/see/cheekwood.webp';
+import farmersMarket from '../../assets/images/visiting-nashville/see/farmers_market.webp';
+import grandOleOpry from '../../assets/images/visiting-nashville/see/grand_ole_opry.webp';
+import nashvillePredatorsHockey from '../../assets/images/visiting-nashville/see/nashville_predators_hockey.webp';
+import nashvilleSoccer from '../../assets/images/visiting-nashville/see/nashville_soccer.webp';
+import nelsonsGreenbrier from '../../assets/images/visiting-nashville/see/nelsons_greenbrier.webp';
+import parthenon from '../../assets/images/visiting-nashville/see/parthenon.webp';
+import regalOpryMills from '../../assets/images/visiting-nashville/see/regal_opry_mills.webp';
+import ryman from '../../assets/images/visiting-nashville/see/ryman.webp';
+import stateHistoryMuseum from '../../assets/images/visiting-nashville/see/state_history_museum.webp';
+import tpac from '../../assets/images/visiting-nashville/see/tpac.webp';
+import zoo from '../../assets/images/visiting-nashville/see/zoo.webp';
+
+// Images for Places to Eat
+import adeles from '../../assets/images/visiting-nashville/eat/adeles.webp';
+import assemblyFoodHall from '../../assets/images/visiting-nashville/eat/assembly_food_hall.webp';
+import bastion from '../../assets/images/visiting-nashville/eat/bastion.webp';
+import butchertownHall from '../../assets/images/visiting-nashville/eat/butchertown_hall.webp';
+import condado from '../../assets/images/visiting-nashville/eat/condado.webp';
+import cookout from '../../assets/images/visiting-nashville/eat/cookout.webp';
+import emmySquared from '../../assets/images/visiting-nashville/eat/emmy_squared.webp';
+import fishmonger from '../../assets/images/visiting-nashville/eat/fishmonger.webp';
+import greenhouse from '../../assets/images/visiting-nashville/eat/greenhouse.webp';
+import hattieBs from '../../assets/images/visiting-nashville/eat/hattie_bs.webp';
+import hawkers from '../../assets/images/visiting-nashville/eat/hawkers.webp';
+import littleHats from '../../assets/images/visiting-nashville/eat/little_hats.webp';
+import locust from '../../assets/images/visiting-nashville/eat/locust.webp';
+import oku from '../../assets/images/visiting-nashville/eat/oku.webp';
+import oleSmoky from '../../assets/images/visiting-nashville/eat/ole_smoky.webp';
+import pizzaPerfect from '../../assets/images/visiting-nashville/eat/pizza_perfect.webp';
+import theCatbirdSeat from '../../assets/images/visiting-nashville/eat/the_catbird_seat.webp';
+
 // Tags for Places to Stay
 export type StayTag = 'downtown' | 'midtown' | 'upscale' | 'parking' | 'valet';
 
@@ -93,8 +135,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Hilton Nashville Downtown',
       details:
         'In the heart of Lower Broadway, right next to Bridgestone Arena. Perfect if you want to be in the middle of all the action in Nashville!',
-      image:
-        'https://www.hilton.com/im/en/BNANSHF/14149761/exterior-2.jpg?impolicy=crop&cw=5720&ch=3203&gravity=NorthWest&xposition=95&yposition=0&rw=768&rh=430',
+      image: hiltonDownton,
       alt: 'Hilton Nashville Downtown',
       directionsLink:
         'https://maps.google.com/?q=Hilton+Nashville+Downtown+Broadway',
@@ -107,8 +148,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'The Joseph',
       details:
         "One of Nashville's most acclaimed luxury hotels. Home to Yolan, widely considered the best Italian restaurant in the city (though we haven't tried it yet!).",
-      image:
-        'https://www.thejosephnashville.com/resourcefiles/mainimages/presidential-suite-living-room-main-el-1962x1076.jpg?version=1022026142602',
+      image: joseph,
       alt: 'The Joseph hotel',
       directionsLink: 'https://maps.google.com/?q=The+Joseph+Nashville',
       cost: 4,
@@ -119,14 +159,13 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Hilton Garden Inn Nashville West End',
       details:
         'Very close to the wedding venue! Also near Vanderbilt University, Centennial Park, and the Parthenon.',
-      image:
-        'https://www.hilton.com/im/en/BNAGIGI/22684435/bnagi-exterior-03.tif?impolicy=crop&cw=5000&ch=2799&gravity=NorthWest&xposition=0&yposition=266&rw=768&rh=430',
+      image: hiltonWestEnd,
       alt: 'Hilton Garden Inn Nashville West End',
       directionsLink:
         'https://maps.google.com/?q=Hilton+Garden+Inn+Nashville+Vanderbilt',
       cost: 2,
       websiteLink:
-        'https://www.hilton.com/en/hotels/bnavbgi-hilton-garden-inn-nashville-vanderbilt/',
+        'https://www.hilton.com/en/hotels/bnagigi-hilton-garden-inn-nashville-west-end-avenue/',
       tags: ['midtown', 'parking'],
     },
   ],
@@ -135,8 +174,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'The Parthenon',
       details:
         'A full-scale replica of the original Parthenon in Athens, housing a 42-foot statue of Athena. A must-see Nashville landmark!',
-      image:
-        'https://images.squarespace-cdn.com/content/v1/5e305abfabc0e4424fd1454a/47b12cc5-2260-4ffd-ba04-88e14640b62e/NathanZucker_0323+%281%29.jpg?format=750w',
+      image: parthenon,
       alt: 'The Parthenon',
       directionsLink: 'https://maps.google.com/?q=The+Parthenon+Nashville',
       cost: 1,
@@ -147,8 +185,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Centennial Park',
       details:
         'Beautiful 132-acre park surrounding the Parthenon. Perfect for a morning walk, picnic, or jog around the lake. This is where we took our engagement photos!',
-      image:
-        'https://images.squarespace-cdn.com/content/v1/6022faf9ee791718f6cf0b87/9515ed89-7a72-4b94-a9cf-acfccc925e0b/Repatriation+and+Its+Impact+Celebration+7.14.24+Centennial+Park+-%40VonRphoto-60+%281%29.jpg?format=1500w',
+      image: centennial,
       alt: 'Centennial Park',
       directionsLink: 'https://maps.google.com/?q=Centennial+Park+Nashville',
       cost: 0,
@@ -160,8 +197,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Nashville Zoo at Grassmere',
       details:
         'A 188-acre zoo with over 6,000 animals. Great for families with kids of all ages. The Jungle Gym playground is a must!',
-      image:
-        'https://www.visitmusiccity.com/sites/default/files/styles/listing_slide/public/listing_images/nashvilletn-3414_nashville-zoo-white-rhinoceros-2017-amiee-stubbs-1-_36dacf2f-5056-b3a8-4919af5d19689a6e_0.jpg.webp?itok=SNJWcMCc',
+      image: zoo,
       alt: 'Nashville Zoo',
       directionsLink: 'https://maps.google.com/?q=Nashville+Zoo',
       cost: 2,
@@ -172,8 +208,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Lower Broadway',
       details:
         'The heart of Nashville! Honky-tonks, live music, and people-watching. No cover charges at most bars.',
-      image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Broadway_%28Nashville%29_lights.jpg/960px-Broadway_%28Nashville%29_lights.jpg',
+      image: broadway,
       alt: 'Lower Broadway at night',
       directionsLink: 'https://maps.google.com/?q=Lower+Broadway+Nashville+TN',
       cost: 0,
@@ -185,8 +220,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: "Nashville Farmers' Market",
       details:
         'Year-round market with fresh produce, local vendors, and international food stalls. The Market House has great lunch spots!',
-      image:
-        'https://www.trolleytours.com/wp-content/uploads/2016/06/nashville-farmers-market-aerial-683x384.jpg',
+      image: farmersMarket,
       alt: "Nashville Farmers' Market",
       directionsLink: 'https://maps.google.com/?q=Nashville+Farmers+Market',
       cost: 0,
@@ -197,8 +231,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Tennessee State Museum',
       details:
         "Explore Tennessee's history from prehistoric times to the present. Free admission makes it a great rainy day activity!",
-      image:
-        'https://lh3.googleusercontent.com/p/AF1QipPZXoNr4Q5dNJmK90mJEb0GOZBv83WIO58Xho4h=s1360-w1360-h1020',
+      image: stateHistoryMuseum,
       alt: 'Tennessee State Museum',
       directionsLink: 'https://maps.google.com/?q=Tennessee+State+Museum',
       cost: 0,
@@ -209,8 +242,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Bicentennial Capitol Mall State Park',
       details:
         'A 19-acre park celebrating Tennessee history. Features a 200-foot granite map of the state and a WWII memorial.',
-      image:
-        'https://www.trolleytours.com/wp-content/uploads/2016/06/nashville-bicentennial-mall-park-480x270.jpg',
+      image: bicentennial,
       alt: 'Bicentennial Capitol Mall',
       directionsLink:
         'https://maps.google.com/?q=Bicentennial+Capitol+Mall+State+Park',
@@ -222,20 +254,18 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Tennessee State Capitol',
       details:
         'One of the oldest working state capitols in the U.S. Free guided tours available. Beautiful Greek Revival architecture.',
-      image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Tennessee_State_Capitol_2022f.jpg/960px-Tennessee_State_Capitol_2022f.jpg',
+      image: capitol,
       alt: 'Tennessee State Capitol building',
       directionsLink: 'https://maps.google.com/?q=Tennessee+State+Capitol',
       cost: 0,
-      websiteLink: 'https://www.capitol.tn.gov',
+      websiteLink: 'https://www.capitol.tn.gov/about/capitolvisit.html',
       tags: ['downtown', 'indoor', 'history', 'walkable', 'free'],
     },
     {
       label: 'Nashville Predators Hockey',
       details:
         "Catch a Preds game at Bridgestone Arena! Even if you're not a hockey fan, the atmosphere is electric.",
-      image:
-        'https://www.bridgestonearena.com/assets/img/Predators-Crowd-Game-Side-533b07040c.jpg',
+      image: nashvillePredatorsHockey,
       alt: 'Bridgestone Arena',
       directionsLink: 'https://maps.google.com/?q=Bridgestone+Arena+Nashville',
       cost: 3,
@@ -246,8 +276,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Nashville SC Soccer',
       details:
         "Catch an MLS match at GEODIS Park! Nashville's soccer club has one of the best atmospheres in the league.",
-      image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Nashville_SC_vs_Portland_Timbers_by_cornfield948_%2820220705094311%29.jpg/500px-Nashville_SC_vs_Portland_Timbers_by_cornfield948_%2820220705094311%29.jpg',
+      image: nashvilleSoccer,
       alt: 'Nashville SC at GEODIS Park',
       directionsLink: 'https://maps.google.com/?q=GEODIS+Park+Nashville',
       cost: 3,
@@ -258,7 +287,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Tennessee Performing Arts Center (TPAC)',
       details:
         'Broadway shows, concerts, and performances. Check the schedule - they often have amazing touring productions!',
-      image: 'https://www.tpac.org/assets/img/image045-4276608612.JPG',
+      image: tpac,
       alt: 'Tennessee Performing Arts Center',
       directionsLink:
         'https://maps.google.com/?q=Tennessee+Performing+Arts+Center',
@@ -270,8 +299,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Ryman Auditorium',
       details:
         "The 'Mother Church of Country Music.' Take a tour or catch a show - the acoustics are incredible.",
-      image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Ryman_Auditorium.jpg/500px-Ryman_Auditorium.jpg',
+      image: ryman,
       alt: 'Ryman Auditorium',
       directionsLink: 'https://maps.google.com/?q=Ryman+Auditorium',
       cost: 2,
@@ -282,8 +310,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Grand Ole Opry',
       details:
         "The show that made country music famous! Catch a live performance at this legendary venue - it's been running since 1925.",
-      image:
-        'https://www.trolleytours.com/wp-content/uploads/2025/01/grand-ole-opry-nashville-480x270.jpg',
+      image: grandOleOpry,
       alt: 'Grand Ole Opry',
       directionsLink: 'https://maps.google.com/?q=Grand+Ole+Opry+Nashville',
       cost: 3,
@@ -294,20 +321,18 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Regal Opry Mills IMAX',
       details:
         'Catch the latest blockbuster on the giant IMAX screen. Located in Opry Mills mall with plenty of shopping nearby.',
-      image:
-        'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSypbKnWvjiLf88RN1kpffHbzfqYB5vqsByPIb2CVhAbaI7JgaqsgqYgJhuJhRFhYWtoQcL8mZ5dyo6QHdV3NBXxeCInXV5mNXZOXBYk7G3WjjGgds7BqYE5PG89KZtJGQGtJT7PfeyHU1K1=s1360-w1360-h1020',
+      image: regalOpryMills,
       alt: 'Regal Opry Mills IMAX',
       directionsLink: 'https://maps.google.com/?q=Regal+Opry+Mills+IMAX',
       cost: 2,
-      websiteLink:
-        'https://www.regmovies.com/theatres/regal-opry-mills-imax/0852',
+      websiteLink: 'https://www.regmovies.com/theatres/regal-opry-mills-0615',
       tags: ['opry-mills', 'indoor', 'parking'],
     },
     {
       label: 'Cheekwood Estate & Gardens',
       details:
         '55 acres of botanical gardens and an art museum. Stunning in fall when the leaves change!',
-      image: 'https://cheekwood.org/wp-content/uploads/bradford-thumbnail.jpg',
+      image: cheekwood,
       alt: 'Cheekwood botanical gardens',
       directionsLink: 'https://maps.google.com/?q=Cheekwood+Estate+and+Gardens',
       cost: 2,
@@ -318,8 +343,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: "Nelson's Green Brier Distillery",
       details:
         "Tennessee whiskey distillery in Marathon Village. Tours and tastings available - learn about Nashville's whiskey history!",
-      image:
-        'https://greenbrierdistillery.com/cdn/shop/files/NGBD_-_Exteriors_06_1512x.jpg?v=1750089962',
+      image: nelsonsGreenbrier,
       alt: "Nelson's Green Brier Distillery",
       directionsLink:
         'https://maps.google.com/?q=Nelsons+Green+Brier+Distillery',
@@ -333,8 +357,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Assembly Food Hall',
       details:
         'Massive food hall in downtown with 30+ vendors. Something for everyone - from Nashville hot chicken to sushi to tacos!',
-      image:
-        'https://www.assemblyfoodhall.com/uploads/sites/3/2021/04/0431-1-min.jpg',
+      image: assemblyFoodHall,
       alt: 'Assembly Food Hall at Fifth + Broadway',
       directionsLink: 'https://maps.google.com/?q=Assembly+Food+Hall+Nashville',
       cost: 2,
@@ -345,20 +368,18 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Greenhouse Bar',
       details:
         'Rooftop bar with stunning views of the Nashville skyline. Great cocktails and a relaxed vibe.',
-      image:
-        'https://images.squarespace-cdn.com/content/v1/60f7282392761f0bc572c532/1629222801122-HRJTST4P1RQT1PLGUAH1/IMG_6986+copy.jpg',
+      image: greenhouse,
       alt: 'Greenhouse Bar rooftop',
       directionsLink: 'https://maps.google.com/?q=Greenhouse+Bar+Nashville',
       cost: 2,
-      websiteLink: 'https://www.greenhousebar.com',
+      websiteLink: 'https://www.greenhousenash.com/',
       tags: ['downtown', 'drinks', 'rooftop', 'walkable'],
     },
     {
       label: 'Condado Tacos',
       details:
         'Build-your-own tacos with creative toppings. The Capitol View location has great outdoor seating!',
-      image:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS__ujSIkKbEoj0rEljkLdNrRKXBBSekiMmpA&s',
+      image: condado,
       alt: 'Condado Tacos',
       directionsLink:
         'https://maps.google.com/?q=Condado+Tacos,+501+12th+Ave+S,+Nashville,+TN+37203',
@@ -367,23 +388,21 @@ export const data: Record<PlaceCategory, Place[]> = {
       tags: ['capitol-view', 'casual', 'drinks', 'parking'],
     },
     {
-      label: 'Little Hats Deli',
+      label: 'Little Hats Market',
       details:
         'Classic Italian deli with amazing sandwiches. The pastrami is a must-try!',
-      image:
-        'https://images.squarespace-cdn.com/content/v1/611aaf1446b20b6b952f2f9b/a5eaea78-4524-47f6-8145-e94386fa04d4/Food+Groups_21.jpg',
+      image: littleHats,
       alt: 'Little Hats Deli',
       directionsLink: 'https://maps.google.com/?q=Little+Hats+Deli+Nashville',
       cost: 2,
-      websiteLink: 'https://www.littlehatsdeli.com',
+      websiteLink: 'https://www.littlehatsmarket.com',
       tags: ['casual', 'local-favorite', 'brunch'],
     },
     {
       label: 'Hawkers Asian Street Food',
       details:
         'Pan-Asian street food with bold flavors. Great for sharing - order a bunch of small plates!',
-      image:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnrQfDCXk6BBqTikWql9301kAgk_s2KsZOog&s',
+      image: hawkers,
       alt: 'Hawkers Asian Street Food',
       directionsLink:
         'https://maps.google.com/?q=Hawkers+Asian+Street+Food+Nashville',
@@ -395,8 +414,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Bastion',
       details:
         'Intimate 24-seat restaurant with a creative tasting menu. The cocktail bar next door is also excellent.',
-      image:
-        'https://images.squarespace-cdn.com/content/v1/63c0626eaf766c4379fb79f9/c0cff0dd-ea21-441e-b1e7-39d649859c1a/Bastion-July2024-117.jpg',
+      image: bastion,
       alt: 'Bastion restaurant',
       directionsLink: 'https://maps.google.com/?q=Bastion+Nashville',
       cost: 4,
@@ -407,8 +425,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Locust',
       details:
         'Farm-to-table fine dining in East Nashville. Beautiful space with a seasonal menu that changes frequently.',
-      image:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3WCOuEViAxlR49yQUj4fWMZlLyGMJ4wNT1w&s',
+      image: locust,
       alt: 'Locust restaurant',
       directionsLink: 'https://maps.google.com/?q=Locust+Nashville',
       cost: 4,
@@ -419,8 +436,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'The Catbird Seat',
       details:
         "Nashville's premier tasting menu experience. Intimate 22-seat counter surrounding the open kitchen.",
-      image:
-        'https://images.squarespace-cdn.com/content/v1/5936c0f66a496360f3e839dd/b043675d-c59c-442f-864d-15fc77e22883/051025-CatbirdPH-26901+2.jpg',
+      image: theCatbirdSeat,
       alt: 'The Catbird Seat plated dish',
       directionsLink: 'https://maps.google.com/?q=The+Catbird+Seat+Nashville',
       cost: 4,
@@ -431,8 +447,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Ole Smoky Distillery',
       details:
         'Tennessee moonshine distillery on Broadway. Free tastings and live music - a fun stop on a Broadway crawl!',
-      image:
-        'https://olesmoky.com/cdn/shop/files/25_Black_Label_Whiskey-mobile_1.jpg?v=1763488594&width=600',
+      image: oleSmoky,
       alt: 'Ole Smoky Distillery on Broadway',
       directionsLink:
         'https://maps.google.com/?q=Ole+Smoky+Distillery+Nashville',
@@ -444,8 +459,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Fishmonger',
       details:
         'Fresh seafood and raw bar with a focus on quality. Great oysters and creative seafood dishes!',
-      image:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGsnvJsvl_-P_hDHWnW8w-G32ZFVOrZ6vYTQ&s',
+      image: fishmonger,
       alt: 'Fishmonger restaurant',
       directionsLink: 'https://maps.google.com/?q=Fishmonger+Nashville',
       cost: 3,
@@ -456,20 +470,18 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Oku',
       details:
         'Modern Japanese restaurant with a beautiful sushi bar. The omakase is a special treat!',
-      image:
-        'https://images.getbento.com/accounts/7646dcfa0cc73f38f6d05812e1b244db/media/images/1402701192022_OkuCLT_Andrew-Cebulka-18252_edited.jpg?w=1200&fit=crop&auto=compress,format&cs=origin&crop=focalpoint&fp-x=0.5&fp-y=0.5',
+      image: oku,
       alt: 'Oku Japanese restaurant',
       directionsLink: 'https://maps.google.com/?q=Oku+Nashville',
       cost: 3,
-      websiteLink: 'https://www.okunashville.com',
+      websiteLink: 'https://www.o-kusushi.com/location/o-ku-nashville/',
       tags: ['germantown', 'upscale', 'drinks', 'local-favorite'],
     },
     {
       label: "Hattie B's Hot Chicken",
       details:
         "Nashville hot chicken at its finest. Warning: 'Shut the Cluck Up' is NOT for beginners!",
-      image:
-        'https://cdn.prod.website-files.com/643d59ec34f67a709d4fb759/67db0b09f5fdd47023909301_hattie-bs-hot-chicken.jpg',
+      image: hattieBs,
       alt: "Hattie B's hot chicken plate",
       directionsLink:
         'https://maps.google.com/?q=Hattie+Bs+Hot+Chicken+Nashville',
@@ -481,8 +493,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Butchertown Hall',
       details:
         'Texas-style BBQ meets Nashville. Smoked meats, great sides, and an excellent beer selection.',
-      image:
-        'https://images.squarespace-cdn.com/content/v1/53ac74f4e4b07ac785324b57/1558661357841-QWRH8N1DW3NDW2GFFVWH/Y2z5bnx0.jpg?format=2500w',
+      image: butchertownHall,
       alt: 'Butchertown Hall BBQ',
       directionsLink: 'https://maps.google.com/?q=Butchertown+Hall+Nashville',
       cost: 2,
@@ -493,7 +504,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Cookout',
       details:
         'Late-night fast food heaven! Cheap, delicious, and open late. The milkshakes are legendary.',
-      image: 'https://cookout.com/wp-content/uploads/CookOut-Sign.png',
+      image: cookout,
       alt: 'Cookout restaurant',
       directionsLink: 'https://maps.google.com/?q=Cookout+Nashville',
       cost: 1,
@@ -504,31 +515,30 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Pizza Perfect',
       details:
         'New York-style pizza by the slice. Perfect for a quick, satisfying meal.',
-      image:
-        'https://www.pizzaperfectonline.com/wp-content/uploads/2024/10/ff7b.pizza-roma-tomato-supreme.jpg',
+      image: pizzaPerfect,
       alt: 'Pizza Perfect',
       directionsLink: 'https://maps.google.com/?q=Pizza+Perfect+Nashville',
       cost: 1,
-      websiteLink: 'https://www.pizzaperfectnashville.com',
+      websiteLink: 'https://www.pizzaperfectonline.com',
       tags: ['casual', 'late-night'],
     },
     {
       label: 'Emmy Squared',
       details:
         'Detroit-style pizza with crispy, cheesy edges. The Colony is a fan favorite!',
-      image: 'https://images.getbento.com/',
+      image: emmySquared,
       alt: 'Emmy Squared pizza',
       directionsLink: 'https://maps.google.com/?q=Emmy+Squared+Nashville',
       cost: 2,
-      websiteLink: 'https://www.emmysquared.com',
-      tags: ['gulch', 'germantown', 'casual', 'local-favorite', 'drinks'],
+      websiteLink:
+        'https://www.emmysquaredpizza.com/location/germantown-nashville-tn/',
+      tags: ['gulch', 'casual', 'local-favorite', 'drinks'],
     },
     {
       label: "Adele's",
       details:
         'Elevated Southern comfort food with farm-to-table ingredients. Famous for their weekend brunch buffet and handcrafted cocktails.',
-      image:
-        'https://images.getbento.com/accounts/67f7019023d5b2addff6e8d20878804b/media/images/58585Adeles-Nashville-Best-Restaurants-Nashville.jpg?w=1200&fit=crop&auto=compress,format&cs=origin&h=600',
+      image: adeles,
       alt: "Adele's restaurant",
       directionsLink:
         'https://maps.google.com/?q=Adeles+Nashville+1210+McGavock+St',

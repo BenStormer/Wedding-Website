@@ -25,7 +25,8 @@ import {
 } from '@tabler/icons-react';
 
 // Fallback image URL for failed image loads
-const PLACE_PLACEHOLDER = 'https://placehold.co/800x600/f5f0ed/5e4838?text=Place';
+const PLACE_PLACEHOLDER =
+  'https://placehold.co/800x600/f5f0ed/5e4838?text=Place';
 
 // Cost display component
 const CostDisplay = ({ cost }: { cost: number }) => {
@@ -86,7 +87,9 @@ const PlaceCard = ({ place, onTagClick, activeFilters }: PlaceCardProps) => {
                 key={tag}
                 size="xs"
                 variant="light"
-                className={`place-tag place-tag-clickable ${isActive ? 'place-tag-active' : ''}`}
+                className={`place-tag place-tag-clickable ${
+                  isActive ? 'place-tag-active' : ''
+                }`}
                 onClick={() => onTagClick(tag)}
               >
                 {tagLabels[tag]}
@@ -137,7 +140,11 @@ interface ActiveFiltersProps {
   onClearAll: () => void;
 }
 
-const ActiveFilters = ({ filters, onRemove, onClearAll }: ActiveFiltersProps) => {
+const ActiveFilters = ({
+  filters,
+  onRemove,
+  onClearAll,
+}: ActiveFiltersProps) => {
   const filterArray = Array.from(filters);
 
   return (
@@ -281,6 +288,21 @@ const NashvilleActivitiesTabs = () => {
           })}
         </Group>
       </Box>
+
+      {/* Places to Stay Note */}
+      {activeTab === 'places-to-stay' && (
+        <Text
+          className="places-to-stay-note"
+          size="sm"
+          c="var(--bold-brown)"
+          ta="center"
+        >
+          We haven't stayed at these spots ourselves, but chose them based on
+          reviews and proximity to the wedding venue. Tennessee is beautiful and
+          there are also many great Airbnb options in the area! You probably
+          can't go wrong with any lodging option you find.
+        </Text>
+      )}
 
       {/* Active Filters Display */}
       {activeFilters.size > 0 && (

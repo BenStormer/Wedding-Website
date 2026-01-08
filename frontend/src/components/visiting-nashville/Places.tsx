@@ -1,19 +1,13 @@
 // Tags for Places to Stay
-export type StayTag =
-  | 'downtown'
-  | 'upscale'
-  | 'walkable'
-  | 'parking'
-  | 'family-friendly'
-  | 'local-favorite'
-  | 'history';
+export type StayTag = 'downtown' | 'midtown' | 'upscale' | 'parking' | 'valet';
 
 // Tags for Places to See
 export type SeeTag =
   | 'downtown'
+  | 'opry-mills'
   | 'outdoors'
+  | 'indoor'
   | 'history'
-  | 'family-friendly'
   | 'parking'
   | 'walkable'
   | 'live-music'
@@ -35,7 +29,6 @@ export type EatTag =
   | 'upscale'
   | 'casual'
   | 'local-favorite'
-  | 'family-friendly'
   | 'parking'
   | 'walkable'
   | 'late-night'
@@ -60,17 +53,18 @@ export const tagLabels: Record<PlaceTag, string> = {
   // Stay tags
   downtown: 'Downtown',
   upscale: 'Upscale',
-  walkable: 'Walkable',
   parking: 'Parking Available',
-  'family-friendly': 'Family Friendly',
+  valet: 'Valet Required',
   'local-favorite': 'Local Favorite',
   history: 'History',
   // See tags
   outdoors: 'Outdoors',
+  indoor: 'Indoor',
   'live-music': 'Live Music',
   sports: 'Sports',
   arts: 'Arts & Culture',
   free: 'Free',
+  'opry-mills': 'Opry Mills Area',
   // Eat tags
   drinks: 'Drinks',
   brunch: 'Brunch',
@@ -78,14 +72,14 @@ export const tagLabels: Record<PlaceTag, string> = {
   'late-night': 'Late Night',
   'food-hall': 'Food Hall',
   rooftop: 'Rooftop',
+  'michelin-star': 'Michelin Star',
   // Location tags
   germantown: 'Germantown',
   'east-nashville': 'East Nashville',
   midtown: 'Midtown',
   gulch: 'The Gulch',
   'capitol-view': 'Capitol View',
-  // Special tags
-  'michelin-star': 'Michelin Star',
+  walkable: 'Walkable',
 };
 
 type PlaceCategory = 'places-to-stay' | 'places-to-see' | 'places-to-eat';
@@ -93,201 +87,242 @@ type PlaceCategory = 'places-to-stay' | 'places-to-see' | 'places-to-eat';
 export const data: Record<PlaceCategory, Place[]> = {
   'places-to-stay': [
     {
-      label: 'The Hermitage Hotel',
+      label: 'Hilton Nashville Downtown',
       details:
-        "Nashville's only Forbes Five-Star hotel, located in the heart of downtown. Historic elegance meets modern luxury.",
-      image: 'https://picsum.photos/seed/hermitage/800/600',
-      alt: 'The Hermitage Hotel exterior',
+        'In the heart of Lower Broadway, right next to Bridgestone Arena. Perfect if you want to be in the middle of all the action in Nashville!',
+      image:
+        'https://www.hilton.com/im/en/BNANSHF/14149761/exterior-2.jpg?impolicy=crop&cw=5720&ch=3203&gravity=NorthWest&xposition=95&yposition=0&rw=768&rh=430',
+      alt: 'Hilton Nashville Downtown',
       directionsLink:
-        'https://maps.google.com/?q=The+Hermitage+Hotel+Nashville',
+        'https://maps.google.com/?q=Hilton+Nashville+Downtown+Broadway',
+      cost: 3,
+      websiteLink:
+        'https://www.hilton.com/en/hotels/bnanshf-hilton-nashville-downtown/',
+      tags: ['downtown', 'valet'],
+    },
+    {
+      label: 'The Joseph',
+      details:
+        "One of Nashville's most acclaimed luxury hotels. Home to Yolan, widely considered the best Italian restaurant in the city (though we haven't tried it yet!).",
+      image:
+        'https://www.thejosephnashville.com/resourcefiles/mainimages/presidential-suite-living-room-main-el-1962x1076.jpg?version=1022026142602',
+      alt: 'The Joseph hotel',
+      directionsLink: 'https://maps.google.com/?q=The+Joseph+Nashville',
       cost: 4,
-      websiteLink: 'https://thehermitagehotel.com',
-      tags: ['downtown', 'upscale', 'walkable', 'history'],
+      websiteLink: 'https://www.thejosephnashville.com',
+      tags: ['downtown', 'upscale', 'valet'],
     },
     {
-      label: 'Graduate Nashville',
+      label: 'Hilton Garden Inn Nashville West End',
       details:
-        'Boutique hotel in Midtown near Vanderbilt. Quirky, fun decor with a rooftop bar and great restaurant.',
-      image: 'https://picsum.photos/seed/graduate/800/600',
-      alt: 'Graduate Nashville hotel',
-      directionsLink: 'https://maps.google.com/?q=Graduate+Nashville',
+        'Very close to the wedding venue! Also near Vanderbilt University, Centennial Park, and the Parthenon.',
+      image:
+        'https://www.hilton.com/im/en/BNAGIGI/22684435/bnagi-exterior-03.tif?impolicy=crop&cw=5000&ch=2799&gravity=NorthWest&xposition=0&yposition=266&rw=768&rh=430',
+      alt: 'Hilton Garden Inn Nashville West End',
+      directionsLink:
+        'https://maps.google.com/?q=Hilton+Garden+Inn+Nashville+Vanderbilt',
       cost: 2,
-      websiteLink: 'https://graduatehotels.com/nashville',
-      tags: ['walkable', 'local-favorite'],
-    },
-    {
-      label: 'Airbnb in Sylvan Park',
-      details:
-        'Stay close to the venue! Sylvan Park has charming homes and is a quick drive to downtown.',
-      image: 'https://picsum.photos/seed/sylvan/800/600',
-      alt: 'Sylvan Park neighborhood',
-      directionsLink: 'https://maps.google.com/?q=Sylvan+Park+Nashville',
-      cost: 2,
-      websiteLink: 'https://airbnb.com',
-      tags: ['parking', 'local-favorite', 'family-friendly'],
+      websiteLink:
+        'https://www.hilton.com/en/hotels/bnavbgi-hilton-garden-inn-nashville-vanderbilt/',
+      tags: ['midtown', 'parking'],
     },
   ],
   'places-to-see': [
     {
-      label: 'Centennial Park & The Parthenon',
+      label: 'The Parthenon',
       details:
-        "A full-scale replica of the original Parthenon in Athens! It's in beautiful Centennial Park, perfect for a morning walk or picnic.",
+        'A full-scale replica of the original Parthenon in Athens, housing a 42-foot statue of Athena. A must-see Nashville landmark!',
       image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Parthenon%2C_Nashville.JPG/1280px-Parthenon%2C_Nashville.JPG',
-      alt: 'The Parthenon in Centennial Park',
-      directionsLink: 'https://maps.google.com/?q=Centennial+Park+Nashville',
+        'https://images.squarespace-cdn.com/content/v1/5e305abfabc0e4424fd1454a/47b12cc5-2260-4ffd-ba04-88e14640b62e/NathanZucker_0323+%281%29.jpg?format=750w',
+      alt: 'The Parthenon',
+      directionsLink: 'https://maps.google.com/?q=The+Parthenon+Nashville',
       cost: 1,
       websiteLink: 'https://www.nashvilleparthenon.com',
-      tags: ['outdoors', 'history', 'family-friendly', 'parking', 'free'],
+      tags: ['midtown', 'indoor', 'history', 'parking'],
+    },
+    {
+      label: 'Centennial Park',
+      details:
+        'Beautiful 132-acre park surrounding the Parthenon. Perfect for a morning walk, picnic, or jog around the lake. This is where we took our engagement photos!',
+      image:
+        'https://images.squarespace-cdn.com/content/v1/6022faf9ee791718f6cf0b87/9515ed89-7a72-4b94-a9cf-acfccc925e0b/Repatriation+and+Its+Impact+Celebration+7.14.24+Centennial+Park+-%40VonRphoto-60+%281%29.jpg?format=1500w',
+      alt: 'Centennial Park',
+      directionsLink: 'https://maps.google.com/?q=Centennial+Park+Nashville',
+      cost: 0,
+      websiteLink:
+        'https://www.nashville.gov/departments/parks/parks/centennial-park',
+      tags: ['midtown', 'outdoors', 'parking', 'free'],
     },
     {
       label: 'Nashville Zoo at Grassmere',
       details:
         'A 188-acre zoo with over 6,000 animals. Great for families with kids of all ages. The Jungle Gym playground is a must!',
       image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Nashville_Zoo_Entrance.jpg/1280px-Nashville_Zoo_Entrance.jpg',
-      alt: 'Nashville Zoo entrance',
+        'https://www.visitmusiccity.com/sites/default/files/styles/listing_slide/public/listing_images/nashvilletn-3414_nashville-zoo-white-rhinoceros-2017-amiee-stubbs-1-_36dacf2f-5056-b3a8-4919af5d19689a6e_0.jpg.webp?itok=SNJWcMCc',
+      alt: 'Nashville Zoo',
       directionsLink: 'https://maps.google.com/?q=Nashville+Zoo',
       cost: 2,
       websiteLink: 'https://www.nashvillezoo.org',
-      tags: ['outdoors', 'family-friendly', 'parking'],
+      tags: ['outdoors', 'parking'],
     },
     {
       label: 'Lower Broadway',
       details:
         'The heart of Nashville! Honky-tonks, live music, and people-watching. No cover charges at most bars.',
       image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Lower_Broadway_in_Nashville%2C_TN.jpg/1280px-Lower_Broadway_in_Nashville%2C_TN.jpg',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Broadway_%28Nashville%29_lights.jpg/960px-Broadway_%28Nashville%29_lights.jpg',
       alt: 'Lower Broadway at night',
       directionsLink: 'https://maps.google.com/?q=Lower+Broadway+Nashville+TN',
       cost: 0,
       websiteLink:
         'https://www.visitmusiccity.com/explore-nashville/neighborhoods/downtown',
-      tags: ['downtown', 'live-music', 'walkable', 'free'],
+      tags: ['downtown', 'indoor', 'live-music', 'walkable', 'free'],
     },
     {
       label: "Nashville Farmers' Market",
       details:
         'Year-round market with fresh produce, local vendors, and international food stalls. The Market House has great lunch spots!',
       image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Nashville_Farmers%27_Market.jpg/1280px-Nashville_Farmers%27_Market.jpg',
+        'https://www.trolleytours.com/wp-content/uploads/2016/06/nashville-farmers-market-aerial-683x384.jpg',
       alt: "Nashville Farmers' Market",
       directionsLink: 'https://maps.google.com/?q=Nashville+Farmers+Market',
       cost: 0,
       websiteLink: 'https://www.nashvillefarmersmarket.org',
-      tags: ['downtown', 'family-friendly', 'parking', 'free'],
+      tags: ['downtown', 'indoor', 'outdoors', 'parking', 'free'],
     },
     {
       label: 'Tennessee State Museum',
       details:
         "Explore Tennessee's history from prehistoric times to the present. Free admission makes it a great rainy day activity!",
       image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Tennessee_State_Museum_2018.jpg/1280px-Tennessee_State_Museum_2018.jpg',
-      alt: 'Tennessee State Museum exterior',
+        'https://lh3.googleusercontent.com/p/AF1QipPZXoNr4Q5dNJmK90mJEb0GOZBv83WIO58Xho4h=s1360-w1360-h1020',
+      alt: 'Tennessee State Museum',
       directionsLink: 'https://maps.google.com/?q=Tennessee+State+Museum',
       cost: 0,
       websiteLink: 'https://tnmuseum.org',
-      tags: ['downtown', 'history', 'family-friendly', 'free'],
+      tags: ['downtown', 'indoor', 'history', 'free'],
     },
     {
       label: 'Bicentennial Capitol Mall State Park',
       details:
         'A 19-acre park celebrating Tennessee history. Features a 200-foot granite map of the state and a WWII memorial.',
       image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Bicentennial_Mall_Nashville.jpg/1280px-Bicentennial_Mall_Nashville.jpg',
+        'https://www.trolleytours.com/wp-content/uploads/2016/06/nashville-bicentennial-mall-park-480x270.jpg',
       alt: 'Bicentennial Capitol Mall',
       directionsLink:
         'https://maps.google.com/?q=Bicentennial+Capitol+Mall+State+Park',
       cost: 0,
       websiteLink: 'https://tnstateparks.com/parks/bicentennial-mall',
-      tags: ['downtown', 'outdoors', 'history', 'family-friendly', 'free'],
+      tags: ['downtown', 'outdoors', 'history', 'free'],
     },
     {
       label: 'Tennessee State Capitol',
       details:
         'One of the oldest working state capitols in the U.S. Free guided tours available. Beautiful Greek Revival architecture.',
       image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Tennessee_State_Capitol_2009.jpg/1280px-Tennessee_State_Capitol_2009.jpg',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Tennessee_State_Capitol_2022f.jpg/960px-Tennessee_State_Capitol_2022f.jpg',
       alt: 'Tennessee State Capitol building',
       directionsLink: 'https://maps.google.com/?q=Tennessee+State+Capitol',
       cost: 0,
       websiteLink: 'https://www.capitol.tn.gov',
-      tags: ['downtown', 'history', 'walkable', 'free'],
+      tags: ['downtown', 'indoor', 'history', 'walkable', 'free'],
     },
     {
       label: 'Nashville Predators Hockey',
       details:
         "Catch a Preds game at Bridgestone Arena! Even if you're not a hockey fan, the atmosphere is electric.",
       image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Bridgestone_Arena_2018.jpg/1280px-Bridgestone_Arena_2018.jpg',
+        'https://www.bridgestonearena.com/assets/img/Predators-Crowd-Game-Side-533b07040c.jpg',
       alt: 'Bridgestone Arena',
       directionsLink: 'https://maps.google.com/?q=Bridgestone+Arena+Nashville',
       cost: 3,
       websiteLink: 'https://www.nhl.com/predators',
-      tags: ['downtown', 'sports', 'walkable'],
+      tags: ['downtown', 'indoor', 'sports', 'walkable'],
+    },
+    {
+      label: 'Nashville SC Soccer',
+      details:
+        "Catch an MLS match at GEODIS Park! Nashville's soccer club has one of the best atmospheres in the league.",
+      image:
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Nashville_SC_vs_Portland_Timbers_by_cornfield948_%2820220705094311%29.jpg/500px-Nashville_SC_vs_Portland_Timbers_by_cornfield948_%2820220705094311%29.jpg',
+      alt: 'Nashville SC at GEODIS Park',
+      directionsLink: 'https://maps.google.com/?q=GEODIS+Park+Nashville',
+      cost: 3,
+      websiteLink: 'https://www.nashvillesc.com',
+      tags: ['midtown', 'outdoors', 'sports', 'parking'],
     },
     {
       label: 'Tennessee Performing Arts Center (TPAC)',
       details:
         'Broadway shows, concerts, and performances. Check the schedule - they often have amazing touring productions!',
-      image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Tennessee_Performing_Arts_Center.jpg/1280px-Tennessee_Performing_Arts_Center.jpg',
+      image: 'https://www.tpac.org/assets/img/image045-4276608612.JPG',
       alt: 'Tennessee Performing Arts Center',
       directionsLink:
         'https://maps.google.com/?q=Tennessee+Performing+Arts+Center',
       cost: 3,
       websiteLink: 'https://www.tpac.org',
-      tags: ['downtown', 'arts', 'walkable'],
+      tags: ['downtown', 'indoor', 'arts', 'walkable'],
     },
     {
       label: 'Ryman Auditorium',
       details:
         "The 'Mother Church of Country Music.' Take a tour or catch a show - the acoustics are incredible.",
       image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Ryman_Auditorium%2C_Nashville%2C_Tennessee.jpg/800px-Ryman_Auditorium%2C_Nashville%2C_Tennessee.jpg',
-      alt: 'Ryman Auditorium interior',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Ryman_Auditorium.jpg/500px-Ryman_Auditorium.jpg',
+      alt: 'Ryman Auditorium',
       directionsLink: 'https://maps.google.com/?q=Ryman+Auditorium',
       cost: 2,
       websiteLink: 'https://www.ryman.com',
-      tags: ['downtown', 'history', 'live-music', 'walkable', 'arts'],
+      tags: ['downtown', 'indoor', 'history', 'live-music', 'walkable', 'arts'],
+    },
+    {
+      label: 'Grand Ole Opry',
+      details:
+        "The show that made country music famous! Catch a live performance at this legendary venue - it's been running since 1925.",
+      image:
+        'https://www.trolleytours.com/wp-content/uploads/2025/01/grand-ole-opry-nashville-480x270.jpg',
+      alt: 'Grand Ole Opry',
+      directionsLink: 'https://maps.google.com/?q=Grand+Ole+Opry+Nashville',
+      cost: 3,
+      websiteLink: 'https://www.opry.com',
+      tags: ['opry-mills', 'indoor', 'history', 'live-music', 'parking'],
     },
     {
       label: 'Regal Opry Mills IMAX',
       details:
         'Catch the latest blockbuster on the giant IMAX screen. Located in Opry Mills mall with plenty of shopping nearby.',
       image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Opry_Mills.jpg/1280px-Opry_Mills.jpg',
-      alt: 'Opry Mills mall',
+        'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSypbKnWvjiLf88RN1kpffHbzfqYB5vqsByPIb2CVhAbaI7JgaqsgqYgJhuJhRFhYWtoQcL8mZ5dyo6QHdV3NBXxeCInXV5mNXZOXBYk7G3WjjGgds7BqYE5PG89KZtJGQGtJT7PfeyHU1K1=s1360-w1360-h1020',
+      alt: 'Regal Opry Mills IMAX',
       directionsLink: 'https://maps.google.com/?q=Regal+Opry+Mills+IMAX',
       cost: 2,
       websiteLink:
         'https://www.regmovies.com/theatres/regal-opry-mills-imax/0852',
-      tags: ['family-friendly', 'parking'],
+      tags: ['opry-mills', 'indoor', 'parking'],
     },
     {
       label: 'Cheekwood Estate & Gardens',
       details:
         '55 acres of botanical gardens and an art museum. Stunning in fall when the leaves change!',
-      image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Cheekwood.jpg/1280px-Cheekwood.jpg',
+      image: 'https://cheekwood.org/wp-content/uploads/bradford-thumbnail.jpg',
       alt: 'Cheekwood botanical gardens',
       directionsLink: 'https://maps.google.com/?q=Cheekwood+Estate+and+Gardens',
       cost: 2,
       websiteLink: 'https://cheekwood.org',
-      tags: ['outdoors', 'history', 'family-friendly', 'parking', 'arts'],
+      tags: ['outdoors', 'indoor', 'history', 'parking', 'arts'],
     },
     {
       label: "Nelson's Green Brier Distillery",
       details:
         "Tennessee whiskey distillery in Marathon Village. Tours and tastings available - learn about Nashville's whiskey history!",
       image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Marathon_Village_Nashville.jpg/1280px-Marathon_Village_Nashville.jpg',
+        'https://greenbrierdistillery.com/cdn/shop/files/NGBD_-_Exteriors_06_1512x.jpg?v=1750089962',
       alt: "Nelson's Green Brier Distillery",
       directionsLink:
         'https://maps.google.com/?q=Nelsons+Green+Brier+Distillery',
       cost: 2,
       websiteLink: 'https://greenbrierdistillery.com',
-      tags: ['history', 'parking'],
+      tags: ['indoor', 'history', 'parking'],
     },
   ],
   'places-to-eat': [
@@ -301,7 +336,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       directionsLink: 'https://maps.google.com/?q=Assembly+Food+Hall+Nashville',
       cost: 2,
       websiteLink: 'https://www.assemblyfoodhall.com',
-      tags: ['downtown', 'food-hall', 'family-friendly', 'walkable'],
+      tags: ['downtown', 'food-hall', 'walkable'],
     },
     {
       label: 'Greenhouse Bar',
@@ -324,12 +359,12 @@ export const data: Record<PlaceCategory, Place[]> = {
         'https://maps.google.com/?q=Condado+Tacos,+501+12th+Ave+S,+Nashville,+TN+37203',
       cost: 2,
       websiteLink: 'https://locations.condadotacos.com/tn/418-11th-ave-n.',
-      tags: ['capitol-view', 'casual', 'drinks', 'family-friendly', 'parking'],
+      tags: ['capitol-view', 'casual', 'drinks', 'parking'],
     },
     {
       label: 'Little Hats Deli',
       details:
-        'Classic Jewish deli with amazing sandwiches. The pastrami is a must-try!',
+        'Classic Italian deli with amazing sandwiches. The pastrami is a must-try!',
       image: 'https://picsum.photos/seed/little-hats/800/600',
       alt: 'Little Hats Deli',
       directionsLink: 'https://maps.google.com/?q=Little+Hats+Deli+Nashville',
@@ -450,7 +485,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       directionsLink: 'https://maps.google.com/?q=Cookout+Nashville',
       cost: 1,
       websiteLink: 'https://cookout.com',
-      tags: ['casual', 'late-night', 'parking', 'family-friendly'],
+      tags: ['casual', 'late-night', 'parking'],
     },
     {
       label: 'Pizza Perfect',
@@ -461,7 +496,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       directionsLink: 'https://maps.google.com/?q=Pizza+Perfect+Nashville',
       cost: 1,
       websiteLink: 'https://www.pizzaperfectnashville.com',
-      tags: ['casual', 'late-night', 'family-friendly'],
+      tags: ['casual', 'late-night'],
     },
     {
       label: 'Emmy Squared',
@@ -472,32 +507,19 @@ export const data: Record<PlaceCategory, Place[]> = {
       directionsLink: 'https://maps.google.com/?q=Emmy+Squared+Nashville',
       cost: 2,
       websiteLink: 'https://www.emmysquared.com',
-      tags: ['gulch', 'casual', 'local-favorite', 'drinks', 'family-friendly'],
+      tags: ['gulch', 'casual', 'local-favorite', 'drinks'],
+    },
+    {
+      label: "Adele's",
+      details:
+        'Elevated Southern comfort food with farm-to-table ingredients. Famous for their weekend brunch buffet and handcrafted cocktails.',
+      image: 'https://picsum.photos/seed/adeles/800/600',
+      alt: "Adele's restaurant",
+      directionsLink:
+        'https://maps.google.com/?q=Adeles+Nashville+1210+McGavock+St',
+      cost: 3,
+      websiteLink: 'https://www.adelesnashville.com',
+      tags: ['gulch', 'upscale', 'brunch', 'drinks', 'local-favorite'],
     },
   ],
 };
-
-/**
- * NOTE: The following places are using placeholder images (picsum.photos) because
- * I couldn't find suitable Creative Commons images:
- *
- * Places to Stay:
- * - The Hermitage Hotel
- * - Graduate Nashville
- * - Airbnb in Sylvan Park
- *
- * Places to Eat:
- * - Greenhouse Bar
- * - Condado Tacos
- * - Little Hats Deli
- * - Hawkers Asian Street Food
- * - Bastion
- * - Locust
- * - The Catbird Seat
- * - Fishmonger
- * - Oku
- * - Butchertown Hall
- * - Cookout
- * - Pizza Perfect
- * - Emmy Squared
- */

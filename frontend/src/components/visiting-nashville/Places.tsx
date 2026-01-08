@@ -132,6 +132,19 @@ type PlaceCategory = 'places-to-stay' | 'places-to-see' | 'places-to-eat';
 export const data: Record<PlaceCategory, Place[]> = {
   'places-to-stay': [
     {
+      label: 'Hilton Garden Inn Nashville West End',
+      details:
+        'Very close to the wedding venue! Also near Vanderbilt University, Centennial Park, and the Parthenon.',
+      image: hiltonWestEnd,
+      alt: 'Hilton Garden Inn Nashville West End',
+      directionsLink:
+        'https://maps.google.com/?q=Hilton+Garden+Inn+Nashville+Vanderbilt',
+      cost: 2,
+      websiteLink:
+        'https://www.hilton.com/en/hotels/bnagigi-hilton-garden-inn-nashville-west-end-avenue/',
+      tags: ['midtown', 'parking'],
+    },
+    {
       label: 'Hilton Nashville Downtown',
       details:
         'In the heart of Lower Broadway, right next to Bridgestone Arena. Perfect if you want to be in the middle of all the action in Nashville!',
@@ -155,31 +168,19 @@ export const data: Record<PlaceCategory, Place[]> = {
       websiteLink: 'https://www.thejosephnashville.com',
       tags: ['downtown', 'upscale', 'valet'],
     },
-    {
-      label: 'Hilton Garden Inn Nashville West End',
-      details:
-        'Very close to the wedding venue! Also near Vanderbilt University, Centennial Park, and the Parthenon.',
-      image: hiltonWestEnd,
-      alt: 'Hilton Garden Inn Nashville West End',
-      directionsLink:
-        'https://maps.google.com/?q=Hilton+Garden+Inn+Nashville+Vanderbilt',
-      cost: 2,
-      websiteLink:
-        'https://www.hilton.com/en/hotels/bnagigi-hilton-garden-inn-nashville-west-end-avenue/',
-      tags: ['midtown', 'parking'],
-    },
   ],
   'places-to-see': [
     {
-      label: 'The Parthenon',
+      label: 'Bicentennial Capitol Mall State Park',
       details:
-        'A full-scale replica of the original Parthenon in Athens, housing a 42-foot statue of Athena. A must-see Nashville landmark!',
-      image: parthenon,
-      alt: 'The Parthenon',
-      directionsLink: 'https://maps.google.com/?q=The+Parthenon+Nashville',
-      cost: 1,
-      websiteLink: 'https://www.nashvilleparthenon.com',
-      tags: ['midtown', 'indoor', 'history', 'parking'],
+        'A 19-acre park celebrating Tennessee history. Features a 200-foot granite map of the state and a WWII memorial.',
+      image: bicentennial,
+      alt: 'Bicentennial Capitol Mall',
+      directionsLink:
+        'https://maps.google.com/?q=Bicentennial+Capitol+Mall+State+Park',
+      cost: 0,
+      websiteLink: 'https://tnstateparks.com/parks/bicentennial-mall',
+      tags: ['downtown', 'outdoors', 'history', 'free'],
     },
     {
       label: 'Centennial Park',
@@ -194,15 +195,26 @@ export const data: Record<PlaceCategory, Place[]> = {
       tags: ['midtown', 'outdoors', 'parking', 'free'],
     },
     {
-      label: 'Nashville Zoo at Grassmere',
+      label: 'Cheekwood Estate & Gardens',
       details:
-        'A 188-acre zoo with over 6,000 animals. Great for families with kids of all ages. The Jungle Gym playground is a must!',
-      image: zoo,
-      alt: 'Nashville Zoo',
-      directionsLink: 'https://maps.google.com/?q=Nashville+Zoo',
+        '55 acres of botanical gardens and an art museum. Stunning in fall when the leaves change!',
+      image: cheekwood,
+      alt: 'Cheekwood botanical gardens',
+      directionsLink: 'https://maps.google.com/?q=Cheekwood+Estate+and+Gardens',
       cost: 2,
-      websiteLink: 'https://www.nashvillezoo.org',
-      tags: ['outdoors', 'parking'],
+      websiteLink: 'https://cheekwood.org',
+      tags: ['outdoors', 'indoor', 'history', 'parking', 'arts'],
+    },
+    {
+      label: 'Grand Ole Opry',
+      details:
+        "The show that made country music famous! Catch a live performance at this legendary venue - it's been running since 1925.",
+      image: grandOleOpry,
+      alt: 'Grand Ole Opry',
+      directionsLink: 'https://maps.google.com/?q=Grand+Ole+Opry+Nashville',
+      cost: 3,
+      websiteLink: 'https://www.opry.com',
+      tags: ['opry-mills', 'indoor', 'history', 'live-music', 'parking'],
     },
     {
       label: 'Lower Broadway',
@@ -228,40 +240,6 @@ export const data: Record<PlaceCategory, Place[]> = {
       tags: ['downtown', 'indoor', 'outdoors', 'parking', 'free'],
     },
     {
-      label: 'Tennessee State Museum',
-      details:
-        "Explore Tennessee's history from prehistoric times to the present. Free admission makes it a great rainy day activity!",
-      image: stateHistoryMuseum,
-      alt: 'Tennessee State Museum',
-      directionsLink: 'https://maps.google.com/?q=Tennessee+State+Museum',
-      cost: 0,
-      websiteLink: 'https://tnmuseum.org',
-      tags: ['downtown', 'indoor', 'history', 'free'],
-    },
-    {
-      label: 'Bicentennial Capitol Mall State Park',
-      details:
-        'A 19-acre park celebrating Tennessee history. Features a 200-foot granite map of the state and a WWII memorial.',
-      image: bicentennial,
-      alt: 'Bicentennial Capitol Mall',
-      directionsLink:
-        'https://maps.google.com/?q=Bicentennial+Capitol+Mall+State+Park',
-      cost: 0,
-      websiteLink: 'https://tnstateparks.com/parks/bicentennial-mall',
-      tags: ['downtown', 'outdoors', 'history', 'free'],
-    },
-    {
-      label: 'Tennessee State Capitol',
-      details:
-        'One of the oldest working state capitols in the U.S. Free guided tours available. Beautiful Greek Revival architecture.',
-      image: capitol,
-      alt: 'Tennessee State Capitol building',
-      directionsLink: 'https://maps.google.com/?q=Tennessee+State+Capitol',
-      cost: 0,
-      websiteLink: 'https://www.capitol.tn.gov/about/capitolvisit.html',
-      tags: ['downtown', 'indoor', 'history', 'walkable', 'free'],
-    },
-    {
       label: 'Nashville Predators Hockey',
       details:
         "Catch a Preds game at Bridgestone Arena! Even if you're not a hockey fan, the atmosphere is electric.",
@@ -284,60 +262,15 @@ export const data: Record<PlaceCategory, Place[]> = {
       tags: ['outdoors', 'sports', 'parking'],
     },
     {
-      label: 'Tennessee Performing Arts Center (TPAC)',
+      label: 'Nashville Zoo at Grassmere',
       details:
-        'Broadway shows, concerts, and performances. Check the schedule - they often have amazing touring productions!',
-      image: tpac,
-      alt: 'Tennessee Performing Arts Center',
-      directionsLink:
-        'https://maps.google.com/?q=Tennessee+Performing+Arts+Center',
-      cost: 3,
-      websiteLink: 'https://www.tpac.org',
-      tags: ['downtown', 'indoor', 'arts', 'walkable'],
-    },
-    {
-      label: 'Ryman Auditorium',
-      details:
-        "The 'Mother Church of Country Music.' Take a tour or catch a show - the acoustics are incredible.",
-      image: ryman,
-      alt: 'Ryman Auditorium',
-      directionsLink: 'https://maps.google.com/?q=Ryman+Auditorium',
+        'A 188-acre zoo with over 6,000 animals. Great for families with kids of all ages. The Jungle Gym playground is a must!',
+      image: zoo,
+      alt: 'Nashville Zoo',
+      directionsLink: 'https://maps.google.com/?q=Nashville+Zoo',
       cost: 2,
-      websiteLink: 'https://www.ryman.com',
-      tags: ['downtown', 'indoor', 'history', 'live-music', 'walkable', 'arts'],
-    },
-    {
-      label: 'Grand Ole Opry',
-      details:
-        "The show that made country music famous! Catch a live performance at this legendary venue - it's been running since 1925.",
-      image: grandOleOpry,
-      alt: 'Grand Ole Opry',
-      directionsLink: 'https://maps.google.com/?q=Grand+Ole+Opry+Nashville',
-      cost: 3,
-      websiteLink: 'https://www.opry.com',
-      tags: ['opry-mills', 'indoor', 'history', 'live-music', 'parking'],
-    },
-    {
-      label: 'Regal Opry Mills IMAX',
-      details:
-        'Catch the latest blockbuster on the giant IMAX screen. Located in Opry Mills mall with plenty of shopping nearby.',
-      image: regalOpryMills,
-      alt: 'Regal Opry Mills IMAX',
-      directionsLink: 'https://maps.google.com/?q=Regal+Opry+Mills+IMAX',
-      cost: 2,
-      websiteLink: 'https://www.regmovies.com/theatres/regal-opry-mills-0615',
-      tags: ['opry-mills', 'indoor', 'parking'],
-    },
-    {
-      label: 'Cheekwood Estate & Gardens',
-      details:
-        '55 acres of botanical gardens and an art museum. Stunning in fall when the leaves change!',
-      image: cheekwood,
-      alt: 'Cheekwood botanical gardens',
-      directionsLink: 'https://maps.google.com/?q=Cheekwood+Estate+and+Gardens',
-      cost: 2,
-      websiteLink: 'https://cheekwood.org',
-      tags: ['outdoors', 'indoor', 'history', 'parking', 'arts'],
+      websiteLink: 'https://www.nashvillezoo.org',
+      tags: ['outdoors', 'parking'],
     },
     {
       label: "Nelson's Green Brier Distillery",
@@ -351,8 +284,87 @@ export const data: Record<PlaceCategory, Place[]> = {
       websiteLink: 'https://greenbrierdistillery.com',
       tags: ['indoor', 'history', 'parking'],
     },
+    {
+      label: 'Regal Opry Mills IMAX',
+      details:
+        'Catch the latest blockbuster on the giant IMAX screen. Located in Opry Mills mall with plenty of shopping nearby.',
+      image: regalOpryMills,
+      alt: 'Regal Opry Mills IMAX',
+      directionsLink: 'https://maps.google.com/?q=Regal+Opry+Mills+IMAX',
+      cost: 2,
+      websiteLink: 'https://www.regmovies.com/theatres/regal-opry-mills-0615',
+      tags: ['opry-mills', 'indoor', 'parking'],
+    },
+    {
+      label: 'Ryman Auditorium',
+      details:
+        "The 'Mother Church of Country Music.' Take a tour or catch a show - the acoustics are incredible.",
+      image: ryman,
+      alt: 'Ryman Auditorium',
+      directionsLink: 'https://maps.google.com/?q=Ryman+Auditorium',
+      cost: 2,
+      websiteLink: 'https://www.ryman.com',
+      tags: ['downtown', 'indoor', 'history', 'live-music', 'walkable', 'arts'],
+    },
+    {
+      label: 'Tennessee Performing Arts Center (TPAC)',
+      details:
+        'Broadway shows, concerts, and performances. Check the schedule - they often have amazing touring productions!',
+      image: tpac,
+      alt: 'Tennessee Performing Arts Center',
+      directionsLink:
+        'https://maps.google.com/?q=Tennessee+Performing+Arts+Center',
+      cost: 3,
+      websiteLink: 'https://www.tpac.org',
+      tags: ['downtown', 'indoor', 'arts', 'walkable'],
+    },
+    {
+      label: 'Tennessee State Capitol',
+      details:
+        'One of the oldest working state capitols in the U.S. Free guided tours available. Beautiful Greek Revival architecture.',
+      image: capitol,
+      alt: 'Tennessee State Capitol building',
+      directionsLink: 'https://maps.google.com/?q=Tennessee+State+Capitol',
+      cost: 0,
+      websiteLink: 'https://www.capitol.tn.gov/about/capitolvisit.html',
+      tags: ['downtown', 'indoor', 'history', 'walkable', 'free'],
+    },
+    {
+      label: 'Tennessee State Museum',
+      details:
+        "Explore Tennessee's history from prehistoric times to the present. Free admission makes it a great rainy day activity!",
+      image: stateHistoryMuseum,
+      alt: 'Tennessee State Museum',
+      directionsLink: 'https://maps.google.com/?q=Tennessee+State+Museum',
+      cost: 0,
+      websiteLink: 'https://tnmuseum.org',
+      tags: ['downtown', 'indoor', 'history', 'free'],
+    },
+    {
+      label: 'Parthenon',
+      details:
+        'A full-scale replica of the original Parthenon in Athens, housing a 42-foot statue of Athena. A must-see Nashville landmark!',
+      image: parthenon,
+      alt: 'Parthenon',
+      directionsLink: 'https://maps.google.com/?q=The+Parthenon+Nashville',
+      cost: 1,
+      websiteLink: 'https://www.nashvilleparthenon.com',
+      tags: ['midtown', 'indoor', 'history', 'parking'],
+    },
   ],
   'places-to-eat': [
+    {
+      label: "Adele's",
+      details:
+        'Elevated Southern comfort food with farm-to-table ingredients. Famous for their weekend brunch buffet and handcrafted cocktails.',
+      image: adeles,
+      alt: "Adele's restaurant",
+      directionsLink:
+        'https://maps.google.com/?q=Adeles+Nashville+1210+McGavock+St',
+      cost: 3,
+      websiteLink: 'https://www.adelesnashville.com',
+      tags: ['gulch', 'upscale', 'brunch', 'drinks', 'local-favorite'],
+    },
     {
       label: 'Assembly Food Hall',
       details:
@@ -365,15 +377,26 @@ export const data: Record<PlaceCategory, Place[]> = {
       tags: ['downtown', 'food-hall', 'walkable'],
     },
     {
-      label: 'Greenhouse Bar',
+      label: 'Bastion',
       details:
-        'Rooftop bar with stunning views of the Nashville skyline. Great cocktails and a relaxed vibe.',
-      image: greenhouse,
-      alt: 'Greenhouse Bar rooftop',
-      directionsLink: 'https://maps.google.com/?q=Greenhouse+Bar+Nashville',
+        'Intimate 24-seat restaurant with a creative tasting menu. The cocktail bar next door is also excellent.',
+      image: bastion,
+      alt: 'Bastion restaurant',
+      directionsLink: 'https://maps.google.com/?q=Bastion+Nashville',
+      cost: 4,
+      websiteLink: 'https://www.bastionnashville.com',
+      tags: ['gulch', 'upscale', 'local-favorite', 'drinks', 'michelin-star'],
+    },
+    {
+      label: 'Butchertown Hall',
+      details:
+        'Texas-style BBQ meets Nashville. Smoked meats, great sides, and an excellent beer selection.',
+      image: butchertownHall,
+      alt: 'Butchertown Hall BBQ',
+      directionsLink: 'https://maps.google.com/?q=Butchertown+Hall+Nashville',
       cost: 2,
-      websiteLink: 'https://www.greenhousenash.com/',
-      tags: ['downtown', 'drinks', 'rooftop', 'walkable'],
+      websiteLink: 'https://www.butchertownhall.com',
+      tags: ['germantown', 'casual', 'local-favorite', 'drinks', 'parking'],
     },
     {
       label: 'Condado Tacos',
@@ -388,119 +411,6 @@ export const data: Record<PlaceCategory, Place[]> = {
       tags: ['capitol-view', 'casual', 'drinks', 'parking'],
     },
     {
-      label: 'Little Hats Market',
-      details:
-        'Classic Italian deli with amazing sandwiches. The pastrami is a must-try!',
-      image: littleHats,
-      alt: 'Little Hats Deli',
-      directionsLink: 'https://maps.google.com/?q=Little+Hats+Deli+Nashville',
-      cost: 2,
-      websiteLink: 'https://www.littlehatsmarket.com',
-      tags: ['casual', 'local-favorite', 'brunch'],
-    },
-    {
-      label: 'Hawkers Asian Street Food',
-      details:
-        'Pan-Asian street food with bold flavors. Great for sharing - order a bunch of small plates!',
-      image: hawkers,
-      alt: 'Hawkers Asian Street Food',
-      directionsLink:
-        'https://maps.google.com/?q=Hawkers+Asian+Street+Food+Nashville',
-      cost: 2,
-      websiteLink: 'https://www.eathawkers.com',
-      tags: ['east-nashville', 'casual', 'local-favorite', 'drinks'],
-    },
-    {
-      label: 'Bastion',
-      details:
-        'Intimate 24-seat restaurant with a creative tasting menu. The cocktail bar next door is also excellent.',
-      image: bastion,
-      alt: 'Bastion restaurant',
-      directionsLink: 'https://maps.google.com/?q=Bastion+Nashville',
-      cost: 4,
-      websiteLink: 'https://www.bastionnashville.com',
-      tags: ['gulch', 'upscale', 'local-favorite', 'drinks', 'michelin-star'],
-    },
-    {
-      label: 'Locust',
-      details:
-        'Farm-to-table fine dining in East Nashville. Beautiful space with a seasonal menu that changes frequently.',
-      image: locust,
-      alt: 'Locust restaurant',
-      directionsLink: 'https://maps.google.com/?q=Locust+Nashville',
-      cost: 4,
-      websiteLink: 'https://www.locustnashville.com',
-      tags: ['east-nashville', 'upscale', 'local-favorite', 'michelin-star'],
-    },
-    {
-      label: 'The Catbird Seat',
-      details:
-        "Nashville's premier tasting menu experience. Intimate 22-seat counter surrounding the open kitchen.",
-      image: theCatbirdSeat,
-      alt: 'The Catbird Seat plated dish',
-      directionsLink: 'https://maps.google.com/?q=The+Catbird+Seat+Nashville',
-      cost: 4,
-      websiteLink: 'https://www.thecatbirdseatrestaurant.com',
-      tags: ['midtown', 'upscale', 'local-favorite', 'drinks', 'michelin-star'],
-    },
-    {
-      label: 'Ole Smoky Distillery',
-      details:
-        'Tennessee moonshine distillery on Broadway. Free tastings and live music - a fun stop on a Broadway crawl!',
-      image: oleSmoky,
-      alt: 'Ole Smoky Distillery on Broadway',
-      directionsLink:
-        'https://maps.google.com/?q=Ole+Smoky+Distillery+Nashville',
-      cost: 1,
-      websiteLink: 'https://olesmoky.com/pages/nashville',
-      tags: ['downtown', 'drinks', 'live-music', 'walkable'],
-    },
-    {
-      label: 'Fishmonger',
-      details:
-        'Fresh seafood and raw bar with a focus on quality. Great oysters and creative seafood dishes!',
-      image: fishmonger,
-      alt: 'Fishmonger restaurant',
-      directionsLink: 'https://maps.google.com/?q=Fishmonger+Nashville',
-      cost: 3,
-      websiteLink: 'https://fishmongergroup.com',
-      tags: ['germantown', 'upscale', 'drinks', 'local-favorite'],
-    },
-    {
-      label: 'Oku',
-      details:
-        'Modern Japanese restaurant with a beautiful sushi bar. The omakase is a special treat!',
-      image: oku,
-      alt: 'Oku Japanese restaurant',
-      directionsLink: 'https://maps.google.com/?q=Oku+Nashville',
-      cost: 3,
-      websiteLink: 'https://www.o-kusushi.com/location/o-ku-nashville/',
-      tags: ['germantown', 'upscale', 'drinks', 'local-favorite'],
-    },
-    {
-      label: "Hattie B's Hot Chicken",
-      details:
-        "Nashville hot chicken at its finest. Warning: 'Shut the Cluck Up' is NOT for beginners!",
-      image: hattieBs,
-      alt: "Hattie B's hot chicken plate",
-      directionsLink:
-        'https://maps.google.com/?q=Hattie+Bs+Hot+Chicken+Nashville',
-      cost: 1,
-      websiteLink: 'https://hattieb.com',
-      tags: ['casual', 'local-favorite', 'parking'],
-    },
-    {
-      label: 'Butchertown Hall',
-      details:
-        'Texas-style BBQ meets Nashville. Smoked meats, great sides, and an excellent beer selection.',
-      image: butchertownHall,
-      alt: 'Butchertown Hall BBQ',
-      directionsLink: 'https://maps.google.com/?q=Butchertown+Hall+Nashville',
-      cost: 2,
-      websiteLink: 'https://www.butchertownhall.com',
-      tags: ['germantown', 'casual', 'local-favorite', 'drinks', 'parking'],
-    },
-    {
       label: 'Cookout',
       details:
         'Late-night fast food heaven! Cheap, delicious, and open late. The milkshakes are legendary.',
@@ -510,17 +420,6 @@ export const data: Record<PlaceCategory, Place[]> = {
       cost: 1,
       websiteLink: 'https://cookout.com',
       tags: ['casual', 'late-night', 'parking'],
-    },
-    {
-      label: 'Pizza Perfect',
-      details:
-        'New York-style pizza by the slice. Perfect for a quick, satisfying meal.',
-      image: pizzaPerfect,
-      alt: 'Pizza Perfect',
-      directionsLink: 'https://maps.google.com/?q=Pizza+Perfect+Nashville',
-      cost: 1,
-      websiteLink: 'https://www.pizzaperfectonline.com',
-      tags: ['casual', 'late-night'],
     },
     {
       label: 'Emmy Squared',
@@ -535,16 +434,122 @@ export const data: Record<PlaceCategory, Place[]> = {
       tags: ['gulch', 'casual', 'local-favorite', 'drinks'],
     },
     {
-      label: "Adele's",
+      label: 'Fishmonger',
       details:
-        'Elevated Southern comfort food with farm-to-table ingredients. Famous for their weekend brunch buffet and handcrafted cocktails.',
-      image: adeles,
-      alt: "Adele's restaurant",
-      directionsLink:
-        'https://maps.google.com/?q=Adeles+Nashville+1210+McGavock+St',
+        'Fresh seafood and raw bar with a focus on quality. Great oysters and creative seafood dishes!',
+      image: fishmonger,
+      alt: 'Fishmonger restaurant',
+      directionsLink: 'https://maps.google.com/?q=Fishmonger+Nashville',
       cost: 3,
-      websiteLink: 'https://www.adelesnashville.com',
-      tags: ['gulch', 'upscale', 'brunch', 'drinks', 'local-favorite'],
+      websiteLink: 'https://fishmongergroup.com',
+      tags: ['germantown', 'upscale', 'drinks', 'local-favorite'],
+    },
+    {
+      label: 'Greenhouse Bar',
+      details:
+        'Rooftop bar with stunning views of the Nashville skyline. Great cocktails and a relaxed vibe.',
+      image: greenhouse,
+      alt: 'Greenhouse Bar rooftop',
+      directionsLink: 'https://maps.google.com/?q=Greenhouse+Bar+Nashville',
+      cost: 2,
+      websiteLink: 'https://www.greenhousenash.com/',
+      tags: ['downtown', 'drinks', 'rooftop', 'walkable'],
+    },
+    {
+      label: "Hattie B's Hot Chicken",
+      details:
+        "Nashville hot chicken at its finest. Warning: 'Shut the Cluck Up' is NOT for beginners!",
+      image: hattieBs,
+      alt: "Hattie B's hot chicken plate",
+      directionsLink:
+        'https://maps.google.com/?q=Hattie+Bs+Hot+Chicken+Nashville',
+      cost: 1,
+      websiteLink: 'https://hattieb.com',
+      tags: ['casual', 'local-favorite', 'parking'],
+    },
+    {
+      label: 'Hawkers Asian Street Food',
+      details:
+        'Pan-Asian street food with bold flavors. Great for sharing - order a bunch of small plates!',
+      image: hawkers,
+      alt: 'Hawkers Asian Street Food',
+      directionsLink:
+        'https://maps.google.com/?q=Hawkers+Asian+Street+Food+Nashville',
+      cost: 2,
+      websiteLink: 'https://www.eathawkers.com',
+      tags: ['east-nashville', 'casual', 'local-favorite', 'drinks'],
+    },
+    {
+      label: 'Little Hats Market',
+      details:
+        'Classic Italian deli with amazing sandwiches. The pastrami is a must-try!',
+      image: littleHats,
+      alt: 'Little Hats Deli',
+      directionsLink: 'https://maps.google.com/?q=Little+Hats+Deli+Nashville',
+      cost: 2,
+      websiteLink: 'https://www.littlehatsmarket.com',
+      tags: ['casual', 'local-favorite', 'brunch'],
+    },
+    {
+      label: 'Locust',
+      details:
+        'Farm-to-table fine dining in East Nashville. Beautiful space with a seasonal menu that changes frequently.',
+      image: locust,
+      alt: 'Locust restaurant',
+      directionsLink: 'https://maps.google.com/?q=Locust+Nashville',
+      cost: 4,
+      websiteLink: 'https://www.locustnashville.com',
+      tags: ['east-nashville', 'upscale', 'local-favorite', 'michelin-star'],
+    },
+    {
+      label: 'Oku',
+      details:
+        'Modern Japanese restaurant with a beautiful sushi bar. The omakase is a special treat!',
+      image: oku,
+      alt: 'Oku Japanese restaurant',
+      directionsLink: 'https://maps.google.com/?q=Oku+Nashville',
+      cost: 3,
+      websiteLink: 'https://www.o-kusushi.com/location/o-ku-nashville/',
+      tags: ['germantown', 'upscale', 'drinks', 'local-favorite'],
+    },
+    {
+      label: 'Ole Smoky Distillery',
+      details:
+        'Tennessee moonshine distillery on Broadway. Free tastings and live music - a fun stop on a Broadway crawl!',
+      image: oleSmoky,
+      alt: 'Ole Smoky Distillery on Broadway',
+      directionsLink:
+        'https://maps.google.com/?q=Ole+Smoky+Distillery+Nashville',
+      cost: 1,
+      websiteLink: 'https://olesmoky.com/pages/nashville',
+      tags: ['downtown', 'drinks', 'live-music', 'walkable'],
+    },
+    {
+      label: 'Pizza Perfect',
+      details:
+        'New York-style pizza by the slice. Perfect for a quick, satisfying meal.',
+      image: pizzaPerfect,
+      alt: 'Pizza Perfect',
+      directionsLink: 'https://maps.google.com/?q=Pizza+Perfect+Nashville',
+      cost: 1,
+      websiteLink: 'https://www.pizzaperfectonline.com',
+      tags: ['casual', 'late-night'],
+    },
+    {
+      label: 'The Catbird Seat',
+      details:
+        "Nashville's premier tasting menu experience. Intimate 22-seat counter surrounding the open kitchen.",
+      image: theCatbirdSeat,
+      alt: 'The Catbird Seat plated dish',
+      directionsLink: 'https://maps.google.com/?q=The+Catbird+Seat+Nashville',
+      cost: 4,
+      websiteLink: 'https://www.thecatbirdseatrestaurant.com',
+      tags: ['midtown', 'upscale', 'local-favorite', 'drinks', 'michelin-star'],
     },
   ],
 };
+
+// Auto-sort all categories alphabetically by label
+Object.keys(data).forEach((key) => {
+  data[key as PlaceCategory].sort((a, b) => a.label.localeCompare(b.label));
+});

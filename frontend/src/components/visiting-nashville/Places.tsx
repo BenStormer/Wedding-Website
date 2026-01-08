@@ -50,14 +50,15 @@ export interface Place {
 }
 
 export const tagLabels: Record<PlaceTag, string> = {
-  // Stay tags
+  // Places to Stay tags
   downtown: 'Downtown',
   upscale: 'Upscale',
   parking: 'Parking Available',
   valet: 'Valet Required',
   'local-favorite': 'Local Favorite',
   history: 'History',
-  // See tags
+
+  // Places to See tags
   outdoors: 'Outdoors',
   indoor: 'Indoor',
   'live-music': 'Live Music',
@@ -65,7 +66,8 @@ export const tagLabels: Record<PlaceTag, string> = {
   arts: 'Arts & Culture',
   free: 'Free',
   'opry-mills': 'Opry Mills Area',
-  // Eat tags
+
+  // Places to Eat tags
   drinks: 'Drinks',
   brunch: 'Brunch',
   casual: 'Casual',
@@ -73,6 +75,7 @@ export const tagLabels: Record<PlaceTag, string> = {
   'food-hall': 'Food Hall',
   rooftop: 'Rooftop',
   'michelin-star': 'Michelin Star',
+
   // Location tags
   germantown: 'Germantown',
   'east-nashville': 'East Nashville',
@@ -249,7 +252,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       directionsLink: 'https://maps.google.com/?q=GEODIS+Park+Nashville',
       cost: 3,
       websiteLink: 'https://www.nashvillesc.com',
-      tags: ['midtown', 'outdoors', 'sports', 'parking'],
+      tags: ['outdoors', 'sports', 'parking'],
     },
     {
       label: 'Tennessee Performing Arts Center (TPAC)',
@@ -331,7 +334,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       details:
         'Massive food hall in downtown with 30+ vendors. Something for everyone - from Nashville hot chicken to sushi to tacos!',
       image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Fifth_%2B_Broadway_Nashville.jpg/1280px-Fifth_%2B_Broadway_Nashville.jpg',
+        'https://www.assemblyfoodhall.com/uploads/sites/3/2021/04/0431-1-min.jpg',
       alt: 'Assembly Food Hall at Fifth + Broadway',
       directionsLink: 'https://maps.google.com/?q=Assembly+Food+Hall+Nashville',
       cost: 2,
@@ -342,7 +345,8 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Greenhouse Bar',
       details:
         'Rooftop bar with stunning views of the Nashville skyline. Great cocktails and a relaxed vibe.',
-      image: 'https://picsum.photos/seed/greenhouse-bar/800/600',
+      image:
+        'https://images.squarespace-cdn.com/content/v1/60f7282392761f0bc572c532/1629222801122-HRJTST4P1RQT1PLGUAH1/IMG_6986+copy.jpg',
       alt: 'Greenhouse Bar rooftop',
       directionsLink: 'https://maps.google.com/?q=Greenhouse+Bar+Nashville',
       cost: 2,
@@ -353,7 +357,8 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Condado Tacos',
       details:
         'Build-your-own tacos with creative toppings. The Capitol View location has great outdoor seating!',
-      image: 'https://picsum.photos/seed/condado-tacos/800/600',
+      image:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS__ujSIkKbEoj0rEljkLdNrRKXBBSekiMmpA&s',
       alt: 'Condado Tacos',
       directionsLink:
         'https://maps.google.com/?q=Condado+Tacos,+501+12th+Ave+S,+Nashville,+TN+37203',
@@ -365,7 +370,8 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Little Hats Deli',
       details:
         'Classic Italian deli with amazing sandwiches. The pastrami is a must-try!',
-      image: 'https://picsum.photos/seed/little-hats/800/600',
+      image:
+        'https://images.squarespace-cdn.com/content/v1/611aaf1446b20b6b952f2f9b/a5eaea78-4524-47f6-8145-e94386fa04d4/Food+Groups_21.jpg',
       alt: 'Little Hats Deli',
       directionsLink: 'https://maps.google.com/?q=Little+Hats+Deli+Nashville',
       cost: 2,
@@ -376,7 +382,8 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Hawkers Asian Street Food',
       details:
         'Pan-Asian street food with bold flavors. Great for sharing - order a bunch of small plates!',
-      image: 'https://picsum.photos/seed/hawkers/800/600',
+      image:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnrQfDCXk6BBqTikWql9301kAgk_s2KsZOog&s',
       alt: 'Hawkers Asian Street Food',
       directionsLink:
         'https://maps.google.com/?q=Hawkers+Asian+Street+Food+Nashville',
@@ -388,7 +395,8 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Bastion',
       details:
         'Intimate 24-seat restaurant with a creative tasting menu. The cocktail bar next door is also excellent.',
-      image: 'https://picsum.photos/seed/bastion/800/600',
+      image:
+        'https://images.squarespace-cdn.com/content/v1/63c0626eaf766c4379fb79f9/c0cff0dd-ea21-441e-b1e7-39d649859c1a/Bastion-July2024-117.jpg',
       alt: 'Bastion restaurant',
       directionsLink: 'https://maps.google.com/?q=Bastion+Nashville',
       cost: 4,
@@ -399,7 +407,8 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Locust',
       details:
         'Farm-to-table fine dining in East Nashville. Beautiful space with a seasonal menu that changes frequently.',
-      image: 'https://picsum.photos/seed/locust/800/600',
+      image:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3WCOuEViAxlR49yQUj4fWMZlLyGMJ4wNT1w&s',
       alt: 'Locust restaurant',
       directionsLink: 'https://maps.google.com/?q=Locust+Nashville',
       cost: 4,
@@ -410,7 +419,8 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'The Catbird Seat',
       details:
         "Nashville's premier tasting menu experience. Intimate 22-seat counter surrounding the open kitchen.",
-      image: 'https://picsum.photos/seed/catbird/800/600',
+      image:
+        'https://images.squarespace-cdn.com/content/v1/5936c0f66a496360f3e839dd/b043675d-c59c-442f-864d-15fc77e22883/051025-CatbirdPH-26901+2.jpg',
       alt: 'The Catbird Seat plated dish',
       directionsLink: 'https://maps.google.com/?q=The+Catbird+Seat+Nashville',
       cost: 4,
@@ -422,7 +432,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       details:
         'Tennessee moonshine distillery on Broadway. Free tastings and live music - a fun stop on a Broadway crawl!',
       image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Lower_Broadway_in_Nashville%2C_TN.jpg/1280px-Lower_Broadway_in_Nashville%2C_TN.jpg',
+        'https://olesmoky.com/cdn/shop/files/25_Black_Label_Whiskey-mobile_1.jpg?v=1763488594&width=600',
       alt: 'Ole Smoky Distillery on Broadway',
       directionsLink:
         'https://maps.google.com/?q=Ole+Smoky+Distillery+Nashville',
@@ -434,7 +444,8 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Fishmonger',
       details:
         'Fresh seafood and raw bar with a focus on quality. Great oysters and creative seafood dishes!',
-      image: 'https://picsum.photos/seed/fishmonger/800/600',
+      image:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGsnvJsvl_-P_hDHWnW8w-G32ZFVOrZ6vYTQ&s',
       alt: 'Fishmonger restaurant',
       directionsLink: 'https://maps.google.com/?q=Fishmonger+Nashville',
       cost: 3,
@@ -445,7 +456,8 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Oku',
       details:
         'Modern Japanese restaurant with a beautiful sushi bar. The omakase is a special treat!',
-      image: 'https://picsum.photos/seed/oku/800/600',
+      image:
+        'https://images.getbento.com/accounts/7646dcfa0cc73f38f6d05812e1b244db/media/images/1402701192022_OkuCLT_Andrew-Cebulka-18252_edited.jpg?w=1200&fit=crop&auto=compress,format&cs=origin&crop=focalpoint&fp-x=0.5&fp-y=0.5',
       alt: 'Oku Japanese restaurant',
       directionsLink: 'https://maps.google.com/?q=Oku+Nashville',
       cost: 3,
@@ -457,7 +469,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       details:
         "Nashville hot chicken at its finest. Warning: 'Shut the Cluck Up' is NOT for beginners!",
       image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Nashville_Hot_Chicken.jpg/1280px-Nashville_Hot_Chicken.jpg',
+        'https://cdn.prod.website-files.com/643d59ec34f67a709d4fb759/67db0b09f5fdd47023909301_hattie-bs-hot-chicken.jpg',
       alt: "Hattie B's hot chicken plate",
       directionsLink:
         'https://maps.google.com/?q=Hattie+Bs+Hot+Chicken+Nashville',
@@ -469,7 +481,8 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Butchertown Hall',
       details:
         'Texas-style BBQ meets Nashville. Smoked meats, great sides, and an excellent beer selection.',
-      image: 'https://picsum.photos/seed/butchertown/800/600',
+      image:
+        'https://images.squarespace-cdn.com/content/v1/53ac74f4e4b07ac785324b57/1558661357841-QWRH8N1DW3NDW2GFFVWH/Y2z5bnx0.jpg?format=2500w',
       alt: 'Butchertown Hall BBQ',
       directionsLink: 'https://maps.google.com/?q=Butchertown+Hall+Nashville',
       cost: 2,
@@ -480,7 +493,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Cookout',
       details:
         'Late-night fast food heaven! Cheap, delicious, and open late. The milkshakes are legendary.',
-      image: 'https://picsum.photos/seed/cookout/800/600',
+      image: 'https://cookout.com/wp-content/uploads/CookOut-Sign.png',
       alt: 'Cookout restaurant',
       directionsLink: 'https://maps.google.com/?q=Cookout+Nashville',
       cost: 1,
@@ -491,7 +504,8 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Pizza Perfect',
       details:
         'New York-style pizza by the slice. Perfect for a quick, satisfying meal.',
-      image: 'https://picsum.photos/seed/pizza-perfect/800/600',
+      image:
+        'https://www.pizzaperfectonline.com/wp-content/uploads/2024/10/ff7b.pizza-roma-tomato-supreme.jpg',
       alt: 'Pizza Perfect',
       directionsLink: 'https://maps.google.com/?q=Pizza+Perfect+Nashville',
       cost: 1,
@@ -502,18 +516,19 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Emmy Squared',
       details:
         'Detroit-style pizza with crispy, cheesy edges. The Colony is a fan favorite!',
-      image: 'https://picsum.photos/seed/emmy-squared/800/600',
+      image: 'https://images.getbento.com/',
       alt: 'Emmy Squared pizza',
       directionsLink: 'https://maps.google.com/?q=Emmy+Squared+Nashville',
       cost: 2,
       websiteLink: 'https://www.emmysquared.com',
-      tags: ['gulch', 'casual', 'local-favorite', 'drinks'],
+      tags: ['gulch', 'germantown', 'casual', 'local-favorite', 'drinks'],
     },
     {
       label: "Adele's",
       details:
         'Elevated Southern comfort food with farm-to-table ingredients. Famous for their weekend brunch buffet and handcrafted cocktails.',
-      image: 'https://picsum.photos/seed/adeles/800/600',
+      image:
+        'https://images.getbento.com/accounts/67f7019023d5b2addff6e8d20878804b/media/images/58585Adeles-Nashville-Best-Restaurants-Nashville.jpg?w=1200&fit=crop&auto=compress,format&cs=origin&h=600',
       alt: "Adele's restaurant",
       directionsLink:
         'https://maps.google.com/?q=Adeles+Nashville+1210+McGavock+St',

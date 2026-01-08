@@ -15,10 +15,16 @@ import ourStoryHorizontal from '../assets/images/our_story_horizontal.svg';
 import ourStoryVertical from '../assets/images/our_story_vertical.svg';
 
 const LandingImage = () => {
+  const daysUntil = getDaysUntil();
+
   return (
     <div className="engagement-photo-container">
       <div className="engagement-photo"></div>
-      <div className="countdown">In {getDaysUntil()} days...</div>
+      {daysUntil > 0 && (
+        <div className="countdown">
+          In {daysUntil} {daysUntil === 1 ? 'day' : 'days'}...
+        </div>
+      )}
       <div className="hero-title">Celebrate the wedding of Aspen and Ben!</div>
     </div>
   );

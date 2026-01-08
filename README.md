@@ -1,6 +1,6 @@
 # Aspen & Ben's Wedding Website
 
-> **Live Site:** `[YOUR_DOMAIN_HERE]`
+> **Live Site:** `https://www.aspenandbenjamin.com`
 
 Source code for Aspen and Ben's wedding website — a full-stack web application for sharing wedding details, collecting RSVPs, and managing a gift registry.
 

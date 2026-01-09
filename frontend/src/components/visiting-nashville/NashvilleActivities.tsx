@@ -24,6 +24,10 @@ import {
   IconX,
 } from '@tabler/icons-react';
 
+// Fallback image URL for failed image loads
+const PLACE_PLACEHOLDER =
+  'https://placehold.co/800x600/f5f0ed/5e4838?text=Place';
+
 // Cost display component
 const CostDisplay = ({ cost }: { cost: number }) => {
   if (cost === 0) {
@@ -36,13 +40,8 @@ const CostDisplay = ({ cost }: { cost: number }) => {
 
   return (
     <Group gap={2}>
-      {[1, 2, 3, 4].map((i) => (
-        <Text
-          key={i}
-          size="sm"
-          fw={600}
-          c={i <= cost ? 'var(--bold-brown)' : 'var(--primary-brown)'}
-        >
+      {Array.from({ length: cost }, (_, i) => (
+        <Text key={i} size="sm" fw={600} c="#4a3a2e">
           $
         </Text>
       ))}
@@ -65,7 +64,7 @@ const PlaceCard = ({ place, onTagClick, activeFilters }: PlaceCardProps) => {
           src={place.image}
           alt={place.alt}
           height={180}
-          fallbackSrc="https://picsum.photos/800/600"
+          fallbackSrc={PLACE_PLACEHOLDER}
         />
         <Box className="place-card-cost-badge">
           <CostDisplay cost={place.cost} />
@@ -76,14 +75,16 @@ const PlaceCard = ({ place, onTagClick, activeFilters }: PlaceCardProps) => {
         <Text className="place-card-title">{place.label}</Text>
 
         <Group gap={6} wrap="wrap">
-          {place.tags.slice(0, 3).map((tag) => {
+          {place.tags.map((tag) => {
             const isActive = activeFilters.has(tag);
             return (
               <Badge
                 key={tag}
                 size="xs"
                 variant="light"
-                className={`place-tag place-tag-clickable ${isActive ? 'place-tag-active' : ''}`}
+                className={`place-tag place-tag-clickable ${
+                  isActive ? 'place-tag-active' : ''
+                }`}
                 onClick={() => onTagClick(tag)}
               >
                 {tagLabels[tag]}
@@ -95,6 +96,12 @@ const PlaceCard = ({ place, onTagClick, activeFilters }: PlaceCardProps) => {
         <Text size="md" c="var(--bold-brown)" className="place-card-details">
           {place.details}
         </Text>
+
+        {place.tip && (
+          <Text size="sm" className="place-card-tip">
+            Tip: {place.tip}
+          </Text>
+        )}
 
         <Group grow gap="sm" className="place-card-links">
           <Button
@@ -134,7 +141,11 @@ interface ActiveFiltersProps {
   onClearAll: () => void;
 }
 
-const ActiveFilters = ({ filters, onRemove, onClearAll }: ActiveFiltersProps) => {
+const ActiveFilters = ({
+  filters,
+  onRemove,
+  onClearAll,
+}: ActiveFiltersProps) => {
   const filterArray = Array.from(filters);
 
   return (
@@ -278,6 +289,21 @@ const NashvilleActivitiesTabs = () => {
           })}
         </Group>
       </Box>
+
+      {/* Places to Stay Note */}
+      {activeTab === 'places-to-stay' && (
+        <Text
+          className="places-to-stay-note"
+          size="sm"
+          c="var(--bold-brown)"
+          ta="center"
+        >
+          We haven't stayed at these spots ourselves, but chose them based on
+          reviews and proximity to the wedding venue. Tennessee is beautiful and
+          there are also many great Airbnb options in the area! You probably
+          can't go wrong with any lodging option you find.
+        </Text>
+      )}
 
       {/* Active Filters Display */}
       {activeFilters.size > 0 && (

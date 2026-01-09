@@ -69,6 +69,13 @@ const PlaceCard = ({ place, onTagClick, activeFilters }: PlaceCardProps) => {
         <Box className="place-card-cost-badge">
           <CostDisplay cost={place.cost} />
         </Box>
+        {place.distanceFromVenue && (
+          <Box className="place-card-distance-badge">
+            <Text size="sm" c="var(--bold-brown)" fw={600}>
+              {place.distanceFromVenue} from venue
+            </Text>
+          </Box>
+        )}
       </Card.Section>
 
       <Stack gap="sm" className="place-card-content">
@@ -97,38 +104,40 @@ const PlaceCard = ({ place, onTagClick, activeFilters }: PlaceCardProps) => {
           {place.details}
         </Text>
 
-        {place.tip && (
-          <Text size="sm" className="place-card-tip">
-            Tip: {place.tip}
-          </Text>
-        )}
+        <Box className="place-card-bottom">
+          {place.tip && (
+            <Text size="sm" className="place-card-tip">
+              Tip: {place.tip}
+            </Text>
+          )}
 
-        <Group grow gap="sm" className="place-card-links">
-          <Button
-            component="a"
-            href={place.directionsLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            variant="light"
-            color="var(--primary-brown)"
-            leftSection={<IconMapPin size={15} />}
-            className="place-button"
-          >
-            Directions
-          </Button>
-          <Button
-            component="a"
-            href={place.websiteLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            variant="light"
-            color="var(--primary-brown)"
-            leftSection={<IconExternalLink size={15} />}
-            className="place-button"
-          >
-            Website
-          </Button>
-        </Group>
+          <Group grow gap="sm" className="place-card-links">
+            <Button
+              component="a"
+              href={place.directionsLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="light"
+              color="var(--primary-brown)"
+              leftSection={<IconMapPin size={15} />}
+              className="place-button"
+            >
+              Directions
+            </Button>
+            <Button
+              component="a"
+              href={place.websiteLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="light"
+              color="var(--primary-brown)"
+              leftSection={<IconExternalLink size={15} />}
+              className="place-button"
+            >
+              Website
+            </Button>
+          </Group>
+        </Box>
       </Stack>
     </Card>
   );

@@ -80,13 +80,11 @@
   border: 2px solid var(--primary-brown) !important;
   border-radius: 12px !important;
   overflow: hidden;
-  transition: all 0.2s ease;
 }
 
 .faq-control {
   padding: 18px 20px;
   background-color: var(--secondary-brown) !important;
-  transition: all 0.2s ease;
 }
 
 .faq-question {
@@ -94,26 +92,16 @@
   font-weight: var(--font-weight-semibold);
   color: var(--bold-brown);
   line-height: 1.4;
-  transition: color 0.2s ease;
 }
 
 .faq-chevron {
   color: var(--bold-brown);
-  transition: color 0.2s ease;
-}
-
-/* Fix Mantine's chevron rotation - target the wrapper */
-.faq-control .mantine-Accordion-chevron {
-  transition: transform 0.2s ease;
-}
-
-.faq-item[data-active] .faq-control .mantine-Accordion-chevron {
-  transform: rotate(180deg);
 }
 
 /* CLOSED + HOVER: Dark brown background, light text */
 .faq-item:not([data-active]):hover {
   box-shadow: 0 4px 12px rgba(94, 72, 56, 0.2);
+  background: var(--primary-brown) !important;
 }
 
 .faq-item:not([data-active]):hover .faq-control {
@@ -160,14 +148,21 @@
 .faq-panel {
   padding: 0 20px 20px;
   background-color: var(--secondary-brown) !important;
-  transition: background-color 0.2s ease;
 }
 
 .faq-answer {
   font-size: var(--font-size-body-sm);
   color: var(--bold-brown);
   line-height: var(--line-height-relaxed);
-  transition: color 0.2s ease;
+}
+
+/* Chevron rotation */
+.faq-control .mantine-Accordion-chevron {
+  transition: transform 150ms ease;
+}
+
+.faq-item[data-active] .faq-control .mantine-Accordion-chevron {
+  transform: rotate(180deg);
 }
 
 /* Mobile Responsive */

@@ -46,6 +46,7 @@ const OverviewDetails = () => {
           {
             label: 'Where',
             details: 'Noah Liff Opera Center',
+            subDetails: '3622 Redmon St, Nashville, TN',
           },
           {
             label: 'Attire',

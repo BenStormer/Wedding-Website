@@ -9,6 +9,7 @@ import {
 interface OverviewDetailBoxType {
   label: string;
   details: string;
+  subDetails?: string;
 }
 
 const getIcon = (label: string) => {
@@ -36,6 +37,11 @@ const OverviewDetailBox = ({ box }: { box: OverviewDetailBoxType }) => {
       <Text className="overview-detail-text">
         {box.details}
       </Text>
+      {box.subDetails && (
+        <Text className="overview-detail-subtext">
+          {box.subDetails}
+        </Text>
+      )}
     </Box>
   );
 };

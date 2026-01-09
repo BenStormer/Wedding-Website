@@ -47,6 +47,14 @@
   color: var(--secondary-brown);
 }
 
+.overview-detail-subtext {
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-relaxed);
+  color: var(--secondary-brown);
+  margin-top: 0.5rem;
+}
+
 @media (max-width: 768px) {
   .overview-detail-box-container {
     flex-direction: column;

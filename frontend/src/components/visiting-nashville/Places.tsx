@@ -117,6 +117,7 @@ export interface Place {
   cost: number; // 0 = free, 1-4 = $ to $$$$
   websiteLink: string;
   tags: PlaceTag[];
+  distanceFromVenue?: string; // Optional distance from wedding venue (e.g., "5 min")
 }
 
 export const tagLabels: Record<PlaceTag, string> = {
@@ -187,6 +188,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       websiteLink:
         'https://www.hilton.com/en/hotels/bnagigi-hilton-garden-inn-nashville-west-end-avenue/',
       tags: ['midtown', 'parking'],
+      distanceFromVenue: '5 min',
     },
     {
       label: 'Hilton Nashville Downtown',
@@ -200,6 +202,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       websiteLink:
         'https://www.hilton.com/en/hotels/bnanshf-hilton-nashville-downtown/',
       tags: ['downtown', 'valet'],
+      distanceFromVenue: '20 min',
     },
     {
       label: 'The Joseph',
@@ -211,6 +214,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       cost: 4,
       websiteLink: 'https://www.thejosephnashville.com',
       tags: ['downtown', 'upscale', 'valet'],
+      distanceFromVenue: '15 min',
     },
   ],
   'places-to-see': [

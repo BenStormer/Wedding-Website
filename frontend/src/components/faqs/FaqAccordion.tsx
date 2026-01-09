@@ -12,7 +12,6 @@ import {
   Box,
   Text,
   UnstyledButton,
-  Stack,
 } from '@mantine/core';
 import {
   IconChevronDown,
@@ -102,22 +101,21 @@ const FaqAccordionSection = () => {
 
       {/* FAQ Content */}
       <Box className="faq-content">
-        <Stack gap={0}>
-          <Accordion
-            variant="separated"
-            radius="md"
-            className="faq-accordion"
-            chevronPosition="right"
-          >
-            {currentFaqs.map((faq) => (
-              <FaqItem
-                key={faq.question}
-                question={faq.question}
-                answer={faq.answer}
-              />
-            ))}
-          </Accordion>
-        </Stack>
+        <Accordion
+          variant="separated"
+          radius="md"
+          className="faq-accordion"
+          chevronPosition="right"
+          transitionDuration={0}
+        >
+          {currentFaqs.map((faq) => (
+            <FaqItem
+              key={faq.question}
+              question={faq.question}
+              answer={faq.answer}
+            />
+          ))}
+        </Accordion>
       </Box>
     </Box>
   );

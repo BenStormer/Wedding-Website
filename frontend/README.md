@@ -25,23 +25,11 @@ React application for Aspen and Ben's wedding website, built with TypeScript and
 - Navigation cards to other sections
 - "Our Story" relationship timeline
 
-<!-- TODO: Add screenshots of homepage -->
-
-| Desktop                                                  | Mobile                                                 |
-| -------------------------------------------------------- | ------------------------------------------------------ |
-| ![Home Page - Desktop](placeholder-for-home-desktop.png) | ![Home Page - Mobile](placeholder-for-home-mobile.png) |
-
 ### Wedding Details (`/details`)
 
 - Event timeline (ceremony, cocktail hour, reception, etc.)
 - Venue information with photos and directions
 - Parking details, attire guidelines, and other logistics
-
-<!-- TODO: Add screenshots of details page -->
-
-| Desktop                                                        | Mobile                                                       |
-| -------------------------------------------------------------- | ------------------------------------------------------------ |
-| ![Details Page - Desktop](placeholder-for-details-desktop.png) | ![Details Page - Mobile](placeholder-for-details-mobile.png) |
 
 ### Visiting Nashville (`/visiting-nashville`)
 
@@ -49,33 +37,15 @@ React application for Aspen and Ben's wedding website, built with TypeScript and
 - Panel toggle to switch between sections
 - Tag-based filters for cards within each section
 
-<!-- TODO: Add screenshots of Nashville page -->
-
-| Desktop                                                            | Mobile                                                           |
-| ------------------------------------------------------------------ | ---------------------------------------------------------------- |
-| ![Nashville Page - Desktop](placeholder-for-nashville-desktop.png) | ![Nashville Page - Mobile](placeholder-for-nashville-mobile.png) |
-
 ### Registry (`/registry`)
 
 - Registry items with images and descriptions
 - Tracks what has been purchased
 - Gift modal with form for recording purchases (integrates with backend)
 
-<!-- TODO: Add screenshots of registry page -->
-
-| Desktop                                                          | Mobile                                                         |
-| ---------------------------------------------------------------- | -------------------------------------------------------------- |
-| ![Registry Page - Desktop](placeholder-for-registry-desktop.png) | ![Registry Page - Mobile](placeholder-for-registry-mobile.png) |
-
 ### FAQs (`/faqs`)
 
 - Accordion-style Q&A format
-
-<!-- TODO: Add screenshots of FAQs page -->
-
-| Desktop                                                  | Mobile                                                 |
-| -------------------------------------------------------- | ------------------------------------------------------ |
-| ![FAQs Page - Desktop](placeholder-for-faqs-desktop.png) | ![FAQs Page - Mobile](placeholder-for-faqs-mobile.png) |
 
 ---
 

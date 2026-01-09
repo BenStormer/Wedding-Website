@@ -4,11 +4,9 @@
 
 Source code for Aspen and Ben's wedding website — a full-stack web application for sharing wedding details, collecting RSVPs, and managing a gift registry.
 
-<!-- TODO: Add screenshot/GIF of the homepage here -->
-
-| Desktop                                                              | Mobile                                                             |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| ![Website Preview - Desktop](placeholder-for-desktop-screenshot.png) | ![Website Preview - Mobile](placeholder-for-mobile-screenshot.png) |
+| Desktop                                             | Mobile                                            |
+| --------------------------------------------------- | ------------------------------------------------- |
+| ![Website Preview - Desktop](docs/home-desktop.png) | ![Website Preview - Mobile](docs/home-mobile.png) |
 
 ---
 
@@ -61,10 +59,13 @@ npm install
 npm run dev
 
 # Backend (from /backend)
-# Start Firestore emulator first, then:
+# Start Firestore emulator first:
+firebase emulators:start --only firestore
+
+# Then in another terminal, start the server:
 go run ./cmd/server/main.go
 
-# Seed local database
+# Seed local database (optional)
 go run ./cmd/server/main.go -seed
 ```
 
@@ -89,5 +90,5 @@ Wedding-Website/
 ├── frontend/          # React + TypeScript + Mantine
 ├── backend/           # Go REST API
 ├── infra/             # Terraform IaC
-└── scripts/           # Data import/export utilities
+└── scripts/           # Data import utilities
 ```

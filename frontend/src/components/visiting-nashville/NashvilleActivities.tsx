@@ -102,6 +102,12 @@ const PlaceCard = ({ place, onTagClick, activeFilters }: PlaceCardProps) => {
           {place.details}
         </Text>
 
+        {place.tip && (
+          <Text size="sm" className="place-card-tip">
+            Tip: {place.tip}
+          </Text>
+        )}
+
         <Group grow gap="sm" className="place-card-links">
           <Button
             component="a"

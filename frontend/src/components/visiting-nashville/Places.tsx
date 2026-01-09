@@ -112,6 +112,7 @@ export type PlaceTag = StayTag | SeeTag | EatTag;
 export interface Place {
   label: string;
   details: string;
+  tip?: string; // Optional tip to display below the description
   image: string;
   alt: string;
   directionsLink: string;
@@ -218,7 +219,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Bicentennial Capitol Mall State Park',
       details:
-        'A 19-acre park celebrating Tennessee history. Features a 200-foot granite map of the state and a WWII memorial.',
+        'We love everything about this place. The landscape architecture follows the geography of Tennessee, complete with plaques and fascinating history throughout. It has the best view of the Capitol in the city. Ben loves that everyone brings their dogs here, and Aspen is particularly drawn to the Magnolia trees at the Southern end.',
+      tip: 'You can spin the massive globe in the WW2 section.',
       image: bicentennial,
       alt: 'Bicentennial Capitol Mall',
       directionsLink:
@@ -230,7 +232,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Centennial Park',
       details:
-        'Beautiful 132-acre park surrounding the Parthenon. Perfect for a morning walk, picnic, or jog around the lake. This is where we took our engagement photos!',
+        'Home to the Parthenon, this beautiful 132-acre park is perfect for a morning walk, picnic, or jog around the lake. This is where we took our engagement photos! There is also a famous chair that Taylor Swift sat at (if you are into that). We imagine it would be a nice place to read if we read.',
+      tip: 'Check out lemonade or ice cream vendors if you are interested.',
       image: centennial,
       alt: 'Centennial Park',
       directionsLink: 'https://maps.google.com/?q=Centennial+Park+Nashville',
@@ -242,7 +245,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Cheekwood Estate & Gardens',
       details:
-        '55 acres of botanical gardens and an art museum. Stunning in fall when the leaves change!',
+        "This is a gorgeous, massive estate with tons of gardens. The variety of garden and plant types means there is truly something for everyone's tastes. It is likely to be especially beautiful (but crowded) in the Fall.",
+      tip: 'Check out the hiking trails! They have sculptures and neat art along the paths.',
       image: cheekwood,
       alt: 'Cheekwood botanical gardens',
       directionsLink: 'https://maps.google.com/?q=Cheekwood+Estate+and+Gardens',
@@ -253,7 +257,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Grand Ole Opry',
       details:
-        "The show that made country music famous! Catch a live performance at this legendary venue - it's been running since 1925.",
+        'This is perhaps the most famous theater in Nashville, located right next to the Opry Mills Mall (with the IMAX theater we love). They offer daily tours and shows. The theater itself has great views from anywhere and comfortable, bench-style seating. We actually saw Dancing with the Stars Live here instead of a musician!',
+      tip: 'Skip the tour and just see a show if possible!',
       image: grandOleOpry,
       alt: 'Grand Ole Opry',
       directionsLink: 'https://maps.google.com/?q=Grand+Ole+Opry+Nashville',
@@ -264,7 +269,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Lower Broadway',
       details:
-        'The heart of Nashville! Honky-tonks, live music, and people-watching. No cover charges at most bars.',
+        'This is the heart of Nashville and where every tourist goes. It is honky-tonk after honky-tonk and the first thing people tend to think of when they imagine Nashville.',
+      tip: 'On the upper floors of the bars they tend to play music genres other than country.',
       image: broadway,
       alt: 'Lower Broadway at night',
       directionsLink: 'https://maps.google.com/?q=Lower+Broadway+Nashville+TN',
@@ -281,9 +287,10 @@ export const data: Record<PlaceCategory, Place[]> = {
       ],
     },
     {
-      label: "Nashville Farmers' Market",
+      label: "Nashville Farmer's Market",
       details:
-        'Year-round market with fresh produce, local vendors, and international food stalls. The Market House has great lunch spots!',
+        "Since it is right next to the TN State Museum and Bicentennial Park, we come here often. There's plenty of parking and tons of vendors for food and local crafts. It's a great place to grab a souvenir, and they usually have live music on the weekends.",
+      tip: 'Do not order the breakfast sandwich from the coffee shop inside.',
       image: farmersMarket,
       alt: "Nashville Farmers' Market",
       directionsLink: 'https://maps.google.com/?q=Nashville+Farmers+Market',
@@ -294,7 +301,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Nashville Predators Hockey',
       details:
-        "Catch a Preds game at Bridgestone Arena! Even if you're not a hockey fan, the atmosphere is electric.",
+        'This is our favorite sport to watch in Nashville. The games are extremely exciting, and they have the best crowd of any sport in the city. The arena is in the heart of Lower Broadway, so you can always find something to do before or after the game. If you are lucky, you might even see a fight!',
+      tip: 'Learn the chants before you go!',
       image: nashvillePredatorsHockey,
       alt: 'Bridgestone Arena',
       directionsLink: 'https://maps.google.com/?q=Bridgestone+Arena+Nashville',
@@ -305,7 +313,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Nashville SC Soccer',
       details:
-        "Catch an MLS match at GEODIS Park! Nashville's soccer club has one of the best atmospheres in the league.",
+        'This is our second favorite sport to watch in Nashville. The stadium is gorgeous and the crowd is almost as lively as hockey. Tickets are often very cheap, and soccer is so much more fun to watch in person than on TV.',
+      tip: 'Use a rideshare app to get there. Parking is a nightmare, expensive, and you will still end up walking 15-30 minutes to reach the stadium.',
       image: nashvilleSoccer,
       alt: 'Nashville SC at GEODIS Park',
       directionsLink: 'https://maps.google.com/?q=GEODIS+Park+Nashville',
@@ -316,7 +325,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Nashville Zoo at Grassmere',
       details:
-        'A 188-acre zoo with over 6,000 animals. Great for families with kids of all ages. The Jungle Gym playground is a must!',
+        "This is our third favorite zoo we've ever been to, right behind the St. Louis Zoo and Smithsonian National Zoo in DC. We even have a membership and go about once a season. Some highlights are that they have live animal shows and will let you pet kangaroos!",
+      tip: 'Check out the vet center. They sometimes have baby animals in the windows!',
       image: zoo,
       alt: 'Nashville Zoo',
       directionsLink: 'https://maps.google.com/?q=Nashville+Zoo',
@@ -327,7 +337,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: "Nelson's Green Brier Distillery",
       details:
-        "Tennessee whiskey distillery in Marathon Village. Tours and tastings available - learn about Nashville's whiskey history!",
+        "Admittedly, we have not actually been here yet and we're not sure why. We have only ever heard good things and it seems like a great time. It is one of the distilleries with the coolest histories in Tennessee.",
+      tip: 'There is free street parking around the green space in Capitol View.',
       image: nelsonsGreenbrier,
       alt: "Nelson's Green Brier Distillery",
       directionsLink:
@@ -339,7 +350,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Regal Opry Mills IMAX',
       details:
-        'Catch the latest blockbuster on the giant IMAX screen. Located in Opry Mills mall with plenty of shopping nearby.',
+        'There is one reason to go to this theater: the IMAX screen. Ben likes to nerd out over screen formats, and this is one of fewer than 30 true 70mm IMAX theaters in the US. We saw our first true IMAX (not "LieMax") movie here, which was Oppenheimer, followed by Barbie the same day. Since then we have seen Interstellar, Mission Impossible: Final Reckoning, Avatar 2, One Battle After Another, and Avatar 3 on the 70mm IMAX screen.',
+      tip: 'If seeing two movies in the same day, watch the one not in IMAX first.',
       image: regalOpryMills,
       alt: 'Regal Opry Mills IMAX',
       directionsLink: 'https://maps.google.com/?q=Regal+Opry+Mills+IMAX',
@@ -350,7 +362,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Ryman Auditorium',
       details:
-        "The 'Mother Church of Country Music.' Take a tour or catch a show - the acoustics are incredible.",
+        'This is one of the most storied theaters in Nashville along with the Grand Ole Opry. Located on Lower Broadway, it is super easy to get to from other Nashville attractions. They offer tours and host shows, so you should be able to find something you like.',
+      tip: 'Not just for music, they also do comedy shows and other acts!',
       image: ryman,
       alt: 'Ryman Auditorium',
       directionsLink: 'https://maps.google.com/?q=Ryman+Auditorium',
@@ -361,7 +374,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Tennessee Performing Arts Center (TPAC)',
       details:
-        'Broadway shows, concerts, and performances. Check the schedule - they often have amazing touring productions!',
+        'This theater is gorgeous and we saw our first Broadway show ever here ("& Juliet" on Valentine\'s Day). It sits right between the busiest parts of Downtown Nashville and the /Bicentennial Mall area. It is definitely worth checking what shows are playing when you visit.',
+      tip: "Park at the Farmer's Market and walk here! It is just one (very steep) hill away!",
       image: tpac,
       alt: 'Tennessee Performing Arts Center',
       directionsLink:
@@ -373,7 +387,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Tennessee State Capitol',
       details:
-        'One of the oldest working state capitols in the U.S. Free guided tours available. Beautiful Greek Revival architecture.',
+        'This is the center of Tennessee! They give free tours on weekdays (check their website for times) and it sits on a super cool hill with a great view of the city. Also, the grave of James K. Polk and his family is on the actual grounds and you can walk right up to it.',
+      tip: 'For a workout, try to run up the massive hill!',
       image: capitol,
       alt: 'Tennessee State Capitol building',
       directionsLink: 'https://maps.google.com/?q=Tennessee+State+Capitol',
@@ -384,7 +399,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Tennessee State Museum',
       details:
-        "Explore Tennessee's history from prehistoric times to the present. Free admission makes it a great rainy day activity!",
+        "This is a super cool museum that is completely free! Museums aren't really Aspen's thing, but Ben loves this one. His favorite artifact is the quill that James K. Polk used to annex Texas.",
+      tip: 'There are lots of mini theaters playing videos spread throughout if you need to take a break from standing.',
       image: stateHistoryMuseum,
       alt: 'Tennessee State Museum',
       directionsLink: 'https://maps.google.com/?q=Tennessee+State+Museum',
@@ -395,7 +411,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Parthenon',
       details:
-        'A full-scale replica of the original Parthenon in Athens, housing a 42-foot statue of Athena. A must-see Nashville landmark!',
+        "The Parthenon is truly stunning with its massive size and architecture. It also houses a museum and rotating art exhibit inside, which Ben really likes. Aspen doesn't care for the museum too much, but it is where they filmed part of the first Percy Jackson movie, which she does find very cool.",
+      tip: 'Bring a student/teacher ID for a discount.',
       image: parthenon,
       alt: 'Parthenon',
       directionsLink: 'https://maps.google.com/?q=The+Parthenon+Nashville',
@@ -408,7 +425,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: "Adele's",
       details:
-        'Elevated Southern comfort food with farm-to-table ingredients. Famous for their weekend brunch buffet and handcrafted cocktails.',
+        'This is elevated Southern comfort food with farm-to-table ingredients. They are famous for their weekend brunch buffet and handcrafted cocktails Ben had an incredible Kale salad here surprisingly enough.',
+      tip: "Don't split the bill with coworkers who order lots of drinks.",
       image: adeles,
       alt: "Adele's restaurant",
       directionsLink:
@@ -427,7 +445,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Assembly Food Hall',
       details:
-        'Massive food hall in downtown with 30+ vendors. Something for everyone - from Nashville hot chicken to sushi to tacos!',
+        "This is a massive food hall in downtown with 30+ vendors. There is something for everyone, from Nashville hot chicken to sushi to tacos. We always make a stop here when we are on Lower Broadway, especially at Jeni's Ice Cream for Ben.",
+      tip: "Don't go to Prince's. Hattie B's is better no matter what anyone says.",
       image: assemblyFoodHall,
       alt: 'Assembly Food Hall at Fifth + Broadway',
       directionsLink: 'https://maps.google.com/?q=Assembly+Food+Hall+Nashville',
@@ -438,7 +457,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Bastion',
       details:
-        'Intimate 24-seat restaurant with a creative tasting menu. The cocktail bar next door is also excellent.',
+        "This is an intimate 24-seat restaurant with a creative tasting menu, and the cocktail bar next door is also allegedly excellent. We have never been here and probably won't be anytime soon (it is pricey!). However, several people we know claim it as the best restaurant in the city, and it is in a really fun neighborhood.",
+      tip: 'If you just go to the bar (not the restaurant), they actually do serve nachos.',
       image: bastion,
       alt: 'Bastion restaurant',
       directionsLink: 'https://maps.google.com/?q=Bastion+Nashville',
@@ -456,7 +476,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Butchertown Hall',
       details:
-        'Texas-style BBQ meets Nashville. Smoked meats, great sides, and an excellent beer selection.',
+        "This is Texas-style BBQ, but not truly Texan (we don't think they have smokers). Regardless, the owners are from Texas and the food is really good. Why doesn't every BBQ place serve their food with tortillas instead of white bread? They also have some more creative entrees beyond straight barbecue.",
+      tip: 'Order a large queso!',
       image: butchertownHall,
       alt: 'Butchertown Hall BBQ',
       directionsLink: 'https://maps.google.com/?q=Butchertown+Hall+Nashville',
@@ -467,7 +488,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Condado Tacos',
       details:
-        'Build-your-own tacos with creative toppings. The Capitol View location has great outdoor seating!',
+        "This place is close to us, so we go a lot. Their nachos are incredible and we really don't order anything else. It is one of the best price-to-portion meals in Nashville if you order the nachos.",
+      tip: 'You can order way more than their "suggested" amount of toppings.',
       image: condado,
       alt: 'Condado Tacos',
       directionsLink:
@@ -479,7 +501,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Cookout',
       details:
-        'Late-night fast food heaven! Cheap, delicious, and open late. The milkshakes are legendary.',
+        'This is what fast food was made for. They are open very late (until 5am), super cheap for the amount of food, and while it is not high quality, it feels like a cultural experience to try at 3am.',
+      tip: 'Swap out your drink for a milkshake for free!',
       image: cookout,
       alt: 'Cookout restaurant',
       directionsLink: 'https://maps.google.com/?q=Cookout+Nashville',
@@ -490,7 +513,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Emmy Squared',
       details:
-        'Detroit-style pizza with crispy, cheesy edges. The Colony is a fan favorite!',
+        'This is definitely the most popular pizza place among people we know. They serve Detroit-style pizza with crispy, cheesy edges. There are lots of locations around Nashville, but we usually go to the one in Germantown.',
+      tip: 'They are good with dietary restrictions if you have any (gluten-free and dairy-free pizza available).',
       image: emmySquared,
       alt: 'Emmy Squared pizza',
       directionsLink: 'https://maps.google.com/?q=Emmy+Squared+Nashville',
@@ -509,7 +533,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Fishmonger',
       details:
-        'Fresh seafood and raw bar with a focus on quality. Great oysters and creative seafood dishes!',
+        'This is a small spot with really neat vibes, right by the Cumberland River in a very cool part of Germantown. They have an incredible fish sandwich.',
+      tip: 'Try to get a reservation even if it is not required. They have very limited seating.',
       image: fishmonger,
       alt: 'Fishmonger restaurant',
       directionsLink: 'https://maps.google.com/?q=Fishmonger+Nashville',
@@ -520,7 +545,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Greenhouse Bar',
       details:
-        'Rooftop bar with stunning views of the Nashville skyline. Great cocktails and a relaxed vibe.',
+        'This is our favorite bar in Nashville! There is lots of seating and it stays open quite late despite not being near a busy area. The drinks are on the expensive side, but the atmosphere is incredible. It is literally in a greenhouse with tons of plants everywhere.',
+      tip: 'The only way to get here is to drive, so plan your way home!',
       image: greenhouse,
       alt: 'Greenhouse Bar rooftop',
       directionsLink: 'https://maps.google.com/?q=Greenhouse+Bar+Nashville',
@@ -531,7 +557,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: "Hattie B's Hot Chicken",
       details:
-        "Nashville hot chicken at its finest. Warning: 'Shut the Cluck Up' is NOT for beginners!",
+        "This is the most iconic restaurant in Nashville. It is often compared to Prince's, but Ben doesn't really think it is a competition (supposedly that is what the tourists and transplants all think though, not the Nashville natives). There are lots of locations, including one in Assembly Food Hall.",
+      tip: 'If getting tenders, order a kids meal and then ask for additional tenders. It saves like $4 for the same meal.',
       image: hattieBs,
       alt: "Hattie B's hot chicken plate",
       directionsLink:
@@ -550,7 +577,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Hawkers Asian Street Food',
       details:
-        'Pan-Asian street food with bold flavors. Great for sharing - order a bunch of small plates!',
+        'This place has a really cool atmosphere and sits at the border of East Nashville and downtown. It is great for sharing food, so you can just order lots of small plates.',
+      tip: 'Get the Curry Roti. It is so good.',
       image: hawkers,
       alt: 'Hawkers Asian Street Food',
       directionsLink:
@@ -562,7 +590,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Little Hats Market',
       details:
-        'Classic Italian deli with amazing sandwiches. The pastrami is a must-try!',
+        'This is our most visited restaurant in Nashville. Ben has ranked almost every sandwich here, so ask him for his list. Aspen tends to just get the chicken parm sandwich. They have nice outdoor seating and a super fun market inside (not just food). The whole place is decorated top to bottom with Italian-American paraphernalia.',
+      tip: 'You can park in their lot and validate inside.',
       image: littleHats,
       alt: 'Little Hats Deli',
       directionsLink: 'https://maps.google.com/?q=Little+Hats+Deli+Nashville',
@@ -573,7 +602,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Locust',
       details:
-        'Farm-to-table fine dining in East Nashville. Beautiful space with a seasonal menu that changes frequently.',
+        'We have never been here, but it won a Michelin star and we have heard they have really creative meals.',
+      tip: "Get a reservation far in advance. We don't think they have much seating.",
       image: locust,
       alt: 'Locust restaurant',
       directionsLink: 'https://maps.google.com/?q=Locust+Nashville',
@@ -590,7 +620,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Oku',
       details:
-        'Modern Japanese restaurant with a beautiful sushi bar. The omakase is a special treat!',
+        'We had our first anniversary in Nashville here! It is the best sushi we have had in the city, with the best service we have ever experienced at a restaurant. It is in Germantown, close to other bars and the Cumberland River.',
+      tip: 'Tell them you have a special occasion in your reservation!',
       image: oku,
       alt: 'Oku Japanese restaurant',
       directionsLink: 'https://maps.google.com/?q=Oku+Nashville',
@@ -607,7 +638,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Ole Smoky Distillery',
       details:
-        'Tennessee moonshine distillery on Broadway. Free tastings and live music - a fun stop on a Broadway crawl!',
+        'This spot has free moonshine tastings and beer inside the Yee-Haw Brewery, which it shares a space with. There are lots of activities like cornhole and live music outside, plus several food vendors. It has really chill vibes and is a fun place to hang out.',
+      tip: "Don't go to the taco vendors. They aren't as good as in Texas.",
       image: oleSmoky,
       alt: 'Ole Smoky Distillery on Broadway',
       directionsLink:
@@ -626,7 +658,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Pizza Perfect',
       details:
-        'New York-style pizza by the slice. Perfect for a quick, satisfying meal.',
+        'This is our favorite pizza in Nashville. It is near Vanderbilt and serves classic, sort of New York-style pizza by the slice.',
+      tip: 'They have a slightly hidden outdoor seating area.',
       image: pizzaPerfect,
       alt: 'Pizza Perfect',
       directionsLink: 'https://maps.google.com/?q=Pizza+Perfect+Nashville',
@@ -637,7 +670,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'The Catbird Seat',
       details:
-        "Nashville's premier tasting menu experience. Intimate 22-seat counter surrounding the open kitchen.",
+        "We have never been here, but we have heard it is a very small place with emphasis on a unique tasting menu. We don't know anyone that has gone in fact, but they have a Michelin star so they must be doing something right.",
+      tip: 'Hang out in the Gulch and get some drinks or ice cream after!',
       image: theCatbirdSeat,
       alt: 'The Catbird Seat plated dish',
       directionsLink: 'https://maps.google.com/?q=The+Catbird+Seat+Nashville',

@@ -163,6 +163,13 @@
   color: var(--bold-brown) !important;
 }
 
+.place-card-tip {
+  font-style: italic;
+  color: var(--bold-brown) !important;
+  line-height: 1.4;
+  opacity: 0.85;
+}
+
 .place-card-links {
   padding-top: 12px;
   margin-top: auto;

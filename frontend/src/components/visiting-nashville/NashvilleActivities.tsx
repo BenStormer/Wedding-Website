@@ -40,13 +40,8 @@ const CostDisplay = ({ cost }: { cost: number }) => {
 
   return (
     <Group gap={2}>
-      {[1, 2, 3, 4].map((i) => (
-        <Text
-          key={i}
-          size="sm"
-          fw={600}
-          c={i <= cost ? 'var(--bold-brown)' : 'var(--primary-brown)'}
-        >
+      {Array.from({ length: cost }, (_, i) => (
+        <Text key={i} size="sm" fw={600} c="#4a3a2e">
           $
         </Text>
       ))}

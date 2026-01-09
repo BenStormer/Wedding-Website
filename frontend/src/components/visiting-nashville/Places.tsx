@@ -34,11 +34,9 @@ import greenhouse from '../../assets/images/visiting-nashville/eat/greenhouse.we
 import hattieBs from '../../assets/images/visiting-nashville/eat/hattie_bs.webp';
 import hawkers from '../../assets/images/visiting-nashville/eat/hawkers.webp';
 import littleHats from '../../assets/images/visiting-nashville/eat/little_hats.webp';
-import locust from '../../assets/images/visiting-nashville/eat/locust.webp';
 import oku from '../../assets/images/visiting-nashville/eat/oku.webp';
 import oleSmoky from '../../assets/images/visiting-nashville/eat/ole_smoky.webp';
 import pizzaPerfect from '../../assets/images/visiting-nashville/eat/pizza_perfect.webp';
-import theCatbirdSeat from '../../assets/images/visiting-nashville/eat/the_catbird_seat.webp';
 
 // Tags for Places to Stay
 export type StayTag = 'downtown' | 'midtown' | 'upscale' | 'parking' | 'valet';
@@ -350,8 +348,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Regal Opry Mills IMAX',
       details:
-        'There is one reason to go to this theater: the IMAX screen. Ben likes to nerd out over screen formats, and this is one of fewer than 30 true 70mm IMAX theaters in the US. We saw our first true IMAX (not "LieMax") movie here, which was Oppenheimer, followed by Barbie the same day. Since then we have seen Interstellar, Mission Impossible: Final Reckoning, Avatar 2, One Battle After Another, and Avatar 3 on the 70mm IMAX screen.',
-      tip: 'If seeing two movies in the same day, watch the one not in IMAX first.',
+        'There is one reason to go to this theater: the IMAX screen. Ben likes to nerd out over screen formats, and this is one of fewer than 30 true 70mm IMAX theaters in the US. We saw our first true IMAX (not "LieMax") movie here, which was Oppenheimer, followed by Barbie the same day. Since then we have seen Interstellar, Mission Impossible: Final Reckoning, Avatar 2, One Battle After Another, and Avatar 3 on the IMAX screen.',
+      tip: 'If you are seeing two movies in the same day, watch the one in IMAX second.',
       image: regalOpryMills,
       alt: 'Regal Opry Mills IMAX',
       directionsLink: 'https://maps.google.com/?q=Regal+Opry+Mills+IMAX',
@@ -374,8 +372,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Tennessee Performing Arts Center (TPAC)',
       details:
-        'This theater is gorgeous and we saw our first Broadway show ever here ("& Juliet" on Valentine\'s Day). It sits right between the busiest parts of Downtown Nashville and the /Bicentennial Mall area. It is definitely worth checking what shows are playing when you visit.',
-      tip: "Park at the Farmer's Market and walk here! It is just one (very steep) hill away!",
+        'This theater is gorgeous and we saw our first Broadway show ever here ("& Juliet" on Valentine\'s Day). It sits right between the busiest parts of Downtown Nashville and the Bicentennial Mall area. It is definitely worth checking what shows are playing when you visit.',
+      tip: "Park at the Farmer's Market and walk over. It is just one (very steep) hill away!",
       image: tpac,
       alt: 'Tennessee Performing Arts Center',
       directionsLink:
@@ -400,7 +398,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Tennessee State Museum',
       details:
         "This is a super cool museum that is completely free! Museums aren't really Aspen's thing, but Ben loves this one. His favorite artifact is the quill that James K. Polk used to annex Texas.",
-      tip: 'There are lots of mini theaters playing videos spread throughout if you need to take a break from standing.',
+      tip: 'There are lots of mini theaters playing videos throughout the museum if you need to take a break from standing.',
       image: stateHistoryMuseum,
       alt: 'Tennessee State Museum',
       directionsLink: 'https://maps.google.com/?q=Tennessee+State+Museum',
@@ -425,7 +423,7 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: "Adele's",
       details:
-        'This is elevated Southern comfort food with farm-to-table ingredients. They are famous for their weekend brunch buffet and handcrafted cocktails Ben had an incredible Kale salad here surprisingly enough.',
+        'This is elevated Southern comfort food with farm-to-table ingredients. They are famous for their weekend brunch buffet and handcrafted cocktails. Ben had an incredible Kale salad here surprisingly enough.',
       tip: "Don't split the bill with coworkers who order lots of drinks.",
       image: adeles,
       alt: "Adele's restaurant",
@@ -446,7 +444,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       label: 'Assembly Food Hall',
       details:
         "This is a massive food hall in downtown with 30+ vendors. There is something for everyone, from Nashville hot chicken to sushi to tacos. We always make a stop here when we are on Lower Broadway, especially at Jeni's Ice Cream for Ben.",
-      tip: "Don't go to Prince's. Hattie B's is better no matter what anyone says.",
+      tip: "Don't go to Prince's. Hattie B's is better, no matter what anyone says.",
       image: assemblyFoodHall,
       alt: 'Assembly Food Hall at Fifth + Broadway',
       directionsLink: 'https://maps.google.com/?q=Assembly+Food+Hall+Nashville',
@@ -457,7 +455,7 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Bastion',
       details:
-        "This is an intimate 24-seat restaurant with a creative tasting menu, and the cocktail bar next door is also allegedly excellent. We have never been here and probably won't be anytime soon (it is pricey!). However, several people we know claim it as the best restaurant in the city, and it is in a really fun neighborhood.",
+        "One of just 3 michelin-starred restaurants in Nashville, Bastion is an intimate 24-seat restaurant with a creative tasting menu, and the cocktail bar next door is also allegedly excellent. We have never been here and probably won't be anytime soon (it is pricey!). However, several people we know claim it as the best restaurant in the city, and it is in a really fun neighborhood.",
       tip: 'If you just go to the bar (not the restaurant), they actually do serve nachos.',
       image: bastion,
       alt: 'Bastion restaurant',
@@ -488,7 +486,7 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Condado Tacos',
       details:
-        "This place is close to us, so we go a lot. Their nachos are incredible and we really don't order anything else. It is one of the best price-to-portion meals in Nashville if you order the nachos.",
+        "This place is close to us, so we go a lot. Their nachos are incredible, and we really don't order anything else. It is one of the best price-to-portion meals in Nashville if you order the nachos.",
       tip: 'You can order way more than their "suggested" amount of toppings.',
       image: condado,
       alt: 'Condado Tacos',
@@ -545,8 +543,8 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Greenhouse Bar',
       details:
-        'This is our favorite bar in Nashville! There is lots of seating and it stays open quite late despite not being near a busy area. The drinks are on the expensive side, but the atmosphere is incredible. It is literally in a greenhouse with tons of plants everywhere.',
-      tip: 'The only way to get here is to drive, so plan your way home!',
+        'This is our favorite bar in Nashville! There is lots of seating and it stays open quite late despite not being near a busy area. The drinks are on the expensive side, but the atmosphere is incredible. It is literally in a greenhouse with tons of plants everywhere!',
+      tip: 'The only way to get here is to drive, so plan your way home.',
       image: greenhouse,
       alt: 'Greenhouse Bar rooftop',
       directionsLink: 'https://maps.google.com/?q=Greenhouse+Bar+Nashville',
@@ -590,7 +588,7 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Little Hats Market',
       details:
-        'This is our most visited restaurant in Nashville. Ben has ranked almost every sandwich here, so ask him for his list. Aspen tends to just get the chicken parm sandwich. They have nice outdoor seating and a super fun market inside (not just food). The whole place is decorated top to bottom with Italian-American paraphernalia.',
+        'This is our most visited restaurant in Nashville. Ben has ranked almost every sandwich here, so ask him for his list. Aspen tends to just get the chicken parm sandwich, but recently has preferred the turkey and cheese. They have nice outdoor seating and a super fun market inside (not just food). The whole place is decorated top to bottom with Italian-American paraphernalia.',
       tip: 'You can park in their lot and validate inside.',
       image: littleHats,
       alt: 'Little Hats Deli',
@@ -598,24 +596,6 @@ export const data: Record<PlaceCategory, Place[]> = {
       cost: 2,
       websiteLink: 'https://www.littlehatsmarket.com',
       tags: ['germantown', 'casual', 'italian', 'parking'],
-    },
-    {
-      label: 'Locust',
-      details:
-        'We have never been here, but it won a Michelin star and we have heard they have really creative meals.',
-      tip: "Get a reservation far in advance. We don't think they have much seating.",
-      image: locust,
-      alt: 'Locust restaurant',
-      directionsLink: 'https://maps.google.com/?q=Locust+Nashville',
-      cost: 4,
-      websiteLink: 'https://www.locustnashville.com',
-      tags: [
-        'east-nashville',
-        'upscale',
-        'american',
-        'michelin-star',
-        'reservation-required',
-      ],
     },
     {
       label: 'Oku',
@@ -658,7 +638,7 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Pizza Perfect',
       details:
-        'This is our favorite pizza in Nashville. It is near Vanderbilt and serves classic, sort of New York-style pizza by the slice.',
+        'This is our favorite pizza in Nashville. It is near Vanderbilt and serves classic, New York-style pizza by the slice.',
       tip: 'They have a slightly hidden outdoor seating area.',
       image: pizzaPerfect,
       alt: 'Pizza Perfect',
@@ -666,24 +646,6 @@ export const data: Record<PlaceCategory, Place[]> = {
       cost: 1,
       websiteLink: 'https://www.pizzaperfectonline.com',
       tags: ['midtown', 'casual', 'pizza', 'late-night'],
-    },
-    {
-      label: 'The Catbird Seat',
-      details:
-        "We have never been here, but we have heard it is a very small place with emphasis on a unique tasting menu. We don't know anyone that has gone in fact, but they have a Michelin star so they must be doing something right.",
-      tip: 'Hang out in the Gulch and get some drinks or ice cream after!',
-      image: theCatbirdSeat,
-      alt: 'The Catbird Seat plated dish',
-      directionsLink: 'https://maps.google.com/?q=The+Catbird+Seat+Nashville',
-      cost: 4,
-      websiteLink: 'https://www.thecatbirdseatrestaurant.com',
-      tags: [
-        'gulch',
-        'upscale',
-        'american',
-        'michelin-star',
-        'reservation-required',
-      ],
     },
   ],
 };

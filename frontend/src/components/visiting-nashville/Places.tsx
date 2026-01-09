@@ -45,38 +45,64 @@ export type StayTag = 'downtown' | 'midtown' | 'upscale' | 'parking' | 'valet';
 
 // Tags for Places to See
 export type SeeTag =
+  // Locations
   | 'downtown'
+  | 'germantown'
+  | 'midtown'
+  | 'wedgewood-houston'
+  | 'capitol-view'
   | 'opry-mills'
-  | 'outdoors'
-  | 'indoor'
-  | 'history'
+  | 'southeast-nashville'
+  // Features
   | 'parking'
-  | 'walkable'
-  | 'live-music'
   | 'sports'
   | 'arts'
-  | 'free';
+  | 'music'
+  | 'indoors'
+  | 'outdoors'
+  | 'late-night'
+  | 'history'
+  | 'free'
+  | 'drinks';
 
 // Tags for Places to Eat
 export type EatTag =
+  // Locations
   | 'downtown'
   | 'germantown'
-  | 'east-nashville'
   | 'midtown'
-  | 'gulch'
+  | 'wedgewood-houston'
   | 'capitol-view'
+  | 'opry-mills'
+  | 'southeast-nashville'
+  | 'east-nashville'
+  | 'gulch'
+  | 'green-hills'
+  // Food types
+  | 'tex-mex'
+  | 'sushi'
+  | 'american'
+  | 'fast-food'
   | 'drinks'
-  | 'live-music'
-  | 'brunch'
-  | 'upscale'
-  | 'casual'
-  | 'local-favorite'
-  | 'parking'
-  | 'walkable'
+  | 'pizza'
+  | 'bbq'
+  | 'asian'
+  | 'seafood'
+  | 'italian'
+  | 'southern'
+  | 'hot-chicken'
+  // Features
+  | 'multiple-options'
+  | 'multiple-locations'
   | 'late-night'
-  | 'food-hall'
-  | 'rooftop'
-  | 'michelin-star';
+  | 'reservation-required'
+  | 'music'
+  | 'tourist-favorite'
+  | 'michelin-star'
+  | 'casual'
+  | 'upscale'
+  | 'breakfast'
+  | 'parking';
 
 export type PlaceTag = StayTag | SeeTag | EatTag;
 
@@ -92,39 +118,55 @@ export interface Place {
 }
 
 export const tagLabels: Record<PlaceTag, string> = {
-  // Places to Stay tags
+  // Location tags (shared)
   downtown: 'Downtown',
-  upscale: 'Upscale',
-  parking: 'Parking Available',
+  germantown: 'Germantown',
+  midtown: 'Midtown',
+  'wedgewood-houston': 'Wedgewood-Houston',
+  'capitol-view': 'Capitol View',
+  'opry-mills': 'Opry Mills',
+  'southeast-nashville': 'Southeast Nashville',
+  'east-nashville': 'East Nashville',
+  gulch: 'The Gulch',
+  'green-hills': 'Green Hills',
+
+  // Places to Stay tags
   valet: 'Valet Required',
-  'local-favorite': 'Local Favorite',
-  history: 'History',
 
   // Places to See tags
-  outdoors: 'Outdoors',
-  indoor: 'Indoor',
-  'live-music': 'Live Music',
+  parking: 'Parking',
   sports: 'Sports',
   arts: 'Arts & Culture',
-  free: 'Free',
-  'opry-mills': 'Opry Mills Area',
-
-  // Places to Eat tags
-  drinks: 'Drinks',
-  brunch: 'Brunch',
-  casual: 'Casual',
+  music: 'Music',
+  indoors: 'Indoors',
+  outdoors: 'Outdoors',
   'late-night': 'Late Night',
-  'food-hall': 'Food Hall',
-  rooftop: 'Rooftop',
-  'michelin-star': 'Michelin Star',
+  history: 'History',
+  free: 'Free',
 
-  // Location tags
-  germantown: 'Germantown',
-  'east-nashville': 'East Nashville',
-  midtown: 'Midtown',
-  gulch: 'The Gulch',
-  'capitol-view': 'Capitol View',
-  walkable: 'Walkable',
+  // Places to Eat - Food types
+  'tex-mex': 'Tex-Mex',
+  sushi: 'Sushi',
+  american: 'American',
+  'fast-food': 'Fast Food',
+  drinks: 'Drinks',
+  pizza: 'Pizza',
+  bbq: 'BBQ',
+  asian: 'Asian',
+  seafood: 'Seafood',
+  italian: 'Italian',
+  southern: 'Southern',
+  'hot-chicken': 'Hot Chicken',
+
+  // Places to Eat - Features
+  'multiple-options': 'Multiple Food Options',
+  'multiple-locations': 'Multiple Locations',
+  'reservation-required': 'Reservation Required',
+  'tourist-favorite': 'Tourist Favorite',
+  'michelin-star': 'Michelin Star',
+  casual: 'Casual',
+  upscale: 'Upscale',
+  breakfast: 'Breakfast',
 };
 
 type PlaceCategory = 'places-to-stay' | 'places-to-see' | 'places-to-eat';
@@ -180,7 +222,7 @@ export const data: Record<PlaceCategory, Place[]> = {
         'https://maps.google.com/?q=Bicentennial+Capitol+Mall+State+Park',
       cost: 0,
       websiteLink: 'https://tnstateparks.com/parks/bicentennial-mall',
-      tags: ['downtown', 'outdoors', 'history', 'free'],
+      tags: ['downtown', 'outdoors', 'history', 'free', 'parking'],
     },
     {
       label: 'Centennial Park',
@@ -203,7 +245,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       directionsLink: 'https://maps.google.com/?q=Cheekwood+Estate+and+Gardens',
       cost: 2,
       websiteLink: 'https://cheekwood.org',
-      tags: ['outdoors', 'indoor', 'history', 'parking', 'arts'],
+      tags: ['outdoors', 'history', 'parking', 'arts'],
     },
     {
       label: 'Grand Ole Opry',
@@ -214,7 +256,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       directionsLink: 'https://maps.google.com/?q=Grand+Ole+Opry+Nashville',
       cost: 3,
       websiteLink: 'https://www.opry.com',
-      tags: ['opry-mills', 'indoor', 'history', 'live-music', 'parking'],
+      tags: ['opry-mills', 'indoors', 'history', 'music', 'parking'],
     },
     {
       label: 'Lower Broadway',
@@ -226,7 +268,14 @@ export const data: Record<PlaceCategory, Place[]> = {
       cost: 0,
       websiteLink:
         'https://www.visitmusiccity.com/explore-nashville/neighborhoods/downtown',
-      tags: ['downtown', 'indoor', 'live-music', 'walkable', 'free'],
+      tags: [
+        'downtown',
+        'indoors',
+        'outdoors',
+        'music',
+        'late-night',
+        'drinks',
+      ],
     },
     {
       label: "Nashville Farmers' Market",
@@ -237,7 +286,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       directionsLink: 'https://maps.google.com/?q=Nashville+Farmers+Market',
       cost: 0,
       websiteLink: 'https://www.nashvillefarmersmarket.org',
-      tags: ['downtown', 'indoor', 'outdoors', 'parking', 'free'],
+      tags: ['downtown', 'indoors', 'outdoors', 'parking', 'free'],
     },
     {
       label: 'Nashville Predators Hockey',
@@ -248,7 +297,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       directionsLink: 'https://maps.google.com/?q=Bridgestone+Arena+Nashville',
       cost: 3,
       websiteLink: 'https://www.nhl.com/predators',
-      tags: ['downtown', 'indoor', 'sports', 'walkable'],
+      tags: ['downtown', 'indoors', 'sports'],
     },
     {
       label: 'Nashville SC Soccer',
@@ -257,9 +306,9 @@ export const data: Record<PlaceCategory, Place[]> = {
       image: nashvilleSoccer,
       alt: 'Nashville SC at GEODIS Park',
       directionsLink: 'https://maps.google.com/?q=GEODIS+Park+Nashville',
-      cost: 3,
+      cost: 2,
       websiteLink: 'https://www.nashvillesc.com',
-      tags: ['outdoors', 'sports', 'parking'],
+      tags: ['wedgewood-houston', 'outdoors', 'sports'],
     },
     {
       label: 'Nashville Zoo at Grassmere',
@@ -270,7 +319,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       directionsLink: 'https://maps.google.com/?q=Nashville+Zoo',
       cost: 2,
       websiteLink: 'https://www.nashvillezoo.org',
-      tags: ['outdoors', 'parking'],
+      tags: ['southeast-nashville', 'outdoors', 'parking'],
     },
     {
       label: "Nelson's Green Brier Distillery",
@@ -282,7 +331,7 @@ export const data: Record<PlaceCategory, Place[]> = {
         'https://maps.google.com/?q=Nelsons+Green+Brier+Distillery',
       cost: 2,
       websiteLink: 'https://greenbrierdistillery.com',
-      tags: ['indoor', 'history', 'parking'],
+      tags: ['capitol-view', 'indoors', 'history', 'parking'],
     },
     {
       label: 'Regal Opry Mills IMAX',
@@ -293,7 +342,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       directionsLink: 'https://maps.google.com/?q=Regal+Opry+Mills+IMAX',
       cost: 2,
       websiteLink: 'https://www.regmovies.com/theatres/regal-opry-mills-0615',
-      tags: ['opry-mills', 'indoor', 'parking'],
+      tags: ['opry-mills', 'indoors', 'parking', 'late-night'],
     },
     {
       label: 'Ryman Auditorium',
@@ -304,7 +353,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       directionsLink: 'https://maps.google.com/?q=Ryman+Auditorium',
       cost: 2,
       websiteLink: 'https://www.ryman.com',
-      tags: ['downtown', 'indoor', 'history', 'live-music', 'walkable', 'arts'],
+      tags: ['downtown', 'indoors', 'history', 'music', 'arts'],
     },
     {
       label: 'Tennessee Performing Arts Center (TPAC)',
@@ -316,7 +365,7 @@ export const data: Record<PlaceCategory, Place[]> = {
         'https://maps.google.com/?q=Tennessee+Performing+Arts+Center',
       cost: 3,
       websiteLink: 'https://www.tpac.org',
-      tags: ['downtown', 'indoor', 'arts', 'walkable'],
+      tags: ['downtown', 'indoors', 'arts'],
     },
     {
       label: 'Tennessee State Capitol',
@@ -327,7 +376,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       directionsLink: 'https://maps.google.com/?q=Tennessee+State+Capitol',
       cost: 0,
       websiteLink: 'https://www.capitol.tn.gov/about/capitolvisit.html',
-      tags: ['downtown', 'indoor', 'history', 'walkable', 'free'],
+      tags: ['downtown', 'indoors', 'history', 'free'],
     },
     {
       label: 'Tennessee State Museum',
@@ -338,7 +387,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       directionsLink: 'https://maps.google.com/?q=Tennessee+State+Museum',
       cost: 0,
       websiteLink: 'https://tnmuseum.org',
-      tags: ['downtown', 'indoor', 'history', 'free'],
+      tags: ['downtown', 'indoors', 'history', 'free', 'parking', 'arts'],
     },
     {
       label: 'Parthenon',
@@ -349,7 +398,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       directionsLink: 'https://maps.google.com/?q=The+Parthenon+Nashville',
       cost: 1,
       websiteLink: 'https://www.nashvilleparthenon.com',
-      tags: ['midtown', 'indoor', 'history', 'parking'],
+      tags: ['midtown', 'indoors', 'outdoors', 'history', 'parking', 'arts'],
     },
   ],
   'places-to-eat': [
@@ -363,7 +412,14 @@ export const data: Record<PlaceCategory, Place[]> = {
         'https://maps.google.com/?q=Adeles+Nashville+1210+McGavock+St',
       cost: 3,
       websiteLink: 'https://www.adelesnashville.com',
-      tags: ['gulch', 'upscale', 'brunch', 'drinks', 'local-favorite'],
+      tags: [
+        'gulch',
+        'upscale',
+        'southern',
+        'breakfast',
+        'parking',
+        'reservation-required',
+      ],
     },
     {
       label: 'Assembly Food Hall',
@@ -374,7 +430,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       directionsLink: 'https://maps.google.com/?q=Assembly+Food+Hall+Nashville',
       cost: 2,
       websiteLink: 'https://www.assemblyfoodhall.com',
-      tags: ['downtown', 'food-hall', 'walkable'],
+      tags: ['downtown', 'multiple-options', 'casual', 'tourist-favorite'],
     },
     {
       label: 'Bastion',
@@ -385,7 +441,14 @@ export const data: Record<PlaceCategory, Place[]> = {
       directionsLink: 'https://maps.google.com/?q=Bastion+Nashville',
       cost: 4,
       websiteLink: 'https://www.bastionnashville.com',
-      tags: ['gulch', 'upscale', 'local-favorite', 'drinks', 'michelin-star'],
+      tags: [
+        'wedgewood-houston',
+        'upscale',
+        'american',
+        'drinks',
+        'michelin-star',
+        'reservation-required',
+      ],
     },
     {
       label: 'Butchertown Hall',
@@ -394,9 +457,9 @@ export const data: Record<PlaceCategory, Place[]> = {
       image: butchertownHall,
       alt: 'Butchertown Hall BBQ',
       directionsLink: 'https://maps.google.com/?q=Butchertown+Hall+Nashville',
-      cost: 2,
+      cost: 3,
       websiteLink: 'https://www.butchertownhall.com',
-      tags: ['germantown', 'casual', 'local-favorite', 'drinks', 'parking'],
+      tags: ['germantown', 'upscale', 'bbq', 'reservation-required'],
     },
     {
       label: 'Condado Tacos',
@@ -408,7 +471,7 @@ export const data: Record<PlaceCategory, Place[]> = {
         'https://maps.google.com/?q=Condado+Tacos,+501+12th+Ave+S,+Nashville,+TN+37203',
       cost: 2,
       websiteLink: 'https://locations.condadotacos.com/tn/418-11th-ave-n.',
-      tags: ['capitol-view', 'casual', 'drinks', 'parking'],
+      tags: ['capitol-view', 'casual', 'tex-mex', 'parking'],
     },
     {
       label: 'Cookout',
@@ -419,7 +482,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       directionsLink: 'https://maps.google.com/?q=Cookout+Nashville',
       cost: 1,
       websiteLink: 'https://cookout.com',
-      tags: ['casual', 'late-night', 'parking'],
+      tags: ['fast-food', 'late-night', 'parking', 'multiple-locations'],
     },
     {
       label: 'Emmy Squared',
@@ -431,7 +494,14 @@ export const data: Record<PlaceCategory, Place[]> = {
       cost: 2,
       websiteLink:
         'https://www.emmysquaredpizza.com/location/germantown-nashville-tn/',
-      tags: ['gulch', 'casual', 'local-favorite', 'drinks'],
+      tags: [
+        'germantown',
+        'gulch',
+        'green-hills',
+        'casual',
+        'pizza',
+        'multiple-locations',
+      ],
     },
     {
       label: 'Fishmonger',
@@ -442,7 +512,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       directionsLink: 'https://maps.google.com/?q=Fishmonger+Nashville',
       cost: 3,
       websiteLink: 'https://fishmongergroup.com',
-      tags: ['germantown', 'upscale', 'drinks', 'local-favorite'],
+      tags: ['germantown', 'casual', 'seafood'],
     },
     {
       label: 'Greenhouse Bar',
@@ -453,7 +523,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       directionsLink: 'https://maps.google.com/?q=Greenhouse+Bar+Nashville',
       cost: 2,
       websiteLink: 'https://www.greenhousenash.com/',
-      tags: ['downtown', 'drinks', 'rooftop', 'walkable'],
+      tags: ['green-hills', 'drinks', 'casual'],
     },
     {
       label: "Hattie B's Hot Chicken",
@@ -465,7 +535,14 @@ export const data: Record<PlaceCategory, Place[]> = {
         'https://maps.google.com/?q=Hattie+Bs+Hot+Chicken+Nashville',
       cost: 1,
       websiteLink: 'https://hattieb.com',
-      tags: ['casual', 'local-favorite', 'parking'],
+      tags: [
+        'midtown',
+        'casual',
+        'american',
+        'tourist-favorite',
+        'parking',
+        'multiple-locations',
+      ],
     },
     {
       label: 'Hawkers Asian Street Food',
@@ -477,7 +554,7 @@ export const data: Record<PlaceCategory, Place[]> = {
         'https://maps.google.com/?q=Hawkers+Asian+Street+Food+Nashville',
       cost: 2,
       websiteLink: 'https://www.eathawkers.com',
-      tags: ['east-nashville', 'casual', 'local-favorite', 'drinks'],
+      tags: ['east-nashville', 'casual', 'asian', 'parking'],
     },
     {
       label: 'Little Hats Market',
@@ -488,7 +565,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       directionsLink: 'https://maps.google.com/?q=Little+Hats+Deli+Nashville',
       cost: 2,
       websiteLink: 'https://www.littlehatsmarket.com',
-      tags: ['casual', 'local-favorite', 'brunch'],
+      tags: ['germantown', 'casual', 'italian', 'parking'],
     },
     {
       label: 'Locust',
@@ -499,7 +576,13 @@ export const data: Record<PlaceCategory, Place[]> = {
       directionsLink: 'https://maps.google.com/?q=Locust+Nashville',
       cost: 4,
       websiteLink: 'https://www.locustnashville.com',
-      tags: ['east-nashville', 'upscale', 'local-favorite', 'michelin-star'],
+      tags: [
+        'east-nashville',
+        'upscale',
+        'american',
+        'michelin-star',
+        'reservation-required',
+      ],
     },
     {
       label: 'Oku',
@@ -510,7 +593,13 @@ export const data: Record<PlaceCategory, Place[]> = {
       directionsLink: 'https://maps.google.com/?q=Oku+Nashville',
       cost: 3,
       websiteLink: 'https://www.o-kusushi.com/location/o-ku-nashville/',
-      tags: ['germantown', 'upscale', 'drinks', 'local-favorite'],
+      tags: [
+        'germantown',
+        'upscale',
+        'sushi',
+        'parking',
+        'reservation-required',
+      ],
     },
     {
       label: 'Ole Smoky Distillery',
@@ -522,7 +611,14 @@ export const data: Record<PlaceCategory, Place[]> = {
         'https://maps.google.com/?q=Ole+Smoky+Distillery+Nashville',
       cost: 1,
       websiteLink: 'https://olesmoky.com/pages/nashville',
-      tags: ['downtown', 'drinks', 'live-music', 'walkable'],
+      tags: [
+        'downtown',
+        'drinks',
+        'music',
+        'multiple-options',
+        'tourist-favorite',
+        'casual',
+      ],
     },
     {
       label: 'Pizza Perfect',
@@ -533,7 +629,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       directionsLink: 'https://maps.google.com/?q=Pizza+Perfect+Nashville',
       cost: 1,
       websiteLink: 'https://www.pizzaperfectonline.com',
-      tags: ['casual', 'late-night'],
+      tags: ['midtown', 'casual', 'pizza', 'late-night'],
     },
     {
       label: 'The Catbird Seat',
@@ -544,7 +640,13 @@ export const data: Record<PlaceCategory, Place[]> = {
       directionsLink: 'https://maps.google.com/?q=The+Catbird+Seat+Nashville',
       cost: 4,
       websiteLink: 'https://www.thecatbirdseatrestaurant.com',
-      tags: ['midtown', 'upscale', 'local-favorite', 'drinks', 'michelin-star'],
+      tags: [
+        'gulch',
+        'upscale',
+        'american',
+        'michelin-star',
+        'reservation-required',
+      ],
     },
   ],
 };

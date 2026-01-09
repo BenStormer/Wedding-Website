@@ -80,7 +80,7 @@ const PlaceCard = ({ place, onTagClick, activeFilters }: PlaceCardProps) => {
         <Text className="place-card-title">{place.label}</Text>
 
         <Group gap={6} wrap="wrap">
-          {place.tags.slice(0, 3).map((tag) => {
+          {place.tags.map((tag) => {
             const isActive = activeFilters.has(tag);
             return (
               <Badge

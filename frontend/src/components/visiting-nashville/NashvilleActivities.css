@@ -128,11 +128,11 @@
 
 .place-tag {
   font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-caption);
+  font-size: var(--font-size-label);
   text-transform: none;
   letter-spacing: 0;
-  padding: 4px 10px;
-  line-height: 1.2;
+  padding: 10px 14px;
+  line-height: 1.3;
   background-color: rgba(94, 72, 56, 0.1) !important;
   color: var(--bold-brown) !important;
   border: 1px solid rgba(94, 72, 56, 0.3) !important;

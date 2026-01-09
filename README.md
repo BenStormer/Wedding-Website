@@ -1,51 +1,94 @@
-# Wedding-Website
+# Aspen & Ben's Wedding Website
 
-Source code for the Aspen and Ben's Wedding Website
+> **Live Site:** `https://www.aspenandbenjamin.com`
 
-# Plan:
+Source code for Aspen and Ben's wedding website — a full-stack web application for sharing wedding details, collecting RSVPs, and managing a gift registry.
 
-This section describes how the wedding website will look and function. It will be split into a mobile and desktop version.
-Heavy inspiration (copying UI/UX) from https://www.blakeandmolly2024.com/
+| Desktop                                             | Mobile                                            |
+| --------------------------------------------------- | ------------------------------------------------- |
+| ![Website Preview - Desktop](docs/home-desktop.png) | ![Website Preview - Mobile](docs/home-mobile.png) |
 
-The main pages for the website will be:
+---
 
-- [ ] Home
-  - [x] Quick details
-    - Image of us
-    - Really like the "When", "Where", "Attire" cards on the reference website
-  - [x] Rsvp
-    - Box that opens up with ability to enter name, email, and Yes/No
-    - API call to backend to check that user is in Rsvp list and set their status
-      - [ ] Stretch goal: Confirm prompt for users that are updating a pre-existing Rsvp
-      - [ ] Stretch goal: Email and text users
-  - [x] Link/Prompt users to other pages
-    - Wedding Details
-    - Visiting Nashville
-    - Registry
-    - FAQs
-  - [ ] Our Story
-    - [ ] Create image to be used
-  - [x] Menu/Navigation to other pages
-- [x] Details
-  - [x] Timeline
-  - [x] About the venue
-    - Overview
-    - Directions
-    - Image
-    - Questions/Details
-  - [x] Parking, Attire, anything else that would concern attendees
-  - [x] Include FAQs here? Link to them?
-- [x] Visiting Nashville
-  - [ ] Recommended Hotels
-    - Links to them and a blurb?
-  - [x] Things to Do
-    - [x] Events
-    - [x] Restaurants
-  - Other sights to see
-- [ ] Registry
-- [x] FAQs
-  - Link to FAQs in details rather than have it's own page?
+## Features
 
-## Mobile Website:
+### Frontend
 
-The main focus should be on the scrolling experience. It is much better to scroll than try to click a bunch of buttons and tabs on a mobile phone, so the content should be planned around this.
+- Mobile-first responsive design
+- Event timeline, venue details, and Nashville travel guide
+- Countdown to the wedding date
+
+### Backend
+
+- **RSVP System** — Guests can RSVP by name; attendance is stored in Firestore
+- **Gift Registry** — Browse registry items and mark gifts as purchased with quantity tracking
+
+### Infrastructure
+
+- **CDN & Caching** — Cloudflare Workers serve the static frontend with edge caching
+- **DDoS Protection** — Cloudflare handles traffic filtering
+- **Serverless Backend** — GCP Cloud Run scales to zero when idle
+
+---
+
+## Tech Stack
+
+| Layer          | Technology                                             |
+| -------------- | ------------------------------------------------------ |
+| Frontend       | TypeScript, React, Mantine UI                          |
+| Backend        | Go, net/http                                           |
+| Database       | Google Cloud Firestore                                 |
+| Hosting        | Cloudflare Workers (frontend), GCP Cloud Run (backend) |
+| Infrastructure | Terraform                                              |
+
+---
+
+## Documentation
+
+- **[Frontend README](./frontend/README.md)** — React app structure, pages, components, and local development
+- **[Backend README](./backend/README.md)** — Go API structure, endpoints, and design decisions
+- **[Infrastructure README](./infra/README.md)** — Cloud architecture, Terraform setup, and deployment
+
+---
+
+## Quick Start
+
+```bash
+# Frontend (from /frontend)
+npm install
+npm run dev
+
+# Backend (from /backend)
+# Start Firestore emulator first:
+firebase emulators:start --only firestore
+
+# Then in another terminal, start the server:
+go run ./cmd/server/main.go
+
+# Seed local database (optional)
+go run ./cmd/server/main.go -seed
+```
+
+---
+
+## CI/CD
+
+GitHub Actions workflows handle continuous integration and deployment:
+
+- **PR Checks** — Runs lint, build, and tests on pull requests (only for changed paths)
+- **Backend Deployment** — Automatically deploys backend to Cloud Run on merges to `main`
+- **Frontend Deployment** — Automatically deploys to Cloudflare Workers on merges to `main`
+
+See individual READMEs for details.
+
+---
+
+## Project Structure
+
+```
+Wedding-Website/
+├── frontend/          # React + TypeScript + Mantine
+├── backend/           # Go REST API
+├── infra/             # Terraform IaC
+└── scripts/           # Data import utilities
+```

@@ -4,13 +4,13 @@ import "time"
 
 // Database model for an Rsvp entry
 type Guest struct {
-	ID        string
-	FirstName string
-	LastName  string
-	Email     string
-	Phone     string
-	Attending *bool
-	UpdatedAt *time.Time
+	ID        string     `firestore:"-"`
+	FirstName string     `firestore:"FirstName"`
+	LastName  string     `firestore:"LastName"`
+	Email     string     `firestore:"Email,omitempty"`
+	Phone     string     `firestore:"Phone,omitempty"`
+	Attending *bool      `firestore:"Attending"`
+	UpdatedAt *time.Time `firestore:"UpdatedAt,omitempty"`
 }
 
 // API request model for an Rsvp entry

@@ -1,43 +1,37 @@
 import './Details.css';
-
-// Components
 import CustomTimeline from '../components/details/Timeline';
 import type { TimelineEvent } from '../components/details/Timeline';
 import VenueInfo from '../components/details/VenueInfo';
 import Menu from '../components/common/Menu';
 import TopNav from '../components/common/TopNav';
-
-// Mantine
 import { Box, Text, Stack, Center } from '@mantine/core';
 import { IconCalendarHeart } from '@tabler/icons-react';
-
-// Assets
 import noahLiffOperaCenter from '../assets/images/noah_liff_frontview.webp';
 
 const weddingEvents: TimelineEvent[] = [
   {
     title: 'Ceremony',
-    time: '4:00 PM',
+    time: '4:30 PM',
     description:
-      'Join us as we say "I do"! The ceremony will be held at the beautiful Noah Liff Opera Center. Please arrive 15-20 minutes early to find your seats.',
+      'Join us for the ceremony and celebrate as we become officially married! Please plan to arrive at least 15 minutes early to find your seats.',
   },
   {
     title: 'Cocktail Hour',
     time: '5:00 PM',
     description:
-      "Enjoy drinks and hors d'oeuvres while we take photos and the room is transformed for the reception. Mingle with friends and family!",
+      'Enjoy drinks and snacks while the room is transformed for the reception. A great time to mingle with friends and family!',
   },
   {
     title: 'Reception',
     time: '6:00 PM',
     description:
-      'Let the celebration begin! Join us for dinner, dancing, and an unforgettable evening celebrating our love story.',
+      'Let the celebration begin! Join us for dinner, drinks, and dancing. We hope you are prepared to party!',
   },
   {
-    title: 'Last Call',
-    time: '9:00 PM',
+    title: 'Night Ends',
+    time: '10:00 PM',
     description:
-      'All good things must come to an end! The reception will wrap up at 10:00 PM. Thank you for celebrating with us!',
+      'The reception will wrap up at 10:00 PM. Thank you for celebrating with us!',
   },
 ];
 

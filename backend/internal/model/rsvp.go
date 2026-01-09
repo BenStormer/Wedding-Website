@@ -22,13 +22,6 @@ type RsvpRequest struct {
 	Attending  *bool   `json:"attending"`
 }
 
-// API response model after updating an Rsvp
-type RsvpStatus struct {
-	Guest *Guest
-	PreviousStatus *bool
-	StatusChanged bool
-}
-
 // API response after an Rsvp is submitted
 type RsvpResponse struct {
 	Success bool `json:"success"`

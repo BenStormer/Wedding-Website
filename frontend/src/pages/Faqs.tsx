@@ -1,11 +1,7 @@
 import './Faqs.css';
-
-// Components
 import FaqAccordionSection from '../components/faqs/FaqAccordion';
 import Menu from '../components/common/Menu';
 import TopNav from '../components/common/TopNav';
-
-// Mantine
 import { Box, Text, Stack } from '@mantine/core';
 import { IconQuestionMark } from '@tabler/icons-react';
 

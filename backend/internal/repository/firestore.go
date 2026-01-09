@@ -2,11 +2,9 @@ package repository
 
 import (
 	"context"
-	"os"
 	"strings"
 
 	"cloud.google.com/go/firestore"
-	"github.com/BenStormer/Wedding-Website/backend/internal/config"
 	"github.com/BenStormer/Wedding-Website/backend/internal/model"
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
@@ -16,23 +14,6 @@ import (
 type FirestoreRsvpRepository struct {
 	client    *firestore.Client
 	ownsClient bool // true if this repository owns the client and should close it
-}
-
-// NewFirestoreRsvpRepository creates a new repository with its own Firestore client.
-func NewFirestoreRsvpRepository(cfg *config.Config) (*FirestoreRsvpRepository, error) {
-	ctx := context.Background()
-
-	// Tell the SDK to use the emulator if configured
-	if cfg.UseEmulator {
-		os.Setenv("FIRESTORE_EMULATOR_HOST", cfg.EmulatorHost)
-	}
-
-	client, err := firestore.NewClient(ctx, cfg.FirestoreProject)
-	if err != nil {
-		return nil, err
-	}
-
-	return &FirestoreRsvpRepository{client: client, ownsClient: true}, nil
 }
 
 // NewFirestoreRsvpRepositoryWithClient creates a new repository using a shared Firestore client.

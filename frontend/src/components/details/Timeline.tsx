@@ -38,7 +38,6 @@ const CustomTimeline = ({
 
   return (
     <Box className="timeline-wrapper">
-      {/* Event Navigation Pills with connecting line */}
       <Box className="timeline-nav-container" mb="xl">
         <div className="timeline-nav-pills">
           {events.map((event, index) => (
@@ -60,7 +59,6 @@ const CustomTimeline = ({
         </div>
       </Box>
 
-      {/* Event Detail Card */}
       <Group gap="sm" align="center" wrap="nowrap">
         <UnstyledButton
           className="timeline-arrow"

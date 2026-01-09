@@ -70,6 +70,18 @@ go run ./cmd/server/main.go -seed
 
 ---
 
+## CI/CD
+
+GitHub Actions workflows handle continuous integration and deployment:
+
+- **PR Checks** — Runs lint, build, and tests on pull requests (only for changed paths)
+- **Backend Deployment** — Automatically deploys backend to Cloud Run on merges to `main`
+- **Frontend Deployment** — Automatically deploys to Cloudflare Workers on merges to `main`
+
+See individual READMEs for details.
+
+---
+
 ## Project Structure
 
 ```

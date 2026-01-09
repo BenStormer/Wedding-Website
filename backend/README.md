@@ -246,3 +246,25 @@ The server runs on `http://localhost:8080` by default.
 ```bash
 go test ./...
 ```
+
+---
+
+## CI/CD
+
+### PR Checks
+
+On pull requests that modify `backend/**`, GitHub Actions runs:
+
+- `go vet ./...` (lint)
+- `go build ./...`
+- `go test ./...`
+
+### Deployment
+
+When changes to `backend/**` or `infra/**` are pushed to `main`, the deploy workflow:
+
+1. Builds the Docker image
+2. Pushes to Artifact Registry (tagged with commit SHA and `latest`)
+3. Runs `terraform apply` to update Cloud Run
+
+Manual deployment can be triggered via `workflow_dispatch`.

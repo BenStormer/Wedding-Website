@@ -123,7 +123,7 @@ Cloud Run has been chosen for hosting the backend since it provides:
    terraform apply
    ```
 
-### Deploying Backend Updates
+### Deploying Backend Updates (Manual)
 
 1. Build and push the Docker image:
 
@@ -138,9 +138,23 @@ Cloud Run has been chosen for hosting the backend since it provides:
    terraform apply -var="backend_image=NEW_IMAGE_TAG"
    ```
 
+### Deploying Backend Updates (Automated)
+
+Backend deployment is automated via GitHub Actions. When changes are pushed to `main` in `backend/**` or `infra/**`:
+
+1. Docker image is built and pushed to Artifact Registry
+2. Terraform applies the new image to Cloud Run
+
+Required GitHub secrets:
+
+- `GCP_SA_KEY` — Service account JSON key with deployment permissions
+- `GCP_PROJECT_ID` — GCP project ID
+
 ### Deploying Frontend Updates
 
-Frontend deployment is handled separately via Wrangler:
+Frontend deployment is automated via Cloudflare Pages on merges to `main`.
+
+Manual deployment can be done via Wrangler:
 
 ```bash
 cd frontend/

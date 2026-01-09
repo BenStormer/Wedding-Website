@@ -188,3 +188,20 @@ The frontend communicates with the Go backend for:
 - **Gift recording** — `POST /v1/api/registry/gift`
 
 The API URL is configured via the `VITE_API_URL` environment variable, set automatically during deployment.
+
+---
+
+## CI/CD
+
+### PR Checks
+
+On pull requests that modify `frontend/**`, GitHub Actions runs:
+
+- `npm run lint`
+- `npm run build` (type checking)
+
+### Deployment
+
+Automatic deployments are configured via Cloudflare Pages, which deploys on merges to `main`.
+
+Manual deployment can also be done via `npm run deploy` (Wrangler CLI).

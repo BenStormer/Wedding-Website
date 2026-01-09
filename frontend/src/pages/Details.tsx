@@ -1,17 +1,11 @@
 import './Details.css';
-
-// Components
 import CustomTimeline from '../components/details/Timeline';
 import type { TimelineEvent } from '../components/details/Timeline';
 import VenueInfo from '../components/details/VenueInfo';
 import Menu from '../components/common/Menu';
 import TopNav from '../components/common/TopNav';
-
-// Mantine
 import { Box, Text, Stack, Center } from '@mantine/core';
 import { IconCalendarHeart } from '@tabler/icons-react';
-
-// Assets
 import noahLiffOperaCenter from '../assets/images/noah_liff_frontview.webp';
 
 const weddingEvents: TimelineEvent[] = [
@@ -34,13 +28,7 @@ const weddingEvents: TimelineEvent[] = [
       'Let the celebration begin! Join us for dinner, drinks, and dancing. We hope you are prepared to party!',
   },
   {
-    title: 'Last Call',
-    time: '9:00 PM',
-    description:
-      'At 9:00 PM the bartender will stop serving alcohol. The party continues though!',
-  },
-  {
-    title: 'End of the Night',
+    title: 'Night Ends',
     time: '10:00 PM',
     description:
       'The reception will wrap up at 10:00 PM. Thank you for celebrating with us!',

@@ -8,8 +8,6 @@ import {
 } from 'react-router-dom';
 import { useEffect } from 'react';
 import Home from './pages/Home';
-
-import './App.css';
 import Details from './pages/Details';
 import VisitingNashville from './pages/VisitingNashville';
 import Registry from './pages/Registry';

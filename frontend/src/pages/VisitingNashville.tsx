@@ -1,11 +1,7 @@
 import './VisitingNashville.css';
-
-// Components
 import NashvilleActivitiesTabs from '../components/visiting-nashville/NashvilleActivities';
 import Menu from '../components/common/Menu';
 import TopNav from '../components/common/TopNav';
-
-// Mantine
 import { Box, Text, Stack, Center } from '@mantine/core';
 import { IconPlane } from '@tabler/icons-react';
 

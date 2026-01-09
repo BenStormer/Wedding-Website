@@ -1,11 +1,7 @@
 import './Registry.css';
-
-// Components
 import RegistryItemsGrid from '../components/registry/RegistryItems';
 import Menu from '../components/common/Menu';
 import TopNav from '../components/common/TopNav';
-
-// Mantine
 import { Box, Text, Stack } from '@mantine/core';
 import { IconGift } from '@tabler/icons-react';
 

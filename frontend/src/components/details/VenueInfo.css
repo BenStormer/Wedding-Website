@@ -102,30 +102,6 @@
   color: var(--secondary-green) !important;
 }
 
-/* FAQ Link Button */
-.venue-faq-link {
-  margin-top: 24px;
-  text-align: center;
-}
-
-.venue-faq-button {
-  transition: all 0.3s ease;
-  background-color: var(--secondary-green) !important;
-  border: 2px solid var(--primary-green) !important;
-  color: var(--bold-green) !important;
-}
-
-.venue-faq-button:hover {
-  background-color: var(--primary-green) !important;
-  color: var(--secondary-green) !important;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(86, 111, 77, 0.3);
-}
-
-.venue-faq-button:hover .mantine-Button-label {
-  color: var(--secondary-green) !important;
-}
-
 /* Mobile - full width */
 @media (max-width: 768px) {
   .venue-card {

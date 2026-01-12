@@ -104,13 +104,15 @@ const PlaceCard = ({ place, onTagClick, activeFilters }: PlaceCardProps) => {
           {place.details}
         </Text>
 
-        <Box className="place-card-bottom">
+        <Text size="md" c="var(--bold-brown)" className="place-card-tip">
           {place.tip && (
             <Text size="sm" className="place-card-tip">
               Tip: {place.tip}
             </Text>
           )}
+        </Text>
 
+        <Box className="place-card-bottom">
           <Group grow gap="sm" className="place-card-links">
             <Button
               component="a"

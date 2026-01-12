@@ -18,7 +18,6 @@ import parthenon from '../../assets/images/visiting-nashville/see/parthenon.webp
 import regalOpryMills from '../../assets/images/visiting-nashville/see/regal_opry_mills.webp';
 import ryman from '../../assets/images/visiting-nashville/see/ryman.webp';
 import stateHistoryMuseum from '../../assets/images/visiting-nashville/see/state_history_museum.webp';
-import tpac from '../../assets/images/visiting-nashville/see/tpac.webp';
 import zoo from '../../assets/images/visiting-nashville/see/zoo.webp';
 
 // Images for Places to Eat
@@ -289,7 +288,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       ],
     },
     {
-      label: "Nashville Farmer's Market",
+      label: "Nashville Farmers' Market",
       details:
         "Since it is right next to the TN State Museum and Bicentennial Park, we come here often. There's plenty of parking and tons of vendors for food and local crafts. It's a great place to grab a souvenir, and they usually have live music on the weekends.",
       tip: 'Do not order the breakfast sandwich from the coffee shop inside.',
@@ -372,19 +371,6 @@ export const data: Record<PlaceCategory, Place[]> = {
       cost: 2,
       websiteLink: 'https://www.ryman.com',
       tags: ['downtown', 'indoors', 'history', 'music', 'arts'],
-    },
-    {
-      label: 'Tennessee Performing Arts Center (TPAC)',
-      details:
-        'This theater is gorgeous and we saw our first Broadway show ever here ("& Juliet" on Valentine\'s Day). It sits right between the busiest parts of Downtown Nashville and the Bicentennial Mall area. It is definitely worth checking what shows are playing when you visit.',
-      tip: "Park at the Farmer's Market and walk over. It is just one (very steep) hill away!",
-      image: tpac,
-      alt: 'Tennessee Performing Arts Center',
-      directionsLink:
-        'https://maps.google.com/?q=Tennessee+Performing+Arts+Center',
-      cost: 3,
-      websiteLink: 'https://www.tpac.org',
-      tags: ['downtown', 'indoors', 'arts'],
     },
     {
       label: 'Tennessee State Capitol',

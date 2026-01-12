@@ -1,15 +1,10 @@
 import './OverviewDetailBoxes.css';
 import { Text, Box } from '@mantine/core';
-import {
-  IconCalendar,
-  IconMapPin,
-  IconShirt,
-} from '@tabler/icons-react';
+import { IconCalendar, IconMapPin, IconShirt } from '@tabler/icons-react';
 
 interface OverviewDetailBoxType {
   label: string;
   details: string;
-  subDetails?: string;
 }
 
 const getIcon = (label: string) => {
@@ -31,17 +26,8 @@ const OverviewDetailBox = ({ box }: { box: OverviewDetailBoxType }) => {
       <Box className="overview-detail-icon" c="var(--secondary-brown)">
         {getIcon(box.label)}
       </Box>
-      <Text className="overview-detail-label">
-        {box.label.toUpperCase()}
-      </Text>
-      <Text className="overview-detail-text">
-        {box.details}
-      </Text>
-      {box.subDetails && (
-        <Text className="overview-detail-subtext">
-          {box.subDetails}
-        </Text>
-      )}
+      <Text className="overview-detail-label">{box.label.toUpperCase()}</Text>
+      <Text className="overview-detail-text">{box.details}</Text>
     </Box>
   );
 };

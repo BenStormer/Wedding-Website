@@ -28,10 +28,10 @@ const weddingEvents: TimelineEvent[] = [
       'Let the celebration begin! Join us for dinner, drinks, and dancing. We hope you are prepared to party!',
   },
   {
-    title: 'Night Ends',
+    title: 'Close',
     time: '10:00 PM',
     description:
-      'The reception will wrap up at 10:00 PM. Thank you for celebrating with us!',
+      'The reception will wrap up at 10:00 PM. Thank you so much for celebrating with us on our special day!',
   },
 ];
 

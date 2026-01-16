@@ -206,7 +206,7 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'The Joseph',
       details:
-        "One of Nashville's most acclaimed luxury hotels. Home to Yolan, widely considered the best Italian restaurant in the city (though we haven't tried it yet!).",
+        "One of Nashville's most acclaimed luxury hotels. Home to Yolan, widely considered the best Italian restaurant in the city (though we haven't tried it yet)!",
       image: joseph,
       alt: 'The Joseph hotel',
       directionsLink: 'https://maps.google.com/?q=The+Joseph+Nashville',

@@ -489,7 +489,7 @@ export const data: Record<PlaceCategory, Place[]> = {
     {
       label: 'Cookout',
       details:
-        'This is what fast food was made for. They are open very late (until 5am), super cheap for the amount of food, and while it is not high quality, it feels like a cultural experience to try at 3am.',
+        'This is what fast food was made for. They are open very late (until 5 AM), super cheap for the amount of food, and while it is not high quality, it feels like a cultural experience to try at 3 in the morning.',
       tip: 'Swap out your drink for a milkshake for free!',
       image: cookout,
       alt: 'Cookout restaurant',

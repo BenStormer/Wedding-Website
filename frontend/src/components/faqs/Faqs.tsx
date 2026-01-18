@@ -35,7 +35,7 @@ export const faqData: Record<FaqCategory, FaqEntry[]> = {
   ],
   travel: [
     {
-      question: 'What airport should I fly into?',
+      question: 'Which airport should I fly into?',
       answer: 'Please fly into Nashville International Airport (BNA).',
     },
     {

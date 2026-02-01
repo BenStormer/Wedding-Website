@@ -23,12 +23,12 @@ import zoo from '../../assets/images/visiting-nashville/see/zoo.webp';
 // Images for Places to Eat
 import adeles from '../../assets/images/visiting-nashville/eat/adeles.webp';
 import assemblyFoodHall from '../../assets/images/visiting-nashville/eat/assembly_food_hall.webp';
-import bastion from '../../assets/images/visiting-nashville/eat/bastion.webp';
 import butchertownHall from '../../assets/images/visiting-nashville/eat/butchertown_hall.webp';
 import condado from '../../assets/images/visiting-nashville/eat/condado.webp';
 import cookout from '../../assets/images/visiting-nashville/eat/cookout.webp';
 import emmySquared from '../../assets/images/visiting-nashville/eat/emmy_squared.webp';
 import fishmonger from '../../assets/images/visiting-nashville/eat/fishmonger.webp';
+import geist from '../../assets/images/visiting-nashville/eat/geist.webp';
 import greenhouse from '../../assets/images/visiting-nashville/eat/greenhouse.webp';
 import hattieBs from '../../assets/images/visiting-nashville/eat/hattie_bs.webp';
 import hawkers from '../../assets/images/visiting-nashville/eat/hawkers.webp';
@@ -443,25 +443,6 @@ export const data: Record<PlaceCategory, Place[]> = {
       tags: ['downtown', 'multiple-options', 'casual', 'tourist-favorite'],
     },
     {
-      label: 'Bastion',
-      details:
-        "One of just 3 michelin-starred restaurants in Nashville, Bastion is an intimate 24-seat restaurant with a creative tasting menu, and the cocktail bar next door is also allegedly excellent. We have never been here and probably won't be anytime soon (it is pricey!). However, several people we know claim it as the best restaurant in the city, and it is in a really fun neighborhood.",
-      tip: 'If you just go to the bar (not the restaurant), they actually do serve nachos.',
-      image: bastion,
-      alt: 'Bastion restaurant',
-      directionsLink: 'https://maps.google.com/?q=Bastion+Nashville',
-      cost: 4,
-      websiteLink: 'https://www.bastionnashville.com',
-      tags: [
-        'wedgewood-houston',
-        'upscale',
-        'american',
-        'drinks',
-        'michelin-star',
-        'reservation-required',
-      ],
-    },
-    {
       label: 'Butchertown Hall',
       details:
         "This is Texas-style BBQ, but not truly Texan (we don't think they have smokers). Regardless, the owners are from Texas and the food is really good. Why doesn't every BBQ place serve their food with tortillas instead of white bread? They also have some more creative entrees beyond straight barbecue.",
@@ -531,6 +512,18 @@ export const data: Record<PlaceCategory, Place[]> = {
       tags: ['germantown', 'casual', 'seafood'],
     },
     {
+      label: 'Geist',
+      details: 'This is by far the best-decorated restaurant we have been to in Nashville. The entire menu is great and we had excellent service while we were there. Their drinks are also creative and fun!',
+      tip: 'They actually have parking right by the restaurant! This is rare for Germantown.',
+      image: geist,
+      alt: 'A spread of different entrees on a table at Geist',
+      directionsLink: 'https://maps.google.com/?q=Geist+Nashville',
+      cost: 4,
+      websiteLink: 'https://www.geistnashville.com/',
+      tags: ['germantown', 'upscale', 'drinks', 'parking', 'reservation-required']
+
+    },
+    {
       label: 'Greenhouse Bar',
       details:
         'This is our favorite bar in Nashville! There is lots of seating and it stays open quite late despite not being near a busy area. The drinks are on the expensive side, but the atmosphere is incredible. It is literally in a greenhouse with tons of plants everywhere!',
@@ -595,7 +588,7 @@ export const data: Record<PlaceCategory, Place[]> = {
       image: oku,
       alt: 'Oku Japanese restaurant',
       directionsLink: 'https://maps.google.com/?q=Oku+Nashville',
-      cost: 3,
+      cost: 4,
       websiteLink: 'https://www.o-kusushi.com/location/o-ku-nashville/',
       tags: [
         'germantown',
